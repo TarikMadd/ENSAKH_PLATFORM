@@ -1,0 +1,1 @@
+Vous etes connécté en tant que <?= $role ?>

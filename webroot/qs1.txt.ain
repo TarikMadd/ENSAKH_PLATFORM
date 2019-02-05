@@ -1,0 +1,6 @@
+max z=3xa+2xb+2xc
+ xa+2xb<=1000
+  xa+xb+xc<=1500
+  xc<=400
+  xa>=500
+  xb+xc>=1200
