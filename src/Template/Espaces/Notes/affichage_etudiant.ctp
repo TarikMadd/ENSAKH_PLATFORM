@@ -16,7 +16,7 @@
         background-color: #E0F8F1;
         border: 1px solid #D8D8D8;
     }
-    #indicateurs{
+    #etudiant{
         width: 40%;
         margin: 2%;
         padding: 2%;
@@ -28,108 +28,71 @@
         padding: 2%;
         float: left;
     }
-    .i {
-        text-align: center;
-    }
     .info{
         color: #7401DF;
     }
 </style>
 
-
-<script>
-    function print() {
-        var doc = new jsPDF();
-        var source = $('#HTMLtoPDF').html();
-        console.log(source);
-        var specialElementHandlers = {
-            '#bypassme': function(element, renderer) {
-                return true;
-            }
-        };
-        doc.fromHTML(
-        source, // HTML string or DOM elem ref.
-        30, // x coord
-        30, // y coord
-        {
-            'width': 500, // max width of content on PDF
-            'elementHandlers': specialElementHandlers
-        });
-        doc.save('todos.pdf');
-    }
-</script>
-
-<div id="HTMLtoPDF">
+<div>
     <div id="titres">
         <br>
         <h1>Gestion des notes</h1>
         <hr>
         <h2>Affichage des notes</h2>
         <hr>
-        <h4>Module : <span class="info"><?= $module->libile ?></span></h4>
-        <h4>Element :<span class="info"> <?= $element->libile ?></span></h4>
-        <hr>
-        <button  id="create_pdf" class="btn btn-warning" style="width:100px;">PDF</button>
+        <!-- <h4>Module : <span class="info"><?= $module->libile ?></span></h4>
+        <h4>Element :<span class="info"> <?= $element->libile ?></span></h4> -->
     </div>
 
-    <div id="indicateurs">
-        <h2>Indicateurs de suivie</h2><br>
-        <?php
-        if(($max!=NULL) && ($min!=NULL) && ($moy!=NULL) && ($my_notes!=NULL) && ($ecart!=NULL)){
-            die(print_r("heloo"));
-        ?>
+    <div id="etudiant">
+        <h2>Etudiant</h2><br>
         <table id="t1">
             <tr>
-                <td><b>Note Max</b></td>
-                <td class="i"> <?= $max ?> </td>
+                <td><b>Nom</b></td>
+                <td class="i"> <?= $etudiant->nom_fr ?> </td>
             </tr>
             <tr>
-                <td><b>Note Min</b></td>
-                <td class="i"> <?= $min ?> </td>
+                <td><b>Prénom</b></td>
+                <td class="i"> <?= $etudiant->prenom_fr ?> </td>
             </tr>
             <tr>
-                <td><b>Note Moy</b></td>
-                <td class="i"> <?= $moy ?> </td>
+                <td><b>CNE</b></td>
+                <td class="i"> <?= $etudiant->cne ?> </td>
             </tr>
             <tr>
-                <td><b>Saisies effectués</b></td>
-                <td class="i"> <?= sizeof($my_notes) ?> </td>
-            </tr>
-            <tr>
-                <td><b>Ecart-type</b></td>
-                <td class="i"> <?= $ecart ?> </td>
+                <td><b>CIN</b></td>
+                <td class="i"> <?= $etudiant->cin  ?> </td>
             </tr>
         </table>
-        <?php
-        }else{
-            die(print_r("else"));
-        }
-        ?>
-
     </div>
 
     <div id="affichage">
         <table id="t2">
             <thead>
                 <tr>
-                    <th scope="col"><?= $this->Paginator->sort('CNE') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('Nom') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('prénom') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('Module') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('Element') ?></th>
                     <th scope="col"><?= $this->Paginator->sort('Note') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('Résultat') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                for ($i = 0; $i < sizeof($my_notes); $i++) {
-                    $et = $my_etudiants[$i];
-                    $no = $my_notes[$i];
-                    echo '<tr>';
-                    echo "<td>$et->cne</td>";
-                    echo "<td>$et->nom_fr</td>";
-                    echo "<td>$et->prenom_fr</td>";
-                    echo "<td>$no->note</td>";
-                    echo '</tr>';
-                }
+                    for ($i = 0; $i < sizeof($my_etudiers); $i++) {
+                        $et = $my_etudiers[$i];
+                        if (isset($nom_elements[$i])) {
+                            $e = $nom_elements[$i];
+                            $m = $nom_modules[$i];
+                            $n = $my_notes[$i];
+                            echo '<tr>';
+                                echo "<td> $m </td>";
+                                echo "<td> $e </td>";
+                                echo "<td> $n->note </td>";
+                                if ($n->note > 10) echo "<td> Validé </td>";
+                                else echo "<td> Rattrapage </td>";
+                            echo '</tr>';
+                        }
+                    }
                 ?>
             </tbody>
         </table>
@@ -137,7 +100,7 @@
     
 </div>
 
-
+                    
 
 <?= $this->Html->script('jspdf') ?>
 <?= $this->Html->script('jspdf.min') ?>

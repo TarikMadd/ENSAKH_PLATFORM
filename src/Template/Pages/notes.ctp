@@ -13,5 +13,8 @@
         <hr>
         <?= $this->Html->link('Afficher les notes', '/notes/preparation-affichage', ['class'=>'btn btn-warning']) ?>
         <hr>
+        <hr>
+        <?= $this->Html->link('Afficher les notes pour etudiants', '/notes/affichage-etudiant', ['class'=>'btn btn-warning']) ?>
+        <hr>
     </div>
 </div>

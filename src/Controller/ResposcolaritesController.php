@@ -1301,7 +1301,7 @@ class resposcolaritesController extends AppController {
         $usrole=$this->Auth->user('role');
         $this->set('role',$usrole);
         $cnx=ConnectionManager::get('default');
-        $professeurs=$cnx->execute("SELECT DISTINCT u.id, p.nom_prof, p.prenom_prof, p.diplome FROM users u, profpermanents p, enseigners e, annee_scolaires a 
+        $professeurs=$cnx->execute("SELECT DISTINCT u.id, p.nom_prof, p.prenom_prof FROM users u, profpermanents p, enseigners e, annee_scolaires a 
         where p.user_id = u.id and e.annee_scolaire_id = a.id ")->fetchAll('assoc');
         $this->set('professeur',$professeurs);
         $this->set('selected',"");

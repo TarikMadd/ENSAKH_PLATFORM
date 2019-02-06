@@ -27,7 +27,7 @@ Vous etes connécté en tant que <?= $role ?>
         <section class="content">
             <div class="row">
                 <div class="col-md-3">
-                    <a href="<?php echo $this->Url->build('Ensaksite/resposcolarites/envoyerNvSco'); ?>" class="btn btn-primary btn-block margin-bottom">Composer un nouveau message</a>
+                    <a href="<?php echo $this->Url->build('/resposcolarites/envoyerNvSco'); ?>" class="btn btn-primary btn-block margin-bottom">Composer un nouveau message</a>
 
                     <div class="box box-solid">
                         <div class="box-header with-border">
@@ -40,9 +40,9 @@ Vous etes connécté en tant que <?= $role ?>
                         </div>
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
-                                <li class="active"><a href="<?php echo $this->Url->build('/Ensaksite/resposcolarites/boiteRecSco'); ?>"><i class="fa fa-inbox"></i> Boîte de réception
+                                <li class="active"><a href="<?php echo $this->Url->build('/resposcolarites/boiteRecSco'); ?>"><i class="fa fa-inbox"></i> Boîte de réception
                                         <?php if(!isset($displaySent)){ ?>  <span class="label label-primary pull-right"> <?php $c =0; foreach ($mesMsgs as $m){ $c++; } echo $c; ?></span><?php } ?></a></li>
-                                <li><a href="<?php echo $this->Url->build('/Ensaksite/resposcolarites/getMsgsEnvoye'); ?>"><i class="fa fa-envelope-o"></i> Messages envoyés</a></li>
+                                <li><a href="<?php echo $this->Url->build('resposcolarites/getMsgsEnvoye'); ?>"><i class="fa fa-envelope-o"></i> Messages envoyés</a></li>
 
                             </ul>
                         </div>

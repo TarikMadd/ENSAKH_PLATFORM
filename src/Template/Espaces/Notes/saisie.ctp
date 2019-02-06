@@ -16,12 +16,7 @@
         background-color: #E0F8F1;
         border: 1px solid #D8D8D8;
     }
-    #indicateurs{
-        width: 40%;
-        margin: 2%;
-        padding: 2%;
-        float: right;
-    }
+    
     #titres{
         width: 52%;
         margin: 0;
@@ -40,37 +35,13 @@
     <br>
     <h1>Gestion des notes</h1>
     <hr>
-    <h2>Affichage des notes</h2>
+    <h2>Saisie des notes</h2>
     <hr>
     <h4>Module : <span class="info"><?= $module->libile ?></span></h4>
     <h4>Element :<span class="info"> <?= $element->libile ?></span></h4>
 </div>
 
-<div id="indicateurs">
-    <h2>Indicateurs de suivie</h2><br>
-    <table>
-        <tr>
-            <td><b>Note Max</b></td>
-            <td class="i"> <?= $max ?> </td>
-        </tr>
-        <tr>
-            <td><b>Note Min</b></td>
-            <td class="i"> <?= $min ?> </td>
-        </tr>
-        <tr>
-            <td><b>Note Moy</b></td>
-            <td class="i"> <?= $moy ?> </td>
-        </tr>
-        <tr>
-            <td><b>Saisies effectués</b></td>
-            <td class="i"> <?= sizeof($my_notes) ?> </td>
-        </tr>
-        <tr>
-            <td><b>Ecart-type</b></td>
-            <td class="i"> <?= $ecart ?> </td>
-        </tr>
-    </table>
-</div>
+
 
 <div id="saisie">
     <table>
