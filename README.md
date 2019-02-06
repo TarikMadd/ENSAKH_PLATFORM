@@ -1,1 +1,1 @@
-# Merci d'upload la 'DB_Version{Section}' àpres chaque intégration 
+Merci d'upload la 'DB_Version{Section}.sql' àpres chaque intégration 
