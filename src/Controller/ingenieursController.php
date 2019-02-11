@@ -12,14 +12,14 @@ use Cake\Datasource\ConnectionManager;
 
 class ingenieursController extends AppController {
 
-  public function index()
-  {
-
-      $this->render('/Espaces/ingenieurs/index');
-  }
-  public function viewActualites($id = null)
+    public function index()
     {
-    	$Actualites=TableRegistry::get('Actualites');
+
+        $this->render('/Espaces/ingenieurs/index');
+    }
+    public function viewActualites($id = null)
+    {
+        $Actualites=TableRegistry::get('Actualites');
         $actualite = $Actualites->get($id, [
             'contain' => []
         ]);
@@ -28,60 +28,104 @@ class ingenieursController extends AppController {
         $this->set('_serialize', ['actualite']);
         $this->render('/Espaces/ingenieurs/viewActualites');
     }
-  public function afficherActualites()
+    public function afficherActualites()
     {
-    	$Actualites=TableRegistry::get('Actualites');
+        $Actualites=TableRegistry::get('Actualites');
         $actualites = $this->paginate($Actualites);
 
         $this->set(compact('actualites'));
         $this->set('_serialize', ['actualites']);
         $this->render('/Espaces/ingenieurs/afficherActualites');
     }
-  public function ajouterActualites()
-    {
-    	$Actualites=TableRegistry::get('Actualites');
+    public function ajouterActualites()
+    {   $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
+
+        $Actualites=TableRegistry::get('Actualites');
         $actualite = $Actualites->newEntity();
         if ($this->request->is('post')) {
             $actualite = $Actualites->patchEntity($actualite, $this->request->data);
             if ($Actualites->save($actualite)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Actualite'));
+                // pour photo
+                $extension=pathinfo($this->request->data['photo']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['photo']['tmp_name']) &&
+                    in_array($extension, array('jpg','jpeg','png'))) {
+                    move_uploaded_file($this->request->data['photo']['tmp_name'],  WWW_ROOT . 'img\imagesSite\actualite' . DS . $actualite->id. '.'. $extension);
+                    $con->execute('UPDATE actualites SET photo = ? WHERE id = ?',[$actualite->id.'.'.$extension,$actualite->id]);
+                }
+                else if (!empty($this->request->data['photo']['tmp_name'])) {
+                    $con->execute('UPDATE actualites SET photo = ? WHERE id = ?',['default.jpg',$actualite->id]);
+                }
+                // pour fichier
+                $extension=pathinfo($this->request->data['file']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['file']['tmp_name']) &&
+                    in_array($extension, array('pdf','docx','rar'))) {
+                    move_uploaded_file($this->request->data['file']['tmp_name'],  WWW_ROOT . 'img\documentsSite\actualite' . DS . $this->request->data['file']['name']);
+                    $con->execute('INSERT INTO sitedocuments VALUES(?,?,?,?) ',[NULL,$actualite->titre,$this->request->data['file']['name'],$actualite->id]);
+                }
+                /* else if (empty($this->request->data['photo']['tmp_name'])) {
+                     $con->execute('UPDATE actualites SET photo = ? WHERE titre = ?',['default.jpg',$this->request->data['titre']]);
+                 }*/
+
+
+                $this->Flash->success(__('Enregistré avec succès'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Actualite'));
+                $this->Flash->error(__('Erreur'));
             }
+            $Sitedocuments=TableRegistry::get('Sitedocuments');
+
+
+
         }
         $this->set(compact('actualite'));
         $this->set('_serialize', ['actualite']);
         $this->render('/Espaces/ingenieurs/ajouterActualites');
     }
     public function modifierActualites($id = null)
-    {
-    	$Actualites=TableRegistry::get('Actualites');
+    {   $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
+
+        $Actualites=TableRegistry::get('Actualites');
         $actualite = $Actualites->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $actualite = $Actualites->patchEntity($actualite, $this->request->data);
+            $image= $con->execute('SELECT photo from actualites where id=?',[$id])->fetchAll('assoc');
             if ($Actualites->save($actualite)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Actualite'));
+
+
+                $extension=pathinfo($this->request->data['photo']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['photo']['tmp_name']) &&
+                    in_array($extension, array('jpg','jpeg','png'))) {
+                    move_uploaded_file($this->request->data['photo']['tmp_name'],  WWW_ROOT . 'img\imagesSite\actualite' . DS . $this->request->data['titre']. '.'. $extension);
+                    $con->execute('UPDATE actualites SET photo = ? WHERE titre = ?',[$this->request->data['titre'].'.'.$extension,$this->request->data['titre']]);
+                }
+                else if (empty($this->request->data['photo']['tmp_name'])) {
+                    $con->execute('UPDATE actualites SET photo = ? WHERE id = ?',[$image[0]['photo'],$id]);
+                }
+
+
+                $this->Flash->success(__('Modifié avec succès'));
                 return $this->redirect(['action' => 'afficherActualites']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Actualite'));
+                $this->Flash->error(__('Erreur'));
             }
         }
         $this->set(compact('actualite'));
         $this->set('_serialize', ['actualite']);
-         $this->render('/Espaces/ingenieurs/modifierActualites');
+        $this->render('/Espaces/ingenieurs/modifierActualites');
     }
     public function supprimerActualites($id = null)
     {
-    	$Actualites=TableRegistry::get('Actualites');
+        $Actualites=TableRegistry::get('Actualites');
         $this->request->allowMethod(['post', 'delete']);
         $actualite = $Actualites->get($id);
         if ($Actualites->delete($actualite)) {
-            $this->Flash->success(__('The {0} has been deleted.', 'Actualite'));
+            $this->Flash->success(__('L\'{0} a été supprimé', 'Actualite'));
         } else {
-            $this->Flash->error(__('The {0} could not be deleted. Please, try again.', 'Actualite'));
+            $this->Flash->error(__('L\' {0} n\'a pas pu être supprimé. Veuillez réessayer.', 'actualité'));
         }
         return $this->redirect(['action' => 'afficherActualites']);
         $this->render('/Espaces/ingenieurs/supprimerActualites');
@@ -89,27 +133,42 @@ class ingenieursController extends AppController {
 
     public function afficherEvenements()
     {
-    	 $Evenements=TableRegistry::get('Evenements');
+        $Evenements=TableRegistry::get('Evenements');
         $evenements = $this->paginate($Evenements);
 
         $this->set(compact('evenements'));
         $this->set('_serialize', ['evenements']);
 
-       
+
         $this->render('/Espaces/ingenieurs/afficherEvenements');
     }
 
-     public function ajouterEvenements()
-    {
-    	$Evenements=TableRegistry::get('Evenements');
+    public function ajouterEvenements()
+    {   $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
+
+        $Evenements=TableRegistry::get('Evenements');
         $evenement = $Evenements->newEntity();
+
         if ($this->request->is('post')) {
             $evenement = $Evenements->patchEntity($evenement, $this->request->data);
+
             if ($Evenements->save($evenement)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Evenement'));
+
+                $extension=pathinfo($this->request->data['photo']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['photo']['tmp_name']) &&
+                    in_array($extension, array('jpg','jpeg','png'))) {
+                    move_uploaded_file($this->request->data['photo']['tmp_name'],  WWW_ROOT . 'img\imagesSite\evenements' . DS . $evenement->id. '.'. $extension);
+                    $con->execute('UPDATE evenements SET photo = ? WHERE id = ?',[$evenement->id.'.'.$extension,$evenement->id]);
+                }
+                else if (!empty($this->request->data['photo']['tmp_name'])) {
+                    $con->execute('UPDATE evenements SET photo = ? WHERE id = ?',['default.jpg',$evenement->id]);
+                }
+
+                $this->Flash->success(__('Enregistré avec succès'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Evenement'));
+                $this->Flash->error(__('Erreur'));
             }
         }
         $this->set(compact('evenement'));
@@ -117,42 +176,57 @@ class ingenieursController extends AppController {
         $this->render('/Espaces/ingenieurs/ajouterEvenements');
     }
 
-     public function modifierEvenements($id = null)
-    {
-    	$Evenements=TableRegistry::get('Evenements');
+    public function modifierEvenements($id = null)
+    {   $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
+
+        $Evenements=TableRegistry::get('Evenements');
         $evenement = $Evenements->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $evenement = $Evenements->patchEntity($evenement, $this->request->data);
+            $image= $con->execute('SELECT photo from evenements where id=?',[$id])->fetchAll('assoc');
             if ($Evenements->save($evenement)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Evenement'));
+
+
+                $extension=pathinfo($this->request->data['photo']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['photo']['tmp_name']) &&
+                    in_array($extension, array('jpg','jpeg','png'))) {
+                    move_uploaded_file($this->request->data['photo']['tmp_name'],  WWW_ROOT . 'img\imagesSite\evenements' . DS . $evenement->id. '.'. $extension);
+                    $con->execute('UPDATE evenements SET photo = ? WHERE id = ?',[$evenement->id.'.'.$extension,$evenement->id]);
+                }
+                else if (empty($this->request->data['photo']['tmp_name'])) {
+                    $con->execute('UPDATE evenements SET photo = ? WHERE id = ?',[$image[0]['photo'],$id]);
+                }
+
+                $this->Flash->success(__('Modifié avec succès'));
                 return $this->redirect(['action' => 'afficherEvenements']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Evenement'));
+                $this->Flash->error(__('Erreur'));
             }
         }
         $this->set(compact('evenement'));
         $this->set('_serialize', ['evenement']);
-         $this->render('/Espaces/ingenieurs/modifierEvenements');
+        $this->render('/Espaces/ingenieurs/modifierEvenements');
     }
 
-     public function supprimerEvenements($id = null)
+    public function supprimerEvenements($id = null)
     {
-    	$Evenements=TableRegistry::get('Evenements');
+        $Evenements=TableRegistry::get('Evenements');
         $this->request->allowMethod(['post', 'delete']);
         $evenement = $Evenements->get($id);
         if ($Evenements->delete($evenement)) {
-            $this->Flash->success(__('The {0} has been deleted.', 'Evenement'));
+            $this->Flash->success(__('L\'{0} a été supprimé', 'événement'));
         } else {
-            $this->Flash->error(__('The {0} could not be deleted. Please, try again.', 'Evenement'));
+            $this->Flash->error(__('L\' {0} n\'a pas pu être supprimé. Veuillez réessayer.', 'événement'));
         }
         return $this->redirect(['action' => 'afficherEvenements']);
     }
 
     public function viewEvenements($id = null)
     {
-    		$Evenements=TableRegistry::get('Evenements');
+        $Evenements=TableRegistry::get('Evenements');
         $evenement = $Evenements->get($id, [
             'contain' => []
         ]);
@@ -163,12 +237,12 @@ class ingenieursController extends AppController {
     }
 
 
-    /* VERSION 2 */ 
-public function liste()
+    /* VERSION 2 */
+    public function liste()
     {
-        $this->render('/Espaces/ingenieurs/liste');
+        $this->render('/Espaces/ingenieurs/liste2');
     }
-        
+
     public function viewLaureats($id = null)
     {
         $Laureats=TableRegistry::get('Laureats');
@@ -180,17 +254,17 @@ public function liste()
         $this->set('_serialize', ['laureat']);
         $this->render('/Espaces/ingenieurs/viewLaureats');
     }
-       public function ajouterLaureats()
+    public function ajouterLaureats()
     {
         $Laureats=TableRegistry::get('Laureats');
         $laureat = $Laureats->newEntity();
         if ($this->request->is('post')) {
             $laureat = $Laureats->patchEntity($laureat, $this->request->data);
             if ($Laureats->save($laureat)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Laureat'));
+                $this->Flash->success(__('Enregistré avec succès'));
                 return $this->redirect(['action' => 'afficherLaureats']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Laureat'));
+                $this->Flash->error(__('Erreur'));
             }
         }
         $this->set(compact('laureat'));
@@ -199,7 +273,7 @@ public function liste()
 
     }
 
-      public function modifierLaureats($id = null)
+    public function modifierLaureats($id = null)
     {
         $Laureats=TableRegistry::get('Laureats');
         $laureat = $Laureats->get($id, [
@@ -208,30 +282,30 @@ public function liste()
         if ($this->request->is(['patch', 'post', 'put'])) {
             $laureat = $Laureats->patchEntity($laureat, $this->request->data);
             if ($Laureats->save($laureat)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Laureat'));
+                $this->Flash->success(__('Modifié avec succès'));
                 return $this->redirect(['action' => 'afficherLaureats']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Laureat'));
+                $this->Flash->error(__('Erreur'));
             }
         }
         $this->set(compact('laureat'));
         $this->set('_serialize', ['laureat']);
-         $this->render('/Espaces/ingenieurs/modifierLaureats');
+        $this->render('/Espaces/ingenieurs/modifierLaureats');
     }
-     public function supprimerLaureats($id = null)
+    public function supprimerLaureats($id = null)
     {
         $Laureats=TableRegistry::get('Laureats');
         $this->request->allowMethod(['post', 'delete']);
         $laureat = $Laureats->get($id);
         if ($Laureats->delete($laureat)) {
-            $this->Flash->success(__('The {0} has been deleted.', 'Laureat'));
+            $this->Flash->success(__('La {0} a été supprimé.', 'statistique'));
         } else {
-            $this->Flash->error(__('The {0} could not be deleted. Please, try again.', 'Laureat'));
+            $this->Flash->error(__('La {0} n\'a pas pu être supprimé. Veuillez réessayer.', 'statistique'));
         }
         return $this->redirect(['action' => 'afficherLaureats']);
     }
 
-     public function afficherLaureats()
+    public function afficherLaureats()
     {
         $Laureats=TableRegistry::get('Laureats');
         $laureats = $this->paginate($Laureats);
@@ -244,55 +318,192 @@ public function liste()
 
 
     public function ajouterActualiteClubs()
-    {
+    {   // pour definir le club
+
+
+        $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
         $Actualiteclubs=TableRegistry::get('Actualiteclubs');
         $actualiteclub = $Actualiteclubs->newEntity();
         if ($this->request->is('post')) {
+
+
             $actualiteclub = $Actualiteclubs->patchEntity($actualiteclub, $this->request->data);
             if ($Actualiteclubs->save($actualiteclub)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Actualiteclub'));
+
+                $extension=pathinfo($this->request->data['photo']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['photo']['tmp_name']) &&
+                    in_array($extension, array('jpg','jpeg','png'))) {
+                    move_uploaded_file($this->request->data['photo']['tmp_name'],  WWW_ROOT . 'img\imagesSite\actualiteClubs' . DS . $actualiteclub->id. '.'. $extension);
+                    $con->execute('UPDATE actualiteClubs SET image = ? WHERE id = ?',[$actualiteclub->id.'.'.$extension,$actualiteclub->id]);
+                }
+                else if (!empty($this->request->data['photo']['tmp_name'])) {
+                    $con->execute('UPDATE actualiteClubs SET image = ? WHERE id = ?',[$actualiteclub->id.'.'.$extension,$actualiteclub->id]);
+                }
+                // pour les fichiers:
+                $extension=pathinfo($this->request->data['fichier']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['fichier']['tmp_name']) &&
+                    in_array($extension, array('pdf','docx','ppt','pps','pptx','ppsx','rar','zip','txt'))) {
+                    move_uploaded_file($this->request->data['fichier']['tmp_name'],  WWW_ROOT . 'img\documentsSite\actualiteClubs' . DS . $actualiteclub->id. '.'. $extension);
+                    $con->execute('UPDATE actualiteClubs SET fichier = ? WHERE id = ?',[$actualiteclub->id.'.'.$extension,$actualiteclub->id]);
+                }
+                else if (!empty($this->request->data['fichier']['tmp_name'])) {
+                    $con->execute('UPDATE actualiteClubs SET fichier = ? WHERE id = ?',['default.docx',$actualiteclub->id]);
+                }
+
+
+
+                $this->Flash->success(__('Enregistré avec succès'));
                 return $this->redirect(['action' => 'ajouterActualiteClubs']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Actualiteclub'));
+                $this->Flash->error(__('Erreur'));
             }
         }
+
+        $clubs = $Actualiteclubs->Clubs->find('list', ['limit' => 200]);
+        $Clubs = TableRegistry::get('clubs');
+        $dest = $Clubs->find("all", array(
+            "joins" => array(
+                array(
+
+                    "table" => "clubs",
+                    "conditions" => array(
+                        "actualiteclub.id_club = clubs.id"
+                    )
+                )
+            ),
+            "fields" =>"clubs.nom"
+        ));
+        $donne_demande =  $con->execute('SELECT clubs.nom, clubs.id FROM clubs ')->fetchAll('assoc');
+
+
+        $this->set('donne_demande',$donne_demande);
+
+        $clubs=$dest->toArray();
+        $Clubs=array();
+        for ($i=0;$i<count($clubs);$i++) {
+            $Clubs[]=$clubs[$i]['nom'];
+        }
+
+
         $this->set(compact('actualiteclub'));
         $this->set('_serialize', ['actualiteclub']);
         $this->render('/Espaces/ingenieurs/ajouterActualiteClubs');
     }
     public function afficherActualiteClubs()
-    {   
+    {   $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
+
         $Actualiteclubs=TableRegistry::get('Actualiteclubs');
-        $actualiteclubs = $this->paginate($Actualiteclubs);
+        $actualiteclubq = $this->paginate($Actualiteclubs);
+
+        $Clubs = TableRegistry::get('clubs');
+        $nom = array();
+        $actualiteclubs=null;
+        foreach ($actualiteclubq as $actualiteclub) {
+            $donne_demande =  $con->execute('SELECT clubs.nom FROM clubs WHERE clubs.id=?',[$actualiteclub->id_club])->fetchAll('assoc');
+            $actualiteclub->nom = $donne_demande[0]['nom'];
+            $actualiteclubs[]=$actualiteclub;
+        }
+         $donne_demande='';
+        $this->set('donne_demande',$donne_demande);
+
 
         $this->set(compact('actualiteclubs'));
         $this->set('_serialize', ['actualiteclubs']);
         $this->render('/Espaces/ingenieurs/afficherActualiteClubs');
     }
     public function viewActualiteClubs($id = null)
-    {
+    {   $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
+
         $Actualiteclubs=TableRegistry::get('Actualiteclubs');
-        $actualiteclub = $Actualiteclubs->get($id, [
+        $actualiteclubq = $Actualiteclubs->get($id, [
             'contain' => []
         ]);
+
+        $Clubs = TableRegistry::get('clubs');
+        $nom = array();
+        $actualiteclub=null;
+        // foreach ($actualiteclubq as $actualiteclu) {
+        $donne_demande =  $con->execute('SELECT clubs.nom FROM clubs WHERE clubs.id=?',[$actualiteclubq->id_club])->fetchAll('assoc');
+        $actualiteclubq->nom = $donne_demande[0]['nom'];
+        $actualiteclub=$actualiteclubq;
+        // }
 
         $this->set('actualiteclub', $actualiteclub);
         $this->set('_serialize', ['actualiteclub']);
         $this->render('/Espaces/ingenieurs/viewActualiteClubs');
     }
-    public function modifierActualiteClubs($id = null)
+    function liste2()
     {
+        $this->render("/Espaces/ingenieurs/liste2");
+    }
+    public function modifierActualiteClubs($id = null)
+    {   $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
+
         $Actualiteclubs=TableRegistry::get('Actualiteclubs');
         $actualiteclub = $Actualiteclubs->get($id, ['contain' => []]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $actualiteclub = $Actualiteclubs->patchEntity($actualiteclub, $this->request->data);
+            $image= $con->execute('SELECT image from actualiteclubs where id=?',[$id])->fetchAll('assoc');
+            $fichier=$con->execute('SELECT fichier from actualiteclubs where id=?',[$id])->fetchAll('assoc');
             if ($Actualiteclubs->save($actualiteclub)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Actualiteclub'));
+                // partie photo
+                $extension=pathinfo($this->request->data['photo']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['photo']['tmp_name']) &&
+                    in_array($extension, array('jpg','jpeg','png'))) {
+                    move_uploaded_file($this->request->data['photo']['tmp_name'],  WWW_ROOT . 'img\imagesSite\actualiteClubs' . DS . $actualiteclub->id. '.'. $extension);
+                    $con->execute('UPDATE actualiteclubs SET image = ? WHERE id = ?',[$actualiteclub->id.'.'.$extension,$actualiteclub->id]);
+                }
+                else if (empty($this->request->data['photo']['tmp_name'])) {
+                    $con->execute('UPDATE actualiteclubs SET image = ? WHERE id = ?',[$image[0]['image'],$id]);
+                }
+                // partie fichier
+                $extension=pathinfo($this->request->data['fichier']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['fichier']['tmp_name']) &&
+                    in_array($extension, array('pdf','docx','ppt','pps','pptx','ppsx','rar','zip','txt'))) {
+                    move_uploaded_file($this->request->data['fichier']['tmp_name'],  WWW_ROOT . 'img\documentsSite\actualiteClubs' . DS . $actualiteclub->id. '.'. $extension);
+                    $con->execute('UPDATE actualiteclubs SET fichier = ? WHERE id = ?',[$actualiteclub->id.'.'.$extension,$actualiteclub->id]);
+                }
+                else if (empty($this->request->data['fichier']['tmp_name'])) {
+                    $con->execute('UPDATE actualiteclubs SET fichier = ? WHERE id = ?',[$fichier[0]['fichier'],$id]);
+                }
+
+                $this->Flash->success(__('Modifié avec succès'));
                 return $this->redirect(['action' => 'afficherActualiteClubs']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Actualiteclub'));
+                $this->Flash->error(__('Erreur'));
             }
         }
+
+        $clubs = $Actualiteclubs->Clubs->find('list', ['limit' => 200]);
+        $Clubs = TableRegistry::get('clubs');
+        $dest = $Clubs->find("all", array(
+            "joins" => array(
+                array(
+
+                    "table" => "clubs",
+                    "conditions" => array(
+                        "actualiteclub.id_club = clubs.id"
+                    )
+                )
+            ),
+            "fields" =>"clubs.nom"
+        ));
+        $donne_demande =  $con->execute('SELECT clubs.nom, clubs.id FROM clubs ')->fetchAll('assoc');
+
+
+        $this->set('donne_demande',$donne_demande);
+
+        $clubs=$dest->toArray();
+        $Clubs=array();
+        for ($i=0;$i<count($clubs);$i++) {
+            $Clubs[]=$clubs[$i]['nom'];
+        }
+
         $this->set(compact('actualiteclub'));
         $this->set('_serialize', ['actualiteclub']);
         $this->render('/Espaces/ingenieurs/modifierActualiteClubs');
@@ -303,28 +514,43 @@ public function liste()
         $this->request->allowMethod(['post', 'delete']);
         $actualiteclub = $Actualiteclubs->get($id);
         if ($Actualiteclubs->delete($actualiteclub)) {
-            $this->Flash->success(__('The {0} has been deleted.', 'Actualiteclub'));
+            $this->Flash->success(__('L\' {0} a été supprimé.', 'actualité'));
         } else {
-            $this->Flash->error(__('The {0} could not be deleted. Please, try again.', 'Actualiteclub'));
+            $this->Flash->error(__('L\' {0} n\'a pas pu être supprimé. Veuillez réessayer.', 'actualité'));
         }
         return $this->redirect(['action' => 'afficherActualiteClubs']);
     }
 
     public function ajouterImages()
     {
+
+        $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
         $Images=TableRegistry::get('Images');
         $image = $Images->newEntity();
-        if ($this->request->is('post')) {
+
+        if ($this->request->is('post'))
+        {
+
+            $extension=pathinfo($this->request->data['lien']['name'] , PATHINFO_EXTENSION);
+            if (!empty($this->request->data['lien']['tmp_name']) &&
+                in_array($extension, array('jpg','jpeg','png'))) {
+                move_uploaded_file($this->request->data['lien']['tmp_name'],WWW_ROOT .  'img\imagesSite\gallery' . DS . $this->request->data['lien']['name']);}
+            $this->request->data['lien']=$this->request->data['lien']['name'];
             $image = $Images->patchEntity($image, $this->request->data);
-            if ($Images->save($image)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Image'));
-                return $this->redirect(['action' => 'ajouterImages']);
-            } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Image'));
-            }
+            $con->execute('INSERT INTO images (lien,commentaire) VALUES (?,?)',[$this->request->data['lien'],$this->request->data['commentaire']]);
+
+            $this->Flash->success(__('Enregistré avec succès'));
+
+            return $this->redirect(['action' => 'ajouterImages']);
         }
-        $this->set(compact('image'));
-        $this->set('_serialize', ['image']);
+        else
+        {
+
+        }
+        $this->set('image',$image);
+        $this->set(compact('Image'));
+        $this->set('_serialize', ['Image']);
         $this->render('/Espaces/ingenieurs/ajouterImages');
     }
     public function afficherImages()
@@ -347,34 +573,47 @@ public function liste()
         $this->set('_serialize', ['image']);
         $this->render('/Espaces/ingenieurs/viewImages');
     }
-    public function modifierImages($id = null)
-    {
-        $Images=TableRegistry::get('Images');
-        $image = $Images->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $image = $Images->patchEntity($image, $this->request->data);
-            if ($Images->save($image)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Image'));
-                return $this->redirect(['action' => 'afficherImages']);
-            } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Image'));
-            }
-        }
-        $this->set(compact('image'));
-        $this->set('_serialize', ['image']);
-        $this->render('/Espaces/ingenieurs/modifierImages');
-    }
+    /* public function modifierImages($id = null)
+     {   $dsn = 'mysql://root@localhost/ensaksite';
+         $con=ConnectionManager::get('default', ['url' => $dsn]);
+
+         $Images=TableRegistry::get('Images');
+         $image = $Images->get($id, [
+             'contain' => []
+         ]);
+         if ($this->request->is(['patch', 'post', 'put'])) {
+             $image = $Images->patchEntity($image, $this->request->data);
+             $image= $con->execute('SELECT lien from images where id=?',[$id])->fetchAll('assoc');
+             if ($Images->save($image)) {
+
+                 if (!empty($this->request->data['lien']['tmp_name']) &&
+                     in_array($extension, array('jpg','jpeg','png'))) {
+                       //  move_uploaded_file($this->request->data['lien']['tmp_name'],WWW_ROOT .  'img\imagesSite\gallery' . DS . $this->request->data['lien']['name']);
+
+                 }
+                 else if (empty($this->request->data['lien']['tmp_name'])) {
+                         $con->execute('UPDATE images SET lien = ? WHERE id = ?',[$image[0]['lien'],$id]);
+                 }
+
+                 $this->Flash->success(__('The {0} has been saved.', 'modification'));
+                 return $this->redirect(['action' => 'afficherImages']);
+             } else {
+                 $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'modification'));
+             }
+         }
+         $this->set(compact('image'));
+         $this->set('_serialize', ['image']);
+         $this->render('/Espaces/ingenieurs/modifierImages');
+     } */
     public function supprimerImages($id = null)
     {
         $Images=TableRegistry::get('Images');
         $this->request->allowMethod(['post', 'delete']);
         $image = $Images->get($id);
         if ($Images->delete($image)) {
-            $this->Flash->success(__('The {0} has been deleted.', 'Image'));
+            $this->Flash->success(__('L\' {0} a été supprimé.', 'image'));
         } else {
-            $this->Flash->error(__('The {0} could not be deleted. Please, try again.', 'Image'));
+            $this->Flash->error(__('L\' {0} n\'a pas pu être supprimé. Veuillez réessayer.', 'image'));
         }
         return $this->redirect(['action' => 'afficherImages']);
     }
@@ -386,10 +625,10 @@ public function liste()
         if ($this->request->is('post')) {
             $video = $Videos->patchEntity($video, $this->request->data);
             if ($Videos->save($video)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Video'));
+                $this->Flash->success(__('Enregistré avec succès'));
                 return $this->redirect(['action' => 'ajouterVideos']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Video'));
+                $this->Flash->error(__('Erreur'));
             }
         }
         $this->set(compact('video'));
@@ -421,10 +660,10 @@ public function liste()
         if ($this->request->is(['patch', 'post', 'put'])) {
             $video = $Videos->patchEntity($video, $this->request->data);
             if ($Videos->save($video)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Video'));
+                $this->Flash->success(__('Modifié avec succès'));
                 return $this->redirect(['action' => 'afficherVideos']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Video'));
+                $this->Flash->error(__('Erreur'));
             }
         }
         $this->set(compact('video'));
@@ -437,24 +676,37 @@ public function liste()
         $this->request->allowMethod(['post', 'delete']);
         $video = $Videos->get($id);
         if ($Videos->delete($video)) {
-            $this->Flash->success(__('The {0} has been deleted.', 'Video'));
+            $this->Flash->success(__('La {0} a été supprimé.', 'vidéo'));
         } else {
-            $this->Flash->error(__('The {0} could not be deleted. Please, try again.', 'Video'));
+            $this->Flash->error(__('Le {0} n\'a pas pu être supprimé. Veuillez réessayer.', 'vidéo'));
         }
         return $this->redirect(['action' => 'afficherVideos']);
     }
 
     public function ajouterClubs()
-    {
+    {   $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
         $Clubs=TableRegistry::get('Clubs');
         $club = $Clubs->newEntity();
         if ($this->request->is('post')) {
             $club = $Clubs->patchEntity($club, $this->request->data);
             if ($Clubs->save($club)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Club'));
+
+                $extension=pathinfo($this->request->data['logo']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['logo']['tmp_name']) &&
+                    in_array($extension, array('jpg','jpeg','png'))) {
+                    move_uploaded_file($this->request->data['logo']['tmp_name'], WWW_ROOT . 'img\imagesSite\clubs' . DS . $club->id. '.'. $extension);
+                    $con->execute('UPDATE clubs SET logo = ? WHERE id = ?',[$club->id.'.'.$extension,$club->id]);
+                }
+                else if (!empty($this->request->data['logo']['tmp_name'])) {
+                    $con->execute('UPDATE clubs SET logo = ? WHERE id = ?',['default.jpg',$club->id]);
+                }
+
+
+                $this->Flash->success(__('Enregistré avec succès'));
                 return $this->redirect(['action' => 'ajouterClubs']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Club'));
+                $this->Flash->error(__('Erreur'));
             }
         }
         $this->set(compact('club'));
@@ -481,15 +733,30 @@ public function liste()
     }
     public function modifierClubs($id = null)
     {
+        $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
+
         $Clubs=TableRegistry::get('Clubs');
         $club = $Clubs->get($id, ['contain' => []]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $club = $Clubs->patchEntity($club, $this->request->data);
+            $image= $con->execute('SELECT logo from clubs where id=?',[$id])->fetchAll('assoc');
             if ($Clubs->save($club)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Club'));
+
+                $extension=pathinfo($this->request->data['logo']['name'] , PATHINFO_EXTENSION);
+                if (!empty($this->request->data['logo']['tmp_name']) &&
+                    in_array($extension, array('jpg','jpeg','png'))) {
+                    move_uploaded_file($this->request->data['logo']['tmp_name'],  WWW_ROOT . 'img\imagesSite\clubs' . DS . $club->id. '.'. $extension);
+                    $con->execute('UPDATE clubs SET logo = ? WHERE id = ?',[$club->id.'.'.$extension,$club->id]);
+                }
+                else if (empty($this->request->data['logo']['tmp_name'])) {
+                    $con->execute('UPDATE clubs SET logo = ? WHERE id = ?',[$image[0]['logo'],$id]);
+                }
+
+                $this->Flash->success(__('Modifié avec succès'));
                 return $this->redirect(['action' => 'afficherClubs']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Club'));
+                $this->Flash->error(__('Erreur'));
             }
         }
         $this->set(compact('club'));
@@ -502,29 +769,13 @@ public function liste()
         $this->request->allowMethod(['post', 'delete']);
         $club = $Clubs->get($id);
         if ($Clubs->delete($club)) {
-            $this->Flash->success(__('The {0} has been deleted.', 'Club'));
+            $this->Flash->success(__('Le {0} a été supprimé.', 'Club'));
         } else {
-            $this->Flash->error(__('The {0} could not be deleted. Please, try again.', 'Club'));
+            $this->Flash->error(__('Le {0} n\'a pas pu être supprimé. Veuillez réessayer.', 'club'));
         }
         return $this->redirect(['action' => 'afficherClubs']);
     }
 
-    public function beforeFilter(Event $event)
-    {
-        // allow only login, forgotpassword
-        $this->Auth->authorize = 'controller';
-        $usrole = $this->Auth->user('role');
-        if($usrole!='ingenieur' && $usrole!='admin')
-        {
-
-            $this->Flash->error(__('Vous ne pouvez pas acceder a ce lien'));
-            return $this->redirect(
-                ['controller' => 'Users', 'action' => 'logout']
-            );
-        }
-        $this->Auth->deny();
-
-    }
 
 }
 

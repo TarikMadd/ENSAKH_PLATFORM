@@ -1,11 +1,11 @@
 <section class="content-header">
   <h1>
-    Club
-    <small><?= __('Add') ?></small>
+    Parascolaire
+    <small><?= __('') ?></small>
   </h1>
   <ol class="breadcrumb">
     <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Retour'), ['action' => 'index'], ['escape' => false]) ?>
     </li>
   </ol>
 </section>
@@ -18,24 +18,24 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><?= __('Form') ?></h3>
+          <h3 class="box-title"><?= __('Ajouter') ?></h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <?= $this->Form->create($club, array('role' => 'form')) ?>
+        <?= $this->Form->create($club, array('type' => 'file')) ?>
           <div class="box-body">
           <?php
-            echo $this->Form->input('nom');
-            echo $this->Form->input('mission');
-            echo $this->Form->input('datePost');
-            echo $this->Form->input('mot');
-            echo $this->Form->input('texte');
-            echo $this->Form->input('logo');
+            echo $this->Form->input('nom',array('label'=>"Nom du club "));
+            echo $this->Form->input('mission',array('label'=>"Mission "));
+            echo $this->Form->input('datePost',array('label'=>"Date"));
+            echo $this->Form->input('mot',array('label'=>"Mot du teamleader"));
+            echo $this->Form->input('texte',array('label'=>"Presentation du club"));
+            echo $this->Form->input('logo',array('type'=>'file'));
           ?>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <?= $this->Form->button(__('Save')) ?>
+            <?= $this->Form->button(__('Enregistrer')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>

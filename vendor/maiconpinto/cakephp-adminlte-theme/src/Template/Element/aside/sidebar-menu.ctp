@@ -527,78 +527,95 @@ elseif($us['role']=='respostock')
 {
 ?> 
 
-<li class="header">Espace Stock</li>
+ <!---      Stock  :      -->
 
-<!-- role Stock -->
+                             <li class="header">Espace Stock</li>
 
-<!--DEBUT  zahri -->
- <li class="treeview">
-     <a href="#">
-         <i class="fa fa-archive" aria-hidden="true"></i><span>Gestion des Articles</span> <i class="fa fa-angle-left pull-right"></i>
-     </a>
-     <ul class="treeview-menu">
-     <li><?php echo $this->Html->link('Afficher Articles', array('controller' => 'Respostocks','action' => 'index_articles')); ?></li>
-     <li><?php echo $this->Html->link('Ajouter Articles', array('controller' => 'Respostocks','action' => 'add_articles')); ?></li>
-     </ul>
- </li>
-     <li class="treeview">
-     <a href="#">
-         <i class="fa fa-cart-plus" aria-hidden="true"></i><span>Gestion des Commandes</span> <i class="fa fa-angle-left pull-right"></i>
-     </a>
-     <ul class="treeview-menu">
-     <li><?php echo $this->Html->link('Afficher Commandes', array('controller' => 'Respostocks','action' => 'index_commandes')); ?></li>
-     <li><?php echo $this->Html->link('Ajouter Commandes', array('controller' => 'Respostocks','action' => 'add_commandes')); ?></li>
-     <li><?php echo $this->Html->link('envoyer Commande', array('controller' => 'Respostocks','action' => 'envoieCom')); ?></li>
-     </ul>
- </li>
- <li class="treeview">
-     <a href="#">
-         <i class="fa fa-truck" aria-hidden="true"></i><span>Gestion des Fournisseurs</span> <i class="fa fa-angle-left pull-right"></i>
-     </a>
-     <ul class="treeview-menu">
-     <li><?php echo $this->Html->link('Afficher Fournisseurs', array('controller' => 'Respostocks','action' => 'index_fournisseurs')); ?></li>
-     <li><?php echo $this->Html->link('Ajouter Fournisseurs', array('controller' => 'Respostocks','action' => 'add_fournisseurs')); ?></li>
-     </ul>
- </li>
- <li class="treeview">
-     <a href="#">
-         <i class="fa fa-dashboard"></i><span>Gestion des Magasins</span> <i class="fa fa-angle-left pull-right"></i>
-     </a>
-     <ul class="treeview-menu">
-     <li><?php echo $this->Html->link('Afficher Magasins', array('controller' => 'Respostocks','action' => 'index_magasins')); ?></li>
-     <li><?php echo $this->Html->link('Ajouter Magasins', array('controller' => 'Respostocks','action' => 'add_magasins')); ?></li>
-     </ul>
- </li>
- <li class="treeview">
-     <a href="#">
-         <i class="fa fa-table"></i><span>Gestion des Mouvements</span> <i class="fa fa-angle-left pull-right"></i>
-     </a>
-     <ul class="treeview-menu">
-     <li><?php echo $this->Html->link('Afficher Mouvements', array('controller' => 'Respostocks','action' => 'index_mouvements')); ?></li>
-     <li><?php echo $this->Html->link('Ajouter Mouvements', array('controller' => 'Respostocks','action' => 'add_mouvements')); ?></li>
-     </ul>
- </li>
- <li class="treeview">
-     <a href="#">
-          <i class="fa fa-clone" aria-hidden="true"></i><span>Gestion des Categories</span> <i class="fa fa-angle-left pull-right"></i>
-     </a>
-     <ul class="treeview-menu">
-     <li><?php echo $this->Html->link('Afficher Categories', array('controller' => 'Respostocks','action' => 'index_stockcategories')); ?></li>
-     <li><?php echo $this->Html->link('Ajouter Categories', array('controller' => 'Respostocks','action' => 'add_stockcategories')); ?></li>
-     </ul>
- </li>
+   <!-- role Stock -->
 
-<li class="treeview">
-     <a href="#">
-         <i class="fa fa-table"></i> <span></span> statistique <i class="fa fa-angle-left pull-right"></i>
-     </a>
-     <ul class="treeview-menu">
+<!--DEBUT  JELAIDI -->
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-archive" aria-hidden="true"></i><span>Gestion des Articles</span> <i class="fa fa-angle-left pull-right"></i> 
+        </a>
+        <ul class="treeview-menu">
+        <li><?php echo $this->Html->link('Afficher Articles', array('controller' => 'Respostocks','action' => 'index_articles')); ?></li>
+		<li><?php echo $this->Html->link('Ajouter Articles', array('controller' => 'Respostocks','action' => 'add_articles')); ?></li>
+        </ul>
+    </li>
+		<li class="treeview">
+        <a href="#">
+            <i class="fa fa-cart-plus" aria-hidden="true"></i><span>Gestion des Commandes</span> <i class="fa fa-angle-left pull-right"></i> 
+        </a>
+        <ul class="treeview-menu">
+        <li><?php echo $this->Html->link('Afficher Commandes', array('controller' => 'Respostocks','action' => 'index_commandes')); ?></li>
+		<li><?php echo $this->Html->link('Ajouter Commandes', array('controller' => 'Respostocks','action' => 'add_commandes')); ?></li>
+        <li><?php echo $this->Html->link('envoyer Commande', array('controller' => 'Respostocks','action' => 'envoieCom')); ?></li>
+		</ul>
+    </li>
+	<li class="treeview">
+        <a href="#">
+            <i class="fa fa-truck" aria-hidden="true"></i><span>Gestion des Fournisseurs</span> <i class="fa fa-angle-left pull-right"></i> 
+        </a>
+        <ul class="treeview-menu">
+        <li><?php echo $this->Html->link('Afficher Fournisseurs', array('controller' => 'Respostocks','action' => 'index_fournisseurs')); ?></li>
+		<li><?php echo $this->Html->link('Ajouter Fournisseurs', array('controller' => 'Respostocks','action' => 'add_fournisseurs')); ?></li>
+        </ul>
+    </li>
+	<li class="treeview">
+        <a href="#">
+            <i class="fa fa-dashboard"></i><span>Gestion des Magasins</span> <i class="fa fa-angle-left pull-right"></i> 
+        </a>
+        <ul class="treeview-menu">
+        <li><?php echo $this->Html->link('Afficher Magasins', array('controller' => 'Respostocks','action' => 'index_magasins')); ?></li>
+		<li><?php echo $this->Html->link('Ajouter Magasins', array('controller' => 'Respostocks','action' => 'add_magasins')); ?></li>
+        </ul>
+    </li>
+	<li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i><span>Gestion des Mouvements</span> <i class="fa fa-angle-left pull-right"></i> 
+        </a>
+        <ul class="treeview-menu">
+        <li><?php echo $this->Html->link('Afficher Mouvements', array('controller' => 'Respostocks','action' => 'index_mouvements')); ?></li>
+		<li><?php echo $this->Html->link('Ajouter Mouvements', array('controller' => 'Respostocks','action' => 'add_mouvements')); ?></li>
+        </ul>
+    </li>
+	<li class="treeview">
+	    <a href="#">
+             <i class="fa fa-clone" aria-hidden="true"></i><span>Gestion des Categories</span> <i class="fa fa-angle-left pull-right"></i> 
+        </a>
+        <ul class="treeview-menu">
+        <li><?php echo $this->Html->link('Afficher Categories', array('controller' => 'Respostocks','action' => 'index_stockcategories')); ?></li>
+		<li><?php echo $this->Html->link('Ajouter Categories', array('controller' => 'Respostocks','action' => 'add_stockcategories')); ?></li>
+        </ul>
+    </li>
+<!--FIN  JELAIDI -->
+<!--DEBUT  Kawtar -->
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respostocks','action' => 'demanderabsences')); ?>"></li>
 
-         <li><li><?php echo $this->Html->link('graphe ', array('controller' => 'Respostocks','action' => 'articlechaqueannee')); ?>"></li></li>
-     </ul>
-<!--fin zahri -->
+        </ul>
+        <!--Fin Kawtar -->
+    </li>
 
 
+
+    <!--DEBUT  Bouhsise -->
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion des demandes</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+
+            <li><li><?php echo $this->Html->link('Déposer une demande ', array('controller' => 'Respostocks','action' => 'demanderDocFct')); ?>"></li></li>
+            <li><li><?php echo $this->Html->link('Liste des documents déposés ', array('controller' => 'Respostocks','action' => 'etatDemandeFct  ')); ?>"></li></li>
+        </ul>
+    </li>
     <!-- Bouhsise -->
 
 <?php

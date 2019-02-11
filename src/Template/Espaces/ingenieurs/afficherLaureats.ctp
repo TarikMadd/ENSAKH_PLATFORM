@@ -36,9 +36,9 @@
                 <td><?= $this->Number->format($laureat->nombresNonTravailles) ?></td>
                 <td><?= h($laureat->filieres) ?></td>
                 <td class="actions" style="white-space:nowrap">
-                  <?= $this->Html->link(__('View'), ['action' => 'viewLaureats', $laureat->id], ['class'=>'btn btn-info btn-xs']) ?>
-                  <?= $this->Html->link(__('Edit'), ['action' => 'modifierLaureats', $laureat->id], ['class'=>'btn btn-warning btn-xs']) ?>
-                  <?= $this->Form->postLink(__('Delete'), ['action' => 'supprimerLaureats', $laureat->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                  <?= $this->Html->link(__('Afficher'), ['action' => 'viewLaureats', $laureat->id], ['class'=>'btn btn-info btn-xs']) ?>
+                  <?= $this->Html->link(__('Modifier'), ['action' => 'modifierLaureats', $laureat->id], ['class'=>'btn btn-warning btn-xs']) ?>
+                  <?= $this->Form->postLink(__('Supprimer'), ['action' => 'supprimerLaureats', $laureat->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -70,7 +70,7 @@
 }
 </style>
 <?php echo '<h3>  Tapper une annee et vous auriez les informations sur les laureats de cette annee :  </h3>
-<form action="liste" method="post">
+<form action="liste2" method="post">
 <input type="text" name="annee" >
 <button type="submit" class="button" name="button">valider</button>
 </form>

@@ -1,8 +1,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Videos
-    <div class="pull-right"><?= $this->Html->link(__('New'), ['action' => 'ajouterVideos'], ['class'=>'btn btn-success btn-xs']) ?></div>
+    Vidéos
+    <div class="pull-right"><?= $this->Html->link(__('Ajouter'), ['action' => 'ajouterVideos'], ['class'=>'btn btn-success btn-xs']) ?></div>
   </h1>
 </section>
 
@@ -12,7 +12,7 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title"><?= __('List of') ?> Videos</h3>
+          <h3 class="box-title"><?= __('Liste des') ?> Vidéos</h3>
           <div class="box-tools">
            
           </div>
@@ -21,22 +21,22 @@
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover">
             <tr>
-              <th><?= $this->Paginator->sort('id') ?></th>
-              <th><?= $this->Paginator->sort('lien') ?></th>
-              <th><?= $this->Paginator->sort('commentaire') ?></th>
-              <th><?= $this->Paginator->sort('captureVideo') ?></th>
+              
+              <th><?= $this->Paginator->sort('lien',array('label'=>"URL de la vidéo")) ?></th>
+              <th><?= $this->Paginator->sort('commentaire',array('label'=>"Commentaire")) ?></th>
+              
               <th><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($videos as $video): ?>
               <tr>
-                <td><?= $this->Number->format($video->id) ?></td>
+                
                 <td><?= h($video->lien) ?></td>
                 <td><?= h($video->commentaire) ?></td>
-                <td><?= h($video->captureVideo) ?></td>
+               
                 <td class="actions" style="white-space:nowrap">
-                  <?= $this->Html->link(__('View'), ['action' => 'viewVideos', $video->id], ['class'=>'btn btn-info btn-xs']) ?>
-                  <?= $this->Html->link(__('Edit'), ['action' => 'modifierVideos', $video->id], ['class'=>'btn btn-warning btn-xs']) ?>
-                  <?= $this->Form->postLink(__('Delete'), ['action' => 'supprimerVideos', $video->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                  <?= $this->Html->link(__('Afficher'), ['action' => 'viewVideos', $video->id], ['class'=>'btn btn-info btn-xs']) ?>
+                  <?= $this->Html->link(__('Modifier'), ['action' => 'modifierVideos', $video->id], ['class'=>'btn btn-warning btn-xs']) ?>
+                  <?= $this->Form->postLink(__('Supprimer'), ['action' => 'supprimerVideos', $video->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
               </tr>
             <?php endforeach; ?>
