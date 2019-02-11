@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Feb 10, 2019 at 10:04 PM
--- Server version: 5.7.23
--- PHP Version: 5.6.38
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  Dim 10 fév. 2019 à 17:43
+-- Version du serveur :  5.7.24
+-- Version de PHP :  5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ensaksite`
+-- Base de données :  `ensaksite`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `absences`
+-- Structure de la table `absences`
 --
 
 DROP TABLE IF EXISTS `absences`;
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `absences` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `access_admis`
+-- Structure de la table `access_admis`
 --
 
 DROP TABLE IF EXISTS `access_admis`;
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `access_admis` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `activites`
+-- Structure de la table `activites`
 --
 
 DROP TABLE IF EXISTS `activites`;
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `activites` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `activitesdespreinscriptions`
+-- Structure de la table `activitesdespreinscriptions`
 --
 
 DROP TABLE IF EXISTS `activitesdespreinscriptions`;
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `activitesdespreinscriptions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `activitesdespreinscriptions_preinscriptions`
+-- Structure de la table `activitesdespreinscriptions_preinscriptions`
 --
 
 DROP TABLE IF EXISTS `activitesdespreinscriptions_preinscriptions`;
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `activitesdespreinscriptions_preinscriptions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `actualiteclubs`
+-- Structure de la table `actualiteclubs`
 --
 
 DROP TABLE IF EXISTS `actualiteclubs`;
@@ -123,12 +123,19 @@ CREATE TABLE IF NOT EXISTS `actualiteclubs` (
   KEY `id_club_2` (`id_club`),
   KEY `id_image` (`image`,`video`),
   KEY `id_video` (`video`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `actualiteclubs`
+--
+
+INSERT INTO `actualiteclubs` (`id`, `titre`, `date`, `texte`, `id_club`, `image`, `video`, `fichier`) VALUES
+(1, 'opensource', '2024-01-01', 'kodj', 2, '1.jpg', 'jjj.mp4', 'hhhh.doc');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `actualites`
+-- Structure de la table `actualites`
 --
 
 DROP TABLE IF EXISTS `actualites`;
@@ -139,12 +146,20 @@ CREATE TABLE IF NOT EXISTS `actualites` (
   `date` date NOT NULL,
   `photo` varchar(600) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `actualites`
+--
+
+INSERT INTO `actualites` (`id`, `titre`, `texte`, `date`, `photo`) VALUES
+(1, 'remise du diplome', 'remise du diplome', '2018-01-01', ''),
+(2, 'remise du diplome', 'uguty', '2024-01-01', '2.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `annee_scolaires`
+-- Structure de la table `annee_scolaires`
 --
 
 DROP TABLE IF EXISTS `annee_scolaires`;
@@ -156,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `annee_scolaires` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `annee_scolaires`
+-- Déchargement des données de la table `annee_scolaires`
 --
 
 INSERT INTO `annee_scolaires` (`id`, `libile`, `annee`) VALUES
@@ -166,7 +181,7 @@ INSERT INTO `annee_scolaires` (`id`, `libile`, `annee`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `articleevents`
+-- Structure de la table `articleevents`
 --
 
 DROP TABLE IF EXISTS `articleevents`;
@@ -182,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `articleevents` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `articles`
+-- Structure de la table `articles`
 --
 
 DROP TABLE IF EXISTS `articles`;
@@ -194,25 +209,14 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `marque` varchar(50) DEFAULT NULL,
   `utilite` tinyint(1) DEFAULT NULL,
   `quantite` int(11) DEFAULT NULL,
-  `date_article` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `stock_categorie_id` (`stock_categorie_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `articles`
---
-
-INSERT INTO `articles` (`id`, `stock_categorie_id`, `label_article`, `quantite_min`, `marque`, `utilite`, `quantite`, `date_article`) VALUES
-(2, 1, 'table', 120, 'Ikea', NULL, 95, '2019-02-10 19:04:20'),
-(3, 1, 'fenetre', 120, 'Ikea', NULL, 100, '2019-02-10 19:07:44'),
-(4, 2, 'Ballons', 50, 'Mikasa', NULL, 100, '2019-02-10 19:16:07'),
-(5, 2, 'Halteres', 50, 'allFit', NULL, 100, '2019-02-10 19:25:11');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asupprimer`
+-- Structure de la table `asupprimer`
 --
 
 DROP TABLE IF EXISTS `asupprimer`;
@@ -225,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `asupprimer` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `autorisations`
+-- Structure de la table `autorisations`
 --
 
 DROP TABLE IF EXISTS `autorisations`;
@@ -245,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `autorisations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `boncommandes`
+-- Structure de la table `boncommandes`
 --
 
 DROP TABLE IF EXISTS `boncommandes`;
@@ -261,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `boncommandes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `books`
+-- Structure de la table `books`
 --
 
 DROP TABLE IF EXISTS `books`;
@@ -284,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `books` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `calendriers`
+-- Structure de la table `calendriers`
 --
 
 DROP TABLE IF EXISTS `calendriers`;
@@ -299,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `calendriers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Structure de la table `categories`
 --
 
 DROP TABLE IF EXISTS `categories`;
@@ -312,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `certificats`
+-- Structure de la table `certificats`
 --
 
 DROP TABLE IF EXISTS `certificats`;
@@ -328,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `certificats` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `certificats_etudiants`
+-- Structure de la table `certificats_etudiants`
 --
 
 DROP TABLE IF EXISTS `certificats_etudiants`;
@@ -353,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `certificats_etudiants` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clubs`
+-- Structure de la table `clubs`
 --
 
 DROP TABLE IF EXISTS `clubs`;
@@ -366,12 +370,23 @@ CREATE TABLE IF NOT EXISTS `clubs` (
   `texte` text NOT NULL,
   `logo` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `clubs`
+--
+
+INSERT INTO `clubs` (`id`, `nom`, `mission`, `datePost`, `mot`, `texte`, `logo`) VALUES
+(1, 'jlm', 'dddd', '2018-01-01', 'jlm', 'jlm', '5.jpg'),
+(2, 'jlm', 'dddd', '2018-01-01', 'jlm', 'jlm', '5.jpg'),
+(3, 'jlm', 'jlm', '2016-01-01', 'jlm', 'ssss', '1.jpg'),
+(4, 'jlm', 'jlm', '2016-01-01', 'jlm', 'ssss', '1.jpg'),
+(5, 'jlm', 'jlm', '2024-01-01', 'lll', 'hvg', '5.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commandes`
+-- Structure de la table `commandes`
 --
 
 DROP TABLE IF EXISTS `commandes`;
@@ -382,19 +397,12 @@ CREATE TABLE IF NOT EXISTS `commandes` (
   `stock_categorie_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `categorie_id` (`stock_categorie_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `commandes`
---
-
-INSERT INTO `commandes` (`id`, `delai_limite`, `nom`, `stock_categorie_id`) VALUES
-(1, '2024-01-01', 'Equipements info', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commande_articles`
+-- Structure de la table `commande_articles`
 --
 
 DROP TABLE IF EXISTS `commande_articles`;
@@ -413,7 +421,7 @@ CREATE TABLE IF NOT EXISTS `commande_articles` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comptes`
+-- Structure de la table `comptes`
 --
 
 DROP TABLE IF EXISTS `comptes`;
@@ -427,7 +435,7 @@ CREATE TABLE IF NOT EXISTS `comptes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `concours`
+-- Structure de la table `concours`
 --
 
 DROP TABLE IF EXISTS `concours`;
@@ -446,7 +454,7 @@ CREATE TABLE IF NOT EXISTS `concours` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contacts`
+-- Structure de la table `contacts`
 --
 
 DROP TABLE IF EXISTS `contacts`;
@@ -461,7 +469,7 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `courrier_arrivees`
+-- Structure de la table `courrier_arrivees`
 --
 
 DROP TABLE IF EXISTS `courrier_arrivees`;
@@ -485,7 +493,7 @@ CREATE TABLE IF NOT EXISTS `courrier_arrivees` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `courrier_departs`
+-- Structure de la table `courrier_departs`
 --
 
 DROP TABLE IF EXISTS `courrier_departs`;
@@ -507,7 +515,7 @@ CREATE TABLE IF NOT EXISTS `courrier_departs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demande_auth`
+-- Structure de la table `demande_auth`
 --
 
 DROP TABLE IF EXISTS `demande_auth`;
@@ -528,7 +536,7 @@ CREATE TABLE IF NOT EXISTS `demande_auth` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departements`
+-- Structure de la table `departements`
 --
 
 DROP TABLE IF EXISTS `departements`;
@@ -543,7 +551,7 @@ CREATE TABLE IF NOT EXISTS `departements` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `departements`
+-- Déchargement des données de la table `departements`
 --
 
 INSERT INTO `departements` (`id`, `nom_departement`, `nb_filiere`, `refer_depart`) VALUES
@@ -552,7 +560,7 @@ INSERT INTO `departements` (`id`, `nom_departement`, `nb_filiere`, `refer_depart
 -- --------------------------------------------------------
 
 --
--- Table structure for table `destinataires`
+-- Structure de la table `destinataires`
 --
 
 DROP TABLE IF EXISTS `destinataires`;
@@ -571,7 +579,7 @@ CREATE TABLE IF NOT EXISTS `destinataires` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `devisdemandes`
+-- Structure de la table `devisdemandes`
 --
 
 DROP TABLE IF EXISTS `devisdemandes`;
@@ -588,7 +596,7 @@ CREATE TABLE IF NOT EXISTS `devisdemandes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `diffusions_messages`
+-- Structure de la table `diffusions_messages`
 --
 
 DROP TABLE IF EXISTS `diffusions_messages`;
@@ -604,7 +612,7 @@ CREATE TABLE IF NOT EXISTS `diffusions_messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `diffusions_messages`
+-- Déchargement des données de la table `diffusions_messages`
 --
 
 INSERT INTO `diffusions_messages` (`message_id`, `user_id`, `typerecepteur`, `group_id`, `departement_id`, `date`) VALUES
@@ -615,7 +623,7 @@ INSERT INTO `diffusions_messages` (`message_id`, `user_id`, `typerecepteur`, `gr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `disciplines`
+-- Structure de la table `disciplines`
 --
 
 DROP TABLE IF EXISTS `disciplines`;
@@ -629,7 +637,7 @@ CREATE TABLE IF NOT EXISTS `disciplines` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `documents`
+-- Structure de la table `documents`
 --
 
 DROP TABLE IF EXISTS `documents`;
@@ -644,7 +652,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `elements`
+-- Structure de la table `elements`
 --
 
 DROP TABLE IF EXISTS `elements`;
@@ -663,7 +671,7 @@ CREATE TABLE IF NOT EXISTS `elements` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `elements`
+-- Déchargement des données de la table `elements`
 --
 
 INSERT INTO `elements` (`id`, `code`, `libile`, `module_id`, `CM`, `Eval`, `AP`, `TP`, `TD`) VALUES
@@ -674,7 +682,7 @@ INSERT INTO `elements` (`id`, `code`, `libile`, `module_id`, `CM`, `Eval`, `AP`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `enseigners`
+-- Structure de la table `enseigners`
 --
 
 DROP TABLE IF EXISTS `enseigners`;
@@ -693,7 +701,7 @@ CREATE TABLE IF NOT EXISTS `enseigners` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `enseigners`
+-- Déchargement des données de la table `enseigners`
 --
 
 INSERT INTO `enseigners` (`id`, `semestre_id`, `annee_scolaire_id`, `element_id`, `profpermanent_id`, `vacataire_id`) VALUES
@@ -702,7 +710,7 @@ INSERT INTO `enseigners` (`id`, `semestre_id`, `annee_scolaire_id`, `element_id`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `equiperecherches`
+-- Structure de la table `equiperecherches`
 --
 
 DROP TABLE IF EXISTS `equiperecherches`;
@@ -715,7 +723,7 @@ CREATE TABLE IF NOT EXISTS `equiperecherches` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etudiants`
+-- Structure de la table `etudiants`
 --
 
 DROP TABLE IF EXISTS `etudiants`;
@@ -789,19 +797,20 @@ CREATE TABLE IF NOT EXISTS `etudiants` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `apogee` (`apogee`),
   UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `etudiants`
+-- Déchargement des données de la table `etudiants`
 --
 
 INSERT INTO `etudiants` (`id`, `user_id`, `apogee`, `nom_fr`, `nom_ar`, `prenom_fr`, `prenom_ar`, `cne`, `cin`, `date_naissance`, `code_ville_naissance`, `ville_naissance_fr`, `ville_naissance_ar`, `code_pays_naissance`, `pays_naissance_fr`, `pays_naissance_ar`, `code_sexe`, `sexe_fr`, `sexe_ar`, `code_adresse_fix`, `adresse_fix_fr`, `adresse_fix_ar`, `adresse_annulle_fr`, `adresse_annulle_ar`, `annee_1er_inscription_universite`, `annee_1er_inscription_enseignement_superieur`, `annee_1er_inscription_universite_marocaine`, `code_bac`, `serie_bac_fr`, `serie_bac_ar`, `code_etablissement_bac`, `etablissement_bac_fr`, `etablissement_bac_ar`, `code_mention_bac`, `mention_bac`, `code_province_bac`, `province_bac_fr`, `province_bac_ar`, `annee_bac`, `code_type_handicap`, `type_handicap`, `code_type_hebergement`, `type_hebergement`, `code_situation_familiale`, `situation_familiale`, `situation_militaire`, `categorie_socio_professionnelle`, `domaine_activite_professionnelle`, `quatite_Travaillee`, `profession_pere_fr`, `profession_pere_ar`, `profession_mere_fr`, `profession_mere_ar`, `code_province_parents`, `province_parents_fr`, `province_parents_ar`, `annee_sortie`, `code_cite_universiatire`, `cite_universiatire`, `created`, `modified`, `photo`, `validi`, `validi_respo`, `numero_tel`, `email`) VALUES
-(1, 3, 'apogee', 'hasnae', 'hasnae', 'hasnae', 'hasnae', 544545, 'aef44', '2019-01-02', NULL, NULL, NULL, NULL, NULL, NULL, 'f', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL);
+(1, 3, 'apogee', 'hasnae', 'hasnae', 'hasnae', 'hasnae', 544545, 'aef44', '2019-01-02', NULL, NULL, NULL, NULL, NULL, NULL, 'f', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL),
+(2, NULL, NULL, 'glouib', NULL, 'chaimaa', NULL, NULL, NULL, '1997-10-23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etudiers`
+-- Structure de la table `etudiers`
 --
 
 DROP TABLE IF EXISTS `etudiers`;
@@ -819,7 +828,7 @@ CREATE TABLE IF NOT EXISTS `etudiers` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `etudiers`
+-- Déchargement des données de la table `etudiers`
 --
 
 INSERT INTO `etudiers` (`id`, `etudiant_id`, `annee_scolaire_id`, `groupe_id`, `element_id`) VALUES
@@ -830,7 +839,7 @@ INSERT INTO `etudiers` (`id`, `etudiant_id`, `annee_scolaire_id`, `groupe_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `evenements`
+-- Structure de la table `evenements`
 --
 
 DROP TABLE IF EXISTS `evenements`;
@@ -846,12 +855,20 @@ CREATE TABLE IF NOT EXISTS `evenements` (
   `invite` int(11) NOT NULL,
   `photo` varchar(600) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `evenements`
+--
+
+INSERT INTO `evenements` (`id`, `titre`, `date`, `adresse`, `tele`, `texte`, `website`, `membre`, `invite`, `photo`) VALUES
+(1, 'opensource', '2024-01-01', 'Ensa khouribga', '0623567428', 'open source', 'www.ensakh.com', 22, 18, ''),
+(2, 'opensource', '2024-01-01', 'Ensa khouribga', '0623567428', 'ssss', 'www.ensakh.com', 27, 36, '2.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `expediteurs`
+-- Structure de la table `expediteurs`
 --
 
 DROP TABLE IF EXISTS `expediteurs`;
@@ -869,7 +886,7 @@ CREATE TABLE IF NOT EXISTS `expediteurs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `filieres`
+-- Structure de la table `filieres`
 --
 
 DROP TABLE IF EXISTS `filieres`;
@@ -880,7 +897,7 @@ CREATE TABLE IF NOT EXISTS `filieres` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `filieres`
+-- Déchargement des données de la table `filieres`
 --
 
 INSERT INTO `filieres` (`id`, `libile`) VALUES
@@ -890,7 +907,7 @@ INSERT INTO `filieres` (`id`, `libile`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fonctionnaires`
+-- Structure de la table `fonctionnaires`
 --
 
 DROP TABLE IF EXISTS `fonctionnaires`;
@@ -920,19 +937,12 @@ CREATE TABLE IF NOT EXISTS `fonctionnaires` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `user_id_2` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `fonctionnaires`
---
-
-INSERT INTO `fonctionnaires` (`id`, `somme`, `date_Recrut`, `salaire`, `etat`, `user_id`, `nom_fct`, `prenom_fct`, `dateNaissance`, `lieuNaissance`, `specialite`, `situation_Familiale`, `email`, `etat_attestation`, `etat_fiche`, `phone`, `CIN`, `age`, `genre`, `nbr_enfants`, `isPassExam`, `photo`) VALUES
-(1, '20000', '2019-02-04', 10000, 1, 10, 'molStock', 'prenom', '1997-01-15', 'CASA', 'Fournitures', 'Marrie', 'stock@gmail.com', 0, 0, 123456, 'BL1234', 44, 'Mr', 3, 1, '12344433444');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fonctionnaires_activites`
+-- Structure de la table `fonctionnaires_activites`
 --
 
 DROP TABLE IF EXISTS `fonctionnaires_activites`;
@@ -949,7 +959,7 @@ CREATE TABLE IF NOT EXISTS `fonctionnaires_activites` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fonctionnaires_documents`
+-- Structure de la table `fonctionnaires_documents`
 --
 
 DROP TABLE IF EXISTS `fonctionnaires_documents`;
@@ -967,7 +977,7 @@ CREATE TABLE IF NOT EXISTS `fonctionnaires_documents` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fonctionnaires_grades`
+-- Structure de la table `fonctionnaires_grades`
 --
 
 DROP TABLE IF EXISTS `fonctionnaires_grades`;
@@ -989,7 +999,7 @@ CREATE TABLE IF NOT EXISTS `fonctionnaires_grades` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fonctionnaires_services`
+-- Structure de la table `fonctionnaires_services`
 --
 
 DROP TABLE IF EXISTS `fonctionnaires_services`;
@@ -1006,7 +1016,7 @@ CREATE TABLE IF NOT EXISTS `fonctionnaires_services` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `formationcontinues`
+-- Structure de la table `formationcontinues`
 --
 
 DROP TABLE IF EXISTS `formationcontinues`;
@@ -1018,7 +1028,7 @@ CREATE TABLE IF NOT EXISTS `formationcontinues` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `formationinitiales`
+-- Structure de la table `formationinitiales`
 --
 
 DROP TABLE IF EXISTS `formationinitiales`;
@@ -1036,7 +1046,7 @@ CREATE TABLE IF NOT EXISTS `formationinitiales` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `formations`
+-- Structure de la table `formations`
 --
 
 DROP TABLE IF EXISTS `formations`;
@@ -1055,7 +1065,7 @@ CREATE TABLE IF NOT EXISTS `formations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fournisseurs`
+-- Structure de la table `fournisseurs`
 --
 
 DROP TABLE IF EXISTS `fournisseurs`;
@@ -1069,12 +1079,12 @@ CREATE TABLE IF NOT EXISTS `fournisseurs` (
   `email` text,
   PRIMARY KEY (`id`),
   KEY `stock_categorie_id` (`stock_categorie_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `grades`
+-- Structure de la table `grades`
 --
 
 DROP TABLE IF EXISTS `grades`;
@@ -1090,7 +1100,7 @@ CREATE TABLE IF NOT EXISTS `grades` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `groupes`
+-- Structure de la table `groupes`
 --
 
 DROP TABLE IF EXISTS `groupes`;
@@ -1105,7 +1115,7 @@ CREATE TABLE IF NOT EXISTS `groupes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `groupes`
+-- Déchargement des données de la table `groupes`
 --
 
 INSERT INTO `groupes` (`id`, `niveaus_id`, `filiere_id`, `photo_emploi`) VALUES
@@ -1115,7 +1125,7 @@ INSERT INTO `groupes` (`id`, `niveaus_id`, `filiere_id`, `photo_emploi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `historiqueemprunte`
+-- Structure de la table `historiqueemprunte`
 --
 
 DROP TABLE IF EXISTS `historiqueemprunte`;
@@ -1131,7 +1141,7 @@ CREATE TABLE IF NOT EXISTS `historiqueemprunte` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `images`
+-- Structure de la table `images`
 --
 
 DROP TABLE IF EXISTS `images`;
@@ -1140,27 +1150,44 @@ CREATE TABLE IF NOT EXISTS `images` (
   `lien` varchar(600) NOT NULL,
   `commentaire` varchar(600) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `images`
+--
+
+INSERT INTO `images` (`id`, `lien`, `commentaire`) VALUES
+(1, 'adobestock_157514845_s_h_exclusiv.jpg', 'photo'),
+(2, 'www.image.com', 'hhghg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `laureats`
+-- Structure de la table `laureats`
 --
 
 DROP TABLE IF EXISTS `laureats`;
 CREATE TABLE IF NOT EXISTS `laureats` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `annee` year(4) NOT NULL,
   `nombresTravailles` int(11) NOT NULL,
   `nombresNonTravailles` int(11) NOT NULL,
-  `filieres` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `filieres` varchar(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `laureats`
+--
+
+INSERT INTO `laureats` (`id`, `annee`, `nombresTravailles`, `nombresNonTravailles`, `filieres`) VALUES
+(1, 2018, 29, 11, 'grt'),
+(2, 2015, 26, 20, 'grt');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `magasins`
+-- Structure de la table `magasins`
 --
 
 DROP TABLE IF EXISTS `magasins`;
@@ -1168,19 +1195,12 @@ CREATE TABLE IF NOT EXISTS `magasins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom_magasin` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `magasins`
---
-
-INSERT INTO `magasins` (`id`, `nom_magasin`) VALUES
-(9, 'magasin2');
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
+-- Structure de la table `messages`
 --
 
 DROP TABLE IF EXISTS `messages`;
@@ -1193,7 +1213,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `messages`
+-- Déchargement des données de la table `messages`
 --
 
 INSERT INTO `messages` (`id`, `sujet`, `contenu`, `piecejointe`) VALUES
@@ -1216,7 +1236,7 @@ INSERT INTO `messages` (`id`, `sujet`, `contenu`, `piecejointe`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messagesbureauordres`
+-- Structure de la table `messagesbureauordres`
 --
 
 DROP TABLE IF EXISTS `messagesbureauordres`;
@@ -1231,7 +1251,7 @@ CREATE TABLE IF NOT EXISTS `messagesbureauordres` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `missions`
+-- Structure de la table `missions`
 --
 
 DROP TABLE IF EXISTS `missions`;
@@ -1259,7 +1279,7 @@ CREATE TABLE IF NOT EXISTS `missions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `modules`
+-- Structure de la table `modules`
 --
 
 DROP TABLE IF EXISTS `modules`;
@@ -1273,7 +1293,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `modules`
+-- Déchargement des données de la table `modules`
 --
 
 INSERT INTO `modules` (`id`, `libile`, `groupe_id`, `semestre_id`) VALUES
@@ -1284,7 +1304,7 @@ INSERT INTO `modules` (`id`, `libile`, `groupe_id`, `semestre_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `motdirecteurs`
+-- Structure de la table `motdirecteurs`
 --
 
 DROP TABLE IF EXISTS `motdirecteurs`;
@@ -1297,7 +1317,7 @@ CREATE TABLE IF NOT EXISTS `motdirecteurs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mouvements`
+-- Structure de la table `mouvements`
 --
 
 DROP TABLE IF EXISTS `mouvements`;
@@ -1314,21 +1334,12 @@ CREATE TABLE IF NOT EXISTS `mouvements` (
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
   KEY `magasin_id` (`magasin_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `mouvements`
---
-
-INSERT INTO `mouvements` (`id`, `article_id`, `magasin_id`, `date_mouvement`, `reference_entree`, `reference_sortie`, `quantite_entree`, `quantite_sortie`, `service`) VALUES
-(36, 2, 9, '2019-02-10 19:53:00', NULL, 'ref1', NULL, 10, 'Transport'),
-(39, 2, 9, '2019-02-10 20:07:00', NULL, 'ref2', NULL, 20, 'BLA'),
-(38, 2, 9, '2019-02-10 19:53:00', '12', 'ref1', 5, 10, 'Transport');
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `niveaus`
+-- Structure de la table `niveaus`
 --
 
 DROP TABLE IF EXISTS `niveaus`;
@@ -1339,7 +1350,7 @@ CREATE TABLE IF NOT EXISTS `niveaus` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `niveaus`
+-- Déchargement des données de la table `niveaus`
 --
 
 INSERT INTO `niveaus` (`id`, `libile`) VALUES
@@ -1349,7 +1360,7 @@ INSERT INTO `niveaus` (`id`, `libile`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notes`
+-- Structure de la table `notes`
 --
 
 DROP TABLE IF EXISTS `notes`;
@@ -1369,7 +1380,7 @@ CREATE TABLE IF NOT EXISTS `notes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `notes`
+-- Déchargement des données de la table `notes`
 --
 
 INSERT INTO `notes` (`id`, `element_id`, `etudier_id`, `note`, `note_ratt`, `confirmed`, `ratt_confirmed`, `saved`, `ratt_saved`, `created_at`, `updated_at`) VALUES
@@ -1379,7 +1390,7 @@ INSERT INTO `notes` (`id`, `element_id`, `etudier_id`, `note`, `note_ratt`, `con
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notes_auth`
+-- Structure de la table `notes_auth`
 --
 
 DROP TABLE IF EXISTS `notes_auth`;
@@ -1399,7 +1410,7 @@ CREATE TABLE IF NOT EXISTS `notes_auth` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifications_groupe`
+-- Structure de la table `notifications_groupe`
 --
 
 DROP TABLE IF EXISTS `notifications_groupe`;
@@ -1418,7 +1429,7 @@ CREATE TABLE IF NOT EXISTS `notifications_groupe` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifications_users`
+-- Structure de la table `notifications_users`
 --
 
 DROP TABLE IF EXISTS `notifications_users`;
@@ -1437,7 +1448,7 @@ CREATE TABLE IF NOT EXISTS `notifications_users` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ordrepaiements`
+-- Structure de la table `ordrepaiements`
 --
 
 DROP TABLE IF EXISTS `ordrepaiements`;
@@ -1457,7 +1468,7 @@ CREATE TABLE IF NOT EXISTS `ordrepaiements` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ordrevirments`
+-- Structure de la table `ordrevirments`
 --
 
 DROP TABLE IF EXISTS `ordrevirments`;
@@ -1472,7 +1483,7 @@ CREATE TABLE IF NOT EXISTS `ordrevirments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `organisations`
+-- Structure de la table `organisations`
 --
 
 DROP TABLE IF EXISTS `organisations`;
@@ -1486,7 +1497,7 @@ CREATE TABLE IF NOT EXISTS `organisations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `paimentsups`
+-- Structure de la table `paimentsups`
 --
 
 DROP TABLE IF EXISTS `paimentsups`;
@@ -1507,7 +1518,7 @@ CREATE TABLE IF NOT EXISTS `paimentsups` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `paimentvacs`
+-- Structure de la table `paimentvacs`
 --
 
 DROP TABLE IF EXISTS `paimentvacs`;
@@ -1529,7 +1540,7 @@ CREATE TABLE IF NOT EXISTS `paimentvacs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parametres`
+-- Structure de la table `parametres`
 --
 
 DROP TABLE IF EXISTS `parametres`;
@@ -1547,7 +1558,7 @@ CREATE TABLE IF NOT EXISTS `parametres` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `preinscriptions`
+-- Structure de la table `preinscriptions`
 --
 
 DROP TABLE IF EXISTS `preinscriptions`;
@@ -1616,7 +1627,7 @@ CREATE TABLE IF NOT EXISTS `preinscriptions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `preinscriptions_diplomes`
+-- Structure de la table `preinscriptions_diplomes`
 --
 
 DROP TABLE IF EXISTS `preinscriptions_diplomes`;
@@ -1634,7 +1645,7 @@ CREATE TABLE IF NOT EXISTS `preinscriptions_diplomes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `preinscriptions_etablissements`
+-- Structure de la table `preinscriptions_etablissements`
 --
 
 DROP TABLE IF EXISTS `preinscriptions_etablissements`;
@@ -1654,7 +1665,7 @@ CREATE TABLE IF NOT EXISTS `preinscriptions_etablissements` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `preinscriptions_infos`
+-- Structure de la table `preinscriptions_infos`
 --
 
 DROP TABLE IF EXISTS `preinscriptions_infos`;
@@ -1677,7 +1688,7 @@ CREATE TABLE IF NOT EXISTS `preinscriptions_infos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prelevements`
+-- Structure de la table `prelevements`
 --
 
 DROP TABLE IF EXISTS `prelevements`;
@@ -1691,7 +1702,7 @@ CREATE TABLE IF NOT EXISTS `prelevements` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prelevementsups`
+-- Structure de la table `prelevementsups`
 --
 
 DROP TABLE IF EXISTS `prelevementsups`;
@@ -1705,7 +1716,7 @@ CREATE TABLE IF NOT EXISTS `prelevementsups` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profdepartements`
+-- Structure de la table `profdepartements`
 --
 
 DROP TABLE IF EXISTS `profdepartements`;
@@ -1719,7 +1730,7 @@ CREATE TABLE IF NOT EXISTS `profdepartements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `profdepartements`
+-- Déchargement des données de la table `profdepartements`
 --
 
 INSERT INTO `profdepartements` (`nomComplet`, `mail`, `telephone`, `fax`, `departement`) VALUES
@@ -1729,7 +1740,7 @@ INSERT INTO `profdepartements` (`nomComplet`, `mail`, `telephone`, `fax`, `depar
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profpermanents`
+-- Structure de la table `profpermanents`
 --
 
 DROP TABLE IF EXISTS `profpermanents`;
@@ -1763,7 +1774,7 @@ CREATE TABLE IF NOT EXISTS `profpermanents` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `profpermanents`
+-- Déchargement des données de la table `profpermanents`
 --
 
 INSERT INTO `profpermanents` (`id`, `user_id`, `somme`, `salaire`, `etat`, `date_Recrut`, `nom_prof`, `prenom_prof`, `age`, `diplome`, `specialite`, `universite`, `autresdiplomes`, `situation_familiale`, `dateNaissance`, `Lieu_Naissance`, `CIN`, `email_prof`, `phone`, `etat_attestation`, `etatdemande`, `photo`, `etat_fichesalaire`, `genre`) VALUES
@@ -1773,7 +1784,7 @@ INSERT INTO `profpermanents` (`id`, `user_id`, `somme`, `salaire`, `etat`, `date
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profpermanentsbis`
+-- Structure de la table `profpermanentsbis`
 --
 
 DROP TABLE IF EXISTS `profpermanentsbis`;
@@ -1808,7 +1819,7 @@ CREATE TABLE IF NOT EXISTS `profpermanentsbis` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profpermanents_activites`
+-- Structure de la table `profpermanents_activites`
 --
 
 DROP TABLE IF EXISTS `profpermanents_activites`;
@@ -1825,7 +1836,7 @@ CREATE TABLE IF NOT EXISTS `profpermanents_activites` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profpermanents_departements`
+-- Structure de la table `profpermanents_departements`
 --
 
 DROP TABLE IF EXISTS `profpermanents_departements`;
@@ -1841,7 +1852,7 @@ CREATE TABLE IF NOT EXISTS `profpermanents_departements` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `profpermanents_departements`
+-- Déchargement des données de la table `profpermanents_departements`
 --
 
 INSERT INTO `profpermanents_departements` (`id`, `profpermanent_id`, `departement_id`, `Poste_Filiere`, `Date_Debut`) VALUES
@@ -1850,7 +1861,7 @@ INSERT INTO `profpermanents_departements` (`id`, `profpermanent_id`, `departemen
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profpermanents_disciplines`
+-- Structure de la table `profpermanents_disciplines`
 --
 
 DROP TABLE IF EXISTS `profpermanents_disciplines`;
@@ -1866,7 +1877,7 @@ CREATE TABLE IF NOT EXISTS `profpermanents_disciplines` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profpermanents_documents`
+-- Structure de la table `profpermanents_documents`
 --
 
 DROP TABLE IF EXISTS `profpermanents_documents`;
@@ -1884,7 +1895,7 @@ CREATE TABLE IF NOT EXISTS `profpermanents_documents` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profpermanents_grades`
+-- Structure de la table `profpermanents_grades`
 --
 
 DROP TABLE IF EXISTS `profpermanents_grades`;
@@ -1907,7 +1918,7 @@ CREATE TABLE IF NOT EXISTS `profpermanents_grades` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `proposition`
+-- Structure de la table `proposition`
 --
 
 DROP TABLE IF EXISTS `proposition`;
@@ -1931,7 +1942,7 @@ CREATE TABLE IF NOT EXISTS `proposition` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pvupdate`
+-- Structure de la table `pvupdate`
 --
 
 DROP TABLE IF EXISTS `pvupdate`;
@@ -1948,7 +1959,7 @@ CREATE TABLE IF NOT EXISTS `pvupdate` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `representations`
+-- Structure de la table `representations`
 --
 
 DROP TABLE IF EXISTS `representations`;
@@ -1965,7 +1976,7 @@ CREATE TABLE IF NOT EXISTS `representations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservations`
+-- Structure de la table `reservations`
 --
 
 DROP TABLE IF EXISTS `reservations`;
@@ -1983,7 +1994,7 @@ CREATE TABLE IF NOT EXISTS `reservations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `semestres`
+-- Structure de la table `semestres`
 --
 
 DROP TABLE IF EXISTS `semestres`;
@@ -1996,7 +2007,7 @@ CREATE TABLE IF NOT EXISTS `semestres` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `semestres`
+-- Déchargement des données de la table `semestres`
 --
 
 INSERT INTO `semestres` (`id`, `libile`, `niveaus_id`) VALUES
@@ -2006,7 +2017,7 @@ INSERT INTO `semestres` (`id`, `libile`, `niveaus_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `services`
+-- Structure de la table `services`
 --
 
 DROP TABLE IF EXISTS `services`;
@@ -2019,7 +2030,7 @@ CREATE TABLE IF NOT EXISTS `services` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sitedepartements`
+-- Structure de la table `sitedepartements`
 --
 
 DROP TABLE IF EXISTS `sitedepartements`;
@@ -2032,7 +2043,7 @@ CREATE TABLE IF NOT EXISTS `sitedepartements` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sitedocuments`
+-- Structure de la table `sitedocuments`
 --
 
 DROP TABLE IF EXISTS `sitedocuments`;
@@ -2049,7 +2060,7 @@ CREATE TABLE IF NOT EXISTS `sitedocuments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sous_categories`
+-- Structure de la table `sous_categories`
 --
 
 DROP TABLE IF EXISTS `sous_categories`;
@@ -2064,7 +2075,7 @@ CREATE TABLE IF NOT EXISTS `sous_categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stock_categories`
+-- Structure de la table `stock_categories`
 --
 
 DROP TABLE IF EXISTS `stock_categories`;
@@ -2072,20 +2083,12 @@ CREATE TABLE IF NOT EXISTS `stock_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `label_cat` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `stock_categories`
---
-
-INSERT INTO `stock_categories` (`id`, `label_cat`) VALUES
-(1, 'Matieres premiers'),
-(2, 'Sport');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sup_heures`
+-- Structure de la table `sup_heures`
 --
 
 DROP TABLE IF EXISTS `sup_heures`;
@@ -2106,7 +2109,7 @@ CREATE TABLE IF NOT EXISTS `sup_heures` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -2121,7 +2124,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `created`, `modified`) VALUES
@@ -2133,12 +2136,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `created`, `modified`
 (7, 'bennay', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'profpermanent', NULL, NULL),
 (8, 'jerradi', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'profpermanent', NULL, NULL),
 (9, 'mandar', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'profvacataire', NULL, NULL),
-(10, 'respostock', '$2y$10$wF1NactKVrbA.o52AbV7sOjVxPcc0feHir1RO71elcrYn1JIfL/gq', 'respostock', NULL, NULL);
+(10, 'ingenieur', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'ingenieur', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users_books`
+-- Structure de la table `users_books`
 --
 
 DROP TABLE IF EXISTS `users_books`;
@@ -2156,7 +2159,7 @@ CREATE TABLE IF NOT EXISTS `users_books` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users_messages`
+-- Structure de la table `users_messages`
 --
 
 DROP TABLE IF EXISTS `users_messages`;
@@ -2171,7 +2174,7 @@ CREATE TABLE IF NOT EXISTS `users_messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users_messages`
+-- Déchargement des données de la table `users_messages`
 --
 
 INSERT INTO `users_messages` (`message_id`, `user_id`, `user_idrecepteur`, `date`) VALUES
@@ -2189,7 +2192,7 @@ INSERT INTO `users_messages` (`message_id`, `user_id`, `user_idrecepteur`, `date
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacataires`
+-- Structure de la table `vacataires`
 --
 
 DROP TABLE IF EXISTS `vacataires`;
@@ -2221,7 +2224,7 @@ CREATE TABLE IF NOT EXISTS `vacataires` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `vacataires`
+-- Déchargement des données de la table `vacataires`
 --
 
 INSERT INTO `vacataires` (`id`, `user_id`, `somme`, `nom_vacataire`, `prenom_vacataire`, `nb_heures`, `echelle`, `echelon`, `dateRecrut`, `dateNaissance`, `LieuNaissance`, `diplome`, `universite`, `specialite`, `CIN`, `situationFamiliale`, `codeSituation`, `dateAffectation`, `email`, `nbr_enfants`, `genre`, `age`) VALUES
@@ -2230,7 +2233,7 @@ INSERT INTO `vacataires` (`id`, `user_id`, `somme`, `nom_vacataire`, `prenom_vac
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacatairesbis`
+-- Structure de la table `vacatairesbis`
 --
 
 DROP TABLE IF EXISTS `vacatairesbis`;
@@ -2260,7 +2263,7 @@ CREATE TABLE IF NOT EXISTS `vacatairesbis` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacataires_activites`
+-- Structure de la table `vacataires_activites`
 --
 
 DROP TABLE IF EXISTS `vacataires_activites`;
@@ -2276,7 +2279,7 @@ CREATE TABLE IF NOT EXISTS `vacataires_activites` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacataires_departements`
+-- Structure de la table `vacataires_departements`
 --
 
 DROP TABLE IF EXISTS `vacataires_departements`;
@@ -2292,7 +2295,7 @@ CREATE TABLE IF NOT EXISTS `vacataires_departements` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacataires_disciplines`
+-- Structure de la table `vacataires_disciplines`
 --
 
 DROP TABLE IF EXISTS `vacataires_disciplines`;
@@ -2308,7 +2311,7 @@ CREATE TABLE IF NOT EXISTS `vacataires_disciplines` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacataires_documents`
+-- Structure de la table `vacataires_documents`
 --
 
 DROP TABLE IF EXISTS `vacataires_documents`;
@@ -2323,7 +2326,7 @@ CREATE TABLE IF NOT EXISTS `vacataires_documents` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacataires_grades`
+-- Structure de la table `vacataires_grades`
 --
 
 DROP TABLE IF EXISTS `vacataires_grades`;
@@ -2341,7 +2344,7 @@ CREATE TABLE IF NOT EXISTS `vacataires_grades` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacations`
+-- Structure de la table `vacations`
 --
 
 DROP TABLE IF EXISTS `vacations`;
@@ -2363,7 +2366,7 @@ CREATE TABLE IF NOT EXISTS `vacations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `videos`
+-- Structure de la table `videos`
 --
 
 DROP TABLE IF EXISTS `videos`;
@@ -2377,7 +2380,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `villes`
+-- Structure de la table `villes`
 --
 
 DROP TABLE IF EXISTS `villes`;
@@ -2391,7 +2394,7 @@ CREATE TABLE IF NOT EXISTS `villes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vote_books`
+-- Structure de la table `vote_books`
 --
 
 DROP TABLE IF EXISTS `vote_books`;
@@ -2402,30 +2405,30 @@ CREATE TABLE IF NOT EXISTS `vote_books` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `books`
+-- Contraintes pour la table `books`
 --
 ALTER TABLE `books`
   ADD CONSTRAINT `books_ibfk_1` FOREIGN KEY (`sous_categorie_id`) REFERENCES `sous_categories` (`id`);
 
 --
--- Constraints for table `concours`
+-- Contraintes pour la table `concours`
 --
 ALTER TABLE `concours`
   ADD CONSTRAINT `concours_ibfk_1` FOREIGN KEY (`niveaus_id`) REFERENCES `niveaus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `concours_ibfk_2` FOREIGN KEY (`filiere_id`) REFERENCES `filieres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `courrier_arrivees`
+-- Contraintes pour la table `courrier_arrivees`
 --
 ALTER TABLE `courrier_arrivees`
   ADD CONSTRAINT `courrier_arrivees_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`);
 
 --
--- Constraints for table `demande_auth`
+-- Contraintes pour la table `demande_auth`
 --
 ALTER TABLE `demande_auth`
   ADD CONSTRAINT `demande_auth_classe_id_foreign` FOREIGN KEY (`classe_id`) REFERENCES `groupes` (`id`),
@@ -2433,20 +2436,20 @@ ALTER TABLE `demande_auth`
   ADD CONSTRAINT `demande_auth_profvacataire_id_foreign` FOREIGN KEY (`profvacataire_id`) REFERENCES `vacataires` (`id`);
 
 --
--- Constraints for table `diffusions_messages`
+-- Contraintes pour la table `diffusions_messages`
 --
 ALTER TABLE `diffusions_messages`
   ADD CONSTRAINT `fk_msgs` FOREIGN KEY (`message_id`) REFERENCES `messages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user_sender` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `elements`
+-- Contraintes pour la table `elements`
 --
 ALTER TABLE `elements`
   ADD CONSTRAINT `elements_modules_id_foreign` FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`);
 
 --
--- Constraints for table `enseigners`
+-- Contraintes pour la table `enseigners`
 --
 ALTER TABLE `enseigners`
   ADD CONSTRAINT `enseigners_annee_scolaires_id_foreign` FOREIGN KEY (`annee_scolaire_id`) REFERENCES `annee_scolaires` (`id`),
@@ -2455,13 +2458,13 @@ ALTER TABLE `enseigners`
   ADD CONSTRAINT `enseigners_semestres_id_foreign` FOREIGN KEY (`semestre_id`) REFERENCES `semestres` (`id`);
 
 --
--- Constraints for table `etudiants`
+-- Contraintes pour la table `etudiants`
 --
 ALTER TABLE `etudiants`
   ADD CONSTRAINT `etudiants_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `etudiers`
+-- Contraintes pour la table `etudiers`
 --
 ALTER TABLE `etudiers`
   ADD CONSTRAINT `etudiers_annee_scolaires_id_foreign` FOREIGN KEY (`annee_scolaire_id`) REFERENCES `annee_scolaires` (`id`),
@@ -2470,34 +2473,34 @@ ALTER TABLE `etudiers`
   ADD CONSTRAINT `etudiers_etudiants_id_foreign` FOREIGN KEY (`etudiant_id`) REFERENCES `etudiants` (`id`);
 
 --
--- Constraints for table `fonctionnaires`
+-- Contraintes pour la table `fonctionnaires`
 --
 ALTER TABLE `fonctionnaires`
   ADD CONSTRAINT `fk_user_Fct` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `fonctionnaires_activites`
+-- Contraintes pour la table `fonctionnaires_activites`
 --
 ALTER TABLE `fonctionnaires_activites`
   ADD CONSTRAINT `fk_ac` FOREIGN KEY (`activite_id`) REFERENCES `activites` (`id`),
   ADD CONSTRAINT `fk_fonctionnaireee` FOREIGN KEY (`fonctionnaire_id`) REFERENCES `fonctionnaires` (`id`);
 
 --
--- Constraints for table `fonctionnaires_documents`
+-- Contraintes pour la table `fonctionnaires_documents`
 --
 ALTER TABLE `fonctionnaires_documents`
   ADD CONSTRAINT `fk_document_fonctionnaire` FOREIGN KEY (`fonctionnaire_id`) REFERENCES `fonctionnaires` (`id`),
   ADD CONSTRAINT `fk_document_fonctionnaire_bis` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`);
 
 --
--- Constraints for table `fonctionnaires_grades`
+-- Contraintes pour la table `fonctionnaires_grades`
 --
 ALTER TABLE `fonctionnaires_grades`
   ADD CONSTRAINT `fk_fct` FOREIGN KEY (`fonctionnaire_id`) REFERENCES `fonctionnaires` (`id`),
   ADD CONSTRAINT `fk_graaadde` FOREIGN KEY (`grade_id`) REFERENCES `grades` (`id`);
 
 --
--- Constraints for table `fonctionnaires_services`
+-- Contraintes pour la table `fonctionnaires_services`
 --
 ALTER TABLE `fonctionnaires_services`
   ADD CONSTRAINT `fk_fonctionnaire` FOREIGN KEY (`fonctionnaire_id`) REFERENCES `fonctionnaires` (`id`),
@@ -2505,14 +2508,14 @@ ALTER TABLE `fonctionnaires_services`
   ADD CONSTRAINT `fonctionnaires_services_ibfk_1` FOREIGN KEY (`fonctionnaire_id`) REFERENCES `fonctionnaires` (`id`);
 
 --
--- Constraints for table `groupes`
+-- Contraintes pour la table `groupes`
 --
 ALTER TABLE `groupes`
   ADD CONSTRAINT `classes_filieres_id_foreign` FOREIGN KEY (`filiere_id`) REFERENCES `filieres` (`id`),
   ADD CONSTRAINT `classes_niveaus_id_foreign` FOREIGN KEY (`niveaus_id`) REFERENCES `niveaus` (`id`);
 
 --
--- Constraints for table `missions`
+-- Contraintes pour la table `missions`
 --
 ALTER TABLE `missions`
   ADD CONSTRAINT `missions_ibfk_1` FOREIGN KEY (`ville_id`) REFERENCES `villes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -2520,44 +2523,44 @@ ALTER TABLE `missions`
   ADD CONSTRAINT `missions_ibfk_4` FOREIGN KEY (`fonctionnaire_id`) REFERENCES `fonctionnaires` (`id`);
 
 --
--- Constraints for table `modules`
+-- Contraintes pour la table `modules`
 --
 ALTER TABLE `modules`
   ADD CONSTRAINT `modules_classes_id_foreign` FOREIGN KEY (`groupe_id`) REFERENCES `groupes` (`id`);
 
 --
--- Constraints for table `notes_auth`
+-- Contraintes pour la table `notes_auth`
 --
 ALTER TABLE `notes_auth`
   ADD CONSTRAINT `notes_auth_profpermanent_id_foreign` FOREIGN KEY (`profpermanent_id`) REFERENCES `profpermanents` (`id`),
   ADD CONSTRAINT `notes_auth_profvacataire_id_foreign` FOREIGN KEY (`profvacataire_id`) REFERENCES `vacataires` (`id`);
 
 --
--- Constraints for table `organisations`
+-- Contraintes pour la table `organisations`
 --
 ALTER TABLE `organisations`
   ADD CONSTRAINT `fk_activite` FOREIGN KEY (`activite_id`) REFERENCES `activites` (`id`);
 
 --
--- Constraints for table `paimentsups`
+-- Contraintes pour la table `paimentsups`
 --
 ALTER TABLE `paimentsups`
   ADD CONSTRAINT `prelev_sup_fk` FOREIGN KEY (`prelevementsup_id`) REFERENCES `prelevementsups` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `paimentvacs`
+-- Contraintes pour la table `paimentvacs`
 --
 ALTER TABLE `paimentvacs`
   ADD CONSTRAINT `fk_comtes_reste_opjj` FOREIGN KEY (`prelevement_id`) REFERENCES `prelevements` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `preinscriptions`
+-- Contraintes pour la table `preinscriptions`
 --
 ALTER TABLE `preinscriptions`
   ADD CONSTRAINT `preinscriptions_ibfk_1` FOREIGN KEY (`concour_id`) REFERENCES `concours` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `preinscriptions_infos`
+-- Contraintes pour la table `preinscriptions_infos`
 --
 ALTER TABLE `preinscriptions_infos`
   ADD CONSTRAINT `preinscriptions_infos_ibfk_1` FOREIGN KEY (`preinscription_id`) REFERENCES `preinscriptions` (`id`),
@@ -2566,87 +2569,87 @@ ALTER TABLE `preinscriptions_infos`
   ADD CONSTRAINT `preinscriptions_infos_ibfk_4` FOREIGN KEY (`semestre_id`) REFERENCES `semestres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `profpermanents`
+-- Contraintes pour la table `profpermanents`
 --
 ALTER TABLE `profpermanents`
   ADD CONSTRAINT `profpermanents_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `profpermanents_activites`
+-- Contraintes pour la table `profpermanents_activites`
 --
 ALTER TABLE `profpermanents_activites`
   ADD CONSTRAINT `fk_activites` FOREIGN KEY (`activite_id`) REFERENCES `activites` (`id`),
   ADD CONSTRAINT `fk_profess` FOREIGN KEY (`profpermanent_id`) REFERENCES `profpermanents` (`id`);
 
 --
--- Constraints for table `profpermanents_departements`
+-- Contraintes pour la table `profpermanents_departements`
 --
 ALTER TABLE `profpermanents_departements`
   ADD CONSTRAINT `fk_departement` FOREIGN KEY (`departement_id`) REFERENCES `departements` (`id`),
   ADD CONSTRAINT `fk_professeur` FOREIGN KEY (`profpermanent_id`) REFERENCES `profpermanents` (`id`);
 
 --
--- Constraints for table `profpermanents_disciplines`
+-- Contraintes pour la table `profpermanents_disciplines`
 --
 ALTER TABLE `profpermanents_disciplines`
   ADD CONSTRAINT `fk_disci` FOREIGN KEY (`discipline_id`) REFERENCES `disciplines` (`id`),
   ADD CONSTRAINT `fk_professeurss` FOREIGN KEY (`profpermanent_id`) REFERENCES `profpermanents` (`id`);
 
 --
--- Constraints for table `profpermanents_documents`
+-- Contraintes pour la table `profpermanents_documents`
 --
 ALTER TABLE `profpermanents_documents`
   ADD CONSTRAINT `fk_document_professeur` FOREIGN KEY (`profpermanent_id`) REFERENCES `profpermanents` (`id`),
   ADD CONSTRAINT `fk_document_professeur_bis` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`);
 
 --
--- Constraints for table `profpermanents_grades`
+-- Contraintes pour la table `profpermanents_grades`
 --
 ALTER TABLE `profpermanents_grades`
   ADD CONSTRAINT `fk_prof` FOREIGN KEY (`profpermanent_id`) REFERENCES `profpermanents` (`id`),
   ADD CONSTRAINT `profpermanents_grades_ibfk_1` FOREIGN KEY (`grade_id`) REFERENCES `grades` (`id`);
 
 --
--- Constraints for table `proposition`
+-- Contraintes pour la table `proposition`
 --
 ALTER TABLE `proposition`
   ADD CONSTRAINT `proposition_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `reservations`
+-- Contraintes pour la table `reservations`
 --
 ALTER TABLE `reservations`
   ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`),
   ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `semestres`
+-- Contraintes pour la table `semestres`
 --
 ALTER TABLE `semestres`
   ADD CONSTRAINT `semestres_niveaus_id_foreign` FOREIGN KEY (`niveaus_id`) REFERENCES `niveaus` (`id`);
 
 --
--- Constraints for table `sous_categories`
+-- Contraintes pour la table `sous_categories`
 --
 ALTER TABLE `sous_categories`
   ADD CONSTRAINT `sous_categories_ibfk_1` FOREIGN KEY (`categorie_id`) REFERENCES `categories` (`id`);
 
 --
--- Constraints for table `sup_heures`
+-- Contraintes pour la table `sup_heures`
 --
 ALTER TABLE `sup_heures`
   ADD CONSTRAINT `paiementsupo_sdsd_fk` FOREIGN KEY (`paimentsup_id`) REFERENCES `paimentsups` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `prof_fk_suph` FOREIGN KEY (`profpermanent_id`) REFERENCES `profpermanents` (`id`);
 
 --
--- Constraints for table `users_books`
+-- Contraintes pour la table `users_books`
 --
 ALTER TABLE `users_books`
   ADD CONSTRAINT `users_books_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`),
   ADD CONSTRAINT `users_books_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `users_messages`
+-- Contraintes pour la table `users_messages`
 --
 ALTER TABLE `users_messages`
   ADD CONSTRAINT `fk_messages` FOREIGN KEY (`message_id`) REFERENCES `messages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -2654,46 +2657,46 @@ ALTER TABLE `users_messages`
   ADD CONSTRAINT `fk_users_messages_recept` FOREIGN KEY (`user_idrecepteur`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `vacataires`
+-- Contraintes pour la table `vacataires`
 --
 ALTER TABLE `vacataires`
   ADD CONSTRAINT `vacataires_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `vacataires_activites`
+-- Contraintes pour la table `vacataires_activites`
 --
 ALTER TABLE `vacataires_activites`
   ADD CONSTRAINT `fk_act` FOREIGN KEY (`activite_id`) REFERENCES `activites` (`id`),
   ADD CONSTRAINT `fk_vacataire` FOREIGN KEY (`vacataire_id`) REFERENCES `vacataires` (`id`);
 
 --
--- Constraints for table `vacataires_departements`
+-- Contraintes pour la table `vacataires_departements`
 --
 ALTER TABLE `vacataires_departements`
   ADD CONSTRAINT `fk_depart` FOREIGN KEY (`departement_id`) REFERENCES `departements` (`id`),
   ADD CONSTRAINT `fk_vaca` FOREIGN KEY (`vacataire_id`) REFERENCES `vacataires` (`id`);
 
 --
--- Constraints for table `vacataires_disciplines`
+-- Contraintes pour la table `vacataires_disciplines`
 --
 ALTER TABLE `vacataires_disciplines`
   ADD CONSTRAINT `fk_disciplines` FOREIGN KEY (`discipline_id`) REFERENCES `disciplines` (`id`),
   ADD CONSTRAINT `fk_vacaaaa` FOREIGN KEY (`vacataire_id`) REFERENCES `vacataires` (`id`);
 
 --
--- Constraints for table `vacataires_documents`
+-- Contraintes pour la table `vacataires_documents`
 --
 ALTER TABLE `vacataires_documents`
   ADD CONSTRAINT `const1` FOREIGN KEY (`vacataire_id`) REFERENCES `vacataires` (`id`);
 
 --
--- Constraints for table `vacataires_grades`
+-- Contraintes pour la table `vacataires_grades`
 --
 ALTER TABLE `vacataires_grades`
   ADD CONSTRAINT `vacataires_grades_ibfk_1` FOREIGN KEY (`grade_id`) REFERENCES `grades` (`id`);
 
 --
--- Constraints for table `vacations`
+-- Contraintes pour la table `vacations`
 --
 ALTER TABLE `vacations`
   ADD CONSTRAINT `hghghgh` FOREIGN KEY (`vacataire_id`) REFERENCES `vacataires` (`id`),
@@ -2701,7 +2704,7 @@ ALTER TABLE `vacations`
 
 DELIMITER $$
 --
--- Events
+-- Évènements
 --
 DROP EVENT `supprimerreservation`$$
 CREATE DEFINER=`root`@`localhost` EVENT `supprimerreservation` ON SCHEDULE EVERY 1 SECOND STARTS '2017-03-20 21:43:48' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM reservations WHERE delai <= now()$$

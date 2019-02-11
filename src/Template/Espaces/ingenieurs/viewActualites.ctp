@@ -1,10 +1,10 @@
 <section class="content-header">
   <h1>
-    <?php echo __('Actualite'); ?>
+    <?php echo __('Actualité'); ?>
   </h1>
   <ol class="breadcrumb">
     <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'afficherActualites'], ['escape' => false])?>
     </li>
   </ol>
 </section>
