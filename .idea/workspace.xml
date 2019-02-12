@@ -1,0 +1,1530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/Template/Espaces/etudiants/lahlaoutimesprofesseurs.ctp" line="34" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="168e9b5e-c121-4861-a09a-4c843031e621" name="Default" comment="" />
+    <ignored path="ensaksite.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="ensaksite" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="RespopersonelsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/RespopersonelsController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="52326">
+              <caret line="3381" column="5" selection-start-line="3381" selection-start-column="5" selection-end-line="3381" selection-end-column="5" />
+              <folding>
+                <marker date="1490662180127" expanded="false" signature="38:306" placeholder="..." />
+                <marker date="1490662180127" expanded="true" signature="362:218205" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="statistiquesFct.ctp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/statistiquesFct.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1275">
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.ctp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profpermanents/home.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1530">
+              <caret line="90" column="114" selection-start-line="90" selection-start-column="114" selection-end-line="90" selection-end-column="114" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfpermanentsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/ProfpermanentsController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="37366">
+              <caret line="2220" column="5" selection-start-line="2220" selection-start-column="5" selection-end-line="2220" selection-end-column="5" />
+              <folding>
+                <marker date="1490626510754" expanded="false" signature="38:176" placeholder="..." />
+                <marker date="1490626510754" expanded="true" signature="281:709" placeholder="{...}" />
+                <marker date="1490626510754" expanded="true" signature="460:673" placeholder="{...}" />
+                <marker date="1490626510754" expanded="true" signature="584:661" placeholder="..." />
+                <marker date="1490626510754" expanded="true" signature="738:1634" placeholder="..." />
+                <marker date="1490626510754" expanded="true" signature="926:985" placeholder="SELECT * FRO... users_books" />
+                <marker date="1490626510754" expanded="true" signature="1067:1160" placeholder="..." />
+                <marker date="1490626510754" expanded="true" signature="81830:82180" placeholder="SELECT COUNT... notes" />
+                <marker date="1490626510754" expanded="true" signature="82411:82732" placeholder="SELECT COUNT... notes" />
+                <marker date="1490626510754" expanded="true" signature="82893:83225" placeholder="SELECT COUNT... notes" />
+                <marker date="1490626510754" expanded="true" signature="83573:83637" placeholder="SELECT a.id annee_scolaires" />
+                <marker date="1490626510754" expanded="true" signature="83857:84204" placeholder="SELECT DISTI... modules" />
+                <marker date="1490626510754" expanded="true" signature="84032:84103" placeholder="SELECT ens.e... enseigners" />
+                <marker date="1490626510754" expanded="true" signature="84420:84772" placeholder="SELECT DISTI... modules" />
+                <marker date="1490626510754" expanded="true" signature="84548:84628" placeholder="SELECT DISTI... enseigners" />
+                <marker date="1490626510754" expanded="true" signature="85230:85677" placeholder="SELECT count... notes" />
+                <marker date="1490626510754" expanded="true" signature="85836:86278" placeholder="SELECT count... notes" />
+                <marker date="1490626510754" expanded="true" signature="86598:86962" placeholder="SELECT count... etudiers" />
+                <marker date="1490626510754" expanded="true" signature="87191:87595" placeholder="SELECT MAX(n... notes" />
+                <marker date="1490626510754" expanded="true" signature="87957:88024" placeholder="SELECT 'CNE'... " />
+                <marker date="1490626510754" expanded="true" signature="87957:88538" placeholder="SELECT 'CNE'... " />
+                <marker date="1490626510754" expanded="true" signature="88067:88375" placeholder="SELECT et.cn... notes" />
+                <marker date="1490626510754" expanded="true" signature="97547:97604" placeholder="SELECT id FR... profpermanents" />
+                <marker date="1490626510754" expanded="true" signature="99186:99243" placeholder="SELECT id FR... profpermanents" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sidebar-menu.ctp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Element/aside/sidebar-menu.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="700" column="0" selection-start-line="700" selection-start-column="0" selection-end-line="700" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GradesTable.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/Table/GradesTable.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ingenieursController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/ingenieursController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
+              <folding>
+                <element signature="e#217#305#0#PHP" expanded="false" />
+                <element signature="e#310#659#0#PHP" expanded="false" />
+                <element signature="e#434#496#0#PHP" expanded="false" />
+                <element signature="e#456#495#0#PHP" expanded="false" />
+                <element signature="e#664#977#0#PHP" expanded="false" />
+                <element signature="e#982#3510#0#PHP" expanded="false" />
+                <element signature="e#1244#3349#0#PHP" expanded="false" />
+                <element signature="e#1375#3272#0#PHP" expanded="false" />
+                <element signature="e#1555#2202#0#PHP" expanded="false" />
+                <element signature="e#2014#2202#0#PHP" expanded="false" />
+                <element signature="e#2347#2818#0#PHP" expanded="false" />
+                <element signature="e#2835#3052#0#PHP" expanded="false" />
+                <element signature="e#3201#3272#0#PHP" expanded="false" />
+                <element signature="e#3515#5320#0#PHP" expanded="false" />
+                <element signature="e#3754#3816#0#PHP" expanded="false" />
+                <element signature="e#3776#3815#0#PHP" expanded="false" />
+                <element signature="e#3826#5158#0#PHP" expanded="false" />
+                <element signature="e#4078#5148#0#PHP" expanded="false" />
+                <element signature="e#4230#4918#0#PHP" expanded="false" />
+                <element signature="e#4737#4918#0#PHP" expanded="false" />
+                <element signature="e#5077#5148#0#PHP" expanded="false" />
+                <element signature="e#5325#5932#0#PHP" expanded="false" />
+                <element signature="e#5542#5792#0#PHP" expanded="false" />
+                <element signature="e#5668#5792#0#PHP" expanded="false" />
+                <element signature="e#5938#6253#0#PHP" expanded="false" />
+                <element signature="e#6259#7843#0#PHP" expanded="false" />
+                <element signature="e#6522#7682#0#PHP" expanded="false" />
+                <element signature="e#6654#7672#0#PHP" expanded="false" />
+                <element signature="e#6805#7453#0#PHP" expanded="false" />
+                <element signature="e#7265#7453#0#PHP" expanded="false" />
+                <element signature="e#7601#7672#0#PHP" expanded="false" />
+                <element signature="e#7849#9606#0#PHP" expanded="false" />
+                <element signature="e#8088#8150#0#PHP" expanded="false" />
+                <element signature="e#8110#8149#0#PHP" expanded="false" />
+                <element signature="e#8160#9444#0#PHP" expanded="false" />
+                <element signature="e#8412#9434#0#PHP" expanded="false" />
+                <element signature="e#8564#9205#0#PHP" expanded="false" />
+                <element signature="e#9024#9205#0#PHP" expanded="false" />
+                <element signature="e#9363#9434#0#PHP" expanded="false" />
+                <element signature="e#9612#10153#0#PHP" expanded="false" />
+                <element signature="e#9829#10079#0#PHP" expanded="false" />
+                <element signature="e#9955#10079#0#PHP" expanded="false" />
+                <element signature="e#10159#10508#0#PHP" expanded="false" />
+                <element signature="e#10283#10345#0#PHP" expanded="false" />
+                <element signature="e#10305#10344#0#PHP" expanded="false" />
+                <element signature="e#10535#10623#0#PHP" expanded="false" />
+                <element signature="e#10629#10960#0#PHP" expanded="false" />
+                <element signature="e#10745#10805#0#PHP" expanded="false" />
+                <element signature="e#10765#10804#0#PHP" expanded="false" />
+                <element signature="e#10965#11658#0#PHP" expanded="false" />
+                <element signature="e#11106#11502#0#PHP" expanded="false" />
+                <element signature="e#11231#11492#0#PHP" expanded="false" />
+                <element signature="e#11421#11492#0#PHP" expanded="false" />
+                <element signature="e#11664#12421#0#PHP" expanded="false" />
+                <element signature="e#11784#11844#0#PHP" expanded="false" />
+                <element signature="e#11804#11843#0#PHP" expanded="false" />
+                <element signature="e#11854#12265#0#PHP" expanded="false" />
+                <element signature="e#11997#12255#0#PHP" expanded="false" />
+                <element signature="e#12184#12255#0#PHP" expanded="false" />
+                <element signature="e#12426#12955#0#PHP" expanded="false" />
+                <element signature="e#12633#12883#0#PHP" expanded="false" />
+                <element signature="e#12758#12883#0#PHP" expanded="false" />
+                <element signature="e#12961#13259#0#PHP" expanded="false" />
+                <element signature="e#13266#16653#0#PHP" expanded="false" />
+                <element signature="e#13581#15710#0#PHP" expanded="false" />
+                <element signature="e#13726#15700#0#PHP" expanded="false" />
+                <element signature="e#13885#14581#0#PHP" expanded="false" />
+                <element signature="e#14365#14581#0#PHP" expanded="false" />
+                <element signature="e#14735#15463#0#PHP" expanded="false" />
+                <element signature="e#15262#15463#0#PHP" expanded="false" />
+                <element signature="e#15629#15700#0#PHP" expanded="false" />
+                <element signature="e#15847#16170#0#PHP" expanded="false" />
+                <element signature="e#15867#16169#0#PHP" expanded="false" />
+                <element signature="e#15897#16123#1#PHP" expanded="false" />
+                <element signature="e#15920#16109#1#PHP" expanded="false" />
+                <element signature="e#16004#16091#1#PHP" expanded="false" />
+                <element signature="e#16394#16478#0#PHP" expanded="false" />
+                <element signature="e#16658#17577#0#PHP" expanded="false" />
+                <element signature="e#17047#17346#0#PHP" expanded="false" />
+                <element signature="e#17582#18480#0#PHP" expanded="false" />
+                <element signature="e#17834#17900#0#PHP" expanded="false" />
+                <element signature="e#17860#17899#0#PHP" expanded="false" />
+                <element signature="e#18485#18567#0#PHP" expanded="false" />
+                <element signature="e#18572#22171#0#PHP" expanded="false" />
+                <element signature="e#18882#21228#0#PHP" expanded="false" />
+                <element signature="e#19260#21218#0#PHP" expanded="false" />
+                <element signature="e#19450#20115#0#PHP" expanded="false" />
+                <element signature="e#19930#20115#0#PHP" expanded="false" />
+                <element signature="e#20265#20985#0#PHP" expanded="false" />
+                <element signature="e#20792#20985#0#PHP" expanded="false" />
+                <element signature="e#21147#21218#0#PHP" expanded="false" />
+                <element signature="e#21365#21688#0#PHP" expanded="false" />
+                <element signature="e#21385#21687#0#PHP" expanded="false" />
+                <element signature="e#21415#21641#1#PHP" expanded="false" />
+                <element signature="e#21438#21627#1#PHP" expanded="false" />
+                <element signature="e#21522#21609#1#PHP" expanded="false" />
+                <element signature="e#21912#21996#0#PHP" expanded="false" />
+                <element signature="e#22176#22751#0#PHP" expanded="false" />
+                <element signature="e#22413#22673#0#PHP" expanded="false" />
+                <element signature="e#22549#22673#0#PHP" expanded="false" />
+                <element signature="e#22757#24098#0#PHP" expanded="false" />
+                <element signature="e#23006#23913#0#PHP" expanded="false" />
+                <element signature="e#23153#23435#0#PHP" expanded="false" />
+                <element signature="e#23888#23913#0#PHP" expanded="false" />
+                <element signature="e#24103#24384#0#PHP" expanded="false" />
+                <element signature="e#24389#24702#0#PHP" expanded="false" />
+                <element signature="e#24497#24555#0#PHP" expanded="false" />
+                <element signature="e#24515#24554#0#PHP" expanded="false" />
+                <element signature="e#24707#26287#0#PHP" expanded="false" />
+                <element signature="e#26292#26795#0#PHP" expanded="false" />
+                <element signature="e#26489#26725#0#PHP" expanded="false" />
+                <element signature="e#26605#26725#0#PHP" expanded="false" />
+                <element signature="e#26801#27464#0#PHP" expanded="false" />
+                <element signature="e#26932#27315#0#PHP" expanded="false" />
+                <element signature="e#27051#27305#0#PHP" expanded="false" />
+                <element signature="e#27234#27305#0#PHP" expanded="false" />
+                <element signature="e#27469#27750#0#PHP" expanded="false" />
+                <element signature="e#27755#28046#0#PHP" expanded="false" />
+                <element signature="e#28051#28758#0#PHP" expanded="false" />
+                <element signature="e#28209#28608#0#PHP" expanded="false" />
+                <element signature="e#28346#28598#0#PHP" expanded="false" />
+                <element signature="e#28527#28598#0#PHP" expanded="false" />
+                <element signature="e#28763#29264#0#PHP" expanded="false" />
+                <element signature="e#28960#29194#0#PHP" expanded="false" />
+                <element signature="e#29075#29194#0#PHP" expanded="false" />
+                <element signature="e#29270#30752#0#PHP" expanded="false" />
+                <element signature="e#29506#30606#0#PHP" expanded="false" />
+                <element signature="e#29622#30596#0#PHP" expanded="false" />
+                <element signature="e#29762#30369#0#PHP" expanded="false" />
+                <element signature="e#30193#30369#0#PHP" expanded="false" />
+                <element signature="e#30525#30596#0#PHP" expanded="false" />
+                <element signature="e#30757#31030#0#PHP" expanded="false" />
+                <element signature="e#31035#31317#0#PHP" expanded="false" />
+                <element signature="e#31322#32949#0#PHP" expanded="false" />
+                <element signature="e#31592#32802#0#PHP" expanded="false" />
+                <element signature="e#31823#32792#0#PHP" expanded="false" />
+                <element signature="e#31963#32568#0#PHP" expanded="false" />
+                <element signature="e#32395#32568#0#PHP" expanded="false" />
+                <element signature="e#32721#32792#0#PHP" expanded="false" />
+                <element signature="e#32954#33445#0#PHP" expanded="false" />
+                <element signature="e#33146#33376#0#PHP" expanded="false" />
+                <element signature="e#33258#33376#0#PHP" expanded="false" />
+                <marker date="1490170307586" expanded="false" signature="1880:1924" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="2106:2150" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="2678:2719" placeholder="INSERT INTO sitedocuments... " />
+                <marker date="1490170307586" expanded="false" signature="3998:4037" placeholder="SELECT photo... actualites" />
+                <marker date="1490170307586" expanded="false" signature="4570:4617" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="4828:4872" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="7131:7175" placeholder="UPDATE evene... " />
+                <marker date="1490170307586" expanded="false" signature="7357:7401" placeholder="UPDATE evene... " />
+                <marker date="1490170307586" expanded="false" signature="8332:8371" placeholder="SELECT photo... evenements" />
+                <marker date="1490170307586" expanded="false" signature="8890:8934" placeholder="UPDATE evene... " />
+                <marker date="1490170307586" expanded="false" signature="9115:9159" placeholder="UPDATE evene... " />
+                <marker date="1490170307586" expanded="false" signature="14219:14267" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="14457:14505" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="15114:15164" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="15356:15406" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="16213:16250" placeholder="SELECT clubs... clubs" />
+                <marker date="1490170307586" expanded="false" signature="17138:17182" placeholder="SELECT clubs... clubs" />
+                <marker date="1490170307586" expanded="false" signature="18099:18143" placeholder="SELECT clubs... clubs" />
+                <marker date="1490170307586" expanded="false" signature="19066:19109" placeholder="SELECT image... actualiteclubs" />
+                <marker date="1490170307586" expanded="false" signature="19174:19219" placeholder="SELECT fichi... actualiteclubs" />
+                <marker date="1490170307586" expanded="false" signature="19784:19832" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="20021:20069" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="20644:20694" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="20885:20935" placeholder="UPDATE actua... " />
+                <marker date="1490170307586" expanded="false" signature="21731:21768" placeholder="SELECT clubs... clubs" />
+                <marker date="1490170307586" expanded="false" signature="23615:23665" placeholder="INSERT INTO images... " />
+                <marker date="1490170307586" expanded="false" signature="30075:30113" placeholder="UPDATE clubs... " />
+                <marker date="1490170307586" expanded="false" signature="30284:30322" placeholder="UPDATE clubs... " />
+                <marker date="1490170307586" expanded="false" signature="31749:31782" placeholder="SELECT logo clubs" />
+                <marker date="1490170307586" expanded="false" signature="32277:32315" placeholder="UPDATE clubs... " />
+                <marker date="1490170307586" expanded="false" signature="32485:32523" placeholder="UPDATE clubs... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editmouna.ctp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profpermanents/editmouna.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addvac.ctp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/addvac.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2108">
+              <caret line="131" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editvacataire.ctp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/editvacataire.ctp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2006">
+              <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>etudiant</find>
+      <find>Validation données</find>
+      <find>deta</find>
+      <find>ce modul</find>
+      <find>avant</find>
+      <find>note_old</find>
+      <find>ben</find>
+      <find>des od</find>
+      <find>add_pv</find>
+      <find>ajouter</find>
+      <find>moun</find>
+      <find>Espace Pro</find>
+      <find>Espace Per</find>
+      <find>Espace F</find>
+      <find>bon</find>
+      <find>Alexander Pierce</find>
+      <find>Profil</find>
+      <find>Admin</find>
+      <find>/Ensaksite</find>
+      <find>Ensaksite/</find>
+      <find>index</find>
+      <find>index(</find>
+      <find>tatist</find>
+      <find>statistiquesp</find>
+      <find>Ã©</find>
+      <find>Ã</find>
+      <find>bef</find>
+      <find>Lister</find>
+      <find>listerP</find>
+      <find>listerProfsParDepar</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Ensaksite</replace>
+      <replace>profvacataire_id</replace>
+      <replace>pv</replace>
+      <replace>é</replace>
+    </replaceStrings>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Controller/RespostocksController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Controller/ProfvacatairesController.php" root0="SKIP_HIGHLIGHTING" root1="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respostages/CertificatsEtudiants/graphes.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/resposcolarites/CertificatsEtudiants/graphes.ctp" />
+        <option value="$PROJECT_DIR$/src/Controller/UsersController.php" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respobiblios/majdaannuleremprunte.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respobiblios/majdaajouteremprunte.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respobiblios/home.ctp" />
+        <option value="$PROJECT_DIR$/src/Controller/RespofinancesController.php" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respobureauordres/home.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respobureauordres/filterArrivee.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respobureauordres/viewExpediteur.ctp" />
+        <option value="$PROJECT_DIR$/config/routes.php" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profpermanents/check-key.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profpermanents/liste-classes.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profpermanents/liste-modules.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profpermanents/liste-elemenents.ctp" />
+        <option value="$PROJECT_DIR$/src/Controller/ProfvacatairesController.php" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profvacataires/home.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profvacataires/liste-classes.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profvacataires/liste-modules.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profvacataires/liste-elemenents.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profvacataires/liste-etudiants.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/etudiants/lahlaoutimesprofesseurs.ctp" />
+        <option value="$PROJECT_DIR$/src/Controller/RespobibliosController.php" />
+        <option value="$PROJECT_DIR$/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Layout/login.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Users/login.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respostocks/addCA.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respostocks/editCA.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respostocks/addArticles.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respostocks/edit_articles.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respostocks/edit_mouvements.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respostocks/add_mouvements.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respostocks/home.ctp" />
+        <option value="$PROJECT_DIR$/src/Controller/Charafi.php" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/respobureauordres/indexDepart1.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profpermanents/envoyerNvPer.ctp" />
+        <option value="$PROJECT_DIR$/src/Controller/EtudiantsController.php" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profpermanents/liste-etudiants.ctp" />
+        <option value="$PROJECT_DIR$/src/Controller/RespostocksController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/AdminController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/ResposcolaritesController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/RespobureauordresController.php" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/Respopersonels/affecterProfEvnt.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/Respopersonels/consultationDemandeFct.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/Respopersonels/addvac.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/Respopersonels/editvacataire.ctp" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/profpermanents/home.ctp" />
+        <option value="$PROJECT_DIR$/src/Controller/ProfpermanentsController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/RespopersonelsController.php" />
+        <option value="$PROJECT_DIR$/src/Template/Espaces/Respopersonels/statistiquesFct.ctp" />
+        <option value="$PROJECT_DIR$/src/Controller/ingenieursController.php" />
+        <option value="$PROJECT_DIR$/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Element/aside/sidebar-menu.ctp" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webroot" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maiconpinto" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cakephp-adminlte-theme" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maiconpinto" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cakephp-adminlte-theme" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maiconpinto" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cakephp-adminlte-theme" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Template" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maiconpinto" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cakephp-adminlte-theme" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Template" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Element" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maiconpinto" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cakephp-adminlte-theme" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Template" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Element" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Flash" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maiconpinto" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cakephp-adminlte-theme" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Template" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Element" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aside" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Template" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ensaksite" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="last_opened_file_path" value="F:/ensaksite" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="AdminLTE&#9;FILE&#9;file://C:/xampp/htdocs/Ensaksite/vendor/maiconpinto/cakephp-adminlte-theme/webroot/css/AdminLTE.min.css&#10;missing&#9;FILE&#9;file://C:/xampp/htdocs/Ensaksite/src/Template/Error/missing_template.ctp&#10;chart&#9;FILE&#9;file://C:/xampp/htdocs/Ensaksite/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Pages/charts/chartjs.ctp&#10;flot&#9;FILE&#9;file://C:/xampp/htdocs/Ensaksite/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Pages/charts/flot.ctp&#10;ORM&#9;null&#9;null" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Ensaksite\src\Template\Espaces\ingenieurs" />
+      <recent name="C:\xampp\htdocs\Ensaksite\src\Model\Table" />
+      <recent name="C:\xampp\htdocs\Ensaksite\src\Template\Espaces\profpermanents" />
+      <recent name="C:\xampp\htdocs\Ensaksite\webroot\img" />
+      <recent name="C:\xampp\htdocs\Ensaksite\src\Template\Espaces\profvacataires" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="168e9b5e-c121-4861-a09a-4c843031e621" name="Default" comment="" />
+      <created>1487162312880</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1487162312880</updated>
+      <workItem from="1487162314795" duration="2799000" />
+      <workItem from="1487171226397" duration="106000" />
+      <workItem from="1487172603662" duration="7581000" />
+      <workItem from="1487197059707" duration="875000" />
+      <workItem from="1487216810696" duration="2054000" />
+      <workItem from="1487234249499" duration="8397000" />
+      <workItem from="1487286953803" duration="19961000" />
+      <workItem from="1487411453894" duration="12907000" />
+      <workItem from="1487776381100" duration="6388000" />
+      <workItem from="1487855825128" duration="773000" />
+      <workItem from="1487859234847" duration="31688000" />
+      <workItem from="1487932172446" duration="5311000" />
+      <workItem from="1488054244104" duration="14379000" />
+      <workItem from="1489143531100" duration="590000" />
+      <workItem from="1489144702845" duration="885000" />
+      <workItem from="1899456536208" duration="57000" />
+      <workItem from="1489233542855" duration="25066000" />
+      <workItem from="1489280641385" duration="786000" />
+      <workItem from="1489311240378" duration="36267000" />
+      <workItem from="1489393599187" duration="3912000" />
+      <workItem from="1489399928935" duration="2081000" />
+      <workItem from="1489404753875" duration="11938000" />
+      <workItem from="1489418636541" duration="737000" />
+      <workItem from="1489422140191" duration="16284000" />
+      <workItem from="1489446240711" duration="25284000" />
+      <workItem from="1489581179937" duration="12412000" />
+      <workItem from="1490031370206" duration="12000" />
+      <workItem from="1490031389633" duration="11231000" />
+      <workItem from="1490098545544" duration="8939000" />
+      <workItem from="1490112875182" duration="17411000" />
+      <workItem from="1490142356727" duration="1041000" />
+      <workItem from="1490150513262" duration="14692000" />
+      <workItem from="1490654851563" duration="1203000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="304047000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24011713" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329429" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$USER_HOME$/Desktop/changes/respoScolarite/controller.php</url>
+          <line>267</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://F:/ensaksite (3)/ensaksite/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Element/aside/sidebar-menu.ctp</url>
+          <line>362</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="36" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profpermanents/liste-classes.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="63" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profpermanents/liste-modules.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profpermanents/liste-elemenents.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ProfvacatairesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4301">
+          <caret line="257" column="48" selection-start-line="257" selection-start-column="21" selection-end-line="257" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profvacataires/home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2023">
+          <caret line="119" column="46" selection-start-line="119" selection-start-column="46" selection-end-line="119" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profvacataires/liste-classes.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="63" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profvacataires/liste-modules.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profvacataires/liste-elemenents.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="63" selection-start-line="26" selection-start-column="63" selection-end-line="26" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profvacataires/liste-etudiants.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="94" selection-start-line="54" selection-start-column="94" selection-end-line="54" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/etudiants/lahlaoutimesprofesseurs.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="78" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Layout/default.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Layout/register.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Layout/login.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="176" column="34" selection-start-line="176" selection-start-column="34" selection-end-line="176" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Users/login.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="77" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respostocks/add_mouvements.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respostocks/edit_mouvements.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="33" column="108" selection-start-line="33" selection-start-column="108" selection-end-line="33" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respostocks/edit_articles.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="34" column="84" selection-start-line="34" selection-start-column="84" selection-end-line="34" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respostocks/addArticles.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="29" column="84" selection-start-line="29" selection-start-column="84" selection-end-line="29" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respostocks/editCA.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="32" column="80" selection-start-line="32" selection-start-column="80" selection-end-line="32" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respostocks/addCA.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="28" column="80" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respostocks/add_commandes.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respostocks/addCom.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/RespobibliosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="50" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respobiblios/home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1190">
+          <caret line="70" column="10" selection-start-line="70" selection-start-column="10" selection-end-line="74" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respostocks/home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1751">
+          <caret line="103" column="87" selection-start-line="103" selection-start-column="87" selection-end-line="103" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Charafi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="64" column="5" selection-start-line="48" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/respobureauordres/indexDepart1.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2567">
+          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profpermanents/envoyerNvPer.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1632">
+          <caret line="96" column="134" selection-start-line="96" selection-start-column="134" selection-end-line="96" selection-end-column="134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/EtudiantsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profpermanents/liste-etudiants.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/resposcolarites/classes_relever.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/RespobureauordresController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="347" column="60" selection-start-line="347" selection-start-column="60" selection-end-line="347" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ResposcolaritesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="4084" column="20" selection-start-line="4084" selection-start-column="20" selection-end-line="4084" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/affecterProfDepar.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/affecterProfEvnt.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/RespostocksController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-578">
+          <caret line="552" column="28" selection-start-line="552" selection-start-column="28" selection-end-line="552" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/consultationDemandeFct.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="60" column="109" selection-start-line="60" selection-start-column="109" selection-end-line="60" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/editGradeFct.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/listerFonctGrade.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-111">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/addvac.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2108">
+          <caret line="131" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/editvacataire.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2006">
+          <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profpermanents/home.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="90" column="114" selection-start-line="90" selection-start-column="114" selection-end-line="90" selection-end-column="114" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/profpermanents/editmouna.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ProfpermanentsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37366">
+          <caret line="2220" column="5" selection-start-line="2220" selection-start-column="5" selection-end-line="2220" selection-end-column="5" />
+          <folding>
+            <marker date="1490626510754" expanded="false" signature="38:176" placeholder="..." />
+            <marker date="1490626510754" expanded="true" signature="281:709" placeholder="{...}" />
+            <marker date="1490626510754" expanded="true" signature="460:673" placeholder="{...}" />
+            <marker date="1490626510754" expanded="true" signature="584:661" placeholder="..." />
+            <marker date="1490626510754" expanded="true" signature="738:1634" placeholder="..." />
+            <marker date="1490626510754" expanded="true" signature="926:985" placeholder="SELECT * FRO... users_books" />
+            <marker date="1490626510754" expanded="true" signature="1067:1160" placeholder="..." />
+            <marker date="1490626510754" expanded="true" signature="81830:82180" placeholder="SELECT COUNT... notes" />
+            <marker date="1490626510754" expanded="true" signature="82411:82732" placeholder="SELECT COUNT... notes" />
+            <marker date="1490626510754" expanded="true" signature="82893:83225" placeholder="SELECT COUNT... notes" />
+            <marker date="1490626510754" expanded="true" signature="83573:83637" placeholder="SELECT a.id annee_scolaires" />
+            <marker date="1490626510754" expanded="true" signature="83857:84204" placeholder="SELECT DISTI... modules" />
+            <marker date="1490626510754" expanded="true" signature="84032:84103" placeholder="SELECT ens.e... enseigners" />
+            <marker date="1490626510754" expanded="true" signature="84420:84772" placeholder="SELECT DISTI... modules" />
+            <marker date="1490626510754" expanded="true" signature="84548:84628" placeholder="SELECT DISTI... enseigners" />
+            <marker date="1490626510754" expanded="true" signature="85230:85677" placeholder="SELECT count... notes" />
+            <marker date="1490626510754" expanded="true" signature="85836:86278" placeholder="SELECT count... notes" />
+            <marker date="1490626510754" expanded="true" signature="86598:86962" placeholder="SELECT count... etudiers" />
+            <marker date="1490626510754" expanded="true" signature="87191:87595" placeholder="SELECT MAX(n... notes" />
+            <marker date="1490626510754" expanded="true" signature="87957:88024" placeholder="SELECT 'CNE'... " />
+            <marker date="1490626510754" expanded="true" signature="87957:88538" placeholder="SELECT 'CNE'... " />
+            <marker date="1490626510754" expanded="true" signature="88067:88375" placeholder="SELECT et.cn... notes" />
+            <marker date="1490626510754" expanded="true" signature="97547:97604" placeholder="SELECT id FR... profpermanents" />
+            <marker date="1490626510754" expanded="true" signature="99186:99243" placeholder="SELECT id FR... profpermanents" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/RespopersonelsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52326">
+          <caret line="3381" column="5" selection-start-line="3381" selection-start-column="5" selection-end-line="3381" selection-end-column="5" />
+          <folding>
+            <marker date="1490662180127" expanded="false" signature="38:306" placeholder="..." />
+            <marker date="1490662180127" expanded="true" signature="362:218205" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Template/Espaces/Respopersonels/statistiquesFct.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Table/GradesTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ingenieursController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
+          <folding>
+            <element signature="e#217#305#0#PHP" expanded="false" />
+            <element signature="e#310#659#0#PHP" expanded="false" />
+            <element signature="e#434#496#0#PHP" expanded="false" />
+            <element signature="e#456#495#0#PHP" expanded="false" />
+            <element signature="e#664#977#0#PHP" expanded="false" />
+            <element signature="e#982#3510#0#PHP" expanded="false" />
+            <element signature="e#1244#3349#0#PHP" expanded="false" />
+            <element signature="e#1375#3272#0#PHP" expanded="false" />
+            <element signature="e#1555#2202#0#PHP" expanded="false" />
+            <element signature="e#2014#2202#0#PHP" expanded="false" />
+            <element signature="e#2347#2818#0#PHP" expanded="false" />
+            <element signature="e#2835#3052#0#PHP" expanded="false" />
+            <element signature="e#3201#3272#0#PHP" expanded="false" />
+            <element signature="e#3515#5320#0#PHP" expanded="false" />
+            <element signature="e#3754#3816#0#PHP" expanded="false" />
+            <element signature="e#3776#3815#0#PHP" expanded="false" />
+            <element signature="e#3826#5158#0#PHP" expanded="false" />
+            <element signature="e#4078#5148#0#PHP" expanded="false" />
+            <element signature="e#4230#4918#0#PHP" expanded="false" />
+            <element signature="e#4737#4918#0#PHP" expanded="false" />
+            <element signature="e#5077#5148#0#PHP" expanded="false" />
+            <element signature="e#5325#5932#0#PHP" expanded="false" />
+            <element signature="e#5542#5792#0#PHP" expanded="false" />
+            <element signature="e#5668#5792#0#PHP" expanded="false" />
+            <element signature="e#5938#6253#0#PHP" expanded="false" />
+            <element signature="e#6259#7843#0#PHP" expanded="false" />
+            <element signature="e#6522#7682#0#PHP" expanded="false" />
+            <element signature="e#6654#7672#0#PHP" expanded="false" />
+            <element signature="e#6805#7453#0#PHP" expanded="false" />
+            <element signature="e#7265#7453#0#PHP" expanded="false" />
+            <element signature="e#7601#7672#0#PHP" expanded="false" />
+            <element signature="e#7849#9606#0#PHP" expanded="false" />
+            <element signature="e#8088#8150#0#PHP" expanded="false" />
+            <element signature="e#8110#8149#0#PHP" expanded="false" />
+            <element signature="e#8160#9444#0#PHP" expanded="false" />
+            <element signature="e#8412#9434#0#PHP" expanded="false" />
+            <element signature="e#8564#9205#0#PHP" expanded="false" />
+            <element signature="e#9024#9205#0#PHP" expanded="false" />
+            <element signature="e#9363#9434#0#PHP" expanded="false" />
+            <element signature="e#9612#10153#0#PHP" expanded="false" />
+            <element signature="e#9829#10079#0#PHP" expanded="false" />
+            <element signature="e#9955#10079#0#PHP" expanded="false" />
+            <element signature="e#10159#10508#0#PHP" expanded="false" />
+            <element signature="e#10283#10345#0#PHP" expanded="false" />
+            <element signature="e#10305#10344#0#PHP" expanded="false" />
+            <element signature="e#10535#10623#0#PHP" expanded="false" />
+            <element signature="e#10629#10960#0#PHP" expanded="false" />
+            <element signature="e#10745#10805#0#PHP" expanded="false" />
+            <element signature="e#10765#10804#0#PHP" expanded="false" />
+            <element signature="e#10965#11658#0#PHP" expanded="false" />
+            <element signature="e#11106#11502#0#PHP" expanded="false" />
+            <element signature="e#11231#11492#0#PHP" expanded="false" />
+            <element signature="e#11421#11492#0#PHP" expanded="false" />
+            <element signature="e#11664#12421#0#PHP" expanded="false" />
+            <element signature="e#11784#11844#0#PHP" expanded="false" />
+            <element signature="e#11804#11843#0#PHP" expanded="false" />
+            <element signature="e#11854#12265#0#PHP" expanded="false" />
+            <element signature="e#11997#12255#0#PHP" expanded="false" />
+            <element signature="e#12184#12255#0#PHP" expanded="false" />
+            <element signature="e#12426#12955#0#PHP" expanded="false" />
+            <element signature="e#12633#12883#0#PHP" expanded="false" />
+            <element signature="e#12758#12883#0#PHP" expanded="false" />
+            <element signature="e#12961#13259#0#PHP" expanded="false" />
+            <element signature="e#13266#16653#0#PHP" expanded="false" />
+            <element signature="e#13581#15710#0#PHP" expanded="false" />
+            <element signature="e#13726#15700#0#PHP" expanded="false" />
+            <element signature="e#13885#14581#0#PHP" expanded="false" />
+            <element signature="e#14365#14581#0#PHP" expanded="false" />
+            <element signature="e#14735#15463#0#PHP" expanded="false" />
+            <element signature="e#15262#15463#0#PHP" expanded="false" />
+            <element signature="e#15629#15700#0#PHP" expanded="false" />
+            <element signature="e#15847#16170#0#PHP" expanded="false" />
+            <element signature="e#15867#16169#0#PHP" expanded="false" />
+            <element signature="e#15897#16123#1#PHP" expanded="false" />
+            <element signature="e#15920#16109#1#PHP" expanded="false" />
+            <element signature="e#16004#16091#1#PHP" expanded="false" />
+            <element signature="e#16394#16478#0#PHP" expanded="false" />
+            <element signature="e#16658#17577#0#PHP" expanded="false" />
+            <element signature="e#17047#17346#0#PHP" expanded="false" />
+            <element signature="e#17582#18480#0#PHP" expanded="false" />
+            <element signature="e#17834#17900#0#PHP" expanded="false" />
+            <element signature="e#17860#17899#0#PHP" expanded="false" />
+            <element signature="e#18485#18567#0#PHP" expanded="false" />
+            <element signature="e#18572#22171#0#PHP" expanded="false" />
+            <element signature="e#18882#21228#0#PHP" expanded="false" />
+            <element signature="e#19260#21218#0#PHP" expanded="false" />
+            <element signature="e#19450#20115#0#PHP" expanded="false" />
+            <element signature="e#19930#20115#0#PHP" expanded="false" />
+            <element signature="e#20265#20985#0#PHP" expanded="false" />
+            <element signature="e#20792#20985#0#PHP" expanded="false" />
+            <element signature="e#21147#21218#0#PHP" expanded="false" />
+            <element signature="e#21365#21688#0#PHP" expanded="false" />
+            <element signature="e#21385#21687#0#PHP" expanded="false" />
+            <element signature="e#21415#21641#1#PHP" expanded="false" />
+            <element signature="e#21438#21627#1#PHP" expanded="false" />
+            <element signature="e#21522#21609#1#PHP" expanded="false" />
+            <element signature="e#21912#21996#0#PHP" expanded="false" />
+            <element signature="e#22176#22751#0#PHP" expanded="false" />
+            <element signature="e#22413#22673#0#PHP" expanded="false" />
+            <element signature="e#22549#22673#0#PHP" expanded="false" />
+            <element signature="e#22757#24098#0#PHP" expanded="false" />
+            <element signature="e#23006#23913#0#PHP" expanded="false" />
+            <element signature="e#23153#23435#0#PHP" expanded="false" />
+            <element signature="e#23888#23913#0#PHP" expanded="false" />
+            <element signature="e#24103#24384#0#PHP" expanded="false" />
+            <element signature="e#24389#24702#0#PHP" expanded="false" />
+            <element signature="e#24497#24555#0#PHP" expanded="false" />
+            <element signature="e#24515#24554#0#PHP" expanded="false" />
+            <element signature="e#24707#26287#0#PHP" expanded="false" />
+            <element signature="e#26292#26795#0#PHP" expanded="false" />
+            <element signature="e#26489#26725#0#PHP" expanded="false" />
+            <element signature="e#26605#26725#0#PHP" expanded="false" />
+            <element signature="e#26801#27464#0#PHP" expanded="false" />
+            <element signature="e#26932#27315#0#PHP" expanded="false" />
+            <element signature="e#27051#27305#0#PHP" expanded="false" />
+            <element signature="e#27234#27305#0#PHP" expanded="false" />
+            <element signature="e#27469#27750#0#PHP" expanded="false" />
+            <element signature="e#27755#28046#0#PHP" expanded="false" />
+            <element signature="e#28051#28758#0#PHP" expanded="false" />
+            <element signature="e#28209#28608#0#PHP" expanded="false" />
+            <element signature="e#28346#28598#0#PHP" expanded="false" />
+            <element signature="e#28527#28598#0#PHP" expanded="false" />
+            <element signature="e#28763#29264#0#PHP" expanded="false" />
+            <element signature="e#28960#29194#0#PHP" expanded="false" />
+            <element signature="e#29075#29194#0#PHP" expanded="false" />
+            <element signature="e#29270#30752#0#PHP" expanded="false" />
+            <element signature="e#29506#30606#0#PHP" expanded="false" />
+            <element signature="e#29622#30596#0#PHP" expanded="false" />
+            <element signature="e#29762#30369#0#PHP" expanded="false" />
+            <element signature="e#30193#30369#0#PHP" expanded="false" />
+            <element signature="e#30525#30596#0#PHP" expanded="false" />
+            <element signature="e#30757#31030#0#PHP" expanded="false" />
+            <element signature="e#31035#31317#0#PHP" expanded="false" />
+            <element signature="e#31322#32949#0#PHP" expanded="false" />
+            <element signature="e#31592#32802#0#PHP" expanded="false" />
+            <element signature="e#31823#32792#0#PHP" expanded="false" />
+            <element signature="e#31963#32568#0#PHP" expanded="false" />
+            <element signature="e#32395#32568#0#PHP" expanded="false" />
+            <element signature="e#32721#32792#0#PHP" expanded="false" />
+            <element signature="e#32954#33445#0#PHP" expanded="false" />
+            <element signature="e#33146#33376#0#PHP" expanded="false" />
+            <element signature="e#33258#33376#0#PHP" expanded="false" />
+            <marker date="1490170307586" expanded="false" signature="1880:1924" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="2106:2150" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="2678:2719" placeholder="INSERT INTO sitedocuments... " />
+            <marker date="1490170307586" expanded="false" signature="3998:4037" placeholder="SELECT photo... actualites" />
+            <marker date="1490170307586" expanded="false" signature="4570:4617" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="4828:4872" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="7131:7175" placeholder="UPDATE evene... " />
+            <marker date="1490170307586" expanded="false" signature="7357:7401" placeholder="UPDATE evene... " />
+            <marker date="1490170307586" expanded="false" signature="8332:8371" placeholder="SELECT photo... evenements" />
+            <marker date="1490170307586" expanded="false" signature="8890:8934" placeholder="UPDATE evene... " />
+            <marker date="1490170307586" expanded="false" signature="9115:9159" placeholder="UPDATE evene... " />
+            <marker date="1490170307586" expanded="false" signature="14219:14267" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="14457:14505" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="15114:15164" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="15356:15406" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="16213:16250" placeholder="SELECT clubs... clubs" />
+            <marker date="1490170307586" expanded="false" signature="17138:17182" placeholder="SELECT clubs... clubs" />
+            <marker date="1490170307586" expanded="false" signature="18099:18143" placeholder="SELECT clubs... clubs" />
+            <marker date="1490170307586" expanded="false" signature="19066:19109" placeholder="SELECT image... actualiteclubs" />
+            <marker date="1490170307586" expanded="false" signature="19174:19219" placeholder="SELECT fichi... actualiteclubs" />
+            <marker date="1490170307586" expanded="false" signature="19784:19832" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="20021:20069" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="20644:20694" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="20885:20935" placeholder="UPDATE actua... " />
+            <marker date="1490170307586" expanded="false" signature="21731:21768" placeholder="SELECT clubs... clubs" />
+            <marker date="1490170307586" expanded="false" signature="23615:23665" placeholder="INSERT INTO images... " />
+            <marker date="1490170307586" expanded="false" signature="30075:30113" placeholder="UPDATE clubs... " />
+            <marker date="1490170307586" expanded="false" signature="30284:30322" placeholder="UPDATE clubs... " />
+            <marker date="1490170307586" expanded="false" signature="31749:31782" placeholder="SELECT logo clubs" />
+            <marker date="1490170307586" expanded="false" signature="32277:32315" placeholder="UPDATE clubs... " />
+            <marker date="1490170307586" expanded="false" signature="32485:32523" placeholder="UPDATE clubs... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Element/aside/sidebar-menu.ctp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="700" column="0" selection-start-line="700" selection-start-column="0" selection-end-line="700" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

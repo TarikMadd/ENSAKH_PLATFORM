@@ -1,0 +1,15 @@
+INSERT INTO `fournisseurs` (`id`, `stock_categorie_id`, `nom_fournisseur`, `prenom_fournisseur`, `label_fournisseur`, `adresse`, `email`) VALUES (NULL, '5', 'fournisseursNom', 'fournisseurPrenom', 'fourniEcONOMIE', 'ville, rue, numero', 'fournisseurEcONOMIE@gmail.com');
+INSERT INTO `fournisseurs` (`id`, `stock_categorie_id`, `nom_fournisseur`, `prenom_fournisseur`, `label_fournisseur`, `adresse`, `email`) VALUES (NULL, '3', 'fournisseursNom', 'fournisseurPrenom', 'fourniSCOLARITE', 'ville, rue, numero', 'fournisseurSCOLA@gmail.com');
+INSERT INTO `fournisseurs` (`id`, `stock_categorie_id`, `nom_fournisseur`, `prenom_fournisseur`, `label_fournisseur`, `adresse`, `email`) VALUES (NULL, '4', 'fournisseursNom', 'fournisseurPrenom', 'fourniBOOK', 'ville, rue, numero', 'fournisseurBOOK@gmail.com');
+
+
+INSERT INTO `magasins` (`id`, `nom_magasin`) VALUES
+(1, 'salleA'),
+(2, 'salleB'),
+(3, 'salleC'),
+(4, 'salleA'),
+(5, 'StockNonUtile'),
+(6, 'STOCK');
+INSERT INTO `fournisseurs` (`id`, `stock_categorie_id`, `nom_fournisseur`, `prenom_fournisseur`, `label_fournisseur`, `adresse`, `email`) VALUES (NULL, '5', 'fournisseursNom', 'fournisseurPrenom', 'fourniEcONOMIE', 'ville, rue, numero', 'fournisseurEcONOMIE@gmail.com');
+INSERT INTO `fournisseurs` (`id`, `stock_categorie_id`, `nom_fournisseur`, `prenom_fournisseur`, `label_fournisseur`, `adresse`, `email`) VALUES (NULL, '3', 'fournisseursNom', 'fournisseurPrenom', 'fourniSCOLARITE', 'ville, rue, numero', 'fournisseurSCOLA@gmail.com');
+INSERT INTO `fournisseurs` (`id`, `stock_categorie_id`, `nom_fournisseur`, `prenom_fournisseur`, `label_fournisseur`, `adresse`, `email`) VALUES (NULL, '4', 'fournisseursNom', 'fournisseurPrenom', 'fourniBOOK', 'ville, rue, numero', 'fournisseurBOOK@gmail.com');
