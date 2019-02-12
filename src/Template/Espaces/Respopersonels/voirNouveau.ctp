@@ -3,16 +3,8 @@
   <h1>
     Liste des professeurs qui ont déposés des demandes de certificats :
       </h1>
-</section>
-
-<!-- Main content -->
-<section class="content">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h3 class="box-title"><?= __('List of') ?> Documents Professeurs</h3>
-          <div class="box-tools">
+    <div class="box-header">
+            <div class="box-tools">
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <div class="input-group input-group-sm"  style="width: 180px;">
                 <input type="text" name="search" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
@@ -22,16 +14,24 @@
               </div>
             </form>
           </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+        
         </div>
         <!-- /.box-header -->
-        <div class="box-body table-responsive no-padding">
+         <div class="panel panel-primary">
+          
+
           <table class="table table-hover">
             <tr>
-              <th><?= $this->Paginator->sort('nom_prof') ?></th>
-              <th><?= $this->Paginator->sort('prenom_prof') ?></th>
+              <th><?= $this->Paginator->sort('NOM PROFESSEUR') ?></th>
+              <th><?= $this->Paginator->sort('PRENOM PROFESSEUR') ?></th>
 
-              <th><?= __('Actions') ?></th>
-            </tr>
+              <th><?= __('ACTIONS ') ?></th>
             <?php $precedent[1]=0;?>
             <?php foreach ($ProfpermanentsDocuments as $documentsProfesseur): ?>
             <?php

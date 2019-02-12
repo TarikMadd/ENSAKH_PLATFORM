@@ -42,13 +42,13 @@
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Valider votre operation</h3>
+                  <h3 class="box-title">Valider votre opération</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form method="POST" action="showElement" class="form-horizontal">
                   <div class="box-body">
                     <div class="form-group" style=" width: 90%; margin-left: 5%; ">
-                      <label>Entrer le code pour ajouter/modifier les note du modele :</label>
+                      <label>Entrer le code pour ajouter/modifier les note du modele</label>
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
                         <input type="password" class="form-control" name="key" placeholder="password">

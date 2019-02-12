@@ -14,12 +14,11 @@
                             <th><?= $this->Paginator->sort('prenom_fct') ?></th>
                             <th><?= $this->Paginator->sort('somme') ?></th>
                             <th><?= $this->Paginator->sort('specialite') ?></th>
-                            <th><?= $this->Paginator->sort('echelle') ?></th>
-                            <th><?= $this->Paginator->sort('echelon') ?></th>
                             <th><?= $this->Paginator->sort('Date Recrutement') ?></th>
                             <th><?= $this->Paginator->sort('Date Naissance') ?></th>
                             <th><?= $this->Paginator->sort('Age') ?></th>
                             <th><?= $this->Paginator->sort('Genre') ?></th>
+                            <th><?= $this->Paginator->sort('Situation Familiale') ?></th>
 
                         </tr>
                         <?php foreach ($fonctionnaires as $fonctionnaires): ?>
@@ -29,12 +28,11 @@
                                 <td><?php echo $fonctionnaires['prenom_fct']; ?></td>
                                 <td><?php echo $fonctionnaires['somme'];?></td>
                                 <td><?php echo $fonctionnaires['specialite']; ?></td>
-                                <td><?php echo $fonctionnaires['echelle']; ?></td>
-                                <td><?php echo $fonctionnaires['echelon']; ?></td>
                                 <td><?php echo $fonctionnaires['date_Recrut']; ?></td>
                                 <td><?php echo $fonctionnaires['dateNaissance']; ?></td>
                                 <td><?php echo $fonctionnaires['age']; ?></td>
                                 <td><?php echo $fonctionnaires['genre']; ?></td>
+                                <td><?php echo $fonctionnaires['situation_Familiale']; ?></td>
 
                             </tr>
                         <?php endforeach; ?>

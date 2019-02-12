@@ -31,6 +31,7 @@
               <th><?= $this->Paginator->sort('Date Demande') ?></th>
               <th><?= $this->Paginator->sort('Document') ?></th>
               <th><?= $this->Paginator->sort('Etat Demande') ?></th>
+              <th>Actions</th>
 
 
 
@@ -45,8 +46,22 @@
               <td><?= h($documentsProfesseur->profpermanent->somme)?></td>
                   <td><?= h($documentsProfesseur->dateDemande)?></td>
                  <td ><?= h($documentsProfesseur->document->nomDocument)?></td>
-                 <td class='btn btn-success btn-xs'><?= h($documentsProfesseur->etatdemande)?></td>
+                 <td class=''><?= h($documentsProfesseur->etatdemande)?></td>
+                 
+                 <td class="actions" style="white-space:nowrap">
+                                                 <?php
+                                                 if($documentsProfesseur->etatdemande=='Delivré')
+                                                 {
+                                                 echo $this->Html->link(__('Imprimer'), ['action' => 'imprimerDocument', $documentsProfesseur->document_id,$documentsProfesseur->profpermanent_id], ['class'=>'btn btn-warning btn-xs']  ) ;
+                                                 echo " ";
+                                                 echo $this->Html->link(__('Supprimer'), ['action' => 'supprimerDocument', $documentsProfesseur->id], ['class'=>'btn btn-danger btn-xs']  ) ;
 
+                                                  }
+                                                 ?>
+
+                                     </td>
+
+              </tr>
                  <?php
 
             endforeach; ?>

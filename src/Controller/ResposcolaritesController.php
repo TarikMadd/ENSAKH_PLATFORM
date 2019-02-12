@@ -853,7 +853,8 @@ class resposcolaritesController extends AppController {
             }
 
 
-                foreach ($_SESSION['prov'] as $item) {
+                
+			foreach ($_SESSION['prov'] as $item) {
                 $id = $item['id'];
                 $rand = $this->createRandomPassword();
                 $date = $_POST['date'];
@@ -873,7 +874,9 @@ class resposcolaritesController extends AppController {
                 $insertprofperma = $con->execute("UPDATE notes_auth SET date_valide ='$date', for_ratt = 1, key_module = '$rand' WHERE profpermanent_id = $id");
 
             }
-            for ($i=0; $i <sizeof($_SESSION['prov']) ; $i++)
+            
+
+		for ($i=0; $i <sizeof($_SESSION['prov']) ; $i++)
             {
                 $id = $_SESSION['prov'][$i]['id'];
                 $rand = $this->createRandomPassword();
@@ -1950,7 +1953,15 @@ class resposcolaritesController extends AppController {
 
     }
 
-    private function genererAnneeScolaire() {
+    
+
+
+
+
+
+
+
+	private function genererAnneeScolaire() {
         $year = (int)date("Y");
         $month = (int)date("M");
 
@@ -3209,7 +3220,9 @@ class resposcolaritesController extends AppController {
         if($f != NULL){
             $suite = "AND filieres.id = :f ";
         }
-        $donne_delivrer =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as 
+        
+
+		$donne_delivrer =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as 
 		id_certif,certificats.id,etudiants.id, etudiants.nom_fr,etudiants.prenom_fr, filieres.libile,
 		certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified,semestres.libile AS semestres FROM 
 		                                                       filieres JOIN groupes ON filieres.id = groupes.filiere_id
@@ -4336,13 +4349,14 @@ class resposcolaritesController extends AppController {
 
                     }
 
-                    if($nombrebis>3)
-                    {
-                        $this->Flash->error(__('Vous avez dépassé le nombre maximum des attestations , pour plus d\'infos veuillez nous conatcter au service'));
-                        break;
-                    }
+                    // if($nombrebis>3)
+                    // {
+                    //     $this->Flash->error(__('Vous avez dépassé le nombre maximum des attestations , pour plus d\'infos veuillez nous conatcter au service'));
+                    //     break;
+                    // }
 
-                    elseif($nombre>=1)
+                    // else
+                    if($nombre>=1)
                     {
                         $this->Flash->error(__('Echéc d\'envoi ... Déja vous avez '.$nombre.' demande(s) dans le service, veuillez attender Svp'));
                         break;
@@ -4374,12 +4388,13 @@ class resposcolaritesController extends AppController {
 
                     }
                     $nombrebis=count($nbtentativebis);
-                    if($nombrebis>3)
-                    {
-                        $this->Flash->error(__('Vous avez dépassé le nombre maximum des fiches de salaire, pour plus d\'infos veuillez nous conatcter au service'));
-                        break;
-                    }
-                    elseif($nombre>=1)
+                    // if($nombrebis>3)
+                    // {
+                    //     $this->Flash->error(__('Vous avez dépassé le nombre maximum des fiches de salaire, pour plus d\'infos veuillez nous conatcter au service'));
+                    //     break;
+                    // }
+                    // else
+                    if($nombre>=1)
                     {
                         $this->Flash->error(__('Echec d\'envoi ... Déja vous avez '.$nombre.'  demande(s) dans le service , veuillez attender Svp'));
                     }
@@ -4450,7 +4465,88 @@ class resposcolaritesController extends AppController {
     }
     // FIN KAWTAR + IBTISSAM
 
+//Validation de donnees
 
+    public function viewmouna($id = null)
+    {
+        $this->loadModel('Fonctionnaires');
+        $usrole=$this->Auth->user('id');
+        $role=$this->Auth->user('role');
+
+        $modif = ConnectionManager::get('default');
+        $id = $modif->execute("SELECT id FROM fonctionnaires  WHERE user_id=".$usrole."")->fetchAll('assoc');
+        //debug($id);
+
+        $profpermanent = $this->Fonctionnaires->get($id[0]['id'], [
+            'contain' => []
+        ]);
+
+        $this->set('id',$usrole);
+        $this->set('role',$role);
+        $this->set('profpermanent', $profpermanent);
+        $this->render('/Espaces/fonctionnaires/viewmouna');
+    }
+
+    public function editmouna()
+    {
+        $this->loadModel('Fonctionnaires');
+        $usrole=$this->Auth->user('id');
+
+        $modif = ConnectionManager::get('default');
+        $id = $modif->execute("SELECT id FROM fonctionnaires  WHERE user_id=".$usrole."")->fetchAll('assoc');
+        $id=$id[0]['id'];
+        $Profpermanent = TableRegistry::get('fonctionnairesbis');
+        $profpermanentOriginal = $this->Fonctionnaires->get($id);
+        $profpermanent = $this->Fonctionnaires->get($id);
+        //debug($profpermanent);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            //debug($profpermanentOriginal);
+            $profpermanent = $Profpermanent->newEntity();
+            //$profpermanent= $Profpermanent->patchEntity($profpermanent, $this->request->data);
+
+            $profpermanent->somme=$this->request->data('somme');
+            $profpermanent->user_id=$profpermanentOriginal->user_id;
+            $profpermanent->salaire=$profpermanentOriginal->salaire;
+            $profpermanent->etat=$this->request->data('etat');
+            //debug($this->request->data('date_Recrut'));
+            if($profpermanentOriginal->date_Recrut)
+               $profpermanent->date_Recrut=$profpermanentOriginal->date_Recrut;
+            $profpermanent->nom_fct=$this->request->data('nom_fct');
+            $profpermanent->prenom_fct=$this->request->data('prenom_fct');
+            $profpermanent->age=$this->request->data('age');
+            $profpermanent->specialite=$this->request->data('specialite');
+            $profpermanent->situation_Familiale=$this->request->data('situation_Familiale');
+            if($profpermanentOriginal->dateNaissance)
+             $profpermanent->dateNaissance=$profpermanentOriginal->dateNaissance;
+             $profpermanent->etat_attestation=$profpermanentOriginal->etat_attestation;
+             $profpermanent->photo=$profpermanentOriginal->photo;
+             $profpermanent->etat_fiche=$profpermanentOriginal->etat_fiche;
+            $profpermanent->lieuNaissance=$this->request->data('lieuNaissance');
+            $profpermanent->CIN=$this->request->data('CIN');
+            $profpermanent->email=$this->request->data('email');
+            $profpermanent->phone=$this->request->data('phone');
+            $profpermanent->genre=$this->request->data('genre');
+            $profpermanent->nbr_enfants=$this->request->data('nbr_enfants');
+            $profpermanent->isPassExam=$this->request->data('isPassExam');
+            //debug($profpermanent);
+
+            //dump($profpermanent);exit;
+
+            if ($Profpermanent->save($profpermanent)) {
+                $this->Flash->success(__('Votre demande de modification de données a été envoyée au responsable , veuillez attendre son traitement .
+                '));
+
+                //return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Fonctionnaire'));
+            }
+        }
+        $this->set(compact('profpermanent'));
+        $this->render('/Espaces/fonctionnaires/editmouna');
+
+    }
 
 }
 

@@ -54,7 +54,7 @@ class EtudiantsController extends AppController {
     {
         $id_user=$this->Auth->user('id');
         $con=ConnectionManager::get('default');
-        $id = $con->execute("SELECT * FROM etudiants WHERE user_id = $id_user")->fetchAll('assoc');
+        $id = $con->execute("SELECT * FROM etudiants WHERE user_id = $id_user ")->fetchAll('assoc');
         foreach($id as $value): ?>
 
             <tr>
@@ -66,7 +66,10 @@ class EtudiantsController extends AppController {
         <?php  endforeach;
 
         $con=ConnectionManager::get('default');
-        $mesprofs=$con->execute("SELECT profpermanents.nom_prof,profpermanents.prenom_prof,profpermanents.email_prof from profpermanents,etudiants,etudiers,enseigners where etudiants.id=etudiers.etudiant_id and etudiers.element_id=enseigners.element_id and enseigners.profpermanent_id=profpermanents.id and etudiants.id=?", [$id2])->fetchAll('assoc');
+        $mesprofs=$con->execute("SELECT DISTINCT profpermanents.nom_prof,profpermanents.prenom_prof,profpermanents.email_prof from profpermanents,etudiants,etudiers,enseigners where etudiants.id=etudiers.etudiant_id and etudiers.element_id=enseigners.element_id and enseigners.profpermanent_id=profpermanents.id and etudiants.id=?", [$id2])->fetchAll('assoc');
+        $mesprofsvacataires=$con->execute("SELECT DISTINCT  vacataires.nom_vacataire,vacataires.prenom_vacataire,vacataires.email  from vacataires,etudiants,etudiers,enseigners where etudiants.id=etudiers.etudiant_id and etudiers.element_id=enseigners.element_id and enseigners.vacataire_id=vacataires.id and etudiants.id=?", [$id2])->fetchAll('assoc');
+
+        $this->set('mesprofsvacataires',$mesprofsvacataires);
         $this->set('mesprofs',$mesprofs);
         $this->render('/Espaces/etudiants/lahlaoutimesprofesseurs');
     }
@@ -87,7 +90,7 @@ class EtudiantsController extends AppController {
 
         <?php  endforeach;
         $con1=ConnectionManager::get('default');
-        $mesmodules=$con1->execute("SELECT modules.libile, elements.libile as libele  from modules,elements,etudiers,etudiants where modules.id=elements.module_id and elements.id=etudiers.element_id and etudiants.id=etudiers.etudiant_id and etudiants.id=?", [$id2])->fetchAll('assoc');
+        $mesmodules=$con1->execute("SELECT DISTINCT modules.libile, elements.libile as libele  from modules,elements,etudiers,etudiants where modules.id=elements.module_id and elements.id=etudiers.element_id and etudiants.id=etudiers.etudiant_id and etudiants.id=?", [$id2])->fetchAll('assoc');
         $this->set('mesmodules',$mesmodules);
         $this->render('/Espaces/etudiants/lahlaoutimesmodules');
     }
@@ -700,23 +703,20 @@ class EtudiantsController extends AppController {
     {
 
         $CertificatsEtudiants = TableRegistry::get('certificats_etudiants');
+        $Notifications = TableRegistry::get('notifications_users');
 
         $certificatsEtudiant = $CertificatsEtudiants->get($id, [
             'contain' => ['Certificats', 'Etudiants']
         ]);
-        if($certificatsEtudiant->notif_etudiant == true){
-            $certificatsEtudiant->notif_etudiant = false;
-            $certificatsEtudiant->modified = $certificatsEtudiant->modified;
-            if($CertificatsEtudiants->save($certificatsEtudiant)){
 
-            }else{
-                $this->Flash->error(_('Erreur innatendue!!'));
-            }
-        }
+        $Notifications->deleteAll(['lien LIKE "%/'.$id.'"']);
+        $certificatsEtudiant->modified = $certificatsEtudiant->modified;
+
         $this->set('certificatsEtudiant', $certificatsEtudiant);
         $this->set('_serialize', ['certificatsEtudiant']);
         $this->render('/Espaces/etudiants/CertificatsEtudiants/view');
     }
+
 
     public function postCertificats(){
         if ($this->request->is('post')) {
@@ -724,7 +724,8 @@ class EtudiantsController extends AppController {
             $Certificats = TableRegistry::get('certificats');
             $CertificatsEtudiants = TableRegistry::get('certificats_etudiants');
             $choix = $this->request->data['demande_certif_choix'];
-            $data = array("entreprise" => "","theme" => "","date_debut" => "","date_fin" => "","encadrant" => "0","raison" => "");
+            $data = array("entreprise" => "-","theme" => "-","date_debut" => "-","date_fin" => "-"
+            ,"raison" => "-");
             if(isset($this->request->data['demande_certif_envoie'])){
 
                 if(strstr($choix, "stage") && !isset($this->request->data['demande_certif_envoie2'])){

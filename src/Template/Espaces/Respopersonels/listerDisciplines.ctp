@@ -1,6 +1,6 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  Disciplines Enseignés :
+
 </section>
 
 <!-- Main content -->
@@ -9,7 +9,6 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title"><?= __('List of') ?> Enseigners</h3>
           <div class="box-tools">
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <div class="input-group input-group-sm"  style="width: 180px;">
@@ -23,6 +22,8 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
+        <div class="panel panel-primary">
+         <div class="panel-heading">Disciplines Enseignés au sein de l'établissement : </div>
           <table class="table table-hover">
             <tr>
               <th><?= $this->Paginator->sort('Somme') ?></th>

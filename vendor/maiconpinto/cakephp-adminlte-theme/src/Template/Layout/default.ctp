@@ -40,11 +40,11 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="<?php echo $this->Url->build('/'); ?>" class="logo">
+            <a href="<?php echo $this->Url->build(['action'=>'index']); ?>" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><?php echo $theme['logo']['mini'] ?></span>
+                <span class="logo-mini">ENSAKGestion</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><?php echo $theme['logo']['large'] ?></span>
+                <span class="logo-lg">ENSAKGestion</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <?php echo $this->element('nav-top') ?>

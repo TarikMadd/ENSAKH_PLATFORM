@@ -88,8 +88,13 @@ if($box_msg_note != null){
                 </div>
                 <div class="box-footer no-padding">
                     <ul class="nav nav-stacked">
-                        <li><a href="#">Echelon <span class="pull-right badge bg-blue"><?php echo $data['PROF_DATA'][0]['echelon']?></span></a></li>
-                          <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                       <li><a href="#">Somme <span class="pull-right badge bg-blue"><?php echo $data['PROF_DATA'][0]['somme']?></span></a></li>
+                  <li><a href="#">Email <span class="pull-right badge bg-aqua"><?php echo $data['PROF_DATA'][0]['email']?></span></a></li>
+                  <li><a href="#">CIN <span class="pull-right badge bg-green"><?php echo $data['PROF_DATA'][0]['CIN']?></span></a></li>
+                  <li><a href="#">cadre <span class="pull-right badge bg-red"><?php echo $data['PROF_GRADE'][0]['cadre']?></span></a></li>
+                  <li><a href="#">grade <span class="pull-right badge bg-red"><?php echo $data['PROF_GRADE'][0]['sous_grade']?></span></a></li>
+                  <li><a href="#">echelon <span class="pull-right badge bg-red"><?php echo $data['PROF_GRADE'][0]['echelon']?></span></a></li>
+                  <li><a href="#">Date prochain echelon <span class="pull-right badge bg-red"><?php echo $data['PROF_GRADE'][0]['date_next_echelon']?></span></a></li>
                     </ul>
                 </div>
             </div><!-- /.widget-user -->
@@ -113,10 +118,10 @@ if($box_msg_note != null){
                     <table class="table table-hover">
                         <tbody>
                         <tr>
-                            <th>nivaux</th>
-                            <th>feliere</th>
-                            <th>modele</th>
-                            <th>element</th>
+                            <th>niveaux</th>
+                            <th>filière</th>
+                            <th>module</th>
+                            <th>élément</th>
                             <th>reste à saisir</th>
                         </tr>
                         <?php if(isset($box_msg_note) && $box_msg_note!= null): ?>
@@ -182,13 +187,13 @@ if($box_msg_note != null){
                                             <div class="col-sm-4 border-right">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $element['code'] ;?></h5>
-                                                    <span class="description-text">code</span>
+                                                    <span class="description-text">CODE</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                             <div class="col-sm-4 border-right">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $element['libile'] ;?></h5>
-                                                    <span class="description-text">libile</span>
+                                                    <span class="description-text">ÉTIQUETTE</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                             <div  class="col-sm-4">
@@ -203,19 +208,19 @@ if($box_msg_note != null){
                                             <div class="col-sm-4 border-right">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $element['nbr'][0]['nombre_etudiants'] ;?></h5>
-                                                    <span class="description-text">Nombre Etudiant</span>
+                                                    <span class="description-text">NOMBRE D'ÉTUDIANT</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                             <div class="col-sm-4 border-right">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $element['nbr_note'][0]['nbr_etudiant_note'] ;?></h5>
-                                                    <span class="description-text">Etudiant avec note</span>
+                                                    <span class="description-text">ÉTUDIANT AVEC NOTE</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                             <div class="col-sm-4">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $reste = $element['nbr'][0]['nombre_etudiants'] - $element['nbr_note'][0]['nbr_etudiant_note'] ;?></h5>
-                                                    <span class="description-text">Etudiant reste</span>
+                                                    <span class="description-text">ÉTUDIANTS RESTE</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                         </div>

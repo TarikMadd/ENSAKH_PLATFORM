@@ -1,11 +1,11 @@
 <section class="content-header">
   <h1>
-    Photo
-    <small><?= __('') ?></small>
+    Image
+    <small><?= __('Add') ?></small>
   </h1>
   <ol class="breadcrumb">
     <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Retour'), ['action' => 'index'], ['escape' => false]) ?>
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
     </li>
   </ol>
 </section>
@@ -18,20 +18,20 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><?= __('Ajouter') ?></h3>
+          <h3 class="box-title"><?= __('Form') ?></h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <?= $this->Form->create($image, array('type' => 'file')) ?>
+        <?= $this->Form->create($image, array('role' => 'form')) ?>
           <div class="box-body">
           <?php
-            echo $this->Form->input('lien',array('type'=>'file','label'=>"Photo"));
-            echo $this->Form->input('commentaire',array('label'=>"Commentaire"));
+            echo $this->Form->input('lien');
+            echo $this->Form->input('commentaire');
           ?>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <?= $this->Form->button(__('Enregistrer')) ?>
+            <?= $this->Form->button(__('Save')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>

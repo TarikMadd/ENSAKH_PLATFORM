@@ -45,6 +45,10 @@ class VacatairesGradesTable extends Table
             'foreignKey' => 'vacataire_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Infosgradesprofs', [
+            'foreignKey' => 'grade_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -68,6 +72,7 @@ class VacatairesGradesTable extends Table
             ->date('datefin')
             ->requirePresence('datefin', 'create')
             ->notEmpty('datefin');
+            
 
         return $validator;
     }
@@ -81,7 +86,7 @@ class VacatairesGradesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['grade_id'], 'Grades'));
+        //$rules->add($rules->existsIn(['grade_id'], 'Grades'));
         $rules->add($rules->existsIn(['vacataire_id'], 'Vacataires'));
 
         return $rules;

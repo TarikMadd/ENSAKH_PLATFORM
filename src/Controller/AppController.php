@@ -17,6 +17,9 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\Core\Configure;
+use Cake\Datasource\ConnectionManager;
+
+use Cake\ORM\TableRegistry;
 
 /**
  * Application Controller
@@ -81,6 +84,49 @@ class AppController extends Controller
         }
         $this->viewBuilder()->theme('AdminLTE');
         $this->set('theme', Configure::read('Theme'));
+    }
+public function updateNotifications(){
+
+        $connection = ConnectionManager::get('default');
+
+        $user_id =$this->Auth->user('id');
+        $user_role = $this->Auth->user('role');
+        $test1 =  $connection->execute('SELECT * FROM notifications_users WHERE user_id = :userid ORDER BY created DESC',[':userid' => $user_id])->fetchAll('assoc');
+        $test2 = $connection->execute('SELECT * FROM notifications_groupe WHERE role = :userrole ORDER BY created DESC',[':userrole' => $user_role])->fetchAll('assoc');
+        $test = array();
+        if(!empty($test1) && !empty($test2)){
+            $test = array_merge($test1,$test2);
+        }elseif(!empty($test1) && empty($test2)){
+            $test = $test1;
+        }elseif(empty($test1) && !empty($test2)){
+            $test = $test2;
+        }
+
+        $session = $this->request->session();
+        $session->write('notifications', $test);
+
+        $this->render('/Element/notification');
+    }
+    protected function preparerNotification($donne,$type){
+        if($type == "indiv"){
+            $Notifications = TableRegistry::get('notifications_users');
+            $notification = $Notifications->newEntity();
+            $notification->user_id = $donne['user_id'];
+        }elseif($type == "grp"){
+            $Notifications = TableRegistry::get('notifications_groupe');
+            $notification = $Notifications->newEntity();
+            $notification->role = $donne['role'];
+
+        }
+        $notification->titre = $donne['titre'];
+        $notification->principale = $donne['principale'];
+        $notification->commentaire = $donne['commentaire'];
+        $notification->lien = $donne['lien'];
+        $notification->style = $donne['style'];
+        if($Notifications->save($notification)){
+            return true;
+        }
+        return false;
     }
 
 

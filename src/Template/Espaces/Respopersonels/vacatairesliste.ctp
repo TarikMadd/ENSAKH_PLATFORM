@@ -3,8 +3,7 @@
   <h1>
     Liste des vacataires
     <div class="pull-right">
-      <?= $this->Html->link(__('Nouveau.vacataire'), ['action' => 'addvac'], ['class'=>'btn btn-primary btn-xs',
-      'class'=>'glyphicon glyphicon-user']) ?> <br>
+       <br>
       <?= $this->Html->link(__('Imprimer.la.Liste'), ['action' => 'printListeVacataire'], ['class'=>'btn btn-primary btn-xs',
         'class'=>'glyphicon glyphicon-duplicate']) ?></div>
   </h1>
@@ -15,11 +14,11 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          
+          <b >Recherche par : Nom, Prenom, N de somme, Email, Lieu de naissance, Grade, Echelon ou indice de grade  </b>
           <div class="box-tools">
-            <form method="post" action="exportVacataires">
+            <form method="post" action="rechercherVac">
               <div class="input-group input-group-sm"  style="width: 300px;">
-                <input type="text" name="cat" class="form-control" placeholder="<?= __('Rechercher un vacataire par son nom') ?>">
+                <input type="text" name="chercherProf" class="form-control" placeholder="<?= __('Rechercher un vacataire') ?>">
                 <span class="input-group-btn">
                 <button class="btn btn-warning btn-xs" type="submit"><?= __('Rechercher') ?></button>
                 </span>
@@ -36,7 +35,6 @@
                 <th scope="col"><?= $this->Paginator->sort('nom_vacataire') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('prenom_vacataire') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nb_heures') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('echelle') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('dateRecrut') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('dateAffectation') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -48,13 +46,11 @@
                 <td><?= h($vacataire->nom_vacataire) ?></td>
                 <td><?= h($vacataire->prenom_vacataire) ?></td>
                 <td><?= $this->Number->format($vacataire->nb_heures) ?></td>
-                <td><?= $this->Number->format($vacataire->echelle) ?></td>
                 <td><?= h($vacataire->dateRecrut) ?></td>
                 <td><?= h($vacataire->dateAffectation) ?></td>
                 <td class="actions" style="white-space:nowrap">
                     <?= $this->Html->link(__('View'), ['action' => 'viewvacataire', $vacataire->id], ['class'=>'btn btn-success btn-xs']) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'editvacataire', $vacataire->id], ['class'=>'btn btn-info btn-xs']) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'deletevacataire', $vacataire->id], ['confirm' => __('Voulez vous vraiment supprimer ce champ?'), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
             </tr>
            <?php endforeach; ?>

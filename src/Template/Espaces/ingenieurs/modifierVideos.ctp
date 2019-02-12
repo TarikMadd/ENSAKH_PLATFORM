@@ -5,12 +5,12 @@
 ?>
 <section class="content-header">
   <h1>
-    Vidéo
-    <small><?= __('') ?></small>
+    Video
+    <small><?= __('Edit') ?></small>
   </h1>
   <ol class="breadcrumb">
     <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Retour'), ['action' => 'afficherVideos'], ['escape' => false]) ?>
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'afficherVideos'], ['escape' => false]) ?>
     </li>
   </ol>
 </section>
@@ -23,21 +23,21 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><?= __('Modifier') ?></h3>
+          <h3 class="box-title"><?= __('Form') ?></h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
         <?= $this->Form->create($video, array('role' => 'form')) ?>
           <div class="box-body">
           <?php
-            echo $this->Form->input('lien',array('label'=>"l'URL du video"));
-            echo $this->Form->input('commentaire',array('label'=>"Commentaire"));
-          
+            echo $this->Form->input('lien');
+            echo $this->Form->input('commentaire');
+            echo $this->Form->input('captureVideo');
           ?>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <?= $this->Form->button(__('Enregistrer')) ?>
+            <?= $this->Form->button(__('Save')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>

@@ -6,7 +6,7 @@
           <div class="alert alert-danger alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <h4>  <i class="icon fa fa-check"></i>Refus</h4>
-                    Votre dmande a été refusée !
+                    Votre demande a été refusée !
                   </div>
         <?php }
         ?>
@@ -29,11 +29,7 @@
                       </tr>
                       <tr>
                         <td><strong>GRADE :</strong></td>
-                        <td><i><?php echo $_SESSION['demandes'][0]['codeGrade']?></i></td>
-                      </tr>
-                      <tr>
-                        <td><strong>SERVICE :</strong></td>
-                        <td><i><?php echo $_SESSION['demandes'][0]['nom_service']?></i></td>
+                        <td><i><?php echo $_SESSION['demandes'][0]['grade']?></i></td>
                       </tr>
                    <tr>
                         <td><strong>Durée d'Absence :</strong></td>
@@ -55,11 +51,11 @@
                         <td><strong>Cause :</strong></td>
                         <td><i><?php if(empty($_SESSION['demandes'][0]['cause']))
                         {
-                        	echo "Non justifié";
+                          echo "Non justifié";
                         }
                         else
                         {
-                        	echo $_SESSION['demandes'][0]['cause'];
+                          echo $_SESSION['demandes'][0]['cause'];
                         }?></i></td>
                       </tr>
                         <td><strong>Nombre d'absences demandé avant: </strong></td>

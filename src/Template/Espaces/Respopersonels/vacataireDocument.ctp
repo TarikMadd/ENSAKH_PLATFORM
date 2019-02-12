@@ -1,8 +1,23 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <h1>
-    Vacataires Documents
-   <!-- <div class="pull-right"><?= $this->Html->link(__('New'), ['action' => 'add'], ['class'=>'btn btn-success btn-xs']) ?></div>-->
+
+
+  <?php
+  foreach ($vacatairesDocuments as $documentsProfesseur)
+  {
+  $nom=$documentsProfesseur->vacataire->nom_vacataire;
+  $prenom=$documentsProfesseur->vacataire->prenom_vacataire;
+   break;
+  }
+  if(!isset($nom))
+  {
+   ?> <div class="panel-heading">Aucune Demande n'a été déposé</div>  <?php
+  }
+  else
+  {
+?><div class="panel panel-primary">
+    <div class="panel-heading">Demandes déposées par : <?php echo $nom .' '.$prenom; }
+?></div>
   </h1>
 </section>
 
@@ -12,40 +27,54 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title"><?= __('List of') ?> Vacataires Documents</h3>
-          <div class="box-tools">
-            <form action="<?php echo $this->Url->build(); ?>" method="POST">
-              <!--<div class="input-group input-group-sm"  style="width: 180px;">
-                <input type="text" name="search" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
-                <span class="input-group-btn">
-                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
-                </span>
-              </div>-->
-            </form>
-          </div>
+
         </div>
         <!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover">
             <tr>
-              <th><?= $this->Paginator->sort('id') ?></th>
-              <th><?= $this->Paginator->sort('vacataire_id') ?></th>
-              <th><?= $this->Paginator->sort('type_document') ?></th>
+              <th><?= $this->Paginator->sort('somme') ?></th>
+              <th><?= $this->Paginator->sort('Date Demande') ?></th>
+              <th><?= $this->Paginator->sort('Document') ?></th>
+              <th><?= $this->Paginator->sort('Etat Demande') ?></th>
+
+
               <th><?= __('Actions') ?></th>
             </tr>
-            <?php 
 
-            foreach ($vacatairesDocuments as $vacatairesDocument): ?>
+            <?php foreach ($vacatairesDocuments as $documentsProfesseur): ?>
+               <?php
+
+?>
               <tr>
-                <td><?= $this->Number->format($vacatairesDocument->id) ?></td>
-                <td><?= $vacatairesDocument->has('vacataire') ? $this->Html->link($vacatairesDocument->vacataire->id, ['controller' => 'Vacataires', 'action' => 'view', $vacatairesDocument->vacataire->id]) : '' ?></td>
-                <td><?= h($vacatairesDocument->type_document) ?></td>
+
+
+              <td><?= h($documentsProfesseur->vacataire->somme)?></td>
+                  <td><?= h($documentsProfesseur->dateDemande)?></td>
+                 <td><?= h($documentsProfesseur->document->nomDocument)?></td>
+                 <td><?= h($documentsProfesseur->etatdemande)?></td>
                 <td class="actions" style="white-space:nowrap">
-                 
-                  <?= $this->Form->postLink(__('imprimer'), ['action' => 'consultation', $vacatairesDocument->vacataire->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
-                </td>
-              </tr>
-            <?php endforeach; ?>
+
+                                                 <?php
+                                  if(strcmp($documentsProfesseur->etatdemande, 'Demande envoyé') == 0)
+                                {
+                                    echo $this->Html->link(__('Approuver'), ['action' => 'approuveDemande', $documentsProfesseur->document_id,$documentsProfesseur->vacataire_id, $documentsProfesseur->id], ['class'=>'btn btn-info btn-xs']  );
+
+                                }
+                                elseif($documentsProfesseur->etatdemande=='En cours de traitement')
+                                {
+                                    echo $this->Html->link(__('Imprimer'), ['action' => 'imprimerDocumentt', $documentsProfesseur->document_id,$documentsProfesseur->vacataire_id,$documentsProfesseur->id], ['class'=>'btn btn-warning btn-xs']  ) ;echo"\n";
+                                    echo $this->Html->link(__('Delivrer'), ['action' => 'DelivreDemande', $documentsProfesseur->document_id,$documentsProfesseur->vacataire_id,$documentsProfesseur->id], ['class'=>'btn btn-info btn-xs']  );
+
+                                }
+                                
+
+                                ?>
+
+                                     </td>
+                        </tr><?php
+
+            endforeach; ?>
           </table>
         </div>
         <!-- /.box-body -->

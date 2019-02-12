@@ -8,7 +8,7 @@
     </h1>
     <ol class="breadcrumb">
         <li>
-            <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'listerFonctGrade'], ['escape' => false])?>
+            <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'listerFonctGrade'], ['escape' => false])?>
         </li>
     </ol>
 </section>
@@ -33,10 +33,13 @@
                             <td><strong>PRENOM :</strong><?= h($fonctionnaire->prenom_fct) ?></td>
                         </tr>
                         <tr style="text-align: center">
-                            <td><strong>GRADE :</strong><?= h($fonctionnaire->codeGrade) ?></td>
+                            <td><strong> GRADE :</strong><?= h($fonctionnaireGra->Grade) ?></td>
                         </tr>
                         <tr style="text-align: center">
-                            <td><strong>SOMME :</strong><?= h($fonctionnaire->somme) ?></td>
+                            <td><strong>Date Début :</strong><?= h($fonctionnaireGra->date_prise) ?></td>
+                        </tr>
+                        <tr style="text-align: center">
+                            <td><strong>AGE :</strong><?= h($fonctionnaire->age) ?></td>
                         </tr >
                         <tr style="text-align: center">
                             <td><strong>DATE NAISSANCE :</strong><?= h($fonctionnaire->dateNaissance) ?></td>

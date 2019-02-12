@@ -403,7 +403,7 @@ if (file_exists($file)) {
         <!-- BOUHSISE -->
         <li class="treeview">
             <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Professeurs Permanents</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Professeurs Permanenttts</span> <i class="fa fa-angle-left pull-right"></i>
                 <ul class="treeview-menu">
                            <li><li><?php echo $this->Html->link('Acceuil', array('controller' => 'Respopersonels','action' => ' index')); ?>"></li></li>
 

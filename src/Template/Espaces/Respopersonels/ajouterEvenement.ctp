@@ -5,7 +5,7 @@
     </h1>
     <ol class="breadcrumb">
         <li>
-            <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'afficherFonctEvent'], ['escape' => false]) ?>
+            <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Retour'), ['action' => 'afficherFonctEvent'], ['escape' => false]) ?>
         </li>
     </ol>
 </section>
@@ -25,7 +25,7 @@
                 <?= $this->Form->create($activite, array('role' => 'form')) ?>
                 <div class="box-body">
                     <?php
-                        echo $this->Form->input('nomActivite',['type' => 'text']);
+                    echo $this->Form->input('nomActivite',['type' => 'text']);
                     echo $this->Form->input('dateDebut');
                     echo $this->Form->input('dateFin');
                     echo $this->Form->input('poste_comite');

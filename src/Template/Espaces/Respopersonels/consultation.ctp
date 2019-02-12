@@ -53,7 +53,7 @@
     CIN:<?=     h($books[0]['CIN']);?><br/>
     N de P.P.N:<?=     h($books[0]['somme']);?><br/>
     date Recrutement:<?=     h($books[0]['dateRecrut']);?><br/>
-
+    
    
     Lieu de travail:KHOURIBGA
     <br/>
@@ -137,6 +137,6 @@ considérations les plus distinguées.
 <br/><br/>-->
 </body>
 <footer><div style=" text-align: center;"  >
-<!--<?php echo $this->Html->image('footer.jpg', ['alt' => 'CakePHP']); ?>-->
+<?php echo $this->Html->image('footer.jpg', ['alt' => 'CakePHP']); ?>
 </div> </footer>
 </html>

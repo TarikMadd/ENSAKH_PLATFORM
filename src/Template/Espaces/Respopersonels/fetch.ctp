@@ -11,7 +11,7 @@
 <br>
 <form method="post" action="fetch1">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search by employee details" name="search">
+            <input type="text" class="form-control" placeholder="Rechercher un fonctionnaire" name="search">
             <div class="input-group-btn">
                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             </div>
@@ -27,16 +27,14 @@
                 <th><?= $this->Paginator->sort('Prenom ') ?></th>
                 <th><?= $this->Paginator->sort('N° Somme') ?></th>
                 <th><?= $this->Paginator->sort('Specialite') ?></th>
-                <th><?= $this->Paginator->sort('Echelle') ?></th>
                 <th><?= $this->Paginator->sort('Date Recrutement') ?></th>
                 <th><?= $this->Paginator->sort('Date Naissance') ?></th>
                 <th><?= $this->Paginator->sort('Lieu Naissance') ?></th>
                 <th><?= $this->Paginator->sort('Age') ?></th>
                 <th><?= $this->Paginator->sort('Genre') ?></th>
-                <th><?= $this->Paginator->sort('Code Grade') ?></th>
-                <th><?= $this->Paginator->sort('Code Pays') ?></th>
-                <th><?= $this->Paginator->sort('Code Diplome') ?></th>
-                <th><?= $this->Paginator->sort('UE Diplome') ?></th>
+                <th><?= $this->Paginator->sort('Phone') ?></th>
+                <th><?= $this->Paginator->sort('Situation Familiale') ?></th>
+                <th><?= $this->Paginator->sort('Nombre d\'enfants') ?></th>
                 <th><?= $this->Paginator->sort('Email') ?></th>
 
             </tr>
@@ -46,16 +44,14 @@
                     <td><?php echo $query['prenom_fct']; ?></td>
                     <td><?php echo $query['somme'];?></td>
                     <td><?php echo $query['specialite']; ?></td>
-                    <td><?php echo $query['echelle']; ?></td>
                     <td><?php echo $query['date_Recrut']; ?></td>
                     <td><?php echo $query['dateNaissance']; ?></td>
                     <td><?php echo $query['lieuNaissance']; ?></td>
                     <td><?php echo $query['age']; ?></td>
                     <td><?php echo $query['genre']; ?></td>
-                    <td><?php echo $query['codeGrade']; ?></td>
-                    <td><?php echo $query['cdPays']; ?></td>
-                    <td><?php echo $query['cdDiplome']; ?></td>
-                    <td><?php echo $query['ueDiplome']; ?></td>
+                    <td><?php echo $query['phone']; ?></td>
+                    <td><?php echo $query['situation_Familiale']; ?></td>
+                    <td><?php echo $query['nbr_enfants']; ?></td>
                     <td><?php echo $query['email']; ?></td>
 
                 </tr>

@@ -7,7 +7,7 @@
 
 <section class="content-header">
   <h1>
-    Professeur permanent
+    Professeur vacataire
  
   </h1>
   <ol class="breadcrumb">
@@ -36,31 +36,24 @@
         <?php
         
             echo $this->Form->input('somme');
-            echo $this->Form->input('poste');
-            echo $this->Form->input('echelle');
-            echo $this->Form->input('echelon');
-            echo $this->Form->input('salaire');
-            echo $this->Form->input('etat');
-            echo $this->Form->input('date_Recrut');
-            echo $this->Form->input('nom_prof');
-            echo $this->Form->input('prenom_prof');
-            echo $this->Form->input('age');
-            echo $this->Form->input('diplome');
-            echo $this->Form->input('specialite');
-            echo $this->Form->input('universite');
-            echo $this->Form->input('autresdiplomes');
-            echo $this->Form->input('situation_familiale');
-            echo $this->Form->input('code_situation_admin');
-            echo $this->Form->input('dateNaissance');
-            echo $this->Form->input('codeEtablissement');
-            echo $this->Form->input('Lieu_Naissance');
-            echo $this->Form->input('CIN');
-            echo $this->Form->input('email_prof');
-            echo $this->Form->input('phone');
-            echo $this->Form->input('etat_attestation');
-            echo $this->Form->input('etatdemande');
-            echo $this->Form->input('photo');
-            echo $this->Form->input('etat_fichesalaire');
+           // echo $this->Form->input('poste');
+           echo $this->Form->input('nom_vacataire');
+           echo $this->Form->input('prenom_vacataire');
+           echo $this->Form->input('CIN');
+           echo $this->Form->input('genre', ['options' => ['male' => 'male', 'femelle' => 'femelle']]);
+           //echo $this->Form->input('dateNaissance');
+           echo $this->Form->input('age');
+           echo $this->Form->input('LieuNaissance');
+           echo $this->Form->input('situationFamiliale', ['options' => ['marié' => 'marié', 'Célibataire'=> 'Célibataire', 'Divorcé'=> 'Divorcé', 'Veuf'=> 'Veuf']]);
+           echo $this->Form->input('nbr_enfants');
+           //echo $this->Form->input('nb_heures');
+           //echo $this->Form->input('dateRecrut');
+          // echo $this->Form->input('dateAffectation');
+                            
+           echo $this->Form->input('diplome');
+           echo $this->Form->input('specialite');
+           echo $this->Form->input('universite');
+            echo $this->Form->input('email');
 
         ?>
     </fieldset>

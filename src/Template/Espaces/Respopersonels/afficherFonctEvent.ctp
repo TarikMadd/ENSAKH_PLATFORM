@@ -5,12 +5,12 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <h3> Les événements réalisés au sein de l'ENSA KHOURIBGA:</h3>
+                <h3> Les événements réalisés au sein de l'ENSA KHOURIBGA par les fonctionnaires:</h3>
                 <div class="box-header">
                     <div class="box-tools">
                         <form action="fetch1Activite" method="POST">
                             <div class="input-group input-group-sm"  style="width: 180px;">
-                                <input type="text" name="search" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
+                                <input type="text" name="search" class="form-control" placeholder="<?= __('Rechercher') ?>">
                                 <span class="input-group-btn">
                            <button class="btn btn-success btn-flat" type="submit"><?= __('Filter') ?></button>
                                 </span>
@@ -42,8 +42,8 @@
                                 <td><?= h($fonctionnairesActivite->activite->dateDebut)?></td>
                                 <td><?= h($fonctionnairesActivite->activite->dateFin)?></td>
                                 <td class="actions" style="white-space:nowrap">
-                                    <?= $this->Form->postLink(__('View'), ['controller' => 'Respopersonels', 'action' => 'afficherMembre', $fonctionnairesActivite->activite->id] , ['class'=>'btn btn-success btn-xs']) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'deleteFonctActivite2', $fonctionnairesActivite->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                                    <?= $this->Form->postLink(__('Consulter'), ['controller' => 'Respopersonels', 'action' => 'afficherMembre', $fonctionnairesActivite->activite->id] , ['class'=>'btn btn-success btn-xs']) ?>
+                                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deleteFonctActivite2', $fonctionnairesActivite->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
 
                                 </td>
                                 <?php $precedent=$fonctionnairesActivite->activite->id;?>
@@ -66,8 +66,8 @@
 </section>
 <section class="content-footer">
 
-        <div class="pull-left"><?= $this->Html->link(__('New Evénement'), ['action' => 'addActivite'], ['class'=>'btn btn-info btn-s']) ?></div>
+        <div class="pull-left"><?= $this->Html->link(__('Nouvel Evénement'), ['action' => 'addActivite'], ['class'=>'btn btn-info btn-s']) ?></div>
 
-        <div class="pull-right"><?= $this->Html->link(__('New membre '), ['action' => 'affecterFonctEvent'], ['class'=>'btn btn-warning btn-s']) ?></div>
+        <div class="pull-right"><?= $this->Html->link(__('Nouveau membre '), ['action' => 'affecterFonctEvent'], ['class'=>'btn btn-warning btn-s']) ?></div>
 
 </section>

@@ -14,4 +14,4 @@ setInterval(function(){
                 $("#notifMenu").empty().append(data);
             }
     });
-}, 1000);
+}, 60000);

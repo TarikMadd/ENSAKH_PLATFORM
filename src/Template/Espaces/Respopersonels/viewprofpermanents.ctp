@@ -2,11 +2,13 @@
 /**
   * @var \App\View\AppView $this
   */
+    use Cake\I18n\Time;
+   
 ?>
 
 <div class="profpermanents view large-9 medium-8 columns content">
     <fieldset>
-        <legend><?= __("Afficher les informations d'un vacataire") ?></legend>
+        <legend><?= __("les informations du professeur permanent") ?></legend>
     <!DOCTYPE html>
     <html>
     <head>
@@ -54,10 +56,7 @@ font-family:sans-serif;
             <th scope="row"><?= __('Somme') ?></th>
             <td><?= h($profpermanent->somme) ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Poste') ?></th>
-            <td><?= h($profpermanent->poste) ?></td>
-        </tr>
+        
         <tr>
             <th scope="row"><?= __('Nom Prof') ?></th>
             <td><?= h($profpermanent->nom_prof) ?></td>
@@ -91,49 +90,39 @@ font-family:sans-serif;
             <td><?= h($profpermanent->phone) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($profpermanent->id) ?></td>
+            <th scope="row"><?= __('Cadre') ?></th>
+            <td><?= h($profpermanentgrade->cadre) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Echelle') ?></th>
-            <td><?= $this->Number->format($profpermanent->echelle) ?></td>
+            <th scope="row"><?= __('Grade') ?></th>
+            <td><?= h($profpermanentgrade->sous_grade) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Echelon') ?></th>
+            <td><?= $this->Number->format($profpermanentgrade->echelon) ?></td>
         </tr>
       
         <tr>
             <th scope="row"><?= __('Etat') ?></th>
-            <td><?= $this->Number->format($profpermanent->etat) ?></td>
+            <td><?= h($profpermanent->etat) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Age') ?></th>
             <td><?= $this->Number->format($profpermanent->age) ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Code Situation Admin') ?></th>
-            <td><?= $this->Number->format($profpermanent->code_situation_admin) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('CodeEtablissement') ?></th>
-            <td><?= $this->Number->format($profpermanent->codeEtablissement) ?></td>
-        </tr>
+        
         <tr>
             <th scope="row"><?= __('CIN') ?></th>
-            <td><?= $this->Number->format($profpermanent->CIN) ?></td>
+            <td><?= h($profpermanent->CIN) ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Etat Attestation') ?></th>
-            <td><?= $this->Number->format($profpermanent->etat_attestation) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Etatdemande') ?></th>
-            <td><?= $this->Number->format($profpermanent->etatdemande) ?></td>
-        </tr>
+        
         <tr>
             <th scope="row"><?= __('Date Recrut') ?></th>
-            <td><?= h($profpermanent->date_Recrut) ?></td>
+            <td><?= Time::parse($profpermanent->date_Recrut)->nice('Europe/Paris', 'fr-FR')?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('DateNaissance') ?></th>
-            <td><?= h($profpermanent->dateNaissance) ?></td>
+            <td><?= Time::parse($profpermanent->dateNaissance)->nice('Europe/Paris', 'fr-FR') ?></td>
         </tr>
     </table>
     </body>

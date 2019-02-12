@@ -3,7 +3,6 @@ $file = $theme['folder'] . DS . 'src' . DS . 'Template' . DS . 'Element' . DS . 
 $us= $this->request->session()->read('Auth.User');
 //début Jellouli
 $prof = $this->request->session()->read('prof_id');
-echo('psst'. $this->request->session()->read('prof_id'));
 //Fin Jellouli
 //print_r($us);
 //exit;
@@ -28,19 +27,7 @@ if ($us['role']=='resposcolarite')
     </li>
 
     <!-- BECHHAYDA -->
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Relever des notes</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
-
-        <!-- changement ici -->
-        <ul class="treeview-menu">
-            <li><a href="<?php echo $this->Url->build('/resposcolarites/liste-pv-notes'); ?>"><i class="fa fa-circle-o"></i>Liste de pv </a></li>
-            <li><a href="<?php echo $this->Url->build('/resposcolarites/liste-classes'); ?>"><i class="fa fa-circle-o"></i>Télécharger</a></li>
-        </ul>
-        <!-- End -->
-
-    </li>
+    
     <!-- Fin BENCHHAYDA -->
 
 <!-- Abdesamad -->
@@ -92,8 +79,9 @@ if ($us['role']=='resposcolarite')
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li><?php echo $this->Html->link('Affichage notes',array('controller'=>'resposcolarites','action'=>'affichagenote')); ?>"></li>
-            <li><?php echo $this->Html->link('Liste d\'admis',array('controller'=>'resposcolarites','action'=>'listeadmis')); ?>"></li>
+            <li><?php echo $this->Html->link('Affichage des notes',array('controller'=>'resposcolarites','action'=>'affichagenote')); ?>"></li>
+            <li><?php echo $this->Html->link('Liste des admis',array('controller'=>'resposcolarites','action'=>'listeadmis')); ?>"></li>
+            <li><a href="<?php echo $this->Url->build('/resposcolarites/liste-classes'); ?>">Génération des relevés de notes</a></li>
 
         </ul>
     </li>
@@ -101,22 +89,49 @@ if ($us['role']=='resposcolarite')
  <!-- Fin Zouhir -->
 
  <!-- Hamdi -->
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-folder"></i> <span>Certificats des etudiants</span>
-            <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-            <li><?php echo $this->Html->link('Tous',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants')); ?>"></li>
-            <li><?php echo $this->Html->link('GI',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/2')); ?>"></li>
-            <li><?php echo $this->Html->link('GE',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/3')); ?>"></li>
-            <li><?php echo $this->Html->link('GRT',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/1')); ?>"></li>
-            <li><?php echo $this->Html->link('GPE',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/4')); ?>"></li>
-            <li><?php echo $this->Html->link('TC',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/6')); ?>"></li>
-            <li><?php echo $this->Html->link('CP',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/5')); ?>"></li>
 
-        </ul>
-    </li>
+
+
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-table"></i> <span>Espace certificats </span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+
+                    <ul class="treeview-menu">
+                        <li><?php echo $this->Html->link('Gestion des certificats',array('controller'=>'resposcolarites','action'=>'indexCertificats')); ?>"></li>
+                        <li class="treeview">
+
+
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-folder"></i> <span>Certificats etudiants</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><?php echo $this->Html->link('Tous',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants')); ?>"></li>
+                                <li><?php echo $this->Html->link('GI',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/2')); ?>"></li>
+                                <li><?php echo $this->Html->link('GE',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/3')); ?>"></li>
+                                <li><?php echo $this->Html->link('GRT',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/1')); ?>"></li>
+                                <li><?php echo $this->Html->link('GPE',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/4')); ?>"></li>
+                                <li><?php echo $this->Html->link('TC',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/6')); ?>"></li>
+                                <li><?php echo $this->Html->link('CP',array('controller'=>'resposcolarites','action'=>'indexCertificatsEtudiants/5')); ?>"></li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+
+
+            </ul>
+        </li>
+
 
 
     <!-- Fin Hamdi -->
@@ -173,7 +188,7 @@ elseif($us['role']=='profvacataire' || $us['role']=='profpermanent')
     
                             <!---       Proffesseur  :      -->
 
-                             <li class="header">Espace Proffesseur</li>
+                             <li class="header">Espace Professeur</li>
 
    <!-- role prof vacataire et permanant -->
 
@@ -181,35 +196,36 @@ elseif($us['role']=='profvacataire' || $us['role']=='profpermanent')
 <!-- BECHHAYDA -->
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-dashboard"></i> <span>notes</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
+            <i class="fa fa-dashboard"></i> Notes<span></span> <i class="fa fa-angle-left pull-right"></i>
 
-        <?php if($us['role']=='profvacataire'): ?>
+        </a>
+        <?php
+        if($us['role']=='profpermanent'){?>
+<li><li><?php echo $this->Html->link('Déposer Demande Document ', array('controller' => 'Profpermanents','action' => 'demanderDoc')); ?>"></li></li>
+    <li><li><?php echo $this->Html->link('Mes Documents ', array('controller' => 'profpermanents','action' => 'etatDemande  ')); ?>"></li></li>
+    <li><li><?php echo $this->Html->link('Demande Validation Données', array('controller' => 'profpermanents','action' => 'viewmouna')); ?>"></li></li>
+
+<li><li><?php echo $this->Html->link('Déposer Demande absence ', array('controller' => 'Profpermanents','action' => 'demanderabsencesb')); ?>"></li></li>
+ <li><?php echo $this->Html->link('Mes absences ',array('controller' => 'profpermanents','action' => 'listerAbsences')); ?>"></li>
+
+
+
+        <?php } if($us['role']=='profvacataire'): ?>
             <ul class="treeview-menu">
-                <li><a href="<?php echo $this->Url->build('/profvacataires'); ?>"><i class="fa fa-circle-o"></i>dashboard</a></li>
-                <li><a href="<?php echo $this->Url->build('/profvacataires/liste-classes'); ?>"><i class="fa fa-circle-o"></i> Ajouter les notes</a></li>
+            
+                <li><a href="<?php echo $this->Url->build('/profvacataires'); ?>"><i class="fa fa-circle-o"></i>tableau de bord</a></li>
+                <li><a href="<?php echo $this->Url->build('/profvacataires/liste-classes'); ?>"><i class="fa fa-circle-o"></i>Inserer des notes</a></li>
             </ul>
         <?php else :?>
-    <li><li><?php echo $this->Html->link('Déposer Demande Document ', array('controller' => 'Profpermanents','action' => 'demanderDoc')); ?>"></li></li>
-    <li><li><?php echo $this->Html->link('Mes Documents ', array('controller' => 'profpermanents','action' => 'etatDemande  ')); ?>"></li></li>
-
-
-    <ul class="treeview-menu">
-                <li><a href="<?php echo $this->Url->build('/profpermanents'); ?>"><i class="fa fa-circle-o"></i>dashboard</a></li>
-                <li><a href="<?php echo $this->Url->build('/profpermanents/liste-classes'); ?>"><i class="fa fa-circle-o"></i> Ajouter les notes</a></li>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo $this->Url->build('/profpermanents'); ?>"><i class="fa fa-circle-o"></i>tableau de bord</a></li>
+                <li><a href="<?php echo $this->Url->build('/profpermanents/liste-classes'); ?>"><i class="fa fa-circle-o"></i> Inserer des notes</a></li>
             </ul>
         <?php endif ?>
     </li>
-<!-- Fin BENCHHAYDA -->
+<!-- Fin *CHHAYDA -->
    <!-- Bouhsise -->
-    <li class="treeview">
-        <a href="#">
-
-
-
-
-    <i class="fa fa-dashboard"></i> <span>notes</span> <i class="fa fa-angle-left pull-right"></i>
-    </a>
+   
 
     <!-- Fin bouhsise -->
 
@@ -224,7 +240,7 @@ elseif($us['role']=='profvacataire' || $us['role']=='profpermanent')
             <li><?php echo $this->Html->link('Liste Ouvrages',array('controller' =>'Profvacataires','action'=>'listbook')); ?></li>
             <li><?php echo $this->Html->link('Liste par Catégorie',array('controller' =>'Profvacataires','action'=>'listcategorie')); ?></li>
             <li><a href="<?php echo $this->Url->build('/profvacataires/proposerbook'); ?>">Proposer un ouvrage </a></li>
-            <li><?php echo $this->Html->link('Ouvrages résérvés',array('controller' =>'Profvacataires','action'=>'hamdihajarselectreservation')); ?></li>
+            <li><?php echo $this->Html->link('Ouvrages réservés',array('controller' =>'Profvacataires','action'=>'hamdihajarselectreservation')); ?></li>
             <li><?php echo $this->Html->link('Ouvrages empruntés',array('controller' =>'Profvacataires','action'=>'majdaselectempreinte')); ?></li>
             <li><?php echo $this->Html->link('Historique des emprunts',array('controller' =>'Profvacataires','action'=>'majdaselecteHistorique')); ?></li>
         </ul>
@@ -233,15 +249,13 @@ elseif($us['role']=='profvacataire' || $us['role']=='profpermanent')
             <li><?php echo $this->Html->link('Liste Ouvrages',array('controller' =>'Profpermanents','action'=>'listbook')); ?></li>
             <li><?php echo $this->Html->link('Liste par Catégorie',array('controller' =>'Profpermanents','action'=>'listcategorie')); ?></li>
             <li><a href="<?php echo $this->Url->build('/profpermanents/proposerbook'); ?>">Proposer un ouvrage </a></li>
-            <li><?php echo $this->Html->link('Ouvrages résérvé',array('controller' =>'Profpermanents','action'=>'hamdihajarselectreservation')); ?></li>
+            <li><?php echo $this->Html->link('Ouvrages réservés',array('controller' =>'Profpermanents','action'=>'hamdihajarselectreservation')); ?></li>
             <li><?php echo $this->Html->link('Ouvrages empruntés',array('controller' =>'Profpermanents','action'=>'majdaselectempreinte')); ?></li>
             <li><?php echo $this->Html->link('Historique des emprunts',array('controller' =>'Profpermanents','action'=>'majdaselecteHistorique')); ?></li>
         </ul>
     <!--  jellouli -->
-    <li><a href="<?= $this->Url->build( array( 'controller' => 'Profpermanents',
-            'action'=>'viewmouna',
-            $prof));
-        ?>"><i class="fa fa-circle-o"></i> Validation données </a></li>
+    
+    
     <!-- fin jellouli -->
     <li class="treeview">
         <a href="#">
@@ -253,6 +267,11 @@ elseif($us['role']=='profvacataire' || $us['role']=='profpermanent')
             <li><?php echo $this->Html->link('Lire mes messages', array('controller' => 'Profpermanents','action' => 'lireMsgPer')); ?>"></li>
         </ul>
     </li>
+
+    
+
+
+
         <?php }?>
     </li>
 
@@ -274,7 +293,7 @@ elseif($us['role']=='profvacataire' || $us['role']=='profpermanent')
             <li><?php echo $this->Html->link('Saisir les heures',array('controller' => 'profvacataires','action' => 'saisienbheures')); ?>"></li>
 
             <li><?php echo $this->Html->link('Mes Vacations',array('controller' => 'profvacataires','action' => 'vacations')); ?>"></li>
-            <li><?php echo $this->Html->link('Demande documents',array('controller' => 'profvacataires','action' => 'demandedocs')); ?>"></li>
+            
 
 
         </ul>
@@ -285,10 +304,7 @@ elseif($us['role']=='profvacataire' || $us['role']=='profpermanent')
 
 
     <?php if($us['role']=='profvacataire'){?>
-        <!--ASMAA SARIHA-->
-       <!-- <li><?php// echo $this->Html->link('Compte Vacataire',array('controller' => 'Respopersonels','action' => 'asmaacomptevacataires')); ?>"></li>
-        <!--AS%AA SARIH-->
-        <!-- mustapha FADILI -->
+       
     <li class="treeview">
         <a href="#">
             <i class="fa fa-dashboard"></i> <span>Messageries</span> <i class="fa fa-angle-left pull-right"></i>
@@ -299,6 +315,37 @@ elseif($us['role']=='profvacataire' || $us['role']=='profpermanent')
             <li><?php echo $this->Html->link('Lire mes messages', array('controller' => 'Profvacataires','action' => 'lireMsgVac')); ?>"></li>
         </ul>
     </li>
+<li class="treeview">
+        <a href="#">
+             <i class="fa fa-dashboard"></i> <span>Gestion des demandes</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+
+            <li><?php echo $this->Html->link('Déposer une demande ', array('controller' => 'Profvacataires','action' => 'demanderDocFct')); ?>"></li>
+            
+            <li><?php echo $this->Html->link('Liste des documents déposés ', array('controller' => 'Profvacataires','action' => 'etatDemandeFct  ')); ?>"></li>
+
+            
+    <li><li><?php echo $this->Html->link('Demande Validation Données', array('controller' => 'profvacataires','action' => 'viewmouna')); ?>"></li></li>
+        </ul>
+    </li>
+
+<li class="treeview">
+        <a href="#">
+             <i class="fa fa-dashboard"></i> <span>Absence</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+
+            <li><?php echo $this->Html->link('demander absence ', array('controller' => 'Profvacataires','action' => 'demanderabsencesb')); ?>"></li>
+            
+            <li><?php echo $this->Html->link('Mes absences ', array('controller' => 'Profvacataires','action' => 'listerAbsences  ')); ?>"></li>
+
+            
+        </ul>
+    </li>
+
+    
+    
 <?php }
 ?>
 
@@ -345,16 +392,15 @@ elseif($us['role']=='etudiant')
 <!-- LAHLAOUTI -->
 
 
-    <li class="treeview">
-    <li><?php echo $this->Html->link('Profil', array('controller' => 'Etudiants','action' => 'lahlaoutiprofil')); ?>"></li>
-    </li>
+    
 
     <li class="treeview">
-    <li><?php echo $this->Html->link('Mes Professeurs', array('controller' => 'Etudiants','action' => 'lahlaoutimesprofesseurs')); ?>"></li>
-    </li>
+    <li><a href="<?= $this->Url->build(array('controller' => 'Etudiants','action' => 'lahlaoutimesprofesseurs')) ?>"> <i class="fa fa-fw fa-users"></i>
+             <span> Mes professeurs</span></a> </li>
     </li>
     <li class="treeview">
-    <li><?php echo $this->Html->link('Mes Modules', array('controller' => 'Etudiants','action' => 'lahlaoutimesmodules')); ?>"></li>
+    <li><a href="<?= $this->Url->build(array('controller' => 'Etudiants','action' => 'lahlaoutimesmodules')) ?>"> <i class="fa fa-fw fa-book"></i>
+             <span> Mes modules</span></a> </li>
     </li>
 
 
@@ -367,8 +413,9 @@ elseif($us['role']=='etudiant')
 
 
     <li class="treeview">
-    <li><?php echo $this->Html->link('Emploi', array('controller' => 'Etudiants','action' => 'lahlaoutiemploi')); ?>"></li>
-    </li>
+    <li><a href="<?= $this->Url->build(array('controller' => 'Etudiants','action' => 'lahlaoutiemploi')) ?>"> <i class="fa fa-fw fa-dashboard"></i>
+             Emploi</span></a> </li>
+
     <!-- FIN LAHLAOUTI -->
 
 <!-- BADR -->
@@ -380,8 +427,8 @@ elseif($us['role']=='etudiant')
             <li><?php echo $this->Html->link('Liste Ouvrages',array('controller' =>'Etudiants','action'=>'listbook')); ?></li>
             <li><?php echo $this->Html->link('Liste par Catégorie',array('controller' =>'Etudiants','action'=>'listcategorie')); ?></li>
             <li><a href="<?php echo $this->Url->build('/etudiants/proposerbook'); ?>">Proposer un ouvrage</a></li>
-            <li><?php echo $this->Html->link('Ouvrage résérvé',array('controller' =>'Etudiants','action'=>'hamdihajarselectreservation')); ?></li>
-            <li><?php echo $this->Html->link('ouvrage empruntés',array('controller' =>'Etudiants','action'=>'majdaselectempreinte')); ?></li>
+            <li><?php echo $this->Html->link('Ouvrages réservés',array('controller' =>'Etudiants','action'=>'hamdihajarselectreservation')); ?></li>
+            <li><?php echo $this->Html->link('Ouvrages empruntés',array('controller' =>'Etudiants','action'=>'majdaselectempreinte')); ?></li>
             <li><?php echo $this->Html->link('historiques emprunts',array('controller' =>'Etudiants','action'=>'majdaselecteHistorique')); ?></li>
         </ul>
     </li>
@@ -432,7 +479,7 @@ elseif($us['role']=='respofinance')
         </a>
         <ul class="treeview-menu">
             <li><a href="<?php echo $this->Url->build('/respofinances/addyassir/'); ?>"><i class="fa fa-circle-o"></i>Nouvelle commande</a></li>
-            <li><a href="<?php echo $this->Url->build('/respofinances/suivicommandes/'); ?>"><i class="fa fa-circle-o"></i>Suivi des commandes</a></li>
+            <li><a href="<?php echo $this->Url->build('/respofinances/suivicommande/'); ?>"><i class="fa fa-circle-o"></i>Suivi des commandes</a></li>
 
         </ul>
     </li>
@@ -444,6 +491,7 @@ elseif($us['role']=='respofinance')
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
+         <li><a href="<?php echo $this->Url->build('/respofinances/vacations/'); ?>"><i class="fa fa-circle-o"></i>Accueil</a></li>
             <li><a href="<?php echo $this->Url->build('/respofinances/Mesvacations/'); ?>"><i class="fa fa-circle-o"></i>Liste Des vacations</a></li>
             <li><a href="<?php echo $this->Url->build('/respofinances/addVac/'); ?>"><i class="fa fa-circle-o"></i>ajouter Vacation</a></li>
             <li><a href="<?php echo $this->Url->build('/respofinances/indexPaimentVac'); ?>"><i class="fa fa-circle-o"></i>paiements</a></li>
@@ -453,10 +501,11 @@ elseif($us['role']=='respofinance')
     </li>
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-table"></i> <span>Heures Supplimentaires</span>
+            <i class="fa fa-table"></i> <span>Heures Supplémentaires</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
+         <li><a href="<?php echo $this->Url->build('/respofinances/supheures/'); ?>"><i class="fa fa-circle-o"></i>Accueil</a></li>
             <li><a href="<?php echo $this->Url->build('/respofinances/Mesheures/'); ?>"><i class="fa fa-circle-o"></i>Liste Des heures supp</a></li>
             <li><a href="<?php echo $this->Url->build('/respofinances/addSup/'); ?>"><i class="fa fa-circle-o"></i>ajouter heures supp</a></li>
             <li><a href="<?php echo $this->Url->build('/respofinances/indexPaimentsup'); ?>"><i class="fa fa-circle-o"></i>paiements</a></li>
@@ -469,7 +518,7 @@ elseif($us['role']=='respofinance')
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li><a href="<?php echo $this->Url->build('/'); ?>"><i class="fa fa-circle-o"></i> Proffesseur permanent</a>
+            <li><a href="<?php echo $this->Url->build('/'); ?>"><i class="fa fa-circle-o"></i> Professeur permanent</a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo $this->Url->build('/respofinances/afficherMissionProf'); ?>"><i class="fa fa-circle-o"></i> Afficher les missions</a></li>
                     <li><a href="<?php echo $this->Url->build('/respofinances/AjouterMissionProf'); ?>"><i class="fa fa-circle-o"></i> Ajouter une Mission</a></li>
@@ -486,7 +535,7 @@ elseif($us['role']=='respofinance')
 
     <!--- fin samsam -->
 
-            <!-- debut bouhsise -->
+    <!-- debut bouhsise -->
 
     <!-- Bouhsise -->
     <!--DEBUT  Kawtar -->
@@ -498,6 +547,7 @@ elseif($us['role']=='respofinance')
         <ul class="treeview-menu">
             <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respofinances','action' => 'demanderabsences')); ?>"></li>
 
+           <li><?php echo $this->Html->link('mes absences ',array('controller' => 'Respofinances','action' => 'listerabsences')); ?>"></li>
         </ul>
         <!--Fin Kawtar -->
     </li>
@@ -534,9 +584,11 @@ elseif($us['role']=='respostock')
    <!-- role Stock -->
 
 <!--DEBUT  JELAIDI -->
+<li><?php echo '   '.$this->Html->link('Accueil',array('controller' =>'RespoStocks','action'=>'index')); ?></li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-archive" aria-hidden="true"></i><span>Gestion des Articles</span> <i class="fa fa-angle-left pull-right"></i> 
+        </a>
         </a>
         <ul class="treeview-menu">
         <li><?php echo $this->Html->link('Afficher Articles', array('controller' => 'Respostocks','action' => 'index_articles')); ?></li>
@@ -598,6 +650,7 @@ elseif($us['role']=='respostock')
         </a>
         <ul class="treeview-menu">
             <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respostocks','action' => 'demanderabsences')); ?>"></li>
+             <li><?php echo $this->Html->link('mes absences ',array('controller' => 'RespoStocks','action' => 'listerabsences')); ?>"></li>
 
         </ul>
         <!--Fin Kawtar -->
@@ -641,8 +694,8 @@ elseif($us['role']=='respobiblio')
             <i class="glyphicon glyphicon-th-list"></i><span>Consulter ouvrages</span> <i class="glyphicon glyphicon-chevron-right pull-right"></i> 
         </a>
         <ul class="treeview-menu">
-        <li><?php echo $this->Html->link('Tout les ouvrages',array('controller' =>'Respobiblios','action'=>'badrconsulterOuvrages')); ?></li>
-        <li><?php echo $this->Html->link('Ouvrages par catégorie',array('controller' =>'Respobiblios','action'=>'badrconsulterOuvragessimple')); ?></li>
+        <li><?php echo $this->Html->link('Tous les ouvrages',array('controller' =>'Respobiblios','action'=>'badrconsulterOuvrages')); ?></li>
+        <li><?php echo $this->Html->link('Consultation par catégorie',array('controller' =>'Respobiblios','action'=>'badrconsulterOuvragessimple')); ?></li>
         </ul>
     </li>
     <li class="treeview">
@@ -656,24 +709,22 @@ elseif($us['role']=='respobiblio')
     </li>
     <li class="treeview">
         <a href="#">
-            <i class="glyphicon glyphicon-list-alt"></i><span>Ouvrages résérvées</span> <i class="glyphicon glyphicon-chevron-right pull-right"></i> 
+            <i class="glyphicon glyphicon-list-alt"></i><span>Ouvrages réservés</span> <i class="glyphicon glyphicon-chevron-right pull-right"></i>
         </a>
         <ul class="treeview-menu">
-        <li><?php echo $this->Html->link('Tout les Ouvrages',array('controller' =>'Respobiblios','action'=>'hajarreservation')); ?></li>
-        <li><?php echo $this->Html->link('Professeurs vacataires',array('controller' =>'Respobiblios','action'=>'hajarreservationProfVacataire')); ?></li>
-        <li><?php echo $this->Html->link('Professeurs permanents',array('controller' =>'Respobiblios','action'=>'hajarreservationProfPermanent')); ?></li>
-        <li><?php echo $this->Html->link('Etudiants',array('controller' =>'Respobiblios','action'=>'hajarreservationEtudiant')); ?></li>
+        <li><?php echo $this->Html->link('Par Professeurs vacataires',array('controller' =>'Respobiblios','action'=>'hajarreservationProfVacataire')); ?></li>
+        <li><?php echo $this->Html->link('Par Professeurs permanents',array('controller' =>'Respobiblios','action'=>'hajarreservationProfPermanent')); ?></li>
+        <li><?php echo $this->Html->link('Par Etudiants',array('controller' =>'Respobiblios','action'=>'hajarreservationEtudiant')); ?></li>
         </ul>
     </li>
     <li>
         <a href="#">
-            <i class="glyphicon glyphicon-list-alt"></i><span>Ouvrages empruntées</span> <i class="glyphicon glyphicon-chevron-right pull-right"></i> 
+            <i class="glyphicon glyphicon-list-alt"></i><span>Ouvrages empruntés</span> <i class="glyphicon glyphicon-chevron-right pull-right"></i>
         </a>
         <ul class="treeview-menu">
-        <li><?php echo $this->Html->link('Tout les Ouvrages',array('controller' =>'Respobiblios','action'=>'majdaemprunte')); ?></li>
-        <li><?php echo $this->Html->link('Professeurs vacataires',array('controller' =>'Respobiblios','action'=>'majdaemprunteProfVacataire')); ?></li>
-        <li><?php echo $this->Html->link('Professeurs permanents',array('controller' =>'Respobiblios','action'=>'majdaemprunteProfPermanent')); ?></li>
-        <li><?php echo $this->Html->link('Etudiants',array('controller' =>'Respobiblios','action'=>'majdaemprunteEtudiant')); ?></li>
+        <li><?php echo $this->Html->link('Par Professeurs vacataires',array('controller' =>'Respobiblios','action'=>'majdaemprunteProfVacataire')); ?></li>
+        <li><?php echo $this->Html->link('Par Professeurs permanents',array('controller' =>'Respobiblios','action'=>'majdaemprunteProfPermanent')); ?></li>
+        <li><?php echo $this->Html->link('Par Etudiants',array('controller' =>'Respobiblios','action'=>'majdaemprunteEtudiant')); ?></li>
         </ul>
     </li>
     <li class="treeview">
@@ -681,7 +732,7 @@ elseif($us['role']=='respobiblio')
     </li>
     <li class="treeview">
         <a href="#">
-            <i class="glyphicon glyphicon-hdd"></i><span>Historiques</span> <i class="glyphicon glyphicon-chevron-right pull-right"></i> 
+            <i class="glyphicon glyphicon-hdd"></i><span>Historiques</span> <i class="glyphicon glyphicon-chevron-right pull-right"></i>
         </a>
         <ul class="treeview-menu">
         <li><?php echo $this->Html->link('Historique pour chaque ouvrages',array('controller' =>'Respobiblios','action'=>'badrhistorique')); ?></li>
@@ -692,21 +743,20 @@ elseif($us['role']=='respobiblio')
 
     <!--- fin badr -->
     <!--DEBUT  kawtar-->
-    <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respobiblios','action' => 'demanderabsences')); ?>"></li>
-    <!--Fin kawtar-->
-
-    </ul>
+    <li class="treeview">
+        <a href="<?php echo $this->Url->build('/Respobiblios/demanderabsences'); ?>"><i class="glyphicon glyphicon-envelope"></i> Demander une absence</a>
+         <li><?php echo $this->Html->link('mes absences ',array('controller' => 'Respobiblios','action' => 'listerabsences')); ?>"></li>
     </li>
-
+    <!--Fin kawtar-->
     <!-- Bouhsise -->
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Gestion des demandes</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-dashboard"></i> <span>Gestion des demandes</span><i class="glyphicon glyphicon-chevron-right pull-right"></i>
         </a>
         <ul class="treeview-menu">
 
-            <li><li><?php echo $this->Html->link('Déposer une demande ', array('controller' => 'Respobiblios','action' => 'demanderDocFct')); ?>"></li></li>
-            <li><li><?php echo $this->Html->link('Liste des documents déposés ', array('controller' => 'Respobiblios','action' => 'etatDemandeFct  ')); ?>"></li></li>
+            <li><li><?php echo $this->Html->link('Déposer une demande ', array('controller' => 'Respobiblios','action' => 'demanderDocFct')); ?></li></li>
+            <li><li><?php echo $this->Html->link('Liste des documents déposés ', array('controller' => 'Respobiblios','action' => 'etatDemandeFct  ')); ?></li></li>
         </ul>
     </li>
     <!-- Fin Bouhsise -->
@@ -736,7 +786,8 @@ elseif($us['role']=='respobureauordre')
             <li><?php echo $this->Html->link('Recherche courriers Reçus',array('controller'=>'Respobureauordres','action'=>'trierArrivee')); ?>"></li>
             <li><?php echo $this->Html->link('Ajouter courriers Reçus',array('controller'=>'Respobureauordres','action'=>'addArrivee')); ?>"></li>
             <li><?php echo $this->Html->link('Expediteurs',array('controller'=>'Respobureauordres','action'=>'indexexpediteur')); ?>"></li>
-        </ul>
+        </ul></li>
+        <li>
         <a href="#">
             <i class="fa fa-fw fa-envelope-o"></i> <span>Courriers Departs</span>
             <i class="fa fa-angle-left pull-right"></i>
@@ -749,7 +800,8 @@ elseif($us['role']=='respobureauordre')
 
             <li><?php echo $this->Html->link('Destinataires',array('controller'=>'Respobureauordres','action'=>'indexDest')); ?>"></li>
 
-        </ul>
+        </ul></li>
+        <li>
         <a href="#">
             <i class="fa fa-fw fa-reply-all"></i> <span>Envoyer Courrier</span>
             <i class="fa fa-angle-left pull-right"></i>
@@ -760,10 +812,7 @@ elseif($us['role']=='respobureauordre')
             <li><?php echo $this->Html->link('Envoyer courrier par email',array('controller'=>'Respobureauordres','action'=>'envoyer')); ?>"></li>
         </ul>
     </li>
-<!--FIN  Ibtihal -->
-<!-- Bouhsise -->
-<!--DEBUT  Kawtar -->
-    <li class="treeview">
+        <li class="treeview">
         <a href="#">
             <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
             <i class="fa fa-angle-left pull-right"></i>
@@ -772,10 +821,8 @@ elseif($us['role']=='respobureauordre')
             <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respobureauordres','action' => 'demanderabsences')); ?>"></li>
 
         </ul>
-        <!--Fin Kawtar -->
     </li>
 
-    <!--DEBUT  Bouhsise -->
     <li class="treeview">
         <a href="#">
             <i class="fa fa-table"></i> <span>Gestion des demandes</span> <i class="fa fa-angle-left pull-right"></i>
@@ -786,7 +833,8 @@ elseif($us['role']=='respobureauordre')
             <li><li><?php echo $this->Html->link('Liste des documents déposés ', array('controller' => 'Respobureauordres','action' => 'etatDemandeFct  ')); ?>"></li></li>
         </ul>
     </li>
-    <!-- Fin Bouhsise -->
+<!--FIN  Ibtihal -->
+<!-- Bouhsise 
 <?php
 }
 elseif($us['role']=='respostage')
@@ -842,7 +890,25 @@ elseif($us['role']=='respostage')
     <!-- Fin hamdi -->
     <!--DEBUT  Bouhsise -->
     <li class="treeview">
-        <a href="<?php echo $this->Url->build('/pages/tables/simple'); ?>"><i class="fa fa-edit"></i> Demande Document</a>
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respostages','action' => 'demanderabsences')); ?>"></li>
+
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion des demandes</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+
+            <li><li><?php echo $this->Html->link('Déposer une demande ', array('controller' => 'Respostages','action' => 'demanderDocFct')); ?>"></li></li>
+            <li><li><?php echo $this->Html->link('Liste des documents déposés ', array('controller' => 'Respostages','action' => 'etatDemandeFct  ')); ?>"></li></li>
+        </ul>
     </li>
     <!-- Bouhsise -->
 
@@ -867,8 +933,8 @@ elseif($us['role']=='ingenieur')
         </a>
         <ul class="treeview-menu">
 
-            <li><?php echo $this->Html->link('Ajouter actualite', array('controller' => 'ingenieurs','action' => 'ajouterActualites')); ?></li>
-            <li><?php echo $this->Html->link('La listes des actualites', array('controller' => 'ingenieurs','action' => 'afficherActualites')); ?></li>
+            <li><?php echo $this->Html->link('Ajouter actualité', array('controller' => 'ingenieurs','action' => 'ajouterActualites')); ?></li>
+            <li><?php echo $this->Html->link('La listes des actualités', array('controller' => 'ingenieurs','action' => 'afficherActualites')); ?></li>
 
 
 
@@ -877,13 +943,13 @@ elseif($us['role']=='ingenieur')
     <li class="treeview">
 
         <a href="#">
-            <i class="fa fa-table"></i> <span style="color:#FFFFFF">Evenement</span>
+            <i class="fa fa-table"></i> <span style="color:#FFFFFF">Evénement</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
 
-            <li><?php echo $this->Html->link('Ajouter evenement', array('controller' => 'ingenieurs','action' => 'ajouterEvenements')); ?></li>
-            <li><?php echo $this->Html->link('La listes des evenements', array('controller' => 'ingenieurs','action' => 'afficherEvenements')); ?></li>
+            <li><?php echo $this->Html->link('Ajouter événement', array('controller' => 'ingenieurs','action' => 'ajouterEvenements')); ?></li>
+            <li><?php echo $this->Html->link('La listes des événements', array('controller' => 'ingenieurs','action' => 'afficherEvenements')); ?></li>
 
 
 
@@ -898,7 +964,7 @@ elseif($us['role']=='ingenieur')
         <ul class="treeview-menu">
 
             <li><?php echo $this->Html->link('Ajouter Statistique', array('controller' => 'ingenieurs','action' => 'ajouterLaureats')); ?></li>
-            <li><?php echo $this->Html->link('La listes des laureats', array('controller' => 'ingenieurs','action' => 'afficherLaureats')); ?></li>
+            <li><?php echo $this->Html->link('La listes des statistiques', array('controller' => 'ingenieurs','action' => 'afficherLaureats')); ?></li>
 
 
 
@@ -909,7 +975,7 @@ elseif($us['role']=='ingenieur')
     <li class="treeview">
 
         <a href="#">
-            <i class="fa fa-table"></i> <span style="color:#FFFFFF">Gallery</span>
+            <i class="fa fa-table"></i> <span style="color:#FFFFFF">Galerie</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
@@ -929,7 +995,7 @@ elseif($us['role']=='ingenieur')
             <li class="treeview">
 
                 <a href="#">
-                    <i class="fa fa-table"></i> <span style="color:#FFFFFF">Video</span>
+                    <i class="fa fa-table"></i> <span style="color:#FFFFFF">Vidéo</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -975,7 +1041,28 @@ elseif($us['role']=='ingenieur')
             </li>
         </ul>
     </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Ingenieurs','action' => 'demanderabsences')); ?>"></li>
 
+        </ul>
+        <!--Fin Kawtar -->
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion des demandes</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+
+            <li><li><?php echo $this->Html->link('Déposer une demande ', array('controller' => 'Ingenieurs','action' => 'demanderDocFct')); ?>"></li></li>
+            <li><li><?php echo $this->Html->link('Liste des documents déposés ', array('controller' => 'Ingenieurs','action' => 'etatDemandeFct  ')); ?>"></li></li>
+        </ul>
+    </li>
     <!-- Fin Bhihi -->
 
 <?php }
@@ -986,148 +1073,289 @@ elseif ($us['role']=='respopersonel')
     <li class="header">Espace Personnel</li>
 
     <!--YOUNESS BOUHSISE-->
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Gestion Profs Permanents</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <!--YOUNESS BOUHSISE-->
-        <ul class="treeview-menu">
-            <li><?php echo $this->Html->link('Acceuil', array('controller' => 'Respopersonels','action' => ' index')); ?>"></li></li>
-            <li><?php echo $this->Html->link('Départements', array('controller' => 'Respopersonels','action' => ' listerProfsParDepar')); ?>"></li></li>
-            <li><?php echo $this->Html->link('Grades', array('controller' => 'Respopersonels','action' => ' listerGrade')); ?></li></li>
-            <li><?php echo $this->Html->link('Activités ', array('controller' => 'Respopersonels','action' => 'afficherEvent')); ?>"></li></li>
-            <li><?php echo $this->Html->link('Consultation Document ', array('controller' => 'Respopersonels','action' => 'voirDocument')); ?></li></li>
-            <li><?php echo $this->Html->link('ChercherProfesseur ', array('controller' => 'Respopersonels','action' => 'rechercher')); ?></li></li>
-            <li><?php echo $this->Html->link('Lister Disciplines ', array('controller' => 'Respopersonels','action' => 'listerDisciplines')); ?></li></li>
-            <li><?php echo $this->Html->link('Demande Modification Données' ,array('controller' => 'Respopersonels','action' => 'voirDemandes')); ?></li>
-            </a>
-            <!-- SARIH debut-->
-            <li class="treeview">
+     <li class="treeview">
                 <a href="#">
-                    <i class="glyphicon glyphicon-wrench"></i> <span>gestion de compte</span> <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-table"></i> <span>Espace Personnel </span>
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><?php echo $this->Html->link('créer un compte ',array('controller' => 'Respopersonels','action' => 'addper')); ?>"></li>
-                    <li><?php echo $this->Html->link('Liste Professeurs Permanents',array('controller' => 'Respopersonels','action' => 'permanentsliste')); ?>"></li>
-                </ul>
-            </li>
-            <!-- SARIH fin-->
 
-        </ul>
-        <!--YOUNESS BOUHSISE-->
-        <!--IBTISSAM EL ABBADI-->
+                    <!--YOUNESS BOUHSISE-->
+                    
+                        <!--YOUNESS BOUHSISE-->
+                          <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-list-ol')).'Acceuil ',array('controller' => 'Respopersonels','action' => 'index'), array('escape' => false)); ?>"></li>
+                         <li class="treeview">
+                                   <a href="#">
+                                       <i class="fa fa-dashboard"></i> <span>Professeurs Permanents </span> <i class="fa fa-angle-left pull-right"></i>
+                                   </a>
+                                   <ul class="treeview-menu">
+                                       <!-- SARIH debut-->
+                                       <li class="treeview">
+                                           <a href="#">
+                                               <i class="glyphicon glyphicon-wrench"></i> <span>Gestion de compte</span> <i class="fa fa-angle-left pull-right"></i>
+                                           </a>
+                                           <ul class="treeview-menu">
+                                              
+                                               <li><?php echo $this->Html->link('Liste des Professeurs permanents',array('controller' => 'Respopersonels','action' => 'permanentsliste')); ?>"></li>
+                                                <li><?php echo $this->Html->link('Créer un Compte ',array('controller' => 'Respopersonels','action' => 'addper')); ?>"></li>
+                                           </ul>
+                                       </li>
+                                       <!-- SARIH fin-->
+                                       <li>
 
-        <!--YOUNESS BOUHSISE-->
+                                         
+                                           <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Départements ',array('controller' => 'Respopersonels','action' => 'listerProfsParDepar'), array('escape' => false)); ?>"></li>
+                                           <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Liste des Profs avec Grades ',array('controller' => 'Respopersonels','action' => 'listerGrade'), array('escape' => false)); ?>"></li>
+                                           <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Affecter un Grade ',array('controller' => 'Respopersonels','action' => 'affecterGradeProf'), array('escape' => false)); ?>"></li>
+                                           <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-list-ol')).'Activités ', array('controller' => 'Respopersonels','action' => 'afficherEvent'), array('escape' => false)); ?>"></li>
+                                           <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-file')).'Consultation Document ', array('controller' => 'Respopersonels','action' => 'voirDocument'), array('escape' => false)); ?>"></li>
+                                           <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-search')).'Recherche des professeurs', array('controller' => 'Respopersonels','action' => 'rechercher'), array('escape' => false)); ?>"></li>
+                                           <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-list-ol')).'Disciplines', array('controller' => 'Respopersonels','action' => 'listerDisciplines'), array('escape' => false)); ?>"></li>
+                                           <li><?php echo $this->Html->link('Demande Modification Données' ,array('controller' => 'Respopersonels','action' => 'voirDemandes')); ?></li>
+             <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Gestion Abscences </span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><?php echo $this->Html->link('Traiter une absence  ',array('controller' => 'Respopersonels','action' => 'absencesprofperm')); ?>"></li>
+
+                            <li><?php echo $this->Html->link('Lister toutes les absences ',array('controller' => 'Respopersonels','action' => 'listerAbsencesperm')); ?>"></li>
+
+                            <li><?php echo $this->Html->link('Trier Les absences par date',array('controller' => 'Respopersonels','action' => 'listerAbspermParDate')); ?>"></li>
+
+                            
+                        </ul></li>
+
+
+
+
+
+                                       </li>
+                                     </ul>
+                               </li>
+                               </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Professeurs Vacataires</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        
+                           
+                        <ul class="treeview-menu">
+                             <a href="#">
+                                <i class="glyphicon glyphicon-wrench"></i> <span>Gestion de Compte</span> <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+
+
+                                <li><?php echo $this->Html->link('Créer un Compte',array('controller' => 'Respopersonels','action' => 'addvac')); ?>"></li>
+                                <li><?php echo $this->Html->link('Liste Professeurs Vacataires',array('controller' => 'Respopersonels','action' => 'vacatairesliste')); ?>"></li>
+
+                          </ul>
+
+<li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Liste des Vacataires avec Grades ',array('controller' => 'Respopersonels','action' => 'listerGradeVac'), array('escape' => false)); ?>"></li>
+<li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Affecter un Grade',array('controller' => 'respopersonels','action'=>'affectergradevac'), array('escape' => false)); ?>"></li>
+<li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-search')).'Rechercher des Vacataires',array('controller' => 'respopersonels','action'=>'rechercherVac'), array('escape' => false)); ?>"></li>
+<li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Demandes Modification Données',array('controller' => 'Respopersonels','action' => 'voirDemandesVac'), array('escape' => false)); ?>"></li>
+<li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Demandes Modification Vacations',array('controller' => 'Respopersonels','action' => 'voirDemandesHeuresVac'), array('escape' => false)); ?>"></li>
+ <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-file')).'Consultation Document ', array('controller' => 'Respopersonels','action' => 'voirrDocument'), array('escape' => false)); ?>"></li>
+<li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Affecter à un Departement',array('controller' => 'respopersonels','action'=>'Affecteraundepart'), array('escape' => false)); ?>"></li>
+
+
+
+ <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Gestion Abscences </span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><?php echo $this->Html->link('Traiter une absence  ',array('controller' => 'Respopersonels','action' => 'absencesprofvac')); ?>"></li>
+
+                            <li><?php echo $this->Html->link('Lister toutes les absences ',array('controller' => 'Respopersonels','action' => 'listerAbsencesvac')); ?>"></li>
+
+                            <li><?php echo $this->Html->link('Trier Les absences par date',array('controller' => 'Respopersonels','action' => 'listerAbsvacParDate')); ?>"></li>
+
+                            
+                        </ul></li>
+
+
+                            <!-- SARIH debut-->
+
+
+
+                            </li>
+                            <!--SARUH FIN -->
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Fonctionnaires</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+               <!-- SARIH debut-->
+               <li class="treeview">
+                   <a href="#">
+                       <i class="glyphicon glyphicon-wrench"></i> <span>Gestion de Compte</span> <i class="fa fa-angle-left pull-right"></i>
+                   </a>
+                   <ul class="treeview-menu">
+                       <li><?php echo $this->Html->link('Créer un Compte ',array('controller' => 'Respopersonels','action' => 'addfonc')); ?>"></li>
+                       <li><?php echo $this->Html->link('Liste des fonctionnaires',array('controller' => 'Respopersonels','action' => 'fonctionnairesliste')); ?>"></li>
+                   </ul>
+               </li>
+               <!-- SARIH fin-->
+               <li>
+
+                   <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-list-ol')).'Evolution Grades des Fonctionnaires ', array('controller' => 'Respopersonels','action' => 'evolutionGrades'), array('escape' => false)); ?>"></li>
+                   <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-list-ol')).'Fonctionnaires par Service ',array('controller' => 'Respopersonels','action' => 'mouvementService'), array('escape' => false)); ?>"></li>
+                   <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Activités des fonctionnaires ',array('controller' => 'Respopersonels','action' => 'listerActivites'), array('escape' => false)); ?>"></li>
+                   <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th-list')).'Groupement des événements ',array('controller' => 'Respopersonels','action' => 'afficherFonctEvent'), array('escape' => false)); ?>"></li>
+                   <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-list-ol')).'Mouvement des fonctionnaires ', array('controller' => 'Respopersonels','action' => 'listerMouvement'), array('escape' => false)); ?>"></li>
+                   <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-search')).'Rechercher des fonctionnaire ', array('controller' => 'Respopersonels','action' => 'rechercherFonc'), array('escape' => false)); ?>"></li>
+                   <li><?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-file')).'Consultation des Documents ', array('controller' => 'Respopersonels','action' => 'voirDocumentFct'), array('escape' => false)); ?>"></li>
+                    <li><?php echo $this->Html->link('Demande Modification Données' ,array('controller' => 'Respopersonels','action' => 'voirDemandesFonc')); ?></li>
+
+               </li>
+            
+
+           </ul>
+                    </li>
+                    </li>
+                   
+
+                    <!-- A -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Gestion des abscences fonctionnaire</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><?php echo $this->Html->link('Traiter une absence  ',array('controller' => 'Respopersonels','action' => 'gestionabsences')); ?>"></li>
+
+                            <li><?php echo $this->Html->link('Lister toutes les absences ',array('controller' => 'Respopersonels','action' => 'listerAbsences')); ?>"></li>
+
+                            <li><?php echo $this->Html->link('Trier Les absences par date',array('controller' => 'Respopersonels','action' => 'listerAbsencesParDate')); ?>"></li>
+
+                            <li><?php echo $this->Html->link('Rechercher une absence ',array('controller' => 'Respopersonels','action' => 'abs')); ?>"></li>
+                        </ul></li>
+
+
+                        
+                            
+                        </ul></li>
+
+
+                    <!-- -->
+
+
+<!-- ////////////////////////////////////// Statistiques des professeurs-->
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Professeurs Vacataires</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-dashboard"></i> <span>Statistiques des professeurs</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Date de recrutement ',array('controller' => 'Respopersonels','action' => 'statistiqueprofdate')); ?>"></li>
 
-            <!-- <li><?php echo $this->Html->link('Afficher vacataireDepartement',array('controller' => 'Respopersonels','action' => 'listepardep')); ?>"></li>-->
-            <!--<li><?php echo $this->Html->link('Listes Par Disciplines',array('controller' => 'Respopersonels','action' => 'listepardiscipline')); ?>"></li>-->
-            <!--<li><?php echo $this->Html->link('Rechercher un vacataire par somme',array('controller' => 'Respopersonels','action' => 'rechercheparinput')); ?>"></li>-->
-            <!-- <li><?php echo $this->Html->link('Rechercher un departement par son id',array('controller' => 'Respopersonels','action' => 'rechercheparinputdepartement')); ?>"></li>-->
+            <li><?php echo $this->Html->link('Grade ',array('controller' => 'Respopersonels','action' => 'statistiqueprofgrade')); ?>"></li>
 
-            <!--<li><?php echo $this->Html->link('Afficher vacataires/Departements',array('controller' => 'VacatairesDepartements')); ?>"></li>-->
-            <li><?php echo $this->Html->link('Afficher vacataires',array('controller' => 'Respopersonels','action'=>'vacataires')); ?>"></li>
-            <!--<li><?php echo $this->Html->link('Afficher Departements',array('controller' => 'Departements')); ?>"></li>-->
+            <li><?php echo $this->Html->link('Département',array('controller' => 'Respopersonels','action' => 'statistiqueprofdept')); ?>"></li>
 
-<!-- Mouna -->
+            <li><?php echo $this->Html->link('Discipline ',array('controller' => 'Respopersonels','action' => 'statistiqueprofdiscipline')); ?>"></li>
 
-            <li><?php echo $this->Html->link('les demandes de modification des données',array('controller' => 'Respopersonels','action' => 'voirDemandes')); ?>"></li>
+            <li><?php echo $this->Html->link('Genre ',array('controller' => 'Respopersonels','action' => 'statistiqueprofgenre')); ?>"></li>
 
-            <!-- fin mouna -->
+            <li><?php echo $this->Html->link('Age ',array('controller' => 'Respopersonels','action' => 'statistiqueprofage')); ?>"></li>
 
-            <!--jadid omar ray-->
+            <li><?php echo $this->Html->link('Activités ',array('controller' => 'Respopersonels','action' => 'statistiqueprofactivite')); ?>"></li>
+        </ul>
+    </li>
+<!-- ///////////////////////////////////// -->
+<!-- ///////////////////////////////////// Statistiques des fonctionnaires -->
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Statistiques des fonctionnaires</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Date de recrutement ',array('controller' => 'Respopersonels','action' => 'statistiquefonctdate')); ?>"></li>
 
-            <!--<li><?php echo $this->Html->link('lister par departements',array('controller' => 'respopersonels','action'=>'listerpardepartements')); ?>"></li>-->
+            <li><?php echo $this->Html->link('Grade ',array('controller' => 'Respopersonels','action' => 'statistiquefonctgrade')); ?>"></li>
 
+            <li><?php echo $this->Html->link('Service ',array('controller' => 'Respopersonels','action' => 'statistiquefonctservice')); ?>"></li>
 
-            <li><?php echo $this->Html->link('Affecter un vacataire',array('controller' => 'respopersonels','action'=>'Affecteraundepart')); ?>"></li>
+            <li><?php echo $this->Html->link('Genre ',array('controller' => 'Respopersonels','action' => 'statistiquefonctgenre')); ?>"></li>
+            
+            <li><?php echo $this->Html->link('Age ',array('controller' => 'Respopersonels','action' => 'statistiquefonctage')); ?>"></li>
 
-
-            <li><?php echo $this->Html->link('Affecter le Grade',array('controller' => 'respopersonels','action'=>'affectergrades')); ?>"></li>
-
-            <li><?php echo $this->Html->link('Documents',array('controller' => 'respopersonels','action'=>'vacatairedocument')); ?>"></li>
-
-            <li><?php echo $this->Html->link('Validation des données',array('controller' => 'Profvacataires','action'=>'viewMounaaa')); ?>"></li>
-            <li><?php echo $this->Html->link('Demande Modification Données',array('controller' => 'Respopersonels','action' => 'voirDemandesVac')); ?>"></li>
-
-
-            <!-- SARIH debut-->
-
-
-            <a href="#">
-                <i class="glyphicon glyphicon-wrench"></i> <span>gestion de compte</span> <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li><?php echo $this->Html->link('créer un compte ',array('controller' => 'Respopersonels','action' => 'addvac')); ?>"></li>
+            <li><?php echo $this->Html->link('Activités ',array('controller' => 'Respopersonels','action' => 'statistiquefonctactivite')); ?>"></li>
+        </ul>
+    </li>
+<!-- ///////////////////////////////////// -->
 
 
-                <li><?php echo $this->Html->link('Liste Professeurs Vacataires',array('controller' => 'Respopersonels','action' => 'vacatairesliste')); ?>"></li>
 
-            </ul>
 
-            </li>
-            <!--SARUH FIN -->
-            </li>
+
+            /****/
 
         </ul>
     </li>
+<?php
+}
 
+elseif ($us['role']=='fonctionnaire')
+{ ?>
+
+	<li class="header">Espace Fonctionnaire</li>
+
+   <!-- role fonc -->
 
 
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Fonctionnaires</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-dashboard"></i> Notes<span></span> <i class="fa fa-angle-left pull-right"></i>
+
+        </a>
+        
+<li><li><?php echo $this->Html->link('Déposer Demande Document ', array('controller' => 'fonctionnaires','action' => 'demanderDoc')); ?>"></li></li>
+    <li><li><?php echo $this->Html->link('Mes Documents ', array('controller' => 'fonctionnaires','action' => 'etatDemande  ')); ?>"></li></li>
+    <li><li><?php echo $this->Html->link('Demande Validation Données', array('controller' => 'fonctionnaires','action' => 'viewmouna')); ?>"></li></li>
+
+        
+    </li>
+
+    <li><a href="<?= $this->Url->build( array( 'controller' => 'fonctionnaires',
+            'action'=>'viewmouna',
+            $prof));
+        ?>"><i class="fa fa-circle-o"></i> Validation données </a></li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Messageries</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <!-- SARIH debut-->
-            <li class="treeview">
-                <a href="#">
-                    <i class="glyphicon glyphicon-wrench"></i> <span>gestion de compte</span> <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><?php echo $this->Html->link('créer un compte ',array('controller' => 'Respopersonels','action' => 'addfonc')); ?>"></li>
-                    <li><?php echo $this->Html->link('Liste des fonctionnaires',array('controller' => 'Respopersonels','action' => 'fonctionnairesliste')); ?>"></li>
-                </ul>
-            </li>
-            <!-- SARIH fin-->
-            <li><?php echo $this->Html->link('Les fonctionnaires par Service ',array('controller' => 'Respopersonels','action' => 'mouvementService')); ?>"></li>
-            <li><?php echo $this->Html->link('Les activités des fonctionnaires ',array('controller' => 'Respopersonels','action' => 'listerActivites')); ?>"></li>
-            <li><?php echo $this->Html->link('Groupement des événements ',array('controller' => 'Respopersonels','action' => 'afficherFonctEvent')); ?>"></li>
-            <li><li><?php echo $this->Html->link('Mouvement des fonctionnaires ', array('controller' => 'Respopersonels','action' => 'listerMouvement')); ?>"></li></li>
-            <li><li><?php echo $this->Html->link('Rechercher un fonctionnaire ', array('controller' => 'Respopersonels','action' => 'fetch')); ?>"></li></li>
-            <li><li><?php echo $this->Html->link('Consultation des Documents ', array('controller' => 'Respopersonels','action' => 'voirDocumentFct')); ?>"></li></li>
-            <li><li><?php echo $this->Html->link('Les fonctionnaires par Grade ', array('controller' => 'Respopersonels','action' => 'listerFonctGrade')); ?>"></li></li>
-            <!--mouna jellouli-->
-            <li><?php echo $this->Html->link('Visualiser les Grades ',array('controller' => 'Respopersonels','action' => 'evolutionGrades')); ?>"></li><!--fin mouna jellouli-->
-
+            <li><?php echo $this->Html->link('Boîte de réception', array('controller' => 'fonctionnaires','action' => 'boiteRecPer')); ?>"></li>
+            <li><?php echo $this->Html->link('Envoyer nouveau message', array('controller' => 'fonctionnaires','action' => 'envoyerNvPer')); ?>"></li>
+            <li><?php echo $this->Html->link('Lire mes messages', array('controller' => 'fonctionnaires','action' => 'lireMsgPer')); ?>"></li>
         </ul>
     </li>
-    </li>
-    <!--IBTISSAM EL ABBADI-->
-
-    <!-- AYOUGIL KAOUTAR ABSENCE -->
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Gestion des abscences</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li><?php echo $this->Html->link('Traiter une absence ',array('controller' => 'Respopersonels','action' => 'gestionabsences')); ?>"></li>
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Fonctionnaires','action' => 'demanderabsences')); ?>"></li>
+            <li><?php echo $this->Html->link('Mes absences ',array('controller' => 'Fonctionnaires','action' => 'listerAbsences')); ?>"></li>
 
-            <li><?php echo $this->Html->link('Lister toutes les absences ',array('controller' => 'Respopersonels','action' => 'listerAbsences')); ?>"></li>
+        </ul>
+        <!--Fin Kawtar -->
+    </li>
+        
+    </li>
 
-            <li><?php echo $this->Html->link('Trier Les absences par date',array('controller' => 'Respopersonels','action' => 'listerAbsencesParDate')); ?>"></li>
-
-            <li><?php echo $this->Html->link('Rechercher une absence ',array('controller' => 'Respopersonels','action' => 'abs')); ?>"></li>
-        </ul></li>
-
-    <!-- AYOUGIL KAOUTAR FIN ABSENCE -->
-
-
-<?php }
+    <?php
+}
 
 elseif ($us['role']=='admin')
 { ?>
@@ -1137,9 +1365,10 @@ elseif ($us['role']=='admin')
             <i class="fa fa-angle-left pull-right"></i>
         </a>
     <ul class="treeview-menu">
-    <li><?php echo $this->Html->link('Génération code Note',array('controller'=>'resposcolarites','action'=>'generationcode')); ?>"></li>
-    <li><a href="<?php echo $this->Url->build('/resposcolarites/liste-pv-notes'); ?>"><i class="fa fa-circle-o"></i>Liste de pv </a></li>
-    <li><a href="<?php echo $this->Url->build('/resposcolarites/liste-classes'); ?>"><i class="fa fa-circle-o"></i>Télécharger Liste Pv</a></li>
+    
+     <li><a href="<?php echo $this->Url->build('/resposcolarites/generationcode'); ?>"><i class="fa fa-circle-o"></i>Génération de code</a></li>
+    <li><a href="<?php echo $this->Url->build('/admin/autoriser'); ?>"><i class="fa fa-circle-o"></i>Autorisation d'accès</a></li>
+    <li><a href="<?php echo $this->Url->build('/resposcolarites/liste-pv-notes'); ?>"><i class="fa fa-circle-o"></i>Modification des notes</a></li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-cog"></i> <span>Gestion de concours</span> <i class="fa fa-angle-right pull-right"></i>
@@ -1191,6 +1420,18 @@ elseif ($us['role']=='admin')
 
         </ul>
     </li>
+      <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Resposcolarites','action' => 'demanderabsences')); ?>"></li>
+            <li><?php echo $this->Html->link('Mes absences ',array('controller' => 'Resposcolarites','action' => 'listerAbsences')); ?>"></li>
+
+        </ul>
+        
+    </li>
 </li>
     <!-- Fin Zouhir -->
     </ul>
@@ -1208,7 +1449,7 @@ elseif ($us['role']=='admin')
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo $this->Url->build('/respofinances/suivicommandes/'); ?>"><i class="fa fa-circle-o"></i>Suivi des commandes</a></li>
+                    <li><a href="<?php echo $this->Url->build('/respofinances/suivicommande/'); ?>"><i class="fa fa-circle-o"></i>Suivi des commandes</a></li>
 
                 </ul>
             </li>
@@ -1255,6 +1496,20 @@ elseif ($us['role']=='admin')
                     </li>
                 </ul>
             </li>
+             <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respofinances','action' => 'demanderabsences')); ?>"></li>
+            <li><?php echo $this->Html->link('Mes absences ',array('controller' => 'Respofinances','action' => 'listerAbsences')); ?>"></li>
+
+        </ul>
+        
+    </li>
+
+            
 
             <!--- fin samsam -->
 
@@ -1327,6 +1582,18 @@ elseif ($us['role']=='admin')
                     <li><?php echo $this->Html->link('Afficher Categories', array('controller' => 'Respostocks','action' => 'index_stockcategories')); ?></li>
                 </ul>
             </li>
+            <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respostocks','action' => 'demanderabsences')); ?>"></li>
+            <li><?php echo $this->Html->link('Mes absences ',array('controller' => 'Respostocks','action' => 'listerAbsences')); ?>"></li>
+
+        </ul>
+      
+    </li>
             <!--FIN  JELAIDI -->
 
 </ul>
@@ -1396,6 +1663,18 @@ elseif ($us['role']=='admin')
                     <li><?php echo $this->Html->link('Historique de chaques utilisateurs',array('controller' =>'Respobiblios','action'=>'badrehistoriqueutilisateur')); ?></li>
                 </ul>
             </li>
+             <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respobiblios','action' => 'demanderabsences')); ?>"></li>
+            <li><?php echo $this->Html->link('Mes absences ',array('controller' => 'Respobiblios','action' => 'listerAbsences')); ?>"></li>
+
+        </ul>
+  
+    </li>
 
             <!--- fin badr -->
 
@@ -1443,6 +1722,18 @@ elseif ($us['role']=='admin')
 
 
             </li>
+            <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respobureauordres','action' => 'demanderabsences')); ?>"></li>
+            <li><?php echo $this->Html->link('Mes absences ',array('controller' => 'Respobureauordres','action' => 'listerAbsences')); ?>"></li>
+
+
+        </ul>
+    </li>
             <!--FIN  Ibtihal -->
             <!-- Bouhsise -->
 
@@ -1473,6 +1764,7 @@ elseif ($us['role']=='admin')
                     <li class="treeview">
 
 
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-folder"></i> <span>Certificats etudiants</span>
@@ -1495,7 +1787,17 @@ elseif ($us['role']=='admin')
             </li>
 
 
+        <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Respostages','action' => 'demanderabsences')); ?>"></li>
+             <li><?php echo $this->Html->link('Mes absences ',array('controller' => 'Respostages','action' => 'listerAbsences')); ?>"></li>
 
+        </ul>
+    </li>
 
         </ul>
     </li>
@@ -1517,17 +1819,29 @@ elseif ($us['role']=='admin')
             <li class="treeview">
                 <?php echo $this->Html->link('Home', array('controller' => 'ingenieurs','action' => 'index')); ?>
                 <a href="#">
-                    <i class="fa fa-table"></i> <span style="color:#FFFFFF">actualite</span>
+                    <i class="fa fa-table"></i> <span style="color:#FFFFFF">Actualité</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
 
-                    <li><?php echo $this->Html->link('La listes des actualites', array('controller' => 'ingenieurs','action' => 'afficherActualites')); ?></li>
+                    <li><?php echo $this->Html->link('La listes des actualités', array('controller' => 'ingenieurs','action' => 'afficherActualites')); ?></li>
 
 
 
                 </ul>
             </li>
+             <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>Gestion d'abscences</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><?php echo $this->Html->link('Demander une absence ',array('controller' => 'Ingenieurs','action' => 'demanderabsences')); ?>"></li>
+            <li><?php echo $this->Html->link('Mes absences ',array('controller' => 'Ingenieurs','action' => 'listerAbsences')); ?>"></li>
+
+        </ul>
+       
+    </li>
             <li class="treeview">
 
                 <a href="#">
@@ -1632,169 +1946,8 @@ elseif ($us['role']=='admin')
 
 
 
+<?php
 
 
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-table"></i> <span>Espace Personnel </span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-
-                    <!--YOUNESS BOUHSISE-->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Gestion Profs Permanents</span> <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <!--YOUNESS BOUHSISE-->
-                        <ul class="treeview-menu">
-                            <li><?php echo $this->Html->link('Acceuil', array('controller' => 'Respopersonels','action' => ' index')); ?>"></li></li>
-                            <li><?php echo $this->Html->link('Départements', array('controller' => 'Respopersonels','action' => ' listerProfsParDepar')); ?>"></li></li>
-                            <li><?php echo $this->Html->link('Grades', array('controller' => 'Respopersonels','action' => ' listerGrade')); ?></li></li>
-                            <li><?php echo $this->Html->link('Activités ', array('controller' => 'Respopersonels','action' => 'afficherEvent')); ?>"></li></li>
-                            <li><?php echo $this->Html->link('Consultation Document ', array('controller' => 'Respopersonels','action' => 'voirDocument')); ?></li></li>
-                            <li><?php echo $this->Html->link('ChercherProfesseur ', array('controller' => 'Respopersonels','action' => 'rechercher')); ?></li></li>
-                            <li><?php echo $this->Html->link('Lister Disciplines ', array('controller' => 'Respopersonels','action' => 'listerDisciplines')); ?></li></li>
-                            </a>
-                            <!-- SARIH debut-->
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="glyphicon glyphicon-wrench"></i> <span>gestion de compte</span> <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><?php echo $this->Html->link('Liste Professeurs Permanents',array('controller' => 'Respopersonels','action' => 'permanentsliste')); ?>"></li>
-                                </ul>
-                            </li>
-                            <!-- SARIH fin-->
-
-                        </ul>
-                        <!--YOUNESS BOUHSISE-->
-                        <!--IBTISSAM EL ABBADI-->
-
-                        <!--YOUNESS BOUHSISE-->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Professeurs Vacataires</span> <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-
-                            <!-- <li><?php echo $this->Html->link('Afficher vacataireDepartement',array('controller' => 'Respopersonels','action' => 'listepardep')); ?>"></li>-->
-                            <!--<li><?php echo $this->Html->link('Listes Par Disciplines',array('controller' => 'Respopersonels','action' => 'listepardiscipline')); ?>"></li>-->
-                            <!--<li><?php echo $this->Html->link('Rechercher un vacataire par somme',array('controller' => 'Respopersonels','action' => 'rechercheparinput')); ?>"></li>-->
-                            <!-- <li><?php echo $this->Html->link('Rechercher un departement par son id',array('controller' => 'Respopersonels','action' => 'rechercheparinputdepartement')); ?>"></li>-->
-
-                            <!--<li><?php echo $this->Html->link('Afficher vacataires/Departements',array('controller' => 'VacatairesDepartements')); ?>"></li>-->
-                            <li><?php echo $this->Html->link('Afficher vacataires',array('controller' => 'Respopersonels','action'=>'vacataires')); ?>"></li>
-                            <!--<li><?php echo $this->Html->link('Afficher Departements',array('controller' => 'Departements')); ?>"></li>-->
-
-                            <!-- Mouna -->
-
-                            <li><?php echo $this->Html->link('les demandes de modification des données',array('controller' => 'Respopersonels','action' => 'voirDemandes')); ?>"></li>
-
-                            <!-- fin mouna -->
-
-                            <!--jadid omar ray-->
-
-                            <!--<li><?php echo $this->Html->link('lister par departements',array('controller' => 'respopersonels','action'=>'listerpardepartements')); ?>"></li>-->
-
-
-
-
-
-                            <li><?php echo $this->Html->link('Documents',array('controller' => 'respopersonels','action'=>'vacatairedocument')); ?>"></li>
-
-
-
-                            <!-- SARIH debut-->
-
-
-                            <a href="#">
-                                <i class="glyphicon glyphicon-wrench"></i> <span>gestion de compte</span> <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-
-
-                                <li><?php echo $this->Html->link('Liste Professeurs Vacataires',array('controller' => 'Respopersonels','action' => 'vacatairesliste')); ?>"></li>
-
-                            </ul>
-
-                            </li>
-                            <!--SARUH FIN -->
-                            </li>
-
-                        </ul>
-                    </li>
-
-
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Fonctionnaires</span> <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <!-- SARIH debut-->
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="glyphicon glyphicon-wrench"></i> <span>gestion de compte</span> <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><?php echo $this->Html->link('Liste des fonctionnaires',array('controller' => 'Respopersonels','action' => 'fonctionnairesliste')); ?>"></li>
-                                </ul>
-                            </li>
-                            <!-- SARIH fin-->
-                            <li><?php echo $this->Html->link('Les fonctionnaires par Service ',array('controller' => 'Respopersonels','action' => 'mouvementService')); ?>"></li>
-                            <li><?php echo $this->Html->link('Les activités des fonctionnaires ',array('controller' => 'Respopersonels','action' => 'listerActivites')); ?>"></li>
-                            <li><?php echo $this->Html->link('Groupement des événements ',array('controller' => 'Respopersonels','action' => 'afficherFonctEvent')); ?>"></li>
-                            <li><li><?php echo $this->Html->link('Mouvement des fonctionnaires ', array('controller' => 'Respopersonels','action' => 'listerMouvement')); ?>"></li></li>
-                            <li><li><?php echo $this->Html->link('Rechercher un fonctionnaire ', array('controller' => 'Respopersonels','action' => 'fetch')); ?>"></li></li>
-                            <li><li><?php echo $this->Html->link('Consultation des Documents ', array('controller' => 'Respopersonels','action' => 'voirDocumentFct')); ?>"></li></li>
-                            <li><li><?php echo $this->Html->link('Les fonctionnaires par Grade ', array('controller' => 'Respopersonels','action' => 'listerFonctGrade')); ?>"></li></li>
-                            <!--mouna jellouli-->
-                            <li><?php echo $this->Html->link('Visualiser les Grades ',array('controller' => 'Respopersonels','action' => 'evolutionGrades')); ?>"></li><!--fin mouna jellouli-->
-
-                        </ul>
-                    </li>
-                    </li>
-                    <!--IBTISSAM EL ABBADI-->
-
-                    <!-- AYOUGIL KAOUTAR ABSENCE -->
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Gestion des abscences</span> <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><?php echo $this->Html->link('Traiter une absence ',array('controller' => 'Respopersonels','action' => 'gestionabsences')); ?>"></li>
-
-                            <li><?php echo $this->Html->link('Lister toutes les absences ',array('controller' => 'Respopersonels','action' => 'listerAbsences')); ?>"></li>
-
-                            <li><?php echo $this->Html->link('Trier Les absences par date',array('controller' => 'Respopersonels','action' => 'listerAbsencesParDate')); ?>"></li>
-
-                            <li><?php echo $this->Html->link('Rechercher une absence ',array('controller' => 'Respopersonels','action' => 'abs')); ?>"></li>
-                        </ul></li>
-
-                    <!-- AYOUGIL KAOUTAR FIN ABSENCE -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            /****/
-
-        </ul>
-    </li>
-    <?php
-}}
+           }}
 ?>

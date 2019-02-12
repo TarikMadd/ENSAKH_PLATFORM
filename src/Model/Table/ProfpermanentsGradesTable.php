@@ -33,15 +33,19 @@ class ProfpermanentsGradesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('profpermanents_grades');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('profpermanents_grades');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Profpermanents', [
             'foreignKey' => 'profpermanent_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Grades', [
+         $this->belongsTo('Grades', [
+            'foreignKey' => 'grade_id',
+            'joinType' => 'INNER'
+        ]); 
+        $this->belongsTo('Infosgradesprofs', [
             'foreignKey' => 'grade_id',
             'joinType' => 'INNER'
         ]);
@@ -60,9 +64,42 @@ class ProfpermanentsGradesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->dateTime('date_grade')
+            ->date('date_grade')
             ->requirePresence('date_grade', 'create')
             ->notEmpty('date_grade');
+
+        $validator
+            ->requirePresence('cadre', 'create')
+            ->notEmpty('cadre');
+
+        $validator
+            ->integer('echelon')
+            ->requirePresence('echelon', 'create')
+            ->notEmpty('echelon');
+
+        $validator
+            ->requirePresence('sous_grade', 'create')
+            ->notEmpty('sous_grade');
+
+        $validator
+            ->date('date_exep')
+            ->requirePresence('date_exep', 'create')
+            ->notEmpty('date_exep');
+
+        $validator
+            ->date('date_normal')
+            ->requirePresence('date_normal', 'create')
+            ->notEmpty('date_normal');
+
+        $validator
+            ->date('date_rapide')
+            ->requirePresence('date_rapide', 'create')
+            ->notEmpty('date_rapide');
+
+        $validator
+            ->date('date_next_echelon')
+            ->requirePresence('date_next_echelon', 'create')
+            ->notEmpty('date_next_echelon');
 
         return $validator;
     }
@@ -77,7 +114,7 @@ class ProfpermanentsGradesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['profpermanent_id'], 'Profpermanents'));
-        $rules->add($rules->existsIn(['grade_id'], 'Grades'));
+        //$rules->add($rules->existsIn(['grade_id'], 'Grades'));
 
         return $rules;
     }

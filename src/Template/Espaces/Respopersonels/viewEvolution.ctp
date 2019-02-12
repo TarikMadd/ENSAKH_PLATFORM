@@ -5,8 +5,9 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="box">
-          <div class="box-header">
-            <h3 class= "Activite"  >Chronologie  des grades  :  </h3>
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">Chronologie  des grades  :  </div>
 
           </div>
           <!-- /.box-header -->

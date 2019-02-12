@@ -40,7 +40,7 @@
             <strong>- LIEU DE TRAVAIL :</strong> Ecole nationale des sciences appliquées de Khouribga<br><br><br>
             La présente attestation est délivrée à l’intéressé pour servir et valoir ce que de droit.<br><br><br>
 
-            <center> Khouribga le : ………………………………</center><br><br>
+            <center> Khouribga le : <?=h($ligne->dateDemande)?></center><br><br>
 
         </div>
         <!-- /.row -->

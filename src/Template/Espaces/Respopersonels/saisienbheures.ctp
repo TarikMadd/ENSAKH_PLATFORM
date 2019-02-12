@@ -19,7 +19,7 @@
                         <div class="form-group" >
                             <label>Mois</label>
                             <?php
-                            echo  "<select name=\"mois\" id='mois' class=\"form-control\" required>
+                            echo  "<select name=\"mois\" id='mois' class=\"form-control\" >
                             <option value='1'>Janvier</option>                        
                           <option value='2'>février</option>
                           <option value='3'>Mars</option>
@@ -39,14 +39,14 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">annee</label>
-                            <input type="number" name="annee" class="form-control" id="annee" value="<?php echo date('Y'); ?>" placeholder="Enter annee" min="2016" required>
+                            <input type="number" name="annee" class="form-control" id="annee" value="<?php echo date('Y'); ?>" placeholder="Enter annee" min="2016">
                         </div>
 
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nb Heures</label>
-                            <input type="number" name="nbHeure" class="form-control" id="nbHeure" placeholder="Enter nombre d'heures" min="1" max="<?php echo $max ?>" required>
+                            <label for="exampleInputEmail1">Nb Heure</label>
+                            <input type="number" name="nbHeure" class="form-control" id="nbHeure" placeholder="Enter nombre d'heures" min="1">
                         </div>
 
                     </div>

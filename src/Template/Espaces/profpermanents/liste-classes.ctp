@@ -12,7 +12,7 @@
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">selectionner une classe</h3>
+                  <h3 class="box-title">sélectionner une classe</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form method="POST" action="showModel" class="form-horizontal">

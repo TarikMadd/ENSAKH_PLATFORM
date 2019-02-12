@@ -1,3 +1,4 @@
+
 <?php $this->layout = 'AdminLTE.print'; ?>
 <!DOCTYPE html>
 
@@ -9,14 +10,12 @@
 <?php echo $this->Html->css(['nain', 'fancy', 'base']); ?>
 </head>
 <body>
-	<p style=" text-align: right;">    KHOURIBGA le : <?php  echo date('d\/m\/y'); ?></p>  <p style=" text-align: left;">  Université Hassan 1er </br>Ecole Nationale des Sciences Appliquées     </p>
+  <p style=" text-align: right;">    KHOURIBGA le : <?php  echo date('d\/m\/y'); ?></p>  <p style=" text-align: left;">  Université Hassan 1er </br>Ecole Nationale des Sciences Appliquées     </p>
     <h2 style=" text-align: center;"> <strong>Permission d'absence</strong></h2></br>
                   
         <p><em>  Nom & Prenom :      <?php echo $_SESSION['demandes'][0]['nom_fct']." ".$_SESSION['demandes'][0]['prenom_fct']?> </em> </p>
 
-         <p><em> Grade : <?php echo $_SESSION['demandes'][0]['codeGrade']?></em></p>
-
-         <p><em> Service : <?php echo $_SESSION['demandes'][0]['nom_service']?></em></p>
+         <p><em> Grade : <?php echo $_SESSION['demandes'][0]['grade']?></em></p>
                    
         <p><em>  Je vous demande de me permettre de s'absenter durant : <?php echo $_SESSION['demandes'][0]['duree_ab']."jour(s)"?></em></p>
                      
@@ -27,11 +26,11 @@
         <p><em>  Cause : 
                   <?php if(empty($_SESSION['demandes'][0]['cause']))
                         {
-                        	echo "Non justifié";
+                          echo "Non justifié";
                         }
                         else
                         {
-                        	echo $_SESSION['demandes'][0]['cause'];
+                          echo $_SESSION['demandes'][0]['cause'];
                         }?></em></p>
         <p><em>  Nombre de jours demandé avant pour ce fonctionnaire :  <?php echo $_SESSION['nbr_abs'].' jour(s)';?></em></p>
 

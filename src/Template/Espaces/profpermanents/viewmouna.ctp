@@ -1,6 +1,9 @@
 <section class="content-header">
   <h1>
-    <?php echo __('Vos Données'); ?>
+     <?php
+    use Cake\I18n\Time;
+     echo __('Vos Données');
+     ?>
   </h1>
   <ol class="breadcrumb">
     <li>
@@ -33,10 +36,7 @@
                                         <dd>
                                             <?= h($profpermanent->somme) ?>
                                         </dd>
-                                          <dt><?= __('Poste :') ?></dt>
-                                        <dd>
-                                            <?= h($profpermanent->poste) ?>
-                                        </dd>
+                                          
                                           <dt><?= __('Numéro de téléphone :') ?></dt>
                                 <dd>
                                     <?= h($profpermanent->phone) ?>
@@ -65,42 +65,31 @@
                         
                                             
                                          
-                                    <dt><?= __('Echèlle :') ?></dt>
-                                <dd>
-                                    <?= $this->Number->format($profpermanent->echelle) ?>
-                                </dd>
-                                <dt><?= __('Echelon :') ?></dt>
-                                <dd>
-                                    <?= $this->Number->format($profpermanent->echelon) ?>
-                                </dd>
+                                   
                          <dt><?= __('Etat :') ?></dt>
                                 <dd>
-                                    <?= $this->Number->format($profpermanent->etat) ?>
+                                    <?= h($profpermanent->etat) ?>
                                 </dd>
                               <dt><?= __('Age :') ?></dt>
                                 <dd>
                                     <?= $this->Number->format($profpermanent->age) ?>
                                 </dd>
-                                <dt><?= __('Code Situation Admin :') ?></dt>
-                                <dd>
-                                    <?= $this->Number->format($profpermanent->code_situation_admin) ?>
-                                </dd>
-                             <dt><?= __('Code établissement :') ?></dt>
-                                <dd>
-                                    <?= $this->Number->format($profpermanent->codeEtablissement) ?>
-                                </dd>
+                                
+                                
+                                
+                               
                                                 <dt><?= __('CIN :') ?></dt>
                                 <dd>
-                                    <?= $this->Number->format($profpermanent->CIN) ?>
+                                    <?= h($profpermanent->CIN) ?>
                                 </dd>
                                                                                                 
                                         <dt><?= __('Date  de recrutement :') ?></dt>
                                 <dd>
-                                    <?= h($profpermanent->date_Recrut) ?>
+                                    <?=  Time::parse($profpermanent->date_Recrut)->nice('Europe/Paris', 'fr-FR') ?>
                                 </dd>
                                         <dt><?= __('Date de naissance :') ?></dt>
                                 <dd>
-                                    <?= h($profpermanent->dateNaissance) ?>
+                                    <?= Time::parse($profpermanent->dateNaissance)->nice('Europe/Paris', 'fr-FR') ?>
                                 </dd>
                                                                                                     
                                             
@@ -116,12 +105,14 @@
             </div>
             <!-- /.box-body -->
         </div>
+        <div class="col-md-3 pull-middle">
         <form action="<?= $this->Url->build(); ?>" method="post">
             <?php   // user is logged in, show logout..user menu etc
-            echo $this->Html->link('Modifier vos données', array('controller' => 'profpermanents', 'action' => 'editmouna'),['class' => 'btn btn-danger btn-block']);
+            echo $this->Html->link('Modifier vos données', array('controller' => 'profpermanents', 'action' => 'editmouna'),['class' => 'btn btn-success btn-block']);
             ?>
      <!-- <span>    <input      name="modifier" type="submit" value="modifier vos données"   class="pull-right" class="btn btn-info btn-flat"></span>-->
         </form>
+         </div>
         <!-- /.box -->
     </div>
     <!-- ./col -->

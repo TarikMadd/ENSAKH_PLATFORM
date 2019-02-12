@@ -101,6 +101,12 @@ class ProfpermanentsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
+            ->add('genre', 'inList', [
+                'rule' => ['inList', ['male', 'femelle']],
+                'message' => 'Please enter a valid gender'
+            ])
+             ->notEmpty('genre');
+        $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
 
@@ -205,7 +211,7 @@ class ProfpermanentsTable extends Table
             ->allowEmpty('etatdemande');
 
         $validator
-            ->requirePresence('photo', 'create')
+            //->requirePresence('photo', 'create')
             ->notEmpty('photo');
 
         $validator

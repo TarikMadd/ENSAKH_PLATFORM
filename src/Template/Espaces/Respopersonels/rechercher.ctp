@@ -1,9 +1,6 @@
 
 <section class="content-header">
-  <h1>
-    Profpermanents
 
-  </h1>
 </section>
 <!-- Main content -->
 <section class="content">
@@ -11,18 +8,24 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title" ><?= __('List of') ?> Profpermanents</h3>
+        <div class="panel panel-primary">
+          <div class="panel-heading">Rechercher les professeurs permanents à l'ENSA KHOURIBGA :
           <div class="box-tools">
+          <br>
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <div class="input-group input-group-sm"  style="width: 180px;">
-                <input type="text" name="chercherProf" class="form-control"  placeholder="<?= __('Fill in to start search') ?>">
+                <input type="text" name="chercherProf" class="form-control" style="width: 280px;" >
                 <span class="input-group-btn">
-                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
+                <button class="btn btn-info btn-flat"style="margin-left:906px type="submit"><?= __('Filtrer') ?></button>
                 </span>
               </div>
             </form>
+            <br>
+             Recherche par : Nom, Prenom, N de somme, Email, Lieu de naissance, Grade, Echelon ou indice de grade
           </div>
         </div>
+        <br>
+       
         <!-- /.box-header -->
 
         <?php
@@ -48,18 +51,24 @@
                       </div>
                       <!-- /.widget-user-image -->
                       <h6 class="widget-user-username" ><?php echo $professeursGrade->profpermanent->nom_prof.'  '.$professeursGrade->profpermanent->prenom_prof;?></h6>
-                      <h5 class="widget-user-desc"><?=$professeursGrade->grade->nomGrade?></h5>
+                      <h5 class="widget-user-desc"><?=($professeursGrade->cadre == 'H') ? 'Habilité' : (($professeursGrade->cadre == 'A') ? 'Assistant' : 'PES') ?></h5>
+                      <h5 class="widget-user-desc">Grade : <?=  ($professeursGrade->sous_grade) ?></h5>
+                      <h5 class="widget-user-desc">Echelon : <?=  ($professeursGrade->echelon) ?></h5>
                     </div>
                     <div class="box-footer no-padding">
                       <ul class="nav nav-stacked">
-                        <li><a href="../../Ensaksite/Respopersonels/viewProfBis/<?=$professeursGrade->profpermanent->id?>" >Somme<span class="pull-right badge bg-blue"><?=$professeursGrade->profpermanent->somme?>
+                        <li><a href="<?php echo $this->Url->build(['action' => 'viewprofpermanents', $professeursGrade->profpermanent_id]); ?>" >Somme<span class="pull-right badge bg-blue"><?=$professeursGrade->profpermanent->somme?>
                         <li><a href="#">Specialité <span class="pull-right badge bg-aqua"><?=$professeursGrade->profpermanent->specialite?></span></a></li>
                         <li><a href="#">Lieu Naissance <span class="pull-right badge bg-green"><?=$professeursGrade->profpermanent->Lieu_Naissance?></span></a></li>
                         <li><a href="#">Date de naissance <span class="pull-right badge bg-red"><?=$professeursGrade->profpermanent->dateNaissance?></span></a></li>
                       </ul>
                     </div>
+                    <a href="<?php echo $this->Url->build(['action' => 'viewprofpermanents', $professeursGrade->profpermanent_id]); ?>" class="small-box-footer">
+                    Plus d'informations <i class="fa fa-arrow-circle-right"></i>
+                </a>
                   </div>
                   <!-- /.widget-user -->
+                  
                 </div>
 
 

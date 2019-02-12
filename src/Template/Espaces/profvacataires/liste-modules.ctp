@@ -26,7 +26,7 @@
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">selectionner un module</h3>
+                  <h3 class="box-title">sélectionner un module</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form method="POST" action="checkKey" class="form-horizontal">

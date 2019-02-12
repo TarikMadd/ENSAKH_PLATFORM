@@ -24,7 +24,7 @@
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">selectionner un element</h3>
+                  <h3 class="box-title">Sélectionner un element</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form method="POST" action="showStudents" class="form-horizontal">

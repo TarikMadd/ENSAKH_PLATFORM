@@ -37,7 +37,13 @@ class VacatairesDocumentsTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('Vacataires', [
-            'foreignKey' => 'vacataire_id'
+            'foreignKey' => 'vacataire_id',
+            'joinType' => 'INNER'
+
+        ]);
+        $this->belongsTo('Documents', [
+            'foreignKey' => 'document_id',
+            'joinType' => 'INNER'
         ]);
     }
 

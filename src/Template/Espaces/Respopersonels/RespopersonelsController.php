@@ -48,7 +48,7 @@ public function trierActivite()
 }*/
 
     //RECHERCHER UN FONCTIONNAIRE
-
+    
     public function fonc(){
 
         $this->set(compact('fonctionnaires'));
@@ -160,6 +160,36 @@ public function trierActivite()
         $this->set('_serialize', ['fonctionnairesService']);
         $this->render('/Espaces/respopersonels/editService');
     }
+     public function statipermanent(){
+     $profpermanents = TableRegistry::get('profpermanentsGrades');
+        $profpermanent = $profpermanents->newEntity();
+        $profpermanent = $profpermanents->patchEntity($profpermanent, $this->request->data);
+        $profdeps = TableRegistry::get('profpermanentsDepartements');
+        $profdep = $profdeps->newEntity();
+        $profdep = $profdeps->patchEntity($profdep, $this->request->data);
+
+        
+        $profpermanent = $profpermanents->find('all',[
+            'fields' => [
+            'grd' => 'Grades.nomGrade',
+            'nbrGrades' => 'COUNT(profpermanentsGrades.profpermanent_id)'],
+            'contain'=>['Grades'],'group' => ['profpermanentsGrades.grade_id'],
+        ]);
+
+        $profpermanentdep = $profdeps->find('all',[
+            'fields' => [
+            'dep' => 'Departements.nom_departement',
+            'nbrDep' => 'COUNT(profpermanentsDepartements.profpermanent_id)'],
+            'contain'=>['Departements'],'group' => ['profpermanentsDepartements.departement_id'],
+        ]);
+
+        
+        $this->set(compact('profpermanent','profpermanentdep'));
+        $this->set('_serialize', ['profpermanent','profpermanentdep']);
+        $this->render('/Espaces/respopersonels/statipermanent');
+
+
+}
     public function viewService($id1=null,$id2=null,$id3=null)
     {
         $services=TableRegistry::get('Services');

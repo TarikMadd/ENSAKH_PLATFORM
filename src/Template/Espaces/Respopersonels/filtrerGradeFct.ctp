@@ -1,8 +1,8 @@
-<?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'listerFonctGrade'], ['escape' => false])?>
+<?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'listerFonctGrade'], ['escape' => false])?>
 
 <div class="fonctionnaires index large-9 medium-8 columns content">
     <section class="content">
-    <div class="panel panel-success">
+    <div class="panel panel-primary">
         <div class="panel-heading"><h3>Résultat de la recherche</h3>
             <div class="row">
             </div>
@@ -25,7 +25,7 @@
                 <tr>
                     <td><?= h($query->fonctionnaire->nom_fct)?></td>
                     <td><?= h($query->fonctionnaire->prenom_fct)?></td>
-                    <td><?= h($query->grade->nom_grade)?></td>
+                    <td><?= h($query->grade->nomGrade)?></td>
                     <td><?= h($query->fonctionnaire->dateNaissance)?></td>
                     <td><?= h($query->fonctionnaire->lieuNaissance)?></td>
 

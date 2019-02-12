@@ -3,33 +3,49 @@
     <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'listerProfsParDepar'], ['escape' => false])?>
     </li>
   </ol>
- <center> <div class="Activite" style="width:500px;margin-left:8px"  class="professeursDepartements form large-9 medium-8 columns content">
+ <center> <div <div class="panel panel-primary" style="width:500px;margin-left:8px"  class="professeursDepartements form large-9 medium-8 columns content">
     <?= $this->Form->create($profpermanentsDepartement) ?>
-    <fieldset>
+    <fieldset class="panel-heading">
         <legend><?= __('Affectation des professeurs :  ') ?></legend>
-        <?php
 
-          ?> <div ><?php echo $this->Form->input('somme', ['options' => $sommetab,'class'=>'Activite']);
+
+        <label >Nom Professeur</label><br />
+                        <select style='color:black;height:35px;width:460px' name="nomProf">
+                        <?php
+                         for($i=1;$i<=count($tabNomProf);$i++)
+                        {
+                           ?><option style='color:black' value=<?= $tabNomProf[$i]?> ><?=$tabNomProf[$i]?> </option><?php
+                        }?>
+                        </select>
+                        <label >Prénom Professeur</label><br />
+                                      <select style='color:black;height:35px;width:460px' name="prenomProf">
+                                      <?php
+                                       for($i=1;$i<=count($tabPrenomProf);$i++)
+                                      {
+                                         ?><option style='color:black' value=<?= $tabPrenomProf[$i]?> ><?=$tabPrenomProf[$i]?> </option><?php
+                                      }?>
+                                      </select><?php
             echo $this->Form->input('nomdepart', ['label'=>'Nom Département','options' => $nomtab]);
             echo $this->Form->input('Poste_Filiere',['label'=>'Poste Occupé','required'=>true]);?>
+            <label style='margin-left:10px'>Date Début:</label>
            <div class="row">
                                <div class="col-md-6">
                                     <div class="box-body">
                                      <!-- Date dd/mm/yyyy -->
                                      <div class="form-group">
-                                       <label>Date Début:</label>
+
                                          <div class="input-group">
                                          <div class="input-group-addon">
                                            <i class="fa fa-calendar"></i>
                                          </div>
-                                          <input name="date_debut" type="text"  class="form-control"  data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                          <input style="width:410px" name="date_debut" type="text"  class="form-control"  data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                                        </div>
                                          </div>
                                    </div>
                                 </div>
                              </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Affecter')) ?>
     <?= $this->Form->end() ?>
 </div></center>
 <?php

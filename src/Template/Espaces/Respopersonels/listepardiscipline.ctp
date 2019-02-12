@@ -4,7 +4,6 @@
   <section class="content-header">
     <h1>
       Categories
-      <!--<div class="pull-right"><?= $this->Html->link(__('New'), ['action' => 'add'], ['class'=>'btn btn-success btn-xs']) ?></div>-->
     </h1>
   </section>
 
@@ -17,12 +16,10 @@
             <h3 class="box-title"><?= __('List of') ?> Categories</h3>
             <div class="box-tools">
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
-              <!--<div class="input-group input-group-sm"  style="width: 180px;">
-                <input type="text" name="search" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
-                <span class="input-group-btn">
-                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
+              <div class="input-group input-group-sm"  style="width: 180px;">
+
                 </span>
-              </div>-->
+              </div>
             </form>
           </div>
             </div>

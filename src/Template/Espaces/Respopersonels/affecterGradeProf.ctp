@@ -3,31 +3,42 @@
     <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'listerGrade'], ['escape' => false])?>
     </li>
   </ol>
-<?php
-array_unshift($nomtab,"--Choisir le grade convenable--");  ?>
-  <center><div class="Activite" style="width:500px;margin-left:8px"  class="profpermanentsGrades form large-9 medium-8 columns content">
+
+  <center><div class="panel panel-primary"  style="width:500px;margin-left:8px"  class="profpermanentsGrades form large-9 medium-8 columns content">
     <?= $this->Form->create($profpermanentsGrade) ?>
     <fieldset>
         <legend><?= __('Affectation des grades :') ?></legend>
-        <?php
-            echo $this->Html->script('remplirCombox.js');
-            echo $this->Form->control('somme', ['options' => $sommetab]);
-            echo $this->Form->control('grade', ['options' => $nomtab,'placeholder'=> "Choisissez le Grade",'onchange'=>"populate('grade','sousgrade')"]);
-             echo $this->Form->control('sousgrade', ['options'=>"",'onchange'=>"populateBis('sousgrade','echelon','grade')"]);
-             echo $this->Form->control('echelon', ['options' => ""]);?>
+        <?php echo $this->Html->script('remplirCombox.js');?>
+
+           <label >Nom et Prenom Professeur</label><br />
+              <select style='color:black;height:35px;width:460px' name="idProf">
+              <?php foreach($queryProf as $prof): ?>
+              <option value=<?= $prof->id ?>><?= $prof->nom_prof.' '.$prof->prenom_prof ?></option>
+              <?php endforeach; ?>
+              </select>
+
+            <?php
+            $nomtab=['Choisissez le grade convenable','Professeur d\'Enseignement Supérieur','Professeur Habilité','Professeur Assistant'];
+            echo $this->Form->control('grade', ['options' => $nomtab,'label'=>'Grade','style'=>'width:460px','placeholder'=> "Choisissez le Grade",'onchange'=>"populate('grade','sousgrade')"]);
+             echo $this->Form->control('sousgrade', ['options'=>"",'label'=>'Classe','style'=>'width:460px','onchange'=>"populateBis('sousgrade','echelon','grade')"]);
+             echo $this->Form->control('echelon', ['options' => "",'label'=>'Echelon','style'=>'width:460px']);?>
+             <label style='margin-left:10px'>Date De Prise :</label>
+            <div style="width:410px">
             <div class="row">
                     <div class="col-md-6">
                          <div class="box-body">
                           <!-- Date dd/mm/yyyy -->
                           <div class="form-group">
-                            <label>Date De Prise :</label>
+
                               <div class="input-group">
                               <div class="input-group-addon">
+
                                 <i class="fa fa-calendar"></i>
                               </div>
-                              <input name="date_grade"type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+
+                              <input style="width:410px" name="date_grade"type="text" class="form-control"  data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                             </div>
-                              </div>
+                              </div></div>
                         </div>
                      </div>
                   </div>

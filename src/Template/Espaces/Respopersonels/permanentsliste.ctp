@@ -13,11 +13,11 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          
+          <b >Recherche par : Nom, Prenom, N de somme, Email, Lieu de naissance, Grade, Echelon ou indice de grade  </b>
           <div class="box-tools">
-            <form method="post" action="exportPermanent">
+            <form method="post" action="rechercher">
               <div class="input-group input-group-sm"  style="width: 300px;">
-                <input type="text" name="cat" class="form-control" placeholder="<?= __('Rechercher un vacataire par son nom') ?>">
+                <input type="text" name="chercherProf" class="form-control" placeholder="<?= __('Rechercher un prof ') ?>">
                 <span class="input-group-btn">
                 <button class="btn btn-warning btn-xs" type="submit"><?= __('Rechercher') ?></button>
                 </span>
@@ -50,7 +50,6 @@
                 <td class="actions" style="white-space:nowrap">
                     <?= $this->Html->link(__('View'), ['action' => 'viewprofpermanents', $profpermanents->id], ['class'=>'btn btn-info btn-xs']) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'editprofpermanents', $profpermanents->id], ['class'=>'btn btn-warning btn-xs']) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'deleteprofpermanents', $profpermanents->id], ['confirm' => __('Voulez vous vraiment supprimer ce champ?'), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

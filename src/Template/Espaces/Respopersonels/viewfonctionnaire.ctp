@@ -1,3 +1,11 @@
+<?php
+/**
+  * @var \App\View\AppView $this
+  */
+    use Cake\I18n\Time;
+   
+?>
+
 <div class="fonctionnaires view large-9 medium-8 columns content">
     <fieldset>
         <legend><?= __("Afficher les informations d'un fonctionnaire") ?></legend>
@@ -47,16 +55,13 @@ font-family:sans-serif;
             <th scope="row"><?= __('Somme') ?></th>
             <td><?= h($fonctionnaire->somme) ?></td>
         </tr>
+        
         <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $fonctionnaire->has('user') ? $this->Html->link($fonctionnaire->user->id, ['controller' => 'Users', 'action' => 'view', $fonctionnaire->user->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Nom Fct') ?></th>
+            <th scope="row"><?= __('Nom Fonctionnaire') ?></th>
             <td><?= h($fonctionnaire->nom_fct) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Prenom Fct') ?></th>
+            <th scope="row"><?= __('Prenom Fonctionnaire') ?></th>
             <td><?= h($fonctionnaire->prenom_fct) ?></td>
         </tr>
         <tr>
@@ -80,41 +85,22 @@ font-family:sans-serif;
             <td><?= h($fonctionnaire->genre) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('UeDiplome') ?></th>
-            <td><?= h($fonctionnaire->ueDiplome) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($fonctionnaire->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Echelle') ?></th>
-            <td><?= $this->Number->format($fonctionnaire->echelle) ?></td>
+            <th scope="row"><?= __('Grade') ?></th>
+            <td><?= $this->Number->format($fonctionnairegrade->grade) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Echelon') ?></th>
-            <td><?= $this->Number->format($fonctionnaire->echelon) ?></td>
+            <td><?= $this->Number->format($fonctionnairegrade->echelon) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Salaire') ?></th>
             <td><?= $this->Number->format($fonctionnaire->salaire) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Etat') ?></th>
-            <td><?= $this->Number->format($fonctionnaire->etat) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('LieuNaissance') ?></th>
+            <th scope="row"><?= __('Lieu de Naissance') ?></th>
             <td><?= $this->Number->format($fonctionnaire->lieuNaissance) ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Etat Attestation') ?></th>
-            <td><?= $this->Number->format($fonctionnaire->etat_attestation) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Etat Fiche') ?></th>
-            <td><?= $this->Number->format($fonctionnaire->etat_fiche) ?></td>
-        </tr>
+
         <tr>
             <th scope="row"><?= __('Phone') ?></th>
             <td><?= $this->Number->format($fonctionnaire->phone) ?></td>
@@ -123,25 +109,14 @@ font-family:sans-serif;
             <th scope="row"><?= __('Age') ?></th>
             <td><?= $this->Number->format($fonctionnaire->age) ?></td>
         </tr>
+
         <tr>
-            <th scope="row"><?= __('CodeGrade') ?></th>
-            <td><?= $this->Number->format($fonctionnaire->codeGrade) ?></td>
+            <th scope="row"><?= __('Date Recrutement') ?></th>
+            <td><?= Time::parse($fonctionnaire->dateRecrut)->nice('Europe/Paris', 'fr-FR')?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('CdPays') ?></th>
-            <td><?= $this->Number->format($fonctionnaire->cdPays) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('CdDiplome') ?></th>
-            <td><?= $this->Number->format($fonctionnaire->cdDiplome) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Date Recrut') ?></th>
-            <td><?= h($fonctionnaire->date_Recrut) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('DateNaissance') ?></th>
-            <td><?= h($fonctionnaire->dateNaissance) ?></td>
+            <th scope="row"><?= __('Date de Naissance') ?></th>
+            <td><?= Time::parse($fonctionnaire->dateNaissance)->nice('Europe/Paris', 'fr-FR')  ?></td>
         </tr>
     </table>
    </body>

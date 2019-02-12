@@ -1,8 +1,8 @@
-<?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'afficherFonctEvent'], ['escape' => false])?>
+<?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'afficherFonctEvent'], ['escape' => false])?>
 
 <div class="fonctionnaires index large-9 medium-8 columns content">
     <section class="content">
-        <div class="panel panel-success">
+        <div class="panel panel-primary">
             <div class="panel-heading"><h3>Résultat de la recherche</h3>
                 <div class="row">
                 </div>

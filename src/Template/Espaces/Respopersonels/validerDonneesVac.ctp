@@ -30,6 +30,10 @@
                         <dd>
                             <?php echo $profvacbis[0]['prenom_vacataire'] ?>
                         </dd>
+                        <dt><?= __('Somme') ?></dt>
+                        <dd>
+                            <?php echo $profvacbis[0]['somme'] ?>
+                        </dd>
                         <dt><?= __('nombres des heures') ?></dt>
                         <dd>
                             <?php  echo $profvacbis[0]['nb_heures'] ?>
@@ -77,13 +81,25 @@
                         <dd>
                             <?php echo $profvacbis[0]['LieuNaissance'] ?>
                         </dd>
-                        <dt><?= __('phone') ?></dt>
-                        <dd>
-                            <?php echo $profvacbis[0]['phone'] ?>
-                        </dd>
+                        
                         <dt><?= __('Email') ?></dt>
                         <dd>
-                            <?php echo $profvacbis[0]['email_prof'] ?>
+                            <?php echo $profvacbis[0]['email'] ?>
+                        </dd>
+
+                        <dt><?= __('Nombre d\'enfants') ?></dt>
+                        <dd>
+                            <?php echo $profvacbis[0]['nbr_enfants'] ?>
+                        </dd>
+
+                        <dt><?= __('Genre') ?></dt>
+                        <dd>
+                            <?php echo $profvacbis[0]['genre'] ?>
+                        </dd>
+
+                        <dt><?= __('Age') ?></dt>
+                        <dd>
+                            <?php echo $profvacbis[0]['age'] ?>
                         </dd>
                         
                       <div class="col-md-1 pull-right" >

@@ -2,7 +2,7 @@
 <section class="content-header">
     <h1>
 La liste des fonctionnaires par service
-        <div class="pull-right"><?= $this->Html->link(__('New'), ['action' => 'ajouterMvtService'], ['class'=>'btn btn-success btn-xs']) ?></div>
+        <div class="pull-right"><?= $this->Html->link(__('Nouveau'), ['action' => 'ajouterMvtService'], ['class'=>'btn btn-success btn-xs']) ?></div>
     </h1>
 </section>
 
@@ -47,9 +47,9 @@ La liste des fonctionnaires par service
                                 <td><?= $FonctionnairesService->has('fonctionnaire') ? $this->Html->link($FonctionnairesService->fonctionnaire->id, ['controller' => 'Respopersonels', 'action' => 'view', $FonctionnairesService->fonctionnaire->id]) : '' ?></td>
                                 <td><?= $FonctionnairesService->has('service') ? $this->Html->link($FonctionnairesService->service->id, ['controller' => 'Services', 'action' => 'view', $FonctionnairesService->service->id]) : '' ?></td>
                                 <td class="actions" style="white-space:nowrap">
-                                    <?= $this->Html->link(__('View'), ['action' => 'viewMouvement', $FonctionnairesService->fonctionnaire->id,$FonctionnairesService->service->id,$FonctionnairesService->id], ['class'=>'label label-primary']) ?>
-                                    <?= $this->Html->link(__('Edit'), ['action' => 'editMouvement', $FonctionnairesService->id], ['class'=>'btn btn-warning btn-xs']) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'deleteMouvement', $FonctionnairesService->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                                    <?= $this->Html->link(__('Consulter'), ['action' => 'viewMouvement', $FonctionnairesService->fonctionnaire->id,$FonctionnairesService->service->id,$FonctionnairesService->id], ['class'=>'label label-primary']) ?>
+                                   
+                                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deleteMouvement', $FonctionnairesService->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

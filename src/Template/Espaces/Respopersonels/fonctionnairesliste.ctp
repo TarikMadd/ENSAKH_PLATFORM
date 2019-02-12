@@ -15,11 +15,11 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          
+           <b >Recherche par : Nom, Prenom, N de somme, Email, Lieu de naissance  </b>
           <div class="box-tools">
-            <form method="post" action="exportFonctionnaire">
+            <form method="post" action="rechercherFonc">
               <div class="input-group input-group-sm"  style="width: 300px;">
-                <input type="text" name="cat" class="form-control" placeholder="<?= __('Rechercher un fonctionnaire par son nom') ?>">
+                <input type="text" name="cat" class="form-control" placeholder="<?= __('Rechercher un fonctionnaire ') ?>">
                 <span class="input-group-btn">
                 <button class="btn btn-warning btn-xs" type="submit"><?= __('Rechercher') ?></button>
                 </span>
@@ -35,7 +35,7 @@
                 <th scope="col"><?= $this->Paginator->sort('Nom fonctionnnaire') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Prenom fonctionnaire') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date de Recrutement') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('etat') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Somme') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('specialite') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -44,7 +44,7 @@
                 <td><?= h($fonctionnaire->nom_fct) ?></td>
                 <td><?= h($fonctionnaire->prenom_fct) ?></td>
                 <td><?= h($fonctionnaire->date_Recrut) ?></td>
-                <td><?= $this->Number->format($fonctionnaire->etat) ?></td>        
+                <td><?= h($fonctionnaire->somme) ?></td>        
                 <td><?= h($fonctionnaire->specialite) ?></td>
                  <td class="actions" style="white-space:nowrap">
                     <?= $this->Html->link(__('View'), ['action' => 'viewfonctionnaire', $fonctionnaire->id], ['class'=>'btn btn-success btn-xs']) ?>

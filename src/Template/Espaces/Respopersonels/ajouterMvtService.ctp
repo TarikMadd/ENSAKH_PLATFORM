@@ -10,9 +10,12 @@
         <?php
 
         echo $this->Form->input('somme', ['options' => $tab1]);
-        echo $this->Form->input('nomService', ['options' => $tab2]);
+        echo $this->Form->input('nom_service', ['options' => $tab2]);
+       //echo $this->Form->input('date_debut',array('type'=>'date'));
 
         ?>
+        <strong>Date Naissance  </strong>
+        <input id="date_debut" type="date" name="date_debut"    class="form-control"><br/>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>

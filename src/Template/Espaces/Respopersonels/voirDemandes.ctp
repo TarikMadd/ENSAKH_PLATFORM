@@ -10,7 +10,6 @@
                     <tr>
                       <th>#</th>
                       <th>Nom et prénom </th>
-                      <th>poste</th>
                       <th>Date d'envoie</th>
                       <th>Action</th>
                     </tr>
@@ -20,7 +19,7 @@
                		<tr>
                			<td><?php echo $i;?></td>
                		<td><?php echo $profpermabi['nom_prof']." ".$profpermabi['prenom_prof'];?></td>
-               		<td><?php echo $profpermabi['poste'];?></td>
+               	
                		
                     <td><?php echo $profpermabi['date_envoi'];?></td>
                		<td><a href="validerDonnees/<?php echo $profpermabi['id'];?>"> <span class="btn btn-info btn-flat">Traiter</span></a></td>

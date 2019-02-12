@@ -14,7 +14,7 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Responsive Hover Table</h3>
+                  <h3 class="box-title">Demandes abscences déposées :</h3>
                   
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -23,7 +23,6 @@
                       <th>#</th>
                       <th>Nom et prénom </th>
                       <th>Grade</th>
-                      <th>Service</th>
                       <th>Duree d'absences</th>
                       <th>Action</th>
                     </tr>
@@ -33,8 +32,7 @@
                   <tr>
                     <td><?php echo $i;?></td>
                   <td><?php echo $demande['nom_fct']." ".$demande['prenom_fct'];?></td>
-                  <td><?php echo $demande['codeGrade'];?></td>
-                  <td><?php echo $demande['nom_service'];?></td>
+                  <td><?php echo $demande['grade'];?></td>
                   <td><?php echo $demande['duree_ab']." jour(s)";?></td>
                   <td><a href="traitementabs/<?php echo $demande['id'];?>"><span class="label label-primary">Traiter</span></a></td>
                   </tr>
