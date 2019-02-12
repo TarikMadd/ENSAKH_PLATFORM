@@ -1,10 +1,10 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <h1>
-    Professeurs Grades
-    <div class="pull-right"><?= $this->Html->link(__('New'), ['action' => 'affecterGradeProf'], ['class'=>'btn btn-success btn-xs']) ?></div>
-  </h1>
+
+
 </section>
+<?php echo $this->Html->script('searchbis.js');?>
+<?php echo $this->Html->script('jquery-3.1.1.min.js');?>
 <?php
 $i=1;
 foreach ($profpermanentsGrades as $professeursGrade)
@@ -16,18 +16,18 @@ $i++;
 
 
 <!-- Main content -->
-<section class="content">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h3 class="box-title"><?= __('List of') ?> Professeurs Grades</h3>
-          <div class="box-tools">
+<section class="content" >
+  <div class="row" >
+    <div class="col-xs-12" >
+      <div class="box" >
+        <div class="box-header" >
+          <h3 class="box-title" > </h3>
+          <div class="box-tools" >
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <div class="input-group input-group-sm"  style="width: 180px;">
-                <input type="text" name="search" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
+                <input type="text" name="gradeCherch" class="form-control" placeholder="<?= __('Chercher') ?>">
                 <span class="input-group-btn">
-                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
+                <button class="btn btn-info btn-flat" type="submit"><?= __('Filtrer') ?></button>
                 </span>
               </div>
             </form>
@@ -35,13 +35,22 @@ $i++;
         </div>
         <!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
+         <div class="panel panel-primary">
+             <div class="pull-right"><?= $this->Html->link(__('Affecter Grade'), ['action' => 'affecterGradeProf'], ['class'=>'btn btn-success btn-xs']) ?></div>
+
+                    <div class="panel-heading"><h4>    - Liste des grades actuels pour les professeurs permanents :
+</h4>
+                    </div>
+                    <div class="panel-body">
           <table class="table table-hover">
             <tr>
-              <th><?= $this->Paginator->sort('Nom Prof') ?></th>
-              <th><?= $this->Paginator->sort('Prénom Prof') ?></th>
-              <th><?= $this->Paginator->sort('GradeActuel') ?></th>
-              <th><?= $this->Paginator->sort('date_grade') ?></th>
-              <th><?= __('Actions') ?></th>
+              <th <?= $this->Paginator->sort('Nom Professeur') ?></th>
+              <th ><?= $this->Paginator->sort('Prénom Professeur') ?></th>
+              <th ><?= $this->Paginator->sort('Grade Actuel') ?></th>
+               <th  ><?= $this->Paginator->sort('Classe') ?></th>
+              <th ><?= $this->Paginator->sort('Echelon') ?></th>
+
+              <th ><?= $this->Paginator->sort('Date Prise Grade') ?></th>
             </tr>
             <?php
             $j=1;
@@ -50,12 +59,14 @@ $i++;
               if(!isset($suivant[$j+1])||$suivant[$j+1]<>$professeursGrade->profpermanent_id)
               {?>
                <tr>
-                              <td><?= h($professeursGrade->profpermanent->nom_prof) ?></td>
-                              <td><?= h($professeursGrade->profpermanent->prenom_prof) ?></td>
-                              <td><?= h($professeursGrade->grade->codeGrade) ?></td>
-                              <td><?= h($professeursGrade->date_grade) ?></td>
+                              <td class="text"><?= h($professeursGrade->profpermanent->nom_prof) ?></td>
+                              <td  class="text"><?= h($professeursGrade->profpermanent->prenom_prof) ?></td>
+                              <td  class="text"><?= h($professeursGrade->grade->nomGrade) ?></td>
+                               <td  class="text"><?= h($professeursGrade->sous_grade) ?></td>
+                              <td  class="text"><?= h($professeursGrade->echelon) ?></td>
+
+                              <td  class="text"><?= h($professeursGrade->date_grade) ?></td>
                               <td class="actions" style="white-space:nowrap">
-                                <?= $this->Html->link(__('Evolution'), ['action' => 'viewEvolution', $professeursGrade->profpermanent_id], ['class'=>'btn btn-warning btn-xs']  ) ?>
 
                               </td>
                             </tr>

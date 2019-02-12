@@ -43,8 +43,6 @@
                 <dd> <?= h($courrierArrivee->date_arrivee) ?></dd>
                 <dt>Date Limite Du Traitement</dt>
                 <dd><?= h($courrierArrivee->date_limite_du_traitement) ?></dd>
-                <dt>Courrier Retourné</dt>
-                <dd><?= h($courrierArrivee->courrier_retourne) ?></dd>
               </dl>
             </div>
             <!-- /.box-body -->

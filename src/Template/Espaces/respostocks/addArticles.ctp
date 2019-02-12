@@ -18,7 +18,7 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><?= __('Form') ?></h3>
+          <h3 class="box-title"><?= __('Formulaire') ?></h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
@@ -27,15 +27,15 @@
           <?php
             echo $this->Form->input('stock_categorie_id', ['options' => $stockCategories]);
             echo $this->Form->input('label_article');
-            echo $this->Form->input('quantite_min');
+            echo $this->Form->input('quantite_min',array('type'=>'number', 'min'=>0));
             echo $this->Form->input('marque');
             echo $this->Form->input('utilite');
-            echo $this->Form->input('quantite');
+            echo $this->Form->input('quantite',array('type'=>'number', 'min'=>0));
           ?>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <?= $this->Form->button(__('Save')) ?>
+            <?= $this->Form->button(__('Sauvegarder')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>

@@ -42,7 +42,7 @@ Vous etes connécté en tant que <?= $role ?>
                             <ul class="nav nav-pills nav-stacked">
                                 <li class="active"><a href="<?php echo $this->Url->build('/resposcolarites/boiteRecSco'); ?>"><i class="fa fa-inbox"></i> Boîte de réception
                                         <?php if(!isset($displaySent)){ ?>  <span class="label label-primary pull-right"> <?php $c =0; foreach ($mesMsgs as $m){ $c++; } echo $c; ?></span><?php } ?></a></li>
-                                <li><a href="<?php echo $this->Url->build('resposcolarites/getMsgsEnvoye'); ?>"><i class="fa fa-envelope-o"></i> Messages envoyés</a></li>
+                                <li><a href="<?php echo $this->Url->build('/resposcolarites/getMsgsEnvoye'); ?>"><i class="fa fa-envelope-o"></i> Messages envoyés</a></li>
 
                             </ul>
                         </div>

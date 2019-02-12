@@ -52,8 +52,8 @@ foreach ($fonctionnairesServices as $fonctionnairesService)
                                     <td><?= h($fonctionnairesService->service->nom_service) ?></td>
                                     <td><?= h($fonctionnairesService->date_debut) ?></td>
                                     <td class="actions" style="white-space:nowrap">
-                                        <?= $this->Html->link(__('View'), ['action' => 'viewServiceFct', $fonctionnairesService->fonctionnaire_id], ['class'=>'btn btn-info btn-xs']  ) ?>
-                                        <?= $this->Form->postLink(__('Delete'), ['action' => 'deleteFonctService2', $fonctionnairesService->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                                        <?= $this->Html->link(__('Consulter'), ['action' => 'viewServiceFct', $fonctionnairesService->fonctionnaire_id], ['class'=>'btn btn-info btn-xs']  ) ?>
+                                        <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deleteFonctService2', $fonctionnairesService->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
 
                                     </td>
                                 </tr>

@@ -5,8 +5,7 @@
 ?>
 <section class="content-header">
   <h1>
-    Mission
-    <small><?= __('Edit') ?></small>
+    La modification de la Mission
   </h1>
   <ol class="breadcrumb">
     <li>
@@ -36,18 +35,18 @@
             echo('<br>');
             echo $this->Form->input('nbr_nuit');
             echo $this->Form->hidden('taux');
-            echo $this->Form->input('Indemnité_appliquée_à_la_puissance_fiscale_de_la_voiture',array('id'=>'Ind','options' => array('1.20'=>'6 chevaux ou moins', '1.75'=>'entre 7 et 9 chevaux','2.30'=>'10 chevaux ou plus')));
+            echo $this->Form->input('la_puissance_fiscale_de_la_voiture',array('id'=>'Ind','options' => array('1.20'=>'6 chevaux ou moins', '1.75'=>'entre 7 et 9 chevaux','2.30'=>'10 chevaux ou plus')));
            echo $this->Form->hidden('indemnite_appliquee');
-            echo $this->Form->input('etat');
+            echo $this->Form->input('Motif');
             echo $this->Form->hidden('profpermanent_id', ['options' => $profpermanent,'empty' => true]);
           ?>
-          <label>Professeur</label>
+          <label>Fonctionnaire</label>
             <select name="Fonc" class="form-control" >
                   <?php foreach ($fonctionnaire as $fonctionnaires): ?>
                       <option value=<?php echo $fonctionnaires['id']?>> <?php echo $fonctionnaires['somme']?></option>
                   <?php endforeach ?>
             </select>
-            <label>ville</label>
+            <label>Ville</label>
             <select name="LaVille" class="form-control" >
                   <?php foreach ($ville as $villes): ?>
                       <option value=<?php echo $villes['id']?>> <?php echo $villes['nom']?></option>

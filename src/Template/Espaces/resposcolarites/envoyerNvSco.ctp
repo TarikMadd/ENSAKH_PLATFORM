@@ -77,13 +77,13 @@ Vous etes connécté en tant que <?= $role ?>
                         </div>
                         <!-- /.box-header -->
                         
-                        <form method="post" action="/Ensaksite/Ensaksite/resposcolarites/envoyermsg" enctype="multipart/form-data">
+                        <form method="post" action="/Ensaksite/resposcolarites/envoyermsg" enctype="multipart/form-data">
 
                             <div class="box-body">
                                 <div class="form-group">
 
                                     <div class="form-group">
-                                        <select class="form-control" name="typeDest" onChange="top.location.href='/Ensaksite/Ensaksite/resposcolarites/getDestinataire/'+this.options[selectedIndex].value">
+                                        <select class="form-control" name="typeDest" onChange="top.location.href='/Ensaksite/resposcolarites/getDestinataire/'+this.options[selectedIndex].value">
                                             <option selected disabled>Type destinataire</option>
                                             <option value="professeur"  <?php if(strcmp($selected, 'professeur') == 0) : ?> selected <?php endif ?> >Groupe de professeurs</option>
                                             <option value="etudiants"  <?php if(strcmp($selected, 'etudiants') == 0) : ?> selected <?php endif ?> >Groupe d'étudiants</option>
@@ -105,7 +105,7 @@ Vous etes connécté en tant que <?= $role ?>
                                     <table width="80%">
                                         <tr>
                                             <td>
-                                                <select  required class="form-control" name="filiereEtudiant" onChange="top.location.href='/Ensaksite/Ensaksite/resposcolarites/getEtudiantsParFiliere/'+this.options[selectedIndex].value">
+                                                <select  required class="form-control" name="filiereEtudiant" onChange="top.location.href='/Ensaksite/resposcolarites/getEtudiantsParFiliere/'+this.options[selectedIndex].value">
                                                     <option disabled selected>---Filière de l'étudiant---</option>
                                                     <?php foreach ($typeDest as $dest): ?>
                                                     <option value="<?php echo $dest['id']; ?> " <?php if($filierID == $dest['id']) : ?> selected <?php endif ?> ><?php echo "Filière: ".$dest['niveau']." ".$dest['filiere']; ?></option>
@@ -128,7 +128,7 @@ Vous etes connécté en tant que <?= $role ?>
                                     <table width="80%">
                                         <tr>
                                             <td>
-                                                <select  required class="form-control" name="filiereEtudiant" onChange="top.location.href='/Ensaksite/Ensaksite/resposcolarites/getProfParDept/'+this.options[selectedIndex].value">
+                                                <select  required class="form-control" name="filiereEtudiant" onChange="top.location.href='/Ensaksite/resposcolarites/getProfParDept/'+this.options[selectedIndex].value">
                                                     <option disabled selected>---Département du professeur---</option>
                                                     <?php foreach ($typeDest as $dest): ?>
                                                     <option value="<?php echo $dest['id']; ?> " <?php if($deptID == $dest['id']) : ?> selected <?php endif ?> ><?php echo "Département: ".$dest['nom']; ?></option>

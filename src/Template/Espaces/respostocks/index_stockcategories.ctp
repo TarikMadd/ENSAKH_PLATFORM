@@ -24,7 +24,7 @@
           <table class="table table-hover">
             <tr>
               <th><?= $this->Paginator->sort('id') ?></th>
-              <th><?= $this->Paginator->sort('label_cat') ?></th>
+              <th><?= $this->Paginator->sort('Categorie') ?></th>
               <th><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($stockCategories as $stockCategory): ?>

@@ -34,7 +34,7 @@ class EtudiantsController extends AppController {
     /***** LAHLAOUTI ******/
 
 
-    public function lahlaoutiprofil()
+    /*public function lahlaoutiprofil()
     {
         $usrole=$this->Auth->user('role');
         $id_user=$this->Auth->user('id');
@@ -44,7 +44,7 @@ class EtudiantsController extends AppController {
         $this->set('role',$usrole);
 
         $this->render('/Espaces/etudiants/lahlaoutiprofil');
-    }
+    }*/
     public function evenements()
     {
         $this->render('/Espaces/etudiants/evenements');
@@ -54,7 +54,7 @@ class EtudiantsController extends AppController {
     {
         $id_user=$this->Auth->user('id');
         $con=ConnectionManager::get('default');
-        $id = $con->execute("SELECT * FROM etudiants WHERE user_id = $id_user")->fetchAll('assoc');
+        $id = $con->execute("SELECT * FROM etudiants WHERE user_id = $id_user ")->fetchAll('assoc');
         foreach($id as $value): ?>
 
             <tr>
@@ -66,7 +66,10 @@ class EtudiantsController extends AppController {
         <?php  endforeach;
 
         $con=ConnectionManager::get('default');
-        $mesprofs=$con->execute("SELECT profpermanents.nom_prof,profpermanents.prenom_prof,profpermanents.email_prof from profpermanents,etudiants,etudiers,enseigners where etudiants.id=etudiers.etudiant_id and etudiers.element_id=enseigners.element_id and enseigners.profpermanent_id=profpermanents.id and etudiants.id=?", [$id2])->fetchAll('assoc');
+        $mesprofs=$con->execute("SELECT DISTINCT profpermanents.nom_prof,profpermanents.prenom_prof,profpermanents.email_prof from profpermanents,etudiants,etudiers,enseigners where etudiants.id=etudiers.etudiant_id and etudiers.element_id=enseigners.element_id and enseigners.profpermanent_id=profpermanents.id and etudiants.id=?", [$id2])->fetchAll('assoc');
+        $mesprofsvacataires=$con->execute("SELECT DISTINCT  vacataires.nom_vacataire,vacataires.prenom_vacataire,vacataires.email  from vacataires,etudiants,etudiers,enseigners where etudiants.id=etudiers.etudiant_id and etudiers.element_id=enseigners.element_id and enseigners.vacataire_id=vacataires.id and etudiants.id=?", [$id2])->fetchAll('assoc');
+
+        $this->set('mesprofsvacataires',$mesprofsvacataires);
         $this->set('mesprofs',$mesprofs);
         $this->render('/Espaces/etudiants/lahlaoutimesprofesseurs');
     }
@@ -87,7 +90,7 @@ class EtudiantsController extends AppController {
 
         <?php  endforeach;
         $con1=ConnectionManager::get('default');
-        $mesmodules=$con1->execute("SELECT modules.libile, elements.libile as libele  from modules,elements,etudiers,etudiants where modules.id=elements.module_id and elements.id=etudiers.element_id and etudiants.id=etudiers.etudiant_id and etudiants.id=?", [$id2])->fetchAll('assoc');
+        $mesmodules=$con1->execute("SELECT DISTINCT modules.libile, elements.libile as libele  from modules,elements,etudiers,etudiants where modules.id=elements.module_id and elements.id=etudiers.element_id and etudiants.id=etudiers.etudiant_id and etudiants.id=?", [$id2])->fetchAll('assoc');
         $this->set('mesmodules',$mesmodules);
         $this->render('/Espaces/etudiants/lahlaoutimesmodules');
     }
@@ -700,23 +703,20 @@ class EtudiantsController extends AppController {
     {
 
         $CertificatsEtudiants = TableRegistry::get('certificats_etudiants');
+        $Notifications = TableRegistry::get('notifications_users');
 
         $certificatsEtudiant = $CertificatsEtudiants->get($id, [
             'contain' => ['Certificats', 'Etudiants']
         ]);
-        if($certificatsEtudiant->notif_etudiant == true){
-            $certificatsEtudiant->notif_etudiant = false;
-            $certificatsEtudiant->modified = $certificatsEtudiant->modified;
-            if($CertificatsEtudiants->save($certificatsEtudiant)){
 
-            }else{
-                $this->Flash->error(_('Erreur innatendue!!'));
-            }
-        }
+        $Notifications->deleteAll(['lien LIKE "%/'.$id.'"']);
+        $certificatsEtudiant->modified = $certificatsEtudiant->modified;
+
         $this->set('certificatsEtudiant', $certificatsEtudiant);
         $this->set('_serialize', ['certificatsEtudiant']);
         $this->render('/Espaces/etudiants/CertificatsEtudiants/view');
     }
+
 
     public function postCertificats(){
         if ($this->request->is('post')) {
@@ -724,7 +724,8 @@ class EtudiantsController extends AppController {
             $Certificats = TableRegistry::get('certificats');
             $CertificatsEtudiants = TableRegistry::get('certificats_etudiants');
             $choix = $this->request->data['demande_certif_choix'];
-            $data = array("entreprise" => "","theme" => "","date_debut" => "","date_fin" => "","encadrant" => "0","raison" => "");
+            $data = array("entreprise" => "-","theme" => "-","date_debut" => "-","date_fin" => "-"
+            ,"raison" => "-");
             if(isset($this->request->data['demande_certif_envoie'])){
 
                 if(strstr($choix, "stage") && !isset($this->request->data['demande_certif_envoie2'])){
@@ -796,86 +797,64 @@ class EtudiantsController extends AppController {
         }
     }
 
-    public function updateNotifications(){
-
-        $connection = ConnectionManager::get('default');
-
-        $usrole=$this->Auth->user('id');
-        $test =  $connection->execute('SELECT certificats.type,certificats_etudiants.modified,certificats_etudiants.commentaire,certificats_etudiants.notif_etudiant, certificats_etudiants.etat
-                                            ,certificats_etudiants.id 
-                                                 FROM certificats_etudiants JOIN certificats ON certificats.id = certificats_etudiants.certificat_id 
-                                                               JOIN etudiants ON etudiants.id = certificats_etudiants.etudiant_id
-                                                               WHERE etudiants.user_id = :id AND certificats_etudiants.notif_etudiant = TRUE
-                                                                ORDER BY certificats_etudiants.modified DESC',[":id"=>$usrole])->fetchAll('assoc');
-        $notif_etudiant = array();
-        for($i=0;$i<count($test);$i++){
-            $notif_etudiant[$i]['id'] = $test[$i]['id'];
-            $notif_etudiant[$i]['commentaire'] = $test[$i]['commentaire'];
-            $notif_etudiant[$i]['principale'] = $test[$i]['etat'];
-            $notif_etudiant[$i]['titre'] = $test[$i]['type'];
-            $notif_etudiant[$i]['date'] = $test[$i]['modified'];
-            $notif_etudiant[$i]['lien'] = 'viewCertificats';
-            switch ($test[$i]['etat']){
-                case 'Rejeter' :
-                    $notif_etudiant[$i]['style']= "badge bg-red";
-                    break;
-                case 'En cours de traitement' :
-                    $notif_etudiant[$i]['style']= "badge bg-yellow";
-                    break;
-                case 'Demande envoyé' :
-                    $notif_etudiant[$i]['style']= "badge bg-light-blue";
-                    break;
-                case 'Prête' :
-                    $notif_etudiant[$i]['style']= "badge bg-green";
-                    break;
-                case 'Délivré' :
-                    $notif_etudiant[$i]['style']= "badge bg-navy";
-                    break;
-            }
-        }
-        $session = $this->request->session();
-        $session->write('notifications', $notif_etudiant);
-        $this->render('/Element/notification');
-    }
-
     private function envoieCertificats($id_certif,$data,$id_etudiant)
     {
-        $connection = ConnectionManager::get('default');
-        $CertificatsEtudiants = TableRegistry::get('certificats_etudiants');
 
-        $certificatsEtudiant = $CertificatsEtudiants->newEntity();
+        $CertificatsEtudiants = TableRegistry::get('certificats_etudiants');
         $et_query = $CertificatsEtudiants->find('all',array(
             'order' => ['certificats_etudiants.id' => 'DESC'],'fields' =>'id'))->first();
-        $et_data = $et_query->toArray();
-        $certificatsEtudiant->id = $et_data['id'] + 1;
+        $certificatsEtudiant = $CertificatsEtudiants->newEntity();
+        if(isset($et_query)){
+            $certificatsEtudiant->id = $et_query->toArray()['id'] + 1;
+        }else{
+            $certificatsEtudiant->id = 1;
+        }
         $certificatsEtudiant->certificat_id = $id_certif;
         $certificatsEtudiant->etudiant_id = $id_etudiant;
         $certificatsEtudiant->entreprise = $data["entreprise"];
-        $niveau=$connection->execute('SELECT niveaus.id, niveaus.libile FROM niveaus
-          JOIN groupes ON niveaus.id= groupes.niveaus_id
-          JOIN etudiers ON groupes.id = etudiers.groupe_id
-          JOIN etudiants ON etudiers.etudiant_id= etudiants.id
-          WHERE etudiants.id = :id',[':id'=>$id_etudiant])->fetchAll('assoc');
 
         $certificatsEtudiant->theme_stage = $data["theme"];
         $certificatsEtudiant->debut_stage = $data["date_debut"];
         $certificatsEtudiant->fin_stage = $data["date_fin"];
-        $certificatsEtudiant->profpermanent_id = $data["encadrant"];
+        if(isset($data['encadrant']))
+            $certificatsEtudiant->profpermanent_id = $data["encadrant"];
         $certificatsEtudiant->duree_stage = $this->secondsToTimeCertificats(abs(strtotime($data['date_fin']) - strtotime($data['date_debut'])));
         $certificatsEtudiant->raison_retrait = $data['raison'];
         $certificatsEtudiant->etat = 'Demande envoyé';
-        if($niveau[0]["id"] != 2 && $niveau[0]["id"] != 1) {
-            if ($CertificatsEtudiants->save($certificatsEtudiant)) {
-                $this->Flash->success(__('La demande est envoyé avec succes.'));
-                return $this->indexCertificats();
-            } else {
-                $this->Flash->error(__('Erreur, essayer de nouveau.'));
-            }
+
+        $connection = ConnectionManager::get('default');
+        $info_etudiant =  $connection->execute('SELECT  filieres.libile, etudiants.nom_fr, etudiants.prenom_fr  
+                                FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
+                                                        JOIN etudiers ON groupes.id = etudiers.groupe_id
+                                                        JOIN etudiants ON etudiers.etudiant_id = etudiants.id
+                                                        WHERE etudiants.id = :id',[':id'=>$id_etudiant])->fetchAll('assoc');
+        $info_certificat =  $connection->execute('SELECT  certificats.type  
+                                FROM certificats WHERE certificats.id = :id',[':id'=>$id_certif])->fetchAll('assoc');
+
+        $scolarite = array(1,2,5,6,7);
+        $stage = array(3,4);
+        if(in_array($id_certif,$scolarite)){
+            $donne_notif['role'] = 'resposcolarite';
+        }elseif(in_array($id_certif,$stage)){
+            $donne_notif['role'] = 'respostage';
+        }
+
+        $donne_notif['principale'] = $info_etudiant[0]['nom_fr'].' '.$info_etudiant[0]['prenom_fr'].' demande: '.$info_certificat[0]['type'];
+        $donne_notif['commentaire'] = "Filiere: <strong>".$info_etudiant[0]['libile']."</strong>";
+        $donne_notif['lien'] = 'viewCertificatsEtudiants/'.$certificatsEtudiant->id;
+        $donne_notif['titre'] = 'Demande';
+        $donne_notif['style'] = 'info';
+
+        if ($CertificatsEtudiants->save($certificatsEtudiant)) {
+            $this->preparerNotification($donne_notif,"grp");
+            $this->Flash->success(__('La demande est envoyé avec succes.'));
+            return $this->indexCertificats();
         }else{
-            $this->Flash->error(__('Vous n\'estes pas authorise'));
+            print_r($certificatsEtudiant->toArray());
+            debug($certificatsEtudiant->errors()); die();
+            $this->Flash->error(__('Erreur, essayer de nouveau.'));
         }
         return $this->redirect(['action' => 'indexCertificats']);
-        exit;
     }
     private function secondsToTimeCertificats($seconds) {
         $dtF = new \DateTime('@0');
@@ -905,12 +884,13 @@ class EtudiantsController extends AppController {
         return $this->render('/Espaces/etudiants/CertificatsEtudiants/raison');
 
     }
-
     /**** Fin Ismail ****/
     
     
     /*** Mustafa ***/
     
+         //*****fadili****
+
     public function getDestinataire($typeD) {
 
         $usrole=$this->Auth->user('role');
@@ -930,17 +910,20 @@ class EtudiantsController extends AppController {
               FROM elements elt, modules m, semestres s, profpermanents p, enseigners ens, annee_scolaires a
               WHERE
                     p.id = ens.profpermanent_id AND elt.id = ens.element_id AND m.id = elt.module_id
-              AND   elt.id IN ( SELECT et.id FROM annee_scolaires a, etudiants, etudiers et WHERE etudiants.id = et.etudiant_id and etudiants.id = $monIdDsMaTable and a.libile like '$year')
-              AND   a.libile like '$year' and (s.libile like '$semestre[0]' OR s.libile like '$semestre[1]'
-              OR   s.libile like '$semestre[2]')
-            UNION 
+              AND   elt.id IN ( SELECT et.element_id FROM annee_scolaires a, etudiants, etudiers et WHERE etudiants.id = et.etudiant_id and etudiants.id = $monIdDsMaTable and a.libile like '$year')
+              AND   a.libile like '$year' and (s.id like $semestre[0] OR s.id like $semestre[1]
+          OR   s.id like $semestre[2]) and m.semestre_id = ens.semestre_id
+             
+        UNION
+              
               SELECT DISTINCT p.user_id as id, CONCAT_WS(' ', p.nom_vacataire, p.prenom_vacataire) as nom, m.libile as module
               FROM elements elt, modules m, semestres s, vacataires p, enseigners ens, annee_scolaires a
               WHERE
                     p.id = ens.vacataire_id AND elt.id = ens.element_id AND m.id = elt.module_id
-              AND   elt.id IN ( SELECT et.id FROM annee_scolaires a, etudiants, etudiers et WHERE etudiants.id = et.etudiant_id and etudiants.id = $monIdDsMaTable and a.libile like '$year')
-              AND   a.libile like '$year' and (s.libile like '$semestre[0]' OR s.libile like '$semestre[1]'
-          OR   s.libile like '$semestre[2]') 
+              AND   elt.id IN ( SELECT et.element_id FROM annee_scolaires a, etudiants, etudiers et 
+              WHERE etudiants.id = et.etudiant_id and etudiants.id = $monIdDsMaTable and a.libile like '$year')
+              AND   a.libile like '$year' and (s.id like $semestre[0] OR s.id like $semestre[1]
+          OR   s.id like $semestre[2]) and m.semestre_id = ens.semestre_id
                ")->fetchAll('assoc');
         }
 
@@ -950,19 +933,21 @@ class EtudiantsController extends AppController {
     }
 
     public function boiteRecEtud() {
-
+        $cnx=ConnectionManager::get('default');
         $usrole=$this->Auth->user('role');
         $this->set('role',$usrole);
         $monid = $this->Auth->user('id');
-
+        $monIdDsMaTable = $cnx->execute("SELECT id FROM etudiants WHERE user_id = $monid ")->fetchAll('assoc');
+        $monIdDsMaTable = $monIdDsMaTable['0']['id'];
         Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
-
-        $cnx=ConnectionManager::get('default');
+        $semestre = $this->genererSemester();
+        $year = $this->genererAnneeScol();
+      
         //PROF VACATAIRE ADDED
         $mesMessages=$cnx->execute("
             SELECT u.role, CONCAT_WS(' ', p.nom_prof, p.prenom_prof) AS username, m.sujet, m.contenu, TIME_TO_SEC(TIMEDIFF(now(), date)) as inttervale,m.id, date 
             FROM users_messages umg, messages m, users u, profpermanents p
-            where m.id NOT IN (SELECT DISTINCT message_id FROM asupprimer WHERE user_id = $monid) and umg.user_id = u.id and umg.message_id  = m.id and user_idrecepteur = $monid and p.user_id = u.id and role like 'profpemanent'
+            where m.id NOT IN (SELECT DISTINCT message_id FROM asupprimer WHERE user_id = $monid) and umg.user_id = u.id and umg.message_id  = m.id and user_idrecepteur = $monid and p.user_id = u.id and role like 'profpermanent'
         UNION 
             SELECT u.role, CONCAT_WS(' ', p.nom_vacataire, p.prenom_vacataire) AS username, m.sujet, m.contenu, TIME_TO_SEC(TIMEDIFF(now(), date)) as inttervale,m.id, date 
             FROM users_messages umg, messages m, users u, vacataires p
@@ -976,22 +961,25 @@ class EtudiantsController extends AppController {
               FROM diffusions_messages dmg, messages m, users u, profpermanents p
               where m.id NOT IN (SELECT DISTINCT message_id FROM asupprimer WHERE user_id = $monid)  and p.user_id = u.id and role like 'profpermanent' and dmg.user_id = u.id and dmg.message_id  = m.id 
               and (dmg.typerecepteur like 'etudiantsParFiliere' OR dmg.typerecepteur like 'etudiantsParFiliereSco') and
-              dmg.group_id = (SELECT etu.groupe_id FROM etudiants e, etudiers etu
-              WHERE e.id = etu.etudiant_id AND e.id = (SELECT id FROM etudiants WHERE user_id = $monid))
+              dmg.group_id = (SELECT DISTINCT etu.groupe_id FROM etudiers etu, modules m, annee_scolaires a
+              WHERE etu.etudiant_id = $monIdDsMaTable and a.id = etu.annee_scolaire_id and a.libile like '$year' and
+               etu.groupe_id = m.groupe_id and m.semestre_id in ($semestre[0], $semestre[1], $semestre[2]))
         UNION 
               SELECT u.role, CONCAT_WS(' ', p.nom_vacataire, p.prenom_vacataire) AS username, m.sujet, m.contenu, TIME_TO_SEC(TIMEDIFF(now(), date)) as inttervale,m.id, date 
               FROM diffusions_messages dmg, messages m, users u, vacataires p
               where m.id NOT IN (SELECT DISTINCT message_id FROM asupprimer WHERE user_id = $monid)  and p.user_id = u.id and role like 'profvacataire' and dmg.user_id = u.id and dmg.message_id  = m.id 
               and (dmg.typerecepteur like 'etudiantsParFiliere' OR dmg.typerecepteur like 'etudiantsParFiliereSco') and
-              dmg.group_id = (SELECT etu.groupe_id FROM etudiants e, etudiers etu
-              WHERE e.id = etu.etudiant_id AND e.id = (SELECT id FROM etudiants WHERE user_id = $monid))
+              dmg.group_id = (SELECT DISTINCT etu.groupe_id FROM etudiers etu, modules m, annee_scolaires a
+              WHERE etu.etudiant_id = $monIdDsMaTable and a.id = etu.annee_scolaire_id and a.libile like '$year' and
+               etu.groupe_id = m.groupe_id and m.semestre_id in ($semestre[0], $semestre[1], $semestre[2]))
         UNION 
               SELECT u.username, u.role, m.sujet, m.contenu, TIME_TO_SEC(TIMEDIFF(now(), date)) as inttervale,m.id, date 
               FROM diffusions_messages dmg, messages m, users u
               where m.id NOT IN (SELECT DISTINCT message_id FROM asupprimer WHERE user_id = $monid)  and role like 'resposcolarite' and dmg.user_id = u.id and dmg.message_id  = m.id 
               and (((dmg.typerecepteur like 'etudiantsParFiliere' OR dmg.typerecepteur like 'etudiantsParFiliereSco') and
-              dmg.group_id = (SELECT etu.groupe_id FROM etudiants e, etudiers etu
-              WHERE e.id = etu.etudiant_id AND e.id = (SELECT id FROM etudiants WHERE user_id = $monid))) OR dmg.typerecepteur like 'etudiants') 
+              dmg.group_id = (SELECT DISTINCT etu.groupe_id FROM etudiers etu, modules m, annee_scolaires a
+              WHERE etu.etudiant_id = $monIdDsMaTable and a.id = etu.annee_scolaire_id and a.libile like '$year' and
+               etu.groupe_id = m.groupe_id and m.semestre_id in ($semestre[0], $semestre[1], $semestre[2]))) OR dmg.typerecepteur like 'etudiants') 
               ORDER BY inttervale
         ")->fetchAll('assoc');
         $this->set('mesMsgs',$mesMessages);
@@ -1005,6 +993,19 @@ class EtudiantsController extends AppController {
         $this->set('role',$usrole);
         $this->set('selected',"");
         $this->render('/Espaces/etudiants/envoyerNvEtud');
+    }
+
+    public function verifyAccess($id=0)
+    {
+         $cnx=ConnectionManager::get('default');
+        $monID = $this->Auth->user('id');
+          $msg = $cnx->execute("
+                   SELECT user_idrecepteur as type FROM users_messages um
+                   WHERE um.message_id = $id
+                  UNION 
+                    SELECT typerecepteur as type FROM diffusions_messages dm
+                   WHERE dm.message_id = $id
+                   ")->fetchAll('assoc');
     }
 
     public function lireMsgEtud($id=0) {
@@ -1086,7 +1087,7 @@ class EtudiantsController extends AppController {
         $nomFichier = $this->suppAccent($nomFichier);
         if(strcmp($this->request->getData('attachment')["name"],'') != 0)
         {
-            $attachementPath = "/Ensaksite/webroot/messageriesFiles/" . $msg['0']['id'] . $nomFichier;
+            $attachementPath = "/ensaksite/webroot/messageriesFiles/" . $msg['0']['id'] . $nomFichier;
             move_uploaded_file($this->request->getData('attachment')["tmp_name"], 'messageriesFiles/'.$msg['0']['id'].$nomFichier );
         }
         else
@@ -1176,7 +1177,7 @@ class EtudiantsController extends AppController {
     }
     public function genererAnneeScol() {
         $year = (int)date("Y");
-        $month = (int)date("M");
+        $month = (int)date("m");
 
         if ($month <= 6) {
             $y1 = $year-1;
@@ -1189,14 +1190,16 @@ class EtudiantsController extends AppController {
     }
 
     public function genererSemester() {
-        $month = (int)date("M");
+        $month = (int)date("m");
         if ($month >= 9 || $month < 2) {
-            return array('S1', 'S3', 'S5');
+            return array(1, 3, 5);
         }
         else{
-            return array('S2', 'S4', 'S6');
+            return array(2, 4, 6);
         }
     }
+
+    //*****fadili****
     
     /**** Fin Mustapha ****/
 

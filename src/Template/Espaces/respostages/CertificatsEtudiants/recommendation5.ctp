@@ -56,7 +56,7 @@ h3
 
 </p>
 <p>
-        A cet effet, nous vous demandons d’accueillir <?php if($donne[0]['code_sexe']=="m"){echo "M ";}else { echo "Mlle ";} ?><span style="font-weight: bold;"><?= $donne[0]['nom_fr'] ?> <?=$donne[0]['prenom_fr']?></span> , <?php if($donne[0]['code_sexe']=="m"){echo "inscrit";}else { echo "inscrite ";} ?>  en 3ème année du Cycle Ingénieur, Filière <span style="font-weight: bold;"><?= $donne[0]['libile'] ?> </span> sous CNE n° <span style="font-weight: bold;"><?= $donne[0]['cne'] ?></span>, afin d’effectuer un stage au sein de votre établissement.
+        A cet effet, nous vous demandons d’accueillir <?php if($donne[0]['code_sexe']=="m"){echo "M ";}elseif($donne[0]['code_sexe']=="f"){ echo "Mlle ";} ?><span style="font-weight: bold;"><?= $donne[0]['nom_fr'] ?> <?=$donne[0]['prenom_fr']?></span> , <?php if($donne[0]['code_sexe']=="m"){echo "inscrit";}else { echo "inscrite ";} ?>  en 3ème année du Cycle Ingénieur, Filière <span style="font-weight: bold;"><?= $donne[0]['libile'] ?> </span> sous CNE n° <span style="font-weight: bold;"><?= $donne[0]['cne'] ?></span>, afin d’effectuer un stage au sein de votre établissement.
 </p>
 
     <p> 

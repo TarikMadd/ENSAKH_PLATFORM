@@ -1,8 +1,8 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Tables
-        <small>advanced tables</small>
+        Statistique Tables
+        <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -17,12 +17,12 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3>
+              <h3 class="box-title"></h3>
            
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              <h3 class="box-title"></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -81,16 +81,34 @@ $this->Html->script([
 
 <?php $this->start('scriptBotton'); ?>
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
+  $(document).ready(function () {
+    var table = $("#example1").DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "order": [[ 2, "desc" ]],
+        "info": false,
+        "autoWidth": true,  
+        "language": {
+            "paginate": {
+            "next": "Suivant",
+            "previous": "Précédent",
+            },
+            "search": "Rechercher: ",
+            "zeroRecords": "Aucun critère ne correspond à ce que vous avez tapé.",
+            "emptyTable": "Rien à afficher.",
+            "lengthMenu": "Afficher _MENU_ lignes"
+        },
+        buttons: [ 'copy', {
+                  extend: 'exel',
+                  exportOptions: {
+                    columns: [0,1,2]
+                  }
+                  },'pdf','colvis']
     });
-  });
+    $("#example1").append(table.table().buttons);
+    
+});
 </script>
 <?php $this->end(); ?>

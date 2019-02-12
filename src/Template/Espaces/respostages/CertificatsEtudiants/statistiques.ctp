@@ -12,7 +12,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Table de donnees</h3>
+              <h3 class="box-title">Table des données</h3>
            
 
           <div class="box">
@@ -77,7 +77,32 @@ $this->Html->script([
 <?php $this->start('scriptBotton'); ?>
 <script>
   $(function () {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "order": [[ 2, "desc" ]],
+        "info": false,
+        "autoWidth": true,  
+        "language": {
+            "paginate": {
+            "next": "Suivant",
+            "previous": "Précédent",
+            },
+            "search": "Rechercher: ",
+            "zeroRecords": "Aucun critère ne correspond à ce que vous avez tapé.",
+            "emptyTable": "Rien à afficher.",
+            "lengthMenu": "Afficher _MENU_ lignes"
+        },
+        buttons: [ 'copy', {
+                  extend: 'exel',
+                  exportOptions: {
+                    columns: [0,1,2]
+                  }
+                  },'pdf','colvis']
+    });
+    $("#example1").append(table.table().buttons);
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,

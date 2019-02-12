@@ -143,11 +143,6 @@
                 <input id="show" type="radio" name="necessité_du_traitement" value="Oui" checked="checked" > Oui<br>
                 <input id="hide" type="radio"  name="necessité_du_traitement" value="Non"> Non<br>
               </div>
-              <div class="form-group">
-                <label>Est-ce que le courrier est retourné ?</label> <br/>
-                <input id="hide" type="radio" name="courrier_retourne" value="Oui"  > Oui<br>
-                <input id="show" type="radio"  name="courrier_retourne" value="Non" checked="checked"> Non<br>
-              </div>
               <hada>
              
               <label>Service traitant</label>

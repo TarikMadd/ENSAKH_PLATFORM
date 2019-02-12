@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Réservations Professeurs
+    Les réservations des Professeurs
   </h1>
 </section>
 
@@ -11,7 +11,7 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">La Liste des ouvrages résérvées</h3>
+          <h3 class="box-title">La Liste des ouvrages réservés</h3>
           <div class="box-tools">
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <div class="input-group input-group-sm">
@@ -25,14 +25,16 @@
           <table class="table table-hover">
             <tr>
               <th><?= $this->Paginator->sort('numéro de somme') ?></th>
+              <th><?= $this->Paginator->sort('nom & prenom') ?></th>
               <th><?= $this->Paginator->sort('titre ouvrage') ?></th>
-              <th><?= $this->Paginator->sort('numéro Inventaire') ?></th>
-              <th><?= $this->Paginator->sort('date Réservations') ?></th>
-              <th><?= $this->Paginator->sort('delai') ?></th>
+              <th><?= $this->Paginator->sort("numéro d'inventaire") ?></th>
+              <th><?= $this->Paginator->sort('date Réservation') ?></th>
+              <th><?= $this->Paginator->sort('délai') ?></th>
             </tr>
             <?php for ($i=0;$i<count($reservation);$i++) { ?>
               <tr>
                 <td><?= $reservation[$i]['username'] ?></td>
+                <td><?= $nom[$i] ?></td>
                 <td><?= $reservation[$i]['titre'] ?></td>
                 <td><?= $reservation[$i]['numInventaire'] ?></td>
                 <td><?= $reservation[$i]['dateReservation'] ?></td>

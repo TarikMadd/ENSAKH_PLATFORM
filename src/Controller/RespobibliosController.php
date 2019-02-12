@@ -37,6 +37,18 @@ class respobibliosController extends AppController {
         $this->set('role',$usrole);
         $username=$this->Auth->user('username');
         $this->set('username',$username);
+        $id=$this->Auth->user('id');
+        $name = $con->execute('SELECT nom_fct , prenom_fct ,genre ,somme, specialite, CIN, email,phone FROM fonctionnaires WHERE user_id=?',[$id])->fetchAll('assoc');
+        $this->set('name',$name);
+        if($name[0]['genre']=='F') {
+            $genre='Mme';
+        }
+        else {
+            $genre = 'Mr';
+        }
+        $this->set('genre',$genre);
+        $nom = $name[0]['nom_fct'].' '.$name[0]['prenom_fct'];
+        $this->set('nom',$nom);
         $premierCadre = $con->execute('SELECT count(*) as sum FROM books')->fetchAll('assoc');
         $this->set('premierCadre',$premierCadre);
         $deuxiemeCadre = $con->execute('SELECT count(*) as sum FROM reservations')->fetchAll('assoc');
@@ -66,27 +78,27 @@ class respobibliosController extends AppController {
         }
         $empreintes = $con->execute('SELECT book_id FROM users_books')->fetchAll('assoc');
         if (count($empreintes)>0) {
-            for ($i=0; $i < count($empreintes); $i++) { 
-            $empreinte[$i]=$empreintes[$i]['book_id'];
+            for ($i=0; $i < count($empreintes); $i++) {
+                $empreinte[$i]=$empreintes[$i]['book_id'];
             }
             $this->set('empreinte',$empreinte);
         }
         else $this->set('empreinte',$empreintes);
         $reservations = $con->execute('SELECT book_id FROM Reservations')->fetchAll('assoc');
         if (count($reservations)>0) {
-            for ($i=0; $i < count($reservations); $i++) { 
-            $reservation[$i]=$reservations[$i]['book_id'];
+            for ($i=0; $i < count($reservations); $i++) {
+                $reservation[$i]=$reservations[$i]['book_id'];
             }
             $this->set('reservation',$reservation);
         }
         else $this->set('reservation',$reservations);
-    	$this->render('/Espaces/respobiblios/badrconsulterOuvrages');
+        $this->render('/Espaces/respobiblios/badrconsulterOuvrages');
     }
     public function badrconsulterOuvragessimple() {
         $dsn = 'mysql://root@localhost/ensaksite';
         $con=ConnectionManager::get('default', ['url' => $dsn]);
         $categories = $con->execute('SELECT id,nom FROM categories')->fetchAll('assoc');
-        for ($i=0; $i < count($categories); $i++) { 
+        for ($i=0; $i < count($categories); $i++) {
             $categorie[$i]=$categories[$i]['nom'];
             $categorieId[$i]=$categories[$i]['id'];
         }
@@ -98,7 +110,7 @@ class respobibliosController extends AppController {
             $selection=$this->request->data['categorie'];
             $this->set('selection',$selection);
             $souscategories = $con->execute('SELECT id,nom FROM sous_categories WHERE categorie_id = ?',[$selection])->fetchAll('assoc');
-            for ($i=0; $i < count($souscategories); $i++) { 
+            for ($i=0; $i < count($souscategories); $i++) {
                 $souscategorie[$i]=$souscategories[$i]['nom'];
                 $souscategorieId[$i]=$souscategories[$i]['id'];
             }
@@ -182,14 +194,14 @@ class respobibliosController extends AppController {
         $book=$_SESSION['book'];
         if ($this->request->is('post')) {
             $j=0;
-            for ($i=0; $i < $_SESSION['book']['nbExemplaire']; $i++) { 
+            for ($i=0; $i < $_SESSION['book']['nbExemplaire']; $i++) {
                 $test=$con->execute('SELECT count(*) as sum FROM books WHERE numInventaire = ?',[$this->request->data['numInventaire'.$i]])->fetchAll('assoc');
                 if ($test[0]['sum']==0) {
                     $j++;
                 }
             }
             if ($j==$_SESSION['book']['nbExemplaire']) {
-                for ($i=0; $i < $_SESSION['book']['nbExemplaire']; $i++) { 
+                for ($i=0; $i < $_SESSION['book']['nbExemplaire']; $i++) {
                     $con->execute('INSERT INTO books (titre, auteur, edition, resumer, image, ISBN, numInventaire, nbExemplaire, sous_categorie_id) VALUES (?,?,?,?,?,?,?,?,?)',[$book['titre'],$book['auteur'],$book['edition'],$book['resumer'],$book['image'],$book['ISBN'],$this->request->data['numInventaire'.$i],$book['nbExemplaire'],$book['sous_categorie_id']]);}
                 $this->Flash->success(__("L'ouvrage est sauvegarder."));
                 return $this->redirect(['action' => 'badrconsulterOuvrages']);
@@ -197,7 +209,7 @@ class respobibliosController extends AppController {
             else
                 $this->Flash->error(__("une erreur s'est produite lors de l'enregistrement des ouvrages"));
         }
-        
+
         $this->render('/Espaces/respobiblios/badrnumInventaire');
     }
     public function badrmodifier($id = null) {
@@ -224,15 +236,15 @@ class respobibliosController extends AppController {
                 array(
                     "table" => "sous_categories",
                     "conditions" => array(
-                        "books.sous_categorie_id = sous_categories.id" 
-                        )
+                        "books.sous_categorie_id = sous_categories.id"
                     )
-                ),
+                )
+            ),
             "fields" => "nom"
-            ));
+        ));
         $sousCategorie=$sc->toArray();
         $sousCategories=array();
-        for ($i=0; $i < count($sousCategorie); $i++) { 
+        for ($i=0; $i < count($sousCategorie); $i++) {
             $sousCategories[$i]=$sousCategorie[$i]['nom'];
         }
         $users = $books->Users->find('list', ['limit' => 200]);
@@ -273,9 +285,9 @@ class respobibliosController extends AppController {
         }
         $this->set(compact('parametre'));
         $this->set('_serialize', ['parametre']);
-    	$this->render('/Espaces/respobiblios/badrparametres');
+        $this->render('/Espaces/respobiblios/badrparametres');
     }
-    public function majdaajouteremprunte() {
+        public function majdaajouteremprunte() {
         $UsersBooks = TableRegistry::get('UsersBooks');
         $usersBook = $UsersBooks->newEntity();
         $dsn = 'mysql://root@localhost/ensaksite';
@@ -283,8 +295,28 @@ class respobibliosController extends AppController {
         if ($this->request->is('post')) {
             $ouvrage=$con->execute('SELECT id FROM books WHERE numInventaire =?',[$this->request->data["numerodInventaire"]])->fetchAll('assoc');
             if(count($ouvrage) != 0) {
-                $user = $con->execute('SELECT id,role FROM users WHERE username =?',[$this->request->data['identifiant_utilisateur']])->fetchAll('assoc');
-                if (count($user) != 0) {
+                //modification
+                $utilisateur=$con->execute('SELECT user_id FROM etudiants WHERE apogee =?',[$this->request->data['identifiant_utilisateur']])->fetchAll('assoc');
+                if (count($utilisateur)>0) {
+                    $user = $con->execute('SELECT id,role FROM users WHERE id =?',[$utilisateur[0]['user_id']])->fetchAll('assoc');
+                }
+                else {
+                    $utilisateur=$con->execute('SELECT user_id FROM vacataires WHERE somme =?',[$this->request->data['identifiant_utilisateur']])->fetchAll('assoc');
+                    if (count($utilisateur)>0) {
+                        $user = $con->execute('SELECT id,role FROM users WHERE id =?',[$utilisateur[0]['user_id']])->fetchAll('assoc');
+                    }
+                    else {
+                        $utilisateur=$con->execute('SELECT user_id FROM profpermanents WHERE somme =?',[$this->request->data['identifiant_utilisateur']])->fetchAll('assoc');
+                        if (count($utilisateur)>0) {
+                        $user = $con->execute('SELECT id,role FROM users WHERE id =?',[$utilisateur[0]['user_id']])->fetchAll('assoc');
+                        }
+                        else {
+                            $this->Flash->error(__("L'identifiant de l'utilisateur est introuvable"));
+                        }
+                    }
+                }
+                //$user = $con->execute('SELECT id,role FROM users WHERE username =?',[$this->request->data['identifiant_utilisateur']])->fetchAll('assoc');
+                if (isset($user)) {
                     switch ($user[0]['role']) {
                     case 'etudiant':
                         $condition = $con->execute('SELECT maxEtud AS max,dureeEmprunteEtud AS delai FROM parametres')->fetchAll('assoc');
@@ -319,8 +351,6 @@ class respobibliosController extends AppController {
                     else
                     $this->Flash->error(__("L'utilisateur a depasser le nombre maximal d'emprunt"));
                 }
-                else
-                    $this->Flash->error(__("L'identifiant de l'utilisateur est introuvable"));
             }
             else
                 $this->Flash->error(__("cet ouvrage ne se trouve pas dans l'Inventaire"));
@@ -358,15 +388,15 @@ class respobibliosController extends AppController {
         $con=ConnectionManager::get('default', ['url' => $dsn]);
         $deppassement=$con->execute('SELECT id FROM users_books WHERE delai< NOW()')->fetchAll('assoc');
         if (count($deppassement)>0) {
-            for ($i=0; $i < count($deppassement); $i++) { 
-            $deppassement[$i]=$deppassement[$i]['id'];
+            for ($i=0; $i < count($deppassement); $i++) {
+                $deppassement[$i]=$deppassement[$i]['id'];
             }
             $this->set('deppassement',$deppassement);
         }
         else $this->set('deppassement',$deppassement);
 
         $categories = $con->execute('SELECT id,nom FROM categories')->fetchAll('assoc');
-        for ($i=0; $i < count($categories); $i++) { 
+        for ($i=0; $i < count($categories); $i++) {
             $categorie[$i]=$categories[$i]['nom'];
             $categorieId[$i]=$categories[$i]['id'];
         }
@@ -379,7 +409,7 @@ class respobibliosController extends AppController {
             $empreinter = $con->execute('SELECT users.role ,users_books.id as id,users.username,books.titre,books.numInventaire,users_books.dateEmprunte,users_books.delai FROM users,books,users_books WHERE users_books.user_id=users.id AND users_books.book_id = books.id ')->fetchAll('assoc');
             $this->set('empreinter',$empreinter);
         }
-        $this->render('/Espaces/respobiblios/majdaemprunte');   
+        $this->render('/Espaces/respobiblios/majdaemprunte');
     }
     public function majdasupprimerEmprunte($id = null){
         if ($this->request->is('post', 'delete')) {
@@ -404,7 +434,7 @@ class respobibliosController extends AppController {
         $dsn = 'mysql://root@localhost/ensaksite';
         $con=ConnectionManager::get('default', ['url' => $dsn]);
         $categories = $con->execute('SELECT id,nom FROM categories')->fetchAll('assoc');
-        for ($i=0; $i < count($categories); $i++) { 
+        for ($i=0; $i < count($categories); $i++) {
             $categorie[$i]=$categories[$i]['nom'];
             $categorieId[$i]=$categories[$i]['id'];
         }
@@ -424,117 +454,143 @@ class respobibliosController extends AppController {
         $dsn = 'mysql://root@localhost/ensaksite';
         $con=ConnectionManager::get('default', ['url' => $dsn]);
         $categories = $con->execute('SELECT id,nom FROM categories')->fetchAll('assoc');
-        for ($i=0; $i < count($categories); $i++) { 
+        for ($i=0; $i < count($categories); $i++) {
             $categorie[$i]=$categories[$i]['nom'];
             $categorieId[$i]=$categories[$i]['id'];
         }
         $this->set('categorie',$categorie);
         if ($this->request->is('post')) {
             $reservation = $con->execute('SELECT reservations.user_id as id,users.username,books.titre,books.numInventaire,reservations.dateReservation,reservations.delai FROM users,books,reservations WHERE reservations.user_id=users.id AND reservations.book_id = books.id AND users.role="profvacataire" AND books.sous_categorie_id IN (SELECT id FROM sous_categories WHERE categorie_id IN (SELECT id FROM categories WHERE id=? ))',[$categorieId[$this->request->data['categorie']]])->fetchAll('assoc');
-            for ($i=0; $i < count($reservation); $i++) { 
-                $somme=$con->execute('SELECT somme FROM vacataires WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
+            $nom = array();
+            for ($i=0; $i < count($reservation); $i++) {
+                $somme=$con->execute('SELECT somme,nom_vacataire,prenom_vacataire FROM vacataires WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $reservation[$i]['username']=$somme[0]['somme'];
+                    $nom[$i]=$somme[0]['nom_vacataire'].' '.$somme[0]['prenom_vacataire'];
                 }
-                else
+                else {
                     $reservation[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
+            $this->set('nom',$nom);
             $this->set('reservation',$reservation);
         }
         else {
             $reservation = $con->execute('SELECT reservations.user_id as id,users.username,books.titre,books.numInventaire,reservations.dateReservation,reservations.delai FROM users,books,reservations WHERE reservations.user_id=users.id AND reservations.book_id = books.id AND users.role="profvacataire"')->fetchAll('assoc');
-            for ($i=0; $i < count($reservation); $i++) { 
-                $somme=$con->execute('SELECT somme FROM vacataires WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
+            $nom = array();
+            for ($i=0; $i < count($reservation); $i++) {
+                $somme=$con->execute('SELECT somme,nom_vacataire,prenom_vacataire FROM vacataires WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $reservation[$i]['username']=$somme[0]['somme'];
+                    $nom[$i]=$somme[0]['nom_vacataire'].' '.$somme[0]['prenom_vacataire'];
                 }
-                else
+                else {
                     $reservation[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
+            $this->set('nom',$nom);
             $this->set('reservation',$reservation);
         }
-        $this->render('/Espaces/respobiblios/hajarreservationProfVacataire');   
+        $this->render('/Espaces/respobiblios/hajarreservationProfVacataire');
     }
     public function hajarreservationProfPermanent() {
         $dsn = 'mysql://root@localhost/ensaksite';
         $con=ConnectionManager::get('default', ['url' => $dsn]);
         $categories = $con->execute('SELECT id,nom FROM categories')->fetchAll('assoc');
-        for ($i=0; $i < count($categories); $i++) { 
+        for ($i=0; $i < count($categories); $i++) {
             $categorie[$i]=$categories[$i]['nom'];
             $categorieId[$i]=$categories[$i]['id'];
         }
         $this->set('categorie',$categorie);
         if ($this->request->is('post')) {
             $reservation = $con->execute('SELECT reservations.user_id as id,users.username,books.titre,books.numInventaire,reservations.dateReservation,reservations.delai FROM users,books,reservations WHERE reservations.user_id=users.id AND reservations.book_id = books.id AND users.role="profpermanent" AND books.sous_categorie_id IN (SELECT id FROM sous_categories WHERE categorie_id IN (SELECT id FROM categories WHERE id=? ))',[$categorieId[$this->request->data['categorie']]])->fetchAll('assoc');
-            for ($i=0; $i < count($reservation); $i++) { 
-                $somme=$con->execute('SELECT somme FROM profpermanents WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
+            $nom = array();
+            for ($i=0; $i < count($reservation); $i++) {
+                $somme=$con->execute('SELECT somme,nom_prof,prenom_prof FROM profpermanents WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $reservation[$i]['username']=$somme[0]['somme'];
+                    $nom[$i]=$somme[0]['nom_prof'].' '.$somme[0]['prenom_prof'];
                 }
-                else
+                else {
                     $reservation[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
+            $this->set('nom',$nom);
             $this->set('reservation',$reservation);
         }
         else {
             $reservation = $con->execute('SELECT reservations.user_id as id,users.username,books.titre,books.numInventaire,reservations.dateReservation,reservations.delai FROM users,books,reservations WHERE reservations.user_id=users.id AND reservations.book_id = books.id AND users.role="profpermanent"')->fetchAll('assoc');
-            for ($i=0; $i < count($reservation); $i++) { 
-                $somme=$con->execute('SELECT somme FROM profpermanents WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
+
+            $nom = array();
+            for ($i=0; $i < count($reservation); $i++) {
+                $somme=$con->execute('SELECT somme,nom_prof,prenom_prof FROM profpermanents WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $reservation[$i]['username']=$somme[0]['somme'];
+                    $nom[$i]=$somme[0]['nom_prof'].' '.$somme[0]['prenom_prof'];
                 }
-                else
+                else {
                     $reservation[$i]['username']='';
+                    $nom[$i] = '';
+                }
             }
-        $this->set('reservation',$reservation);
+            $this->set('nom',$nom);
+            $this->set('reservation',$reservation);
         }
-        $this->render('/Espaces/respobiblios/hajarreservationProfPermanent');   
+        $this->render('/Espaces/respobiblios/hajarreservationProfPermanent');
     }
     public function hajarreservationEtudiant() {
         $dsn = 'mysql://root@localhost/ensaksite';
         $con=ConnectionManager::get('default', ['url' => $dsn]);
         $categories = $con->execute('SELECT id,nom FROM categories')->fetchAll('assoc');
-        for ($i=0; $i < count($categories); $i++) { 
+        for ($i=0; $i < count($categories); $i++) {
             $categorie[$i]=$categories[$i]['nom'];
             $categorieId[$i]=$categories[$i]['id'];
         }
         $this->set('categorie',$categorie);
         if ($this->request->is('post')) {
             $reservation = $con->execute('SELECT reservations.user_id as id,users.username,books.titre,books.numInventaire,reservations.dateReservation,reservations.delai FROM users,books,reservations WHERE reservations.user_id=users.id AND reservations.book_id = books.id AND users.role="etudiant" AND books.sous_categorie_id IN (SELECT id FROM sous_categories WHERE categorie_id IN (SELECT id FROM categories WHERE id=? ))',[$categorieId[$this->request->data['categorie']]])->fetchAll('assoc');
-            for ($i=0; $i < count($reservation); $i++) { 
-                $somme=$con->execute('SELECT apogee FROM etudiants WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
+            $nom = array();
+            for ($i=0; $i < count($reservation); $i++) {
+                $somme=$con->execute('SELECT apogee,nom_fr,prenom_fr FROM etudiants WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $reservation[$i]['username']=$somme[0]['apogee'];
+                    $nom[$i]=$somme[0]['nom_fr'].' '.$somme[0]['prenom_fr'];
                 }
-                else
+                else {
                     $reservation[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
+            $this->set('nom',$nom);
             $this->set('reservation',$reservation);
         }
         else {
             $reservation = $con->execute('SELECT reservations.user_id as id,users.username,books.titre,books.numInventaire,reservations.dateReservation,reservations.delai FROM users,books,reservations WHERE reservations.user_id=users.id AND reservations.book_id = books.id AND users.role="etudiant"')->fetchAll('assoc');
-            for ($i=0; $i < count($reservation); $i++) { 
-                $somme=$con->execute('SELECT apogee FROM etudiants WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
+            $nom = array();
+            for ($i=0; $i < count($reservation); $i++) {
+                $somme=$con->execute('SELECT apogee,nom_fr,prenom_fr FROM etudiants WHERE user_id=?',[$reservation[$i]['id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $reservation[$i]['username']=$somme[0]['apogee'];
+                    $nom[$i]=$somme[0]['nom_fr'].' '.$somme[0]['prenom_fr'];
                 }
-                else
+                else {
                     $reservation[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
+            $this->set('nom',$nom);
             $this->set('reservation',$reservation);
         }
-        $this->render('/Espaces/respobiblios/hajarreservationEtudiant');   
+        $this->render('/Espaces/respobiblios/hajarreservationEtudiant');
     }
     public function badrhistoriqueCategorie() {
         $dsn = 'mysql://root@localhost/ensaksite';
         $con=ConnectionManager::get('default', ['url' => $dsn]);
         $categories = $con->execute('SELECT id,nom FROM categories')->fetchAll('assoc');
-        for ($i=0; $i < count($categories); $i++) { 
+        for ($i=0; $i < count($categories); $i++) {
             $categorie[$i]=$categories[$i]['nom'];
             $categorieId[$i]=$categories[$i]['id'];
         }
@@ -545,7 +601,7 @@ class respobibliosController extends AppController {
             $selection=$this->request->data['categorie'];
             $this->set('selection',$selection);
             $souscategories = $con->execute('SELECT id,nom FROM sous_categories WHERE categorie_id = ?',[$selection])->fetchAll('assoc');
-            for ($i=0; $i < count($souscategories); $i++) { 
+            for ($i=0; $i < count($souscategories); $i++) {
                 $souscategorie[$i]=$souscategories[$i]['nom'];
                 $souscategorieId[$i]=$souscategories[$i]['id'];
             }
@@ -559,10 +615,43 @@ class respobibliosController extends AppController {
                 $emprunt = $con->execute('SELECT books.titre,books.numInventaire,users.id,users.username,users.role,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id AND books.sous_categorie_id IN (SELECT id FROM sous_categories WHERE categorie_id IN (SELECT id FROM categories WHERE id=? ))',[$this->request->data['categorie']])->fetchAll('assoc');
             }
         }
-        else 
+        else
             $emprunt=$con->execute('SELECT books.titre,books.numInventaire,users.id,users.username,users.role,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id')->fetchAll('assoc');
 
-        for ($i=0; $i < count($emprunt); $i++) { 
+        for ($i=0; $i < count($emprunt); $i++) {
+            if(isset($emprunt[$i]['role'])) {
+                if ($emprunt[$i]['role']=='etudiant') {
+                    $nom=$con->execute('SELECT nom_fr,prenom_fr,apogee FROM etudiants WHERE user_id=?',[$emprunt[$i]['id']])->fetchAll('assoc');
+                    if(count($nom)>0) {
+                        $emprunt[$i]['username']=$nom[0]['nom_fr'].' '.$nom[0]['prenom_fr'];
+                        $emprunt[$i]['id']=$nom[0]['apogee'];
+                    }
+                }
+                if ($emprunt[$i]['role']=='profpermanent') {
+                    $nom=$con->execute('SELECT nom_prof,prenom_prof,somme FROM profpermanents WHERE user_id=?',[$emprunt[$i]['id']])->fetchAll('assoc');
+                    if(count($nom)>0) {
+                        $emprunt[$i]['username']=$nom[0]['nom_prof'].' '.$nom[0]['prenom_prof'];
+                        $emprunt[$i]['id']=$nom[0]['somme'];
+                    }
+                }
+                if ($emprunt[$i]['role']=='profvacataire') {
+                    $nom=$con->execute('SELECT nom_vacataire,prenom_vacataire,somme FROM vacataires WHERE user_id=?',[$emprunt[$i]['id']])->fetchAll('assoc');
+                    if(count($nom)>0) {
+                        $emprunt[$i]['username']=$nom[0]['nom_vacataire'].' '.$nom[0]['prenom_vacataire'];
+                        $emprunt[$i]['id']=$nom[0]['somme'];
+                    }
+                }
+            }
+        }
+        $this->set('emprunt',$emprunt);
+        $this->render('/Espaces/respobiblios/badrhistoriqueCategorie');
+    }
+    public function badrhistorique() {
+        $dsn = 'mysql://root@localhost/ensaksite';
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
+        if ($this->request->is('post')) {
+            $emprunt = $con->execute('SELECT books.titre,books.numInventaire,users.id,users.username,users.role,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id AND books.numInventaire=? ORDER BY dateRetour asc',[$this->request->data['search']])->fetchAll('assoc');
+            for ($i=0; $i < count($emprunt); $i++) {
                 if(isset($emprunt[$i]['role'])) {
                     if ($emprunt[$i]['role']=='etudiant') {
                         $nom=$con->execute('SELECT nom_fr,prenom_fr,apogee FROM etudiants WHERE user_id=?',[$emprunt[$i]['id']])->fetchAll('assoc');
@@ -581,33 +670,6 @@ class respobibliosController extends AppController {
                     }
                 }
             }
-        $this->set('emprunt',$emprunt);
-        $this->render('/Espaces/respobiblios/badrhistoriqueCategorie');
-    }
-    public function badrhistorique() {
-        $dsn = 'mysql://root@localhost/ensaksite';
-        $con=ConnectionManager::get('default', ['url' => $dsn]);
-        if ($this->request->is('post')) {
-            $emprunt = $con->execute('SELECT books.titre,books.numInventaire,users.id,users.username,users.role,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id AND books.numInventaire=? ORDER BY dateRetour asc',[$this->request->data['search']])->fetchAll('assoc');
-            for ($i=0; $i < count($emprunt); $i++) { 
-                if(isset($emprunt[$i]['role'])) {
-                    if ($emprunt[$i]['role']=='etudiant') {
-                        $nom=$con->execute('SELECT nom_fr,prenom_fr,apogee FROM etudiants WHERE user_id=?',[$emprunt[$i]['id']])->fetchAll('assoc');
-                        $emprunt[$i]['username']=$nom[0]['nom_fr'].' '.$nom[0]['prenom_fr'];
-                        $emprunt[$i]['id']=$nom[0]['apogee'];
-                    }
-                    if ($emprunt[$i]['role']=='profpermanent') {
-                        $nom=$con->execute('SELECT nom_prof,prenom_prof,somme FROM profpermanents WHERE user_id=?',[$emprunt[$i]['id']])->fetchAll('assoc');
-                        $emprunt[$i]['username']=$nom[0]['nom_prof'].' '.$nom[0]['prenom_prof'];
-                        $emprunt[$i]['id']=$nom[0]['somme'];
-                    }
-                    if ($emprunt[$i]['role']=='profvacataire') {
-                        $nom=$con->execute('SELECT nom_vacataire,prenom_vacataire,somme FROM vacataires WHERE user_id=?',[$emprunt[$i]['id']])->fetchAll('assoc');
-                        $emprunt[$i]['username']=$nom[0]['nom_vacataire'].' '.$nom[0]['prenom_vacataire'];
-                        $emprunt[$i]['id']=$nom[0]['somme'];
-                    }
-                }
-            }  
             $this->set('emprunt',$emprunt);
         }
         $this->render('/Espaces/respobiblios/badrhistorique');
@@ -618,15 +680,15 @@ class respobibliosController extends AppController {
         $con=ConnectionManager::get('default', ['url' => $dsn]);
         if ($this->request->is('post')) {
             if ($this->request->data['utilisateur']=='etudiant') {
-                $emprunt = $con->execute('SELECT etudiants.apogee,etudiants.nom_fr as nom,etudiants.prenom_fr as prenom,books.titre,books.numInventaire,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users,etudiants WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id AND etudiants.user_id=historiqueemprunte.user_id AND etudiants.apogee=? ORDER BY dateRetour asc',[$this->request->data['search']])->fetchAll('assoc'); 
-                $this->set('emprunt',$emprunt);   
+                $emprunt = $con->execute('SELECT etudiants.apogee,etudiants.nom_fr as nom,etudiants.prenom_fr as prenom,books.titre,books.numInventaire,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users,etudiants WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id AND etudiants.user_id=historiqueemprunte.user_id AND etudiants.apogee=? ORDER BY dateRetour asc',[$this->request->data['search']])->fetchAll('assoc');
+                $this->set('emprunt',$emprunt);
             }
             else if($this->request->data['utilisateur']=='profpermanant'){
-                $emprunt = $con->execute('SELECT profpermanents.somme as apogee,profpermanents.nom_prof as nom,profpermanents.prenom_prof as prenom,books.titre,books.numInventaire,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users,profpermanents WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id AND profpermanents.user_id=historiqueemprunte.user_id AND profpermanents.somme=? ORDER BY dateRetour asc',[$this->request->data['search']])->fetchAll('assoc'); 
+                $emprunt = $con->execute('SELECT profpermanents.somme as apogee,profpermanents.nom_prof as nom,profpermanents.prenom_prof as prenom,books.titre,books.numInventaire,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users,profpermanents WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id AND profpermanents.user_id=historiqueemprunte.user_id AND profpermanents.somme=? ORDER BY dateRetour asc',[$this->request->data['search']])->fetchAll('assoc');
                 $this->set('emprunt',$emprunt);
             }
             else {
-                $emprunt = $con->execute('SELECT vacataires.somme as apogee,vacataires.nom_vacataire as nom,vacataires.prenom_vacataire as prenom,books.titre,books.numInventaire,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users,vacataires WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id AND vacataires.user_id=historiqueemprunte.user_id AND vacataires.somme=? ORDER BY dateRetour asc',[$this->request->data['search']])->fetchAll('assoc'); 
+                $emprunt = $con->execute('SELECT vacataires.somme as apogee,vacataires.nom_vacataire as nom,vacataires.prenom_vacataire as prenom,books.titre,books.numInventaire,historiqueemprunte.dateEmprunte,historiqueemprunte.dateRetour FROM books,historiqueemprunte,users,vacataires WHERE books.id=historiqueemprunte.book_id AND users.id=historiqueemprunte.user_id AND vacataires.user_id=historiqueemprunte.user_id AND vacataires.somme=? ORDER BY dateRetour asc',[$this->request->data['search']])->fetchAll('assoc');
                 $this->set('emprunt',$emprunt);
             }
         }
@@ -635,31 +697,12 @@ class respobibliosController extends AppController {
     public function badrStatistique() {
         $dsn = 'mysql://root@localhost/ensaksite';
         $con=ConnectionManager::get('default', ['url' => $dsn]);
-        $usrole=$this->Auth->user('role');
-        $this->set('role',$usrole);
-        $username=$this->Auth->user('username');
-        $this->set('username',$username);
-        $deppassement=$con->execute('SELECT users.username,users.role,books.numInventaire FROM users,books,users_books WHERE users.id=users_books.user_id AND books.id= users_books.book_id AND users_books.delai< NOW()')->fetchAll('assoc');
+        $deppassement=$con->execute('SELECT books.titre,books.numInventaire FROM books,users_books WHERE  books.id= users_books.book_id AND users_books.delai< NOW()')->fetchAll('assoc');
         $this->set('deppassement',$deppassement);
-        $con->execute('DELETE FROM reservations WHERE delai<NOW()');
-        $quatrecadre=$con->execute('SELECT COUNT(*) as sum FROM users_books WHERE delai<NOW()')->fetchAll('assoc');
-        $this->set('quatrecadre',$quatrecadre);
-        $books = TableRegistry::get('Books');
-        $numbooks = $books->find('all');
-        $numberbooks=$numbooks->count();
-        $this->set('numberbooks',$numberbooks);
-        $Reservations = TableRegistry::get('Reservations');
-        $numreservations = $Reservations->find('all');
-        $numberreservations=$numreservations->count();
-        $this->set('numberreservations',$numberreservations);
-        $users_books = TableRegistry::get('Users_Books');
-        $numempreintes = $users_books->find('all');
-        $numberempreintes=$numempreintes->count();
-        $this->set('numberempreintes',$numberempreintes);
         $demande = $con->execute('SELECT count(book_id) AS num,book_id FROM historiqueemprunte GROUP BY book_id ORDER BY count(book_id) desc')->fetchAll('assoc');
         $this->set('demande',$demande);
         $demandetitre=array();
-        for ($i=0; $i < count($demande); $i++) { 
+        for ($i=0; $i < count($demande); $i++) {
             $ouvrageDemande=$con->execute('SELECT titre FROM books WHERE id=?',[$demande[$i]['book_id']])->fetchAll('assoc');
             $demandetitre[$i]=$ouvrageDemande[0]['titre'];
         }
@@ -674,7 +717,7 @@ class respobibliosController extends AppController {
         $this->set('empreinter',$empreinter);
         $pique= $con->execute('SELECT count(*) as somme,MONTH(dateEmprunte) as mois FROM historiqueemprunte GROUP BY MONTH(dateEmprunte)')->fetchAll('assoc');
         $sommeMois=array(0,0,0,0,0,0,0,0,0,0,0,0);
-        for ($i=0; $i < count($pique); $i++) { 
+        for ($i=0; $i < count($pique); $i++) {
             switch ($pique[$i]['mois']) {
                 case 1:
                     $sommeMois[0]=$pique[$i]['somme'];
@@ -721,7 +764,7 @@ class respobibliosController extends AppController {
         $dsn = 'mysql://root@localhost/ensaksite';
         $con=ConnectionManager::get('default', ['url' => $dsn]);
         $categories = $con->execute('SELECT id,nom FROM categories')->fetchAll('assoc');
-        for ($i=0; $i < count($categories); $i++) { 
+        for ($i=0; $i < count($categories); $i++) {
             $categorie[$i]=$categories[$i]['nom'];
             $categorieId[$i]=$categories[$i]['id'];
         }
@@ -732,7 +775,7 @@ class respobibliosController extends AppController {
             $selection=$this->request->data['categorie'];
             $this->set('selection',$selection);
         }
-        else 
+        else
             $depasser=$con->execute('SELECT users.username,users.role,books.titre,books.numInventaire,users_books.dateEmprunte,users_books.delai FROM users,books,users_books WHERE users_books.user_id=users.id AND books.id=users_books.book_id AND users_books.delai<NOW()')->fetchAll('assoc');
         $this->set('depasser',$depasser);
         $this->render('/Espaces/respobiblios/badrDepassementDelai');
@@ -780,6 +823,13 @@ class respobibliosController extends AppController {
             $this->render('/Espaces/respobiblios/detailproposition');
         }
     }
+    public function imprimerprop() {
+        if ($this->request->is(['post'])) {
+            $search = $this->request->data();
+        }
+        $this->set('search', $search);
+        $this->render('/Espaces/respobiblios/imprimerprop');
+    }
     public function majdaemprunteProfVacataire() {
         $dsn = 'mysql://root@localhost/ensaksite';
         $con=ConnectionManager::get('default', ['url' => $dsn]);
@@ -800,29 +850,35 @@ class respobibliosController extends AppController {
         $this->set('categorie',$categorie);
         if ($this->request->is('post')) {
             $empreinter = $con->execute('SELECT users_books.user_id as Id,users_books.id as id,users.username,books.titre,books.numInventaire,users_books.dateEmprunte,users_books.delai FROM users,books,users_books WHERE users_books.user_id=users.id AND users_books.book_id = books.id AND users.role="profvacataire" AND books.sous_categorie_id IN (SELECT id FROM sous_categories WHERE categorie_id IN (SELECT id FROM categories WHERE id=? ))',[$categorieId[$this->request->data['categorie']]])->fetchAll('assoc');
+            $nom = array();
             for ($i=0; $i < count($empreinter); $i++) {
-                $somme=$con->execute('SELECT somme FROM vacataires WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
+                $somme=$con->execute('SELECT somme,nom_vacataire,prenom_vacataire FROM vacataires WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $empreinter[$i]['username']=$somme[0]['somme'];
+                    $nom[$i]=$somme[0]['nom_vacataire'].' '.$somme[0]['prenom_vacataire'];
                 }
-                else
+                else {
                     $empreinter[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
             $this->set('empreinter',$empreinter);
         }
         else {
             $empreinter = $con->execute('SELECT users_books.user_id as Id,users_books.id as id,users.username,books.titre,books.numInventaire,users_books.dateEmprunte,users_books.delai FROM users,books,users_books WHERE users_books.user_id=users.id AND users_books.book_id = books.id AND users.role="profvacataire"')->fetchAll('assoc');
+            $nom = array();
             for ($i=0; $i < count($empreinter); $i++) {
-                $somme=$con->execute('SELECT somme FROM vacataires WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
+                $somme=$con->execute('SELECT somme,nom_vacataire,prenom_vacataire FROM vacataires WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $empreinter[$i]['username']=$somme[0]['somme'];
+                    $nom[$i]=$somme[0]['nom_vacataire'].' '.$somme[0]['prenom_vacataire'];
                 }
                 else {
                     $empreinter[$i]['username']='';
+                    $nom[$i] = '';
                 }
-
             }
+            $this->set('nom',$nom);
             $this->set('empreinter',$empreinter);
         }
         $this->render('/Espaces/respobiblios/majdaemprunteProfVacataire');
@@ -847,28 +903,36 @@ class respobibliosController extends AppController {
         $this->set('categorie',$categorie);
         if ($this->request->is('post')) {
             $empreinter = $con->execute('SELECT users_books.user_id as Id,users_books.id as id,users.username,books.titre,books.numInventaire,users_books.dateEmprunte,users_books.delai FROM users,books,users_books WHERE users_books.user_id=users.id AND users_books.book_id = books.id AND users.role="profpermanent" AND books.sous_categorie_id IN (SELECT id FROM sous_categories WHERE categorie_id IN (SELECT id FROM categories WHERE id=? ))',[$categorieId[$this->request->data['categorie']]])->fetchAll('assoc');
+            $nom = array();
             for ($i=0; $i < count($empreinter); $i++) {
-                $somme=$con->execute('SELECT somme FROM profpermanents WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
+                $somme=$con->execute('SELECT somme,nom_prof,prenom_prof FROM profpermanents WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $empreinter[$i]['username']=$somme[0]['somme'];
+                    $nom[$i]=$somme[0]['nom_prof'].' '.$somme[0]['prenom_prof'];
                 }
-                else
+                else {
                     $empreinter[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
+            $this->set('nom',$nom);
             $this->set('empreinter',$empreinter);
         }
         else {
             $empreinter = $con->execute('SELECT users_books.user_id as Id,users_books.id as id,users.username,books.titre,books.numInventaire,users_books.dateEmprunte,users_books.delai FROM users,books,users_books WHERE users_books.user_id=users.id AND users_books.book_id = books.id AND users.role="profpermanent"')->fetchAll('assoc');
+            $nom = array();
             for ($i=0; $i < count($empreinter); $i++) {
-                $somme=$con->execute('SELECT somme FROM profpermanents WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
+                $somme=$con->execute('SELECT somme,nom_prof,prenom_prof FROM profpermanents WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $empreinter[$i]['username']=$somme[0]['somme'];
+                    $nom[$i]=$somme[0]['nom_prof'].' '.$somme[0]['prenom_prof'];
                 }
-                else
+                else {
                     $empreinter[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
+            $this->set('nom',$nom);
             $this->set('empreinter',$empreinter);
         }
         $this->render('/Espaces/respobiblios/majdaemprunteProfPermanent');
@@ -893,32 +957,42 @@ class respobibliosController extends AppController {
         $this->set('categorie',$categorie);
         if ($this->request->is('post')) {
             $empreinter = $con->execute('SELECT users_books.user_id as Id,users_books.id as id,users.username,books.titre,books.numInventaire,users_books.dateEmprunte,users_books.delai FROM users,books,users_books WHERE users_books.user_id=users.id AND users_books.book_id = books.id AND users.role="etudiant" AND books.sous_categorie_id IN (SELECT id FROM sous_categories WHERE categorie_id IN (SELECT id FROM categories WHERE id=? ))',[$categorieId[$this->request->data['categorie']]])->fetchAll('assoc');
+            $nom = array();
             for ($i=0; $i < count($empreinter); $i++) {
-                $somme=$con->execute('SELECT apogee FROM etudiants WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
+                $somme=$con->execute('SELECT apogee,nom_fr,prenom_fr FROM etudiants WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $empreinter[$i]['username']=$somme[0]['apogee'];
+                    $nom[$i]=$somme[0]['nom_fr'].' '.$somme[0]['prenom_fr'];
                 }
-                else
+                else {
                     $empreinter[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
+            $this->set('nom',$nom);
             $this->set('empreinter',$empreinter);
         }
         else {
             $empreinter = $con->execute('SELECT users_books.user_id as Id,users_books.id as id,users.username,books.titre,books.numInventaire,users_books.dateEmprunte,users_books.delai FROM users,books,users_books WHERE users_books.user_id=users.id AND users_books.book_id = books.id AND users.role="etudiant"')->fetchAll('assoc');
+            $nom = array();
             for ($i=0; $i < count($empreinter); $i++) {
-                $somme=$con->execute('SELECT apogee FROM etudiants WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
+                $somme=$con->execute('SELECT apogee,nom_fr,prenom_fr FROM etudiants WHERE user_id=?',[$empreinter[$i]['Id']])->fetchAll('assoc');
                 if (count($somme)>0) {
                     $empreinter[$i]['username']=$somme[0]['apogee'];
+                    $nom[$i]=$somme[0]['nom_fr'].' '.$somme[0]['prenom_fr'];
                 }
-                else
+                else {
                     $empreinter[$i]['username']='';
-
+                    $nom[$i] = '';
+                }
             }
+            $this->set('nom',$nom);
             $this->set('empreinter',$empreinter);
         }
         $this->render('/Espaces/respobiblios/majdaemprunteEtudiant');
     }
+
+
 
     /********* Bouhis *********/
     public function demanderabsences()

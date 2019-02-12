@@ -81,14 +81,10 @@
                                 <dd>
                                     <?= $this->Number->format($profpermanent->age) ?>
                                 </dd>
-                                <dt><?= __('Code Situation Admin :') ?></dt>
-                                <dd>
-                                    <?= $this->Number->format($profpermanent->code_situation_admin) ?>
-                                </dd>
-                             <dt><?= __('Code établissement :') ?></dt>
-                                <dd>
-                                    <?= $this->Number->format($profpermanent->codeEtablissement) ?>
-                                </dd>
+                                
+                                
+                                
+                               
                                                 <dt><?= __('CIN :') ?></dt>
                                 <dd>
                                     <?= $this->Number->format($profpermanent->CIN) ?>
@@ -116,12 +112,14 @@
             </div>
             <!-- /.box-body -->
         </div>
+        <div class="col-md-3 pull-middle">
         <form action="<?= $this->Url->build(); ?>" method="post">
             <?php   // user is logged in, show logout..user menu etc
-            echo $this->Html->link('Modifier vos données', array('controller' => 'profpermanents', 'action' => 'editmouna'),['class' => 'btn btn-danger btn-block']);
+            echo $this->Html->link('Modifier vos données', array('controller' => 'profpermanents', 'action' => 'editmouna'),['class' => 'btn btn-success btn-block']);
             ?>
      <!-- <span>    <input      name="modifier" type="submit" value="modifier vos données"   class="pull-right" class="btn btn-info btn-flat"></span>-->
         </form>
+         </div>
         <!-- /.box -->
     </div>
     <!-- ./col -->

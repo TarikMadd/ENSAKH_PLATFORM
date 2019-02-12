@@ -27,10 +27,10 @@
             echo $this->Form->input('titre');
             echo $this->Form->input('auteur');
             echo $this->Form->input('edition');
-            echo $this->Form->input('resumer');
+            echo $this->Form->input('resumer',["label"=>'Resumé']);
             echo $this->Form->input('ISBN');
-            echo $this->Form->input('nbExemplaire' , ['label' => "nombre d'éxemplaires"]);
-            echo $this->Form->input('categorie', ['label' => 'Catégorie','empty'=> '(choisissez une Catégorie)', 'options' => $categorie, 'onchange'=>"this.form.submit()"]);
+            echo $this->Form->input('nbExemplaire' , ['label' => "Nombre d'exemplaire "]);
+            echo $this->Form->input('categorie', ['label' => 'Catégorie','empty'=> '(Choisissez une Catégorie)', 'options' => $categorie, 'onchange'=>"this.form.submit()"]);
             if (isset($selection)) {
               echo $this->Form->input('sous_categorie_id', ['label' => 'Sous Catégorie', 'options' => $souscategorie]);
             }

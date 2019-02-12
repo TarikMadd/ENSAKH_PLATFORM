@@ -10,7 +10,7 @@
   </h1>
   <ol class="breadcrumb">
     <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'index_mouvements'], ['escape' => false]) ?>
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Retour'), ['action' => 'index_mouvements'], ['escape' => false]) ?>
     </li>
   </ol>
 </section>
@@ -31,12 +31,12 @@
           <div class="box-body">
           <?php
             echo $this->Form->input('reference_entree',['required' => true]);
-            echo $this->Form->input('quantite_entree',['required' => true]);
+            echo $this->Form->input('quantite_entree',['required' => true],array('type'=>'number', 'min'=>0));
           ?>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <?= $this->Form->button(__('Save')) ?>
+            <?= $this->Form->button(__('Sauvegarder')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>

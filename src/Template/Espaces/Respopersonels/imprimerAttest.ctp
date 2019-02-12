@@ -1,5 +1,5 @@
 <?php echo $this->Html->image('logo.png'); ?>
-<?php $this->layout = 'AdminLTE.print'; ?>
+
 
 
 <!-- Main content -->
@@ -51,7 +51,7 @@
            - NOM ET PRENOM :<?= $nom.' '. $prenom ?><br><br><br><br>
            - N° de C.I.N : <?= $cin ?><br><br><br><br>
            - N° de  P.P.R : <?= $somme ?><br><br><br><br>
-           - GRADE : <?= $nomGrade ?> <br><br><br><br>
+           - GRADE : Professeur Assistant<br><br><br><br>
            - DATE DE RECRUTEMENT:<?= $daterec ?><br><br><br>
            - LIEU DE TRAVAIL : Ecole nationale des sciences appliquées de Khouribga<br><br><br>
            La présente attestation est délivrée à l’intéressé pour servir et valoir ce que de droit.<br><br><br>
@@ -72,3 +72,4 @@
         <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'consultationDemande',$id], ['escape' => false]) ?>
         </li>
       </ol>
+<?php $this->layout = 'AdminLTE.print'; ?>

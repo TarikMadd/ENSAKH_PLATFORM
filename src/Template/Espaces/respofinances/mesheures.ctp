@@ -27,9 +27,9 @@
                             <tr>
                                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                                 <th scope="col">Professeur</th>
-                                <th scope="col">anne</th>
+                                <th scope="col">annee</th>
                                 <th scope="col">mois</th>
-                                <th scope="col">nb Heures</th>
+                                <th scope="col">nbr Heures</th>
                                 <th scope="col">etat</th>
 
                                 <th scope="col" class="actions"><?= __('Actions') ?></th>

@@ -6,7 +6,7 @@
           <div class="alert alert-danger alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <h4>  <i class="icon fa fa-check"></i>Refus</h4>
-                    Votre dmande a été refusée !
+                    Votre demande a été refusée !
                   </div>
         <?php }
         ?>

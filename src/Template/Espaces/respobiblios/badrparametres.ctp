@@ -5,7 +5,7 @@
 ?>
 <section class="content-header">
   <h1>
-    Paramètre
+    Paramètres
   </h1>
   <ol class="breadcrumb">
     <li>
@@ -32,9 +32,9 @@
             echo $this->Form->input('maxProfVac',['label' => 'Maximum des ouvrages empruntés par un professeur vacataire']);
             echo $this->Form->input('maxProfPer',['label' => 'Maximum des ouvrages empruntés par un professeur Permanent']);
             echo $this->Form->input('maxEtud',['label' => 'Maximum des ouvrages empruntés par un étudiant']);
-            echo $this->Form->input('dureeEmprunteProf',['label' => "la durée maximale d'emprunte  par un professuer(jours)"]);
-            echo $this->Form->input('dureeEmprunteEtud',['label' => "la durée maximale d'emprunte  par un étudiant(jours)"]);
-            echo $this->Form->input('dureeReservation',['label' => "la durée maximale d'une résérvation(jours)"]);
+            echo $this->Form->input('dureeEmprunteProf',['label' => "la durée maximale d'emprunt  par un professeur(jours)"]);
+            echo $this->Form->input('dureeEmprunteEtud',['label' => "la durée maximale d'emprunt  par un étudiant(jours)"]);
+            echo $this->Form->input('dureeReservation',['label' => "la durée maximale d'une réservation(jours)"]);
           ?>
           </div>
           <!-- /.box-body -->

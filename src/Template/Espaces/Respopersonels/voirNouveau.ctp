@@ -1,8 +1,6 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <h1>
-    Liste des professeurs qui ont déposés des demandes de certificats :
-      </h1>
+
 </section>
 
 <!-- Main content -->
@@ -10,33 +8,25 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="box">
-        <div class="box-header">
-          <h3 class="box-title"><?= __('List of') ?> Documents Professeurs</h3>
-          <div class="box-tools">
-            <form action="<?php echo $this->Url->build(); ?>" method="POST">
-              <div class="input-group input-group-sm"  style="width: 180px;">
-                <input type="text" name="search" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
-                <span class="input-group-btn">
-                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
-                </span>
-              </div>
-            </form>
-          </div>
+
         </div>
         <!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
+        <div class="panel panel-primary">
+           <div class="panel-heading"> Liste des professeurs qui ont déposé des demandes de certificats :</div>
+
           <table class="table table-hover">
             <tr>
-              <th><?= $this->Paginator->sort('nom_prof') ?></th>
-              <th><?= $this->Paginator->sort('prenom_prof') ?></th>
+              <th><?= $this->Paginator->sort('NOM PROFESSEUR') ?></th>
+              <th><?= $this->Paginator->sort('PRENOM PROFESSEUR') ?></th>
 
-              <th><?= __('Actions') ?></th>
+              <th><?= __('ACTIONS ') ?></th>
             </tr>
             <?php $precedent[1]=0;?>
             <?php foreach ($ProfpermanentsDocuments as $documentsProfesseur): ?>
             <?php
 
-             if(!in_array($documentsProfesseur->profpermanent->id,$precedent)&& strcmp($documentsProfesseur->etatdemande, 'Demande envoyé') == 0)
+             if(!in_array($documentsProfesseur->profpermanent->id,$precedent)&& strcmp($documentsProfesseur->etatdemande, 'Demande envoyÃ©') == 0)
             {
             array_push($precedent,$documentsProfesseur->profpermanent->id);
 

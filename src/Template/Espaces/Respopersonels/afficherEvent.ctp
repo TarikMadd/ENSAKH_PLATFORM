@@ -1,11 +1,13 @@
+<section class="content">
+  <div class="row">
 <div class="box-header">
           <p class="text">Liste des événements organisés par les profs permanents à l'ENSA KHOURIBGA : <p>
           <div class="box-tools">
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <div class="input-group input-group-sm"  style="width: 180px;">
-                <input type="text" name="activiteCherch" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
+                <input type="text" name="activiteCherch" class="form-control" placeholder="<?= __('Rechercher par Nom ') ?>">
                 <span class="input-group-btn">
-                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
+                <button class="btn btn-info btn-flat" type="submit"><?= __('Filtrer') ?></button>
                 </span>
               </div>
             </form>
@@ -24,7 +26,7 @@ $i=1;
                         if(!in_array($professeursActivite->activite->id,$precedent))
                         {
                           array_push($precedent,$professeursActivite->activite->id);?>
-<div class="col-md-4" >
+<div class="col-md-4">
           <div class="small-box bg-aqua">
             <div class="inner">
             <?php if($professeursActivite->activite->photo<>''){?>
@@ -39,9 +41,6 @@ $i=1;
 
 
             </div>
-            <div >
-              <i ></i>
-            </div>
         <p class="text"><?php echo $this->Html->link(__('Comité organisateur'), ['action' => 'listerOrganisateur', $professeursActivite->activite->id], ['class'=>'btn btn-warning btn-xs']  );?></p>
           </div>
           </div><?php
@@ -52,4 +51,6 @@ echo '<br>';
 $i++;
 }}?>
 </div>
+</div>
+
 

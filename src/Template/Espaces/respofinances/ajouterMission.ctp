@@ -24,8 +24,10 @@
         <!-- form start -->
         <?= $this->Form->create($mission, array('role' => 'form')) ?>
           <div class="box-body">
+                    <input type="text" name='date_depart' class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+
           <?php
-            echo $this->Form->input('date_depart');
+            //echo $this->Form->input('date_depart');
             echo $this->Form->input('date_arrivee');
             echo $this->Form->select('mode_transport', ['voiture personnelle','voiture de service']);
             echo('<br>');

@@ -28,8 +28,8 @@
               <th><?= $this->Paginator->sort('role') ?></th>
               <th><?= $this->Paginator->sort('titre ouvrage') ?></th>
               <th><?= $this->Paginator->sort('numéro Inventaire') ?></th>
-              <th><?= $this->Paginator->sort('date Emprunte') ?></th>
-              <th><?= $this->Paginator->sort('delai') ?></th>
+              <th><?= $this->Paginator->sort('date Emprunt') ?></th>
+              <th><?= $this->Paginator->sort('délai') ?></th>
               <th><?= __('Etat') ?></th>
               <th><?= __('Actions') ?></th>
             </tr>
@@ -43,7 +43,7 @@
                 <td><?= $empreinter[$i]['delai'] ?></td>
                 <td class="etat" style="white-space:nowrap">
                   <?php 
-                    if (in_array($empreinter[$i]['id'], $deppassement)) echo '<button type="button" type="button" style="padding: 3px 8px" class="btn btn-danger btn-xs"></button>';
+                    if (in_array($empreinter[$i]['id'], $deppassement)) echo '<button type="button" type="button" class="btn btn-danger btn-xs"></button>';
                     else echo '<button type="button" type="button" class="btn btn-success btn-xs"></button>'; ?>
                 </td>
                 <td class="actions" style="white-space:nowrap">

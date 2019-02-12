@@ -405,7 +405,7 @@ class ingenieursController extends AppController {
             $actualiteclub->nom = $donne_demande[0]['nom'];
             $actualiteclubs[]=$actualiteclub;
         }
-         $donne_demande='';
+
         $this->set('donne_demande',$donne_demande);
 
 

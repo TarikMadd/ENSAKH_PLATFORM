@@ -64,7 +64,7 @@
                                     }
                                 }?>
                                     </div>
-                                    <?php endforeach; ?>
+                                 
                             <div class="col-xs-12 col-sm-4 emphasis">
                                 <div class="btn-group dropup btn-block">
                                     <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Options </button>
@@ -79,6 +79,22 @@
                                     </ul>
                                 </div>
                             </div>
+                              <div class="col-xs-12 col-sm-4 emphasis">
+                            <div class="btn-group dropup btn-block">
+                 <form method="post"  name="add" action=" <?php echo $this->Url->build('/respobiblios/imprimerprop', true) ?>">
+                                <input type="hidden" name="id" value="<?php echo $detail['id'];  ?>">
+                                <input type="hidden" name="Utulisateur" value="<?php echo $detail['nom']  ;echo $detail['prenom']; ?>">
+                                <input type="hidden" name="role" value="<?php echo $detail['role']; ?>">
+                                <input type="hidden" name="CNE/SOM" value="<?php echo $detail['code'] ?>">
+                                <input type="hidden" name="email" value="<?php echo $detail['email'] ?>">
+                                <input type="hidden" name="resumé" value="<?php echo $detail['resumer'] ?>">
+                               <input type="hidden" name="image" value="<?php echo $detail['fichier'] ?>">
+
+                                <button  id="add" type="submit" class="btn btn-info btn-block"><span class="fa fa-user"><span>Imprimer</button>
+                               </form>
+                               <?php endforeach; ?>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>

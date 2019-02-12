@@ -1,13 +1,9 @@
 <section class="content-header">
   <h1>
     Certificat
-    <small><?= __('Add') ?></small>
+   
   </h1>
-  <ol class="breadcrumb">
-    <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
-    </li>
-  </ol>
+ 
 </section>
 
 <!-- Main content -->
@@ -18,7 +14,7 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><?= __('Form') ?></h3>
+          <h3 class="box-title"><?= __('Ajouter certificat') ?></h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
@@ -36,17 +32,10 @@
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <?= $this->Form->button(__('Save'),['class'=>'fa fa-save']) ?>
+            <?= $this->Form->button(__('Enregistrer')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>
     </div>
   </div>
 </section>
-<script>
-  $('#type').change(function() {
-  var val = $(this).val();
-  if(val.indexOf('-stage') == -1)
-    $(this).val(val+'-stage');
-});
-</script>

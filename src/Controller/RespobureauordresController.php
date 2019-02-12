@@ -323,23 +323,23 @@ class respobureauordresController extends AppController {
         $CourrierDeparts =TableRegistry::get('CourrierDeparts');
         $courrierDepart = $CourrierDeparts->newEntity();
         if ($this->request->is('post')) {
-            //if(isset($_FILES) && (bool) $_FILES)
-            if (file_exists($_FILES['attach1']['tmp_name']) || is_uploaded_file($_FILES['attach1']['tmp_name']))
-            {
+            if(isset($_FILES) && (bool) $_FILES){
+
+
 
                 $allowedExtensions = array("pdf","docx","doc","gif","jpeg","jpg","png","rtf","txt","rar","zip",);
                 $files=array();
 
-                foreach ($_FILES as $name => $file) 
-                {
+                foreach ($_FILES as $name => $file) {
+
+
 
                     $file_name = $file['name'];
                     $temp_name = $file['tmp_name'];
 
                     $path_parts = pathinfo($file_name);
                     $ext = $path_parts['extension'];
-                    if(!in_array($ext, $allowedExtensions))
-                    {
+                    if(!in_array($ext, $allowedExtensions)){
                         $this->Flash->error(__('extension not allowed ', 'mail '));
                         return $this->redirect(['action' => 'envoyer']);
 
@@ -369,8 +369,7 @@ class respobureauordresController extends AppController {
                 $message .="Content-Transfer-Encoding: 7bit\n\n" . $msg . "\n\n";
                 $message .= "--{$mime_boundary}\n";
 
-                foreach ($files as $file) 
-                {
+                foreach ($files as $file) {
                     $aFile = fopen($file, "rb");
                     $data = fread($aFile, filesize($file));
                     fclose($aFile);
@@ -383,45 +382,10 @@ class respobureauordresController extends AppController {
                     $message .= "--{$mime_boundary}\n";
                 }
                 $ok = mail($to, $subject, $message ,$headers);
-                if ($ok) 
-                {
+                if ($ok) {
                     $this->Flash->success(__('l\' email est envoyé.'));
                     return $this->redirect(['action' => 'indexDepart1']);
-                }
-                else
-                {
-                    $this->Flash->error(__('l\' email ne peut pas etre envoyer! '));
-                    return $this->redirect(['action' => 'envoyer']);
-                }
-            }
-            else
-            {
-                $to = $this->request->data['email'];
-                $from = "ensakhouribga2007@gmail.com";
-                $subject = $this->request->data['subject'];
-                $msg = $this->request->data['msg'];
-                $headers = "From: $from";
-
-
-                $semi_rand = md5(time());
-                $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
-
-                $headers .= "\nMIME-Version: 1.0\n";
-                $headers .= "Content-Type: multipart/mixed;\n";
-                $headers .= " boundary=\"{$mime_boundary}\"";
-
-                $message ="\n\n--{$mime_boundary}\n";
-                $message .="Content-Type: text/plain; charset=\"iso-8859-1\"\n";
-                $message .="Content-Transfer-Encoding: 7bit\n\n" . $msg . "\n\n";
-                $message .= "--{$mime_boundary}\n";
-                $ok = mail($to, $subject, $message ,$headers);
-                if ($ok) 
-                {
-                    $this->Flash->success(__('l\' email est envoyé.'));
-                    return $this->redirect(['action' => 'indexDepart1']);
-                }
-                else
-                {
+                }else{
                     $this->Flash->error(__('l\' email ne peut pas etre envoyer! '));
                     return $this->redirect(['action' => 'envoyer']);
                 }
@@ -452,7 +416,8 @@ class respobureauordresController extends AppController {
 
         $this->paginate = ['contain' => ['Destinataires']];
 
-        $con= ConnectionManager::get('default');
+        $dsn = 'mysql://root:password@localhost/ensaksite';
+        $con= ConnectionManager::get('default', ['url' => $dsn]);
 
 
         for($i=1;$i<9;$i++)
@@ -708,7 +673,6 @@ class respobureauordresController extends AppController {
 
     public function viewArrivee($id = null)
     {
-        $connection=ConnectionManager::get('default');
         $CourrierArrivees=TableRegistry::get('CourrierArrivees');
         $courrierArrivee = $CourrierArrivees->get($id, ['contain' => ['Expediteurs','Services']]);
 
@@ -727,7 +691,7 @@ class respobureauordresController extends AppController {
         $connection=ConnectionManager::get('default');
         $CourrierArrivees=TableRegistry::get('CourrierArrivees');
 
-        $courrierArrivee = $connection->execute('SELECT courrier_arrivees.courrier,courrier_arrivees.accuse,courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees
+        $courrierArrivee = $connection->execute('SELECT courrier_arrivees.courrier,courrier_arrivees.accuse,courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees
             JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id
 
             ')->fetchAll('assoc');
@@ -1031,11 +995,15 @@ class respobureauordresController extends AppController {
         $CourrierArrivees=TableRegistry::get('CourrierArrivees');
         $courrierArrivee = $CourrierArrivees->get($id, ['contain' => ['Expediteurs','Services']]);
 
+
         $this->set('courrierArrivee', $courrierArrivee);
-       $courrierArrivee = $CourrierArrivees->get($id, [
+
+        $courrierArrivee = $CourrierArrivees->get($id, [
             'contain' => ['Services']
         ]);
-                if ($this->request->is(['patch', 'post', 'put'])) {
+
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
             $courrierArrivee = $CourrierArrivees->patchEntity($courrierArrivee, $this->request->data);
             if ($CourrierArrivees->save($courrierArrivee)) {
                 $this->Flash->success(__('Bien enregistré .', 'Courrier Arrivee'));
@@ -1101,7 +1069,7 @@ class respobureauordresController extends AppController {
         //$CourrierArrivees=TableRegistry::get('CourrierArrivees');
         $this->paginate = ['contain' => ['Expediteurs','Services']];
         // $courrierArrivees = $this->paginate($CourrierArrivees);
-        $courrierArrivee = $connection->execute('SELECT courrier_arrivees.courrier,courrier_arrivees.accuse,courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees
+        $courrierArrivee = $connection->execute('SELECT courrier_arrivees.courrier,courrier_arrivees.accuse,courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees
             JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id
 
             ')->fetchAll('assoc');
@@ -1126,9 +1094,10 @@ class respobureauordresController extends AppController {
         $this->set('services',$services);
 
         $CourrierArrivees =TableRegistry::get('CourrierArrivees');
-        $con= ConnectionManager::get('default');
+        $dsn = 'mysql://root:password@localhost/ensaksite';
+        $con= ConnectionManager::get('default', ['url' => $dsn]);
 
-        for($i=1;$i<=11;$i++)
+        for($i=1;$i<11;$i++)
         {
             if(!empty($_POST['cat'.$i.'']))
             {
@@ -1148,15 +1117,9 @@ class respobureauordresController extends AppController {
         $cat5=$catt[5];
         $cat6=$catt[6];
         $cat9=$catt[9];
-        
 
 
         $cat10=$catt[10];
-        $cat11 = $catt[11];
-
-
-        
-
         if(!empty($_POST['cat7']))
         {
             $cat7=$_POST['cat7'];
@@ -1183,39 +1146,38 @@ class respobureauordresController extends AppController {
         if($cat4=="Oui")
         {
 
-            $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%' AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%' AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+            $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%' AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%'")->fetchAll('assoc');
         }
         elseif($cat4=="Non")
         {
 
-            $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%' ")->fetchAll('assoc');
+            $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') ")->fetchAll('assoc');
         }
         else{
             if($cat6!=NULL)
             {
                 if($cat10 == NULL)
                 {
-                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') ")->fetchAll('assoc');
                 }
                 else
                 {
-                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%' AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%' ")->fetchAll('assoc');
                 }
             }
             else
             {
                 if($cat10== NULL)
                 {
-                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%'  ")->fetchAll('assoc');
                 }
                 else
                 {
-                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%' AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%'  ")->fetchAll('assoc');
                 }
             }
+
         }
-
-
         $this->set('courrierArrivees',$courrierArrivees);
         $this->render('/Espaces/respobureauordres/filterArrivee');
     }
@@ -1231,7 +1193,7 @@ class respobureauordresController extends AppController {
         //$CourrierArrivees=TableRegistry::get('CourrierArrivees');
         $this->paginate = ['contain' => ['Expediteurs','Services']];
         // $courrierArrivees = $this->paginate($CourrierArrivees);
-        $courrierArrivee = $connection->execute('SELECT courrier_arrivees.courrier,courrier_arrivees.accuse,courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees
+        $courrierArrivee = $connection->execute('SELECT courrier_arrivees.courrier,courrier_arrivees.accuse,courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees
             JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id
 
             ')->fetchAll('assoc');
@@ -1256,9 +1218,10 @@ class respobureauordresController extends AppController {
         $this->set('services',$services);
 
         $CourrierArrivees =TableRegistry::get('CourrierArrivees');
-        $con= ConnectionManager::get('default');
+        $dsn = 'mysql://root:password@localhost/ensaksite';
+        $con= ConnectionManager::get('default', ['url' => $dsn]);
 
-        for($i=1;$i<12;$i++)
+        for($i=1;$i<11;$i++)
         {
             if(!empty($_POST['cat'.$i.'']))
             {
@@ -1279,8 +1242,8 @@ class respobureauordresController extends AppController {
         $cat6=$catt[6];
         $cat9=$catt[9];
 
+
         $cat10=$catt[10];
-        $cat11=$catt[11];
         if(!empty($_POST['cat7']))
         {
             $cat7=$_POST['cat7'];
@@ -1307,34 +1270,34 @@ class respobureauordresController extends AppController {
         if($cat4=="Oui")
         {
 
-            $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%' AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%' AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+            $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%' AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%'")->fetchAll('assoc');
         }
         elseif($cat4=="Non")
         {
 
-            $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+            $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') ")->fetchAll('assoc');
         }
         else{
             if($cat6!=NULL)
             {
                 if($cat10 == NULL)
                 {
-                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') ")->fetchAll('assoc');
                 }
                 else
                 {
-                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%' AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.service_id IN(SELECT services.id FROM services WHERE services.nom_service LIKE'%" .$cat6. "%') AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%' ")->fetchAll('assoc');
                 }
             }
             else
             {
                 if($cat10== NULL)
                 {
-                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%'")->fetchAll('assoc');
+                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%'  ")->fetchAll('assoc');
                 }
                 else
                 {
-                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement,courrier_arrivees.courrier_retourne FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%' AND courrier_arrivees.courrier_retourne LIKE '%" .$cat11. "%' ")->fetchAll('assoc');
+                    $courrierArrivees=$con->execute("SELECT courrier_arrivees.id,courrier_arrivees.etat_du_courrier, courrier_arrivees.expediteur_id,expediteurs.nomComplet_expediteur, courrier_arrivees.service_id, courrier_arrivees.date_arrivee,courrier_arrivees.Désignation,courrier_arrivees.type_courrier,courrier_arrivees.necessité_du_traitement,courrier_arrivees.Priorité,courrier_arrivees.date_limite_du_traitement FROM courrier_arrivees JOIN expediteurs ON courrier_arrivees.expediteur_id= expediteurs.id WHERE courrier_arrivees.id LIKE '%" .$cat1. "%' AND courrier_arrivees.date_arrivee LIKE '%" .$cat2. "%' AND courrier_arrivees.Désignation LIKE '%" .$cat3. "%' AND courrier_arrivees.necessité_du_traitement LIKE '%" .$cat4. "%' AND courrier_arrivees.type_courrier LIKE '%" .$cat5. "%'  AND courrier_arrivees.expediteur_id IN(SELECT expediteurs.id FROM expediteurs WHERE expediteurs.nomComplet_expediteur LIKE'%" .$cat9. "%') AND courrier_arrivees.Priorité LIKE '%" .$cat7. "%' AND courrier_arrivees.etat_du_courrier LIKE '%" .$cat8. "%' AND courrier_arrivees.date_limite_du_traitement LIKE '%" .$cat10. "%'  ")->fetchAll('assoc');
                 }
             }
 
@@ -1380,7 +1343,216 @@ class respobureauordresController extends AppController {
     }
 
 
+/****** Bouhsise *****/
 
+//DEBUT IBTISSAM +kawtar
+    public function demanderabsences()
+    {
+        $_SESSION['auto'] = "none";
+        $user_id = $this->Auth->user('id');
+        $con=ConnectionManager::get('default');
+
+        $id = $con->execute("SELECT id FROM fonctionnaires WHERE user_id = $user_id")->fetchAll('assoc');
+        //debug($id); die;
+        $fonct_id = $id[0]['id'];
+
+        $nbr = $con->execute("SELECT COUNT(*) as n FROM absences WHERE fonctionnaire_id = $fonct_id")->fetchAll('assoc');
+        $duree = $con->execute("SELECT duree_ab FROM absences WHERE fonctionnaire_id = $fonct_id")->fetchAll('assoc');
+        $d =0;
+        for ($i=0; $i < $nbr[0]['n']; $i++)
+        {
+            $d += $duree[$i]['duree_ab'];
+        }
+
+        if(isset($_POST['submit']))
+        {
+
+            $duree_ab = $_POST['duree_ab'];
+            $cause = $_POST['cause'];
+            $date_ab = $_POST['date'];
+
+            if (empty($_POST['time']))
+            {
+                $time_ab = 0;
+
+            }
+            else
+            {
+                $time_ab = $_POST['time'];
+            }
+
+            if($d>'13')
+            {
+                $_SESSION['auto'] ="no";
+            }
+            else
+            {
+                $_SESSION['auto'] ="yes";
+                $con->execute("INSERT INTO absences (fonctionnaire_id,duree_ab,cause,date_ab,time_ab) VALUES ($fonct_id,$duree_ab,'$cause','$date_ab','$time_ab')");
+
+            } }
+
+        $this->render('/Espaces/respobureauordres/demanderabsences');
+    }
+    public function demanderDocFct()
+    {
+        $ProfpermanentsDocuments=TableRegistry::get('FonctionnairesDocuments');
+        $documentsProfesseur = $ProfpermanentsDocuments->newEntity();
+        $documentbis=TableRegistry::get('Documents');
+        $documentbis=$documentbis->find('all');
+        $profbis=TableRegistry::get('Fonctionnaires');
+        $profbis=$profbis->find('all');
+        $idUser=$this->Auth->user('id');
+        $profpermanents=TableRegistry::get('Fonctionnaires');
+        $query=$profpermanents->find('all')->select('id')->where(['user_id'=>$idUser]);
+
+        foreach($query as $ligne)
+        {
+            $usrid=$ligne->id;
+        }
+
+        if ($this->request->is('post')){
+
+            $documentsProfesseur->fonctionnaire_id =$usrid;
+            $documentsProfesseur->document_id =$this->request->data('nomDoc');
+            //requete pour une demande déja effectué
+            $requete = $ProfpermanentsDocuments->find('all',array('conditions' => array('FonctionnairesDocuments.fonctionnaire_id' => $usrid
+            ,   'FonctionnairesDocuments.document_id' => $this->request->data('nomDoc'))));
+            $nombre=0;
+            foreach($requete as $resultat)
+            {
+                if($resultat->etatdemande=='Demande envoyé' or $resultat->etatdemande=='Prete' or $resultat->etatdemande=='En cours de traitement')
+                {
+                    $nombre++;
+                }
+            }
+
+            $Profpermanents=TableRegistry::get('Fonctionnaires');
+            $identifiantDoc=$this->request->data('nomDoc');
+
+            switch($identifiantDoc)
+            {
+                case 1:
+                {
+                    $nbtentativebis=$Profpermanents->find('all')->select('etat_attestation')->where(['id'=>$usrid]);
+                    foreach ($nbtentativebis as $value) {
+                        $nombrebis=$value->etat_attestation;
+
+                    }
+
+                    if($nombrebis>3)
+                    {
+                        $this->Flash->error(__('Vous avez dépassé le nombre maximum des attestations , pour plus d\'infos veuillez nous conatcter au service'));
+                        break;
+                    }
+
+                    elseif($nombre>=1)
+                    {
+                        $this->Flash->error(__('Echéc d\'envoi ... Déja vous avez '.$nombre.' demande(s) dans le service, veuillez attender Svp'));
+                        break;
+                    }
+                    elseif($ProfpermanentsDocuments->save($documentsProfesseur)) {
+                        $nombrebis++;
+                        $query=$profpermanents->find('all')->update()->set(['etat_attestation' => $nombrebis])->where(['id' => $usrid]);
+                        $query->execute();
+
+                        $this->Flash->success(__('Demande envoyée.'));
+
+                        return $this->redirect(['controller'=>'Respobureauordres','action' => 'index']);
+                    }
+                    else{
+                        $this->Flash->error(__('Demande échouée'));
+
+                    }
+
+
+
+                    break;
+                }
+                case 2:
+                {
+                    // debug($usrid);
+                    $nbtentativebis=$profpermanents->find('all')->select('etat_fiche')->where(['id'=>$usrid]);
+                    foreach ($nbtentativebis as $value) {
+                        $nombrebis=$value->etat_attestation;
+
+                    }
+                    $nombrebis=count($nbtentativebis);
+                    if($nombrebis>3)
+                    {
+                        $this->Flash->error(__('Vous avez dépassé le nombre maximum des fiches de salaire, pour plus d\'infos veuillez nous conatcter au service'));
+                        break;
+                    }
+                    elseif($nombre>=1)
+                    {
+                        $this->Flash->error(__('Echec d\'envoi ... Déja vous avez '.$nombre.'  demande(s) dans le service , veuillez attender Svp'));
+                    }
+                    elseif ($ProfpermanentsDocuments->save($documentsProfesseur)) {
+                        $nombrebis++;
+                        $query=$profpermanents->find('all')->update()->set(['etat_fiche' => $nombrebis])->where(['id' => $usrid]);
+                        $query->execute();
+                        $this->Flash->success(__('Demande envoyée.'));
+
+                        return $this->redirect(['controller'=>'Respobureauordres','action' => 'index']);
+                    }
+                    else{
+                        $this->Flash->error(__('Demande echouée'));
+
+                    }
+
+                }
+            }
+
+
+        }
+
+        $profpermanents = $ProfpermanentsDocuments->fonctionnaires->find('list', ['limit' => 200]);
+        $documents = $ProfpermanentsDocuments->Documents->find('list', ['limit' => 200]);
+        $this->set('doc',$documentbis);
+        $this->set('prof',$profbis);
+        $this->set(compact('documentsProfesseur', 'profpermanents', 'documents'));
+        $this->set('_serialize', ['documentsProfesseur']);
+        $this->render('/Espaces/respobureauordres/demanderDocFct');
+
+    }
+    public function etatDemandeFct()
+    {
+        $idUser = $this->Auth->user('id');
+        $Foncts = TableRegistry::get('Fonctionnaires');
+        $query = $Foncts->find('all')->select('id')->where(['user_id' => $idUser]);
+        foreach ($query as $ligne) {
+            $ide = $ligne->id;
+            break;
+        }
+        $this->paginate = [
+            'contain' => ['Fonctionnaires', 'Documents']
+        ];
+        $FonctionnairesDocuments = TableRegistry::get('FonctionnairesDocuments');
+        $FonctionnairesDocuments = $this->paginate($FonctionnairesDocuments->find("all", array(
+                "joins" => array(
+                    array(
+                        "table" => "Fonctionnaires",
+                        "conditions" => array(
+                            "FonctionnairesDocuments.fonctionnaire_id = Fonctionnaires.id"
+                        )
+                    ),
+                    array(
+                        "table" => "Documents",
+                        "conditions" => array(
+                            "FonctionnairesDocuments.document_id = Documents.id"
+                        )
+                    )
+                ),
+                'conditions' => array(
+                    'FonctionnairesDocuments.fonctionnaire_id' => $ide)
+            )
+        ));
+        $this->set(compact('FonctionnairesDocuments'));
+        $this->set('_serialize', ['FonctionnairesDocuments']);
+        $this->render('/Espaces/respobureauordres/etatDemandeFct');
+
+    }
+    // FIN KAWTAR + IBTISSAM
 
 
 }

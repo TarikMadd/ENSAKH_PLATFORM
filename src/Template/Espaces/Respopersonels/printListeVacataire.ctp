@@ -29,11 +29,11 @@
 $day  = date('d');
 $day=$day+5;
 $year = date('y');
-$month  = date('m ');;
+$month  = date('m');;
 if($day>29)
 {
 	$day=$day-29;
-$month=$month+1;
+$month=$month+01;
 	if($month>12)
 	{
 		$year=$year+1;

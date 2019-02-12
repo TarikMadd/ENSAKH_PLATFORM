@@ -35,7 +35,7 @@ ENSA-KHOURIBGA<br>
 
     <?php foreach ($resultat as $resultats): ?>
             <tr><td><?=$resultats[1]?> au <?=$resultats[2]?></td><td>KHOURIBGA- <?=$resultats[0]?></td>
-            <td><?=$resultats[3]?></td><td>motif</td>
+            <td><?=$resultats[3]?></td><td><?=$resultats[4]?></td>
             </tr>
     <?php endforeach; ?>
 </table>

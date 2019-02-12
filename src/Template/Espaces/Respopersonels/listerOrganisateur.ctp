@@ -18,7 +18,7 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Contribution des profs permanents à : <?= $nomAct ?> <br> </h3>
+            <h3 class="box-title">Contribution des professeurs permanents à : <?= $nomAct ?> <br> </h3>
 
           </div>
           <!-- /.box-header -->

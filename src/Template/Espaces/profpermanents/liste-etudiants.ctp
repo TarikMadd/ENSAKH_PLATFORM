@@ -6,6 +6,28 @@
 //echo '</pre>';
 //die();
 ?>
+<?php if ($first_time && $access_type == "consulter"):  ?>
+<section class="content">
+    <div id="header_botton" class="row">
+        <div class="col-md-6" style="width: 100% !important; margin-left: 0 !important; margin-bottom: 10px;">
+            <center>
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4>	<i class="icon fa fa-check"></i> Rien à afficher !</h4>
+                        
+                    </div>
+            </center>
+                <form method="POST" action="showElement">
+                    <button style=" background-color: #fff; margin-bottom: 2px; " type="submit" class="btn btn-block btn-default">Liste Element</button>
+                </form>
+                <form method="POST" action="showModel">
+                        <button style=" background-color: #fff;  margin-bottom: 2px;" type="submit" class="btn btn-block btn-default">Liste Module</button>
+                </form>
+                
+        </div>
+    </div>
+</section>
+<?php else:  ?>
 <section class="content">
     <div id="header_botton" class="row">
         <div class="col-md-6" style="width: 100% !important; margin-left: 0 !important; margin-bottom: 10px;">
@@ -27,11 +49,20 @@
             <div class="box box-info">
                 <div id="main_table" class="box-header with-border">
                     <h3 class="box-title">Niveau  : <?php echo $semestre[0]['niveaus_lib']; ?>
-                                <br/><br> Filiere : <?php echo $semestre[0]['filieres_lib']; ?><br/><br>
-                                          Element : <?php echo $etudiants[0]['libile']; ?>      
+                                <br/><br> Filière : <?php echo $semestre[0]['filieres_lib']; ?><br/><br>
+                                          Élément : <?php echo $etudiants[0]['libile']; ?>      
                     </h3>
                     <h3 class="box-title txt-annee" style="float: right;" >ANNEE UNIVERSITAIRE : <?php echo $anneeScolaire[0]['libile']; ?><br/><br/><span style="float: right" ><?php echo ' SEMESTRE : '.$semestre[0]['semestres_lib']; ?></span></h3>
                 </div><!-- /.box-header -->
+                <?php if(isset($statisticNotes) && !empty($statisticNotes)): ?>
+                <div id="main_table" class="box-header with-border">
+                    <h3 class="box-title">Note moyenne  : <?php echo number_format((float)$statisticNotes[0]['avg_note'], 2, '.', ''); ?>
+                                <br/><br> Note minimale : <?php echo $statisticNotes[0]['min_note']; ?><br/><br>
+                                          Note maximale : <?php echo $statisticNotes[0]['max_note']; ?>      
+                    </h3>
+                    <h3 class="box-title txt-annee" style="float: right;" >Note saisie : <?php  echo (count($etudiants) - $restASaisir[0]['non_saisie']); ?><br/><br/><span style="float: right" ><?php echo ' Reste à saisir : '.$restASaisir[0]['non_saisie']; ?></span></h3>
+                </div><!-- /.box-header -->
+                <?php endif ?> 
                 <!-- form start -->
                 <form class="form-horizontal" method="POST" action="ajouter-notes" enctype='multipart/form-data'>
                   
@@ -69,13 +100,13 @@
                                 <tbody><tr>
                                   <th>CNE</th>
                                   <th>Nom</th>
-                                  <th>Prenom</th>
+                                  <th>Prénom</th>
                                   <th>Note</th>
-                                  <th>Confermed</th>
-                                  <th>Saved</th>
+                                  <th>Confirmé</th>
+                                  <th>Enregistré</th>
                                   <th>Note Ratt</th>
-                                  <th>Confermed</th>
-                                  <th>Saved</th>
+                                  <th>Confirmé</th>
+                                  <th>Enregistré</th>
                                   <th>Inséré le </th>
                                   <th>Mis à jour le</th>
                                 </tr>
@@ -101,8 +132,8 @@
                                                     </div>
                                                 </td>
                                             <?php endif ?>
-                                            <td><span class="label label-danger">not confirmed</span></td>
-                                            <td><span class="label label-danger">not saved</span></td>
+                                            <td><span class="label label-danger">Non confirmé</span></td>
+                                            <td><span class="label label-danger">Non Enregistré</span></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -143,16 +174,21 @@
                                           ?>
                                           <?php 
                                            if ($element['confirmed']) {
-                                               echo '<td><span class="label label-success">confermed</span></td>';
+                                               echo '<td><span class="label label-success">Confirmé</span></td>';
                                            }
                                            else{
-                                               echo '<td><span class="label label-danger">not confirmed</span></td>';
+                                               echo '<td><span class="label label-danger">Non confirmé</span></td>';
                                            }
                                            if($element['saved']){
-                                               echo '<td><span class="label label label-success">saved</span></td>';
+                                               if($element['note'] != null){
+                                                    echo '<td><span class="label label label-success">Enregistré</span></td>';
+                                               }
+                                               else{
+                                                   echo '<td></td>';
+                                               }
                                            }
                                            else{
-                                               echo '<td><span class="label label-danger">not saved</span></td>';
+                                               echo '<td><span class="label label-danger">Non Enregistré</span></td>';
                                            }
                                          ?>
                                         <?php 
@@ -185,16 +221,16 @@
                                       <?php 
                                         if($element['note'] < 12){
                                             if ($element['ratt_confirmed']) {
-                                                echo '<td><span class="label label-success">confermed</span></td>';
+                                                echo '<td><span class="label label-success">Confirmé</span></td>';
                                             }
                                             else{
-                                                echo '<td><span class="label label-danger">not confirmed</span></td>';
+                                                echo '<td><span class="label label-danger">Non confirmé</span></td>';
                                             }
                                             if($element['ratt_saved']){
-                                                echo '<td><span class="label label label-success">saved</span></td>';
+                                                echo '<td><span class="label label label-success">Enregistré</span></td>';
                                             }
                                             else{
-                                                echo '<td><span class="label label-danger">not saved</span></td>';
+                                                echo '<td><span class="label label-danger">Non Enregistré</span></td>';
                                             }
                                         }
                                         else{
@@ -240,13 +276,13 @@
                             if((isset($haveMore) && $haveMore) || !isset($haveMore) || $for_pv == 1){
                                 if($access_type !== "consulter")  {
                                     echo '<label class="btn btn-default btn-file" style=" margin-left: 10px; ">';
-                                        echo 'Browse <input name="csv_notes" type="file" hidden>';
+                                        echo 'Insérer depuis csv <input name="csv_notes" type="file" hidden>';
                                     echo '</label>';
                                     if($first_time){
-                                        echo '<button id="save" style="margin-right: 10px;margin-bottom: 20px;position: absolute;margin-left: 10px;" name="action"  value="insert_csv" type="submit" class="btn btn-info pull-right">upload notes</button>';
+                                        echo '<button id="save" style="margin-right: 10px;margin-bottom: 20px;position: absolute;margin-left: 10px;" name="action"  value="insert_csv" type="submit" class="btn btn-info pull-right">Envoyer</button>';
                                     }
                                     else{
-                                        echo '<button id="save" style="margin-right: 10px;margin-bottom: 20px;position: absolute;margin-left: 10px;" name="action" value="update_csv"  type="submit" class="btn btn-info pull-right">upload notes</button>';
+                                        echo '<button id="save" style="margin-right: 10px;margin-bottom: 20px;position: absolute;margin-left: 10px;" name="action" value="update_csv"  type="submit" class="btn btn-info pull-right">Envoyer</button>';
                                     }
                                 }
                             }
@@ -267,7 +303,7 @@
                             <?php if($access_type !== "consulter") : ?>
                                 <button id="confirmer" style=" margin-right: 10px; margin-bottom: 20px; " name="action" value="confirme"  type="submit" class="btn btn-warning pull-right">confirmer</button>
                                 <?php if(!$for_pv): ?>
-                                    <button id="save" style=" margin-right: 10px; margin-bottom: 20px; " name="action" value="save" type="submit" class="btn btn-info pull-right">save</button>
+                                    <button id="save" style=" margin-right: 10px; margin-bottom: 20px; " name="action" value="save" type="submit" class="btn btn-info pull-right">Enregistrer</button>
                                 <?php endif ?>
                             <?php endif ?>
                         <?php endif ?>
@@ -284,3 +320,4 @@
     
    
 </section>
+<?php endif ?>

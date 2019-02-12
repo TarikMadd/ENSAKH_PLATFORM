@@ -113,10 +113,10 @@ if($box_msg_note != null){
                     <table class="table table-hover">
                         <tbody>
                         <tr>
-                            <th>nivaux</th>
-                            <th>feliere</th>
-                            <th>modele</th>
-                            <th>element</th>
+                            <th>niveaux</th>
+                            <th>filière</th>
+                            <th>module</th>
+                            <th>élément</th>
                             <th>reste à saisir</th>
                         </tr>
                         <?php if(isset($box_msg_note) && $box_msg_note!= null): ?>
@@ -182,13 +182,13 @@ if($box_msg_note != null){
                                             <div class="col-sm-4 border-right">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $element['code'] ;?></h5>
-                                                    <span class="description-text">code</span>
+                                                    <span class="description-text">CODE</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                             <div class="col-sm-4 border-right">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $element['libile'] ;?></h5>
-                                                    <span class="description-text">libile</span>
+                                                    <span class="description-text">ÉTIQUETTE</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                             <div  class="col-sm-4">
@@ -203,19 +203,19 @@ if($box_msg_note != null){
                                             <div class="col-sm-4 border-right">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $element['nbr'][0]['nombre_etudiants'] ;?></h5>
-                                                    <span class="description-text">Nombre Etudiant</span>
+                                                    <span class="description-text">NOMBRE D'ÉTUDIANT</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                             <div class="col-sm-4 border-right">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $element['nbr_note'][0]['nbr_etudiant_note'] ;?></h5>
-                                                    <span class="description-text">Etudiant avec note</span>
+                                                    <span class="description-text">ÉTUDIANT AVEC NOTE</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                             <div class="col-sm-4">
                                                 <div class="description-block">
                                                     <h5 class="description-header"><?php echo $reste = $element['nbr'][0]['nombre_etudiants'] - $element['nbr_note'][0]['nbr_etudiant_note'] ;?></h5>
-                                                    <span class="description-text">Etudiant reste</span>
+                                                    <span class="description-text">ÉTUDIANTS RESTE</span>
                                                 </div><!-- /.description-block -->
                                             </div><!-- /.col -->
                                         </div>

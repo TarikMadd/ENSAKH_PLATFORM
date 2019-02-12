@@ -1,1 +1,1 @@
-//Vous etes connécté en tant que <?= $role ?>
+Vous etes connécté en tant que <?= $role ?>

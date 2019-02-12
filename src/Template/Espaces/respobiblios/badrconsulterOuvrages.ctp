@@ -11,7 +11,7 @@
     <div class="col-xs-12">
       <div class="box">
       <div class="box-header">
-          <h3 class="box-title">Les Ouvrages Disponible</h3>
+          <h3 class="box-title">Les Ouvrages Disponibles</h3>
           <div class="box-tools">
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <div class="input-group input-group-sm"  style="width: 300px;">
@@ -32,10 +32,9 @@
               <th><?= $this->Paginator->sort('titre') ?></th>
               <th><?= $this->Paginator->sort('auteur') ?></th>
               <th><?= $this->Paginator->sort('édition') ?></th>
-              <th><?= $this->Paginator->sort('resumer') ?></th>
+              <th><?= $this->Paginator->sort('resumé') ?></th>
               <th><?= $this->Paginator->sort('ISBN') ?></th>
               <th><?= __('Etat') ?></th>
-              <th><?= __('Actions') ?></th>
             </tr>
             <?php for ($i=0;$i<count($book);$i++) { ?>
               <tr>
@@ -47,13 +46,9 @@
                 <td><?= $book[$i]['ISBN'] ?></td>
                 <td class="Etat" style="white-space:nowrap">
                   <?php 
-                    if (in_array($book[$i]['id'], $empreinte)) echo '<button type="button" type="button" class="btn btn-danger btn-xs">empreintée</button>';
-                    else if (in_array($book[$i]['id'], $reservation)) echo '<button type="button" type="button" class="btn btn-warning btn-xs">résérvée</button>';
+                    if (in_array($book[$i]['id'], $empreinte)) echo '<button type="button" type="button" class="btn btn-danger btn-xs">Emprunté</button>';
+                    else if (in_array($book[$i]['id'], $reservation)) echo '<button type="button" type="button" class="btn btn-warning btn-xs">Réservé</button>';
                     else echo '<button type="button" type="button" class="btn btn-success btn-xs">disponible</button>'; ?>
-                </td>
-                <td class="actions" style="white-space:nowrap">
-                  <?= $this->Html->link(__('Edit'), ['action' => 'badrmodifier', $book[$i]['id']], ['class'=>'btn btn-warning btn-xs']) ?>
-                  <?= $this->Form->postLink(__('Delete'), ['action' => 'badrsupprimer', $book[$i]['id']], ['confirm' => __("Confirmer la sppression de l'ouvrage?"), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
               </tr>
             <?php } ?>

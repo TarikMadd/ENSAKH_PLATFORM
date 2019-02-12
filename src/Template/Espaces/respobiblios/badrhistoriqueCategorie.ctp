@@ -25,7 +25,7 @@
                 <?php }} ?>
                 </select>
                 <select name="souscategorie" onchange="this.form.submit();" <?php if(!isset($selection)) echo "disabled";?>>
-                  <option value="inf1">tout les sous catégories</option>
+                  <option value="inf1">toutes les sous catégories</option>
                   <?php 
                   for ($i=0; $i <count($souscategorie) ; $i++) { 
                       if(isset($selection1)){ ?>
@@ -45,7 +45,7 @@
               <th><?= $this->Paginator->sort('utilisateur') ?></th>
               <th><?= $this->Paginator->sort('fonction') ?></th>
               <th><?= $this->Paginator->sort('identifiant') ?></th>
-              <th><?= $this->Paginator->sort('dateEmprunte') ?></th>
+              <th><?= $this->Paginator->sort('date Emprunt') ?></th>
               <th><?= $this->Paginator->sort('date Retour') ?></th>
             </tr>
             <?php if (isset($emprunt)) {

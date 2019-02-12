@@ -20,11 +20,11 @@
                       <th>Nom</th>
                       <th>Prenom</th>
                       <th>Grade</th>
-                      <th>Code grade</th>
+                      
                       <th>Categorie</th>
                       
                       <th>Date debut</th>
-                      <th>Date fin</th>
+                      
 
                     
                     <tr>
@@ -43,10 +43,10 @@
                           <?php endif; ?>
                         <td><span class="badge bg-yellow"><?php echo $fonctionnaireG[$l]['nomGrade']?></span></td>
                         
-                      <td><span class="badge bg-grey"><?php echo $fonctionnaireG[$l]['codeGrade']?></span></td>
+                      
                         <td><?php echo $fonctionnaireG[$l]['categorie']?></td>
-                        <td><?php echo $fonctionnaireG[$l]['date_prise']?></td>
-                        <td><?php echo $fonctionnaireG[$l]['date_fin']?></td>
+                        <td><?php echo $fonctionnaireG[$l]['date_grade']?></td>
+                        
                         
 
               

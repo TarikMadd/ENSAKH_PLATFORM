@@ -18,14 +18,14 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><?= __('Form') ?></h3>
+          <h3 class="box-title"><?= __('Formulaire') ?></h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
         <?= $this->Form->create() ?> <!--$article, array('role' => 'form')-->
           <div class="box-body">
           <?php
-            echo $this->Form->input('stock_categorie_id', ['options' => $stockCategories]);
+            echo $this->Form->input('stock_categorie', ['options' => $donne]); 
             echo $this->Form->input('label_article',['required' => true]);
             echo $this->Form->input('quantite_min',['required' => true]);
             echo $this->Form->input('marque',['required' => true]);
@@ -34,7 +34,7 @@
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <?= $this->Form->button(__('Save')) ?>
+            <?= $this->Form->button(__('Sauvegarder')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>

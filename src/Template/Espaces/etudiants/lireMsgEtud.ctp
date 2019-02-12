@@ -1,4 +1,4 @@
-Vous etes connécté en tant que <?= $role ?>
+
 
 <!DOCTYPE html>
 <html>

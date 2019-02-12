@@ -4,7 +4,7 @@
   </h1>
   <ol class="breadcrumb">
     <li>
-
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'index-commandes'], ['escape' => false])?>
     </li>
   </ol>
 </section>

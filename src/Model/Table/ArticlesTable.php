@@ -80,11 +80,7 @@ class ArticlesTable extends Table
         $validator
             ->integer('quantite')
             ->allowEmpty('quantite');
-        
-        $validator 
-            ->dateTime('date_article')
-            ->allowEmpty('date_article');
-    
+
         return $validator;
     }
 

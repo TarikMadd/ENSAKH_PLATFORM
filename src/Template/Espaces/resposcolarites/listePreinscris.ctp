@@ -30,7 +30,7 @@
           </div>
             
           <div class="box-tools">
-             <form action="/resposcolarites/find_preinscriptions" method="POST" id="frmRecherche">
+             <form action="/resposcolarites/findPreinscriptions" method="POST" id="frmRecherche">
               <div class="input-group input-group-sm"  style="width: 180px;">
                  <?php echo $this->Form->input('motif', ['type' => 'text','class'=>'form-control','id'=>'recherche','templates' => ['inputContainer' => '{{content}}'],'label' => false,'placeholder'=>__('recherche par:'),'style' => ' width: 200px;']); ?>
                  <span class="input-group-btn">

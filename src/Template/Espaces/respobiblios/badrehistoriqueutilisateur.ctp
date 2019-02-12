@@ -39,7 +39,7 @@
               <th><?= $this->Paginator->sort('prenom') ?></th>
               <th><?= $this->Paginator->sort('titre') ?></th>
               <th><?= $this->Paginator->sort('numéro Inventaire') ?></th>
-              <th><?= $this->Paginator->sort('dateEmprunte') ?></th>
+              <th><?= $this->Paginator->sort('date Emprunt') ?></th>
               <th><?= $this->Paginator->sort('date Retour') ?></th>
             </tr>
             <?php if (isset($emprunt)) {

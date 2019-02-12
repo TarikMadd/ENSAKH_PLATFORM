@@ -34,9 +34,9 @@ class MissionsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('missions');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('missions');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Fonctionnaires', [
             'foreignKey' => 'fonctionnaire_id'
@@ -63,12 +63,12 @@ class MissionsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->dateTime('date_depart')
+            ->date('date_depart')
             ->requirePresence('date_depart', 'create')
             ->notEmpty('date_depart');
 
         $validator
-            ->dateTime('date_arrivee')
+            ->date('date_arrivee')
             ->requirePresence('date_arrivee', 'create')
             ->notEmpty('date_arrivee');
 
@@ -97,8 +97,13 @@ class MissionsTable extends Table
             ->notEmpty('indemnite_appliquee');
 
         $validator
-            ->requirePresence('etat', 'create')
-            ->notEmpty('etat');
+            ->numeric('montant_indemnite')
+            ->requirePresence('montant_indemnite', 'create')
+            ->notEmpty('montant_indemnite');
+
+        $validator
+            ->requirePresence('Motif', 'create')
+            ->notEmpty('Motif');
 
         $validator
             ->numeric('total')

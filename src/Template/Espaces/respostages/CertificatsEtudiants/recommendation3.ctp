@@ -52,7 +52,7 @@ h3
     Pour réussir cette formation, l’ENSA de Khouribga offre à ses élèves ingénieurs un enseignement moderne semestriel et modulaire alliant les aspects scientifiques et techniques avec les nouvelles orientations technologiques et professionnelles à dominante pratique. 
 </p>
 
-<p> Dans le but de développer davantage l’esprit d’initiative chez l’élève ingénieur de notre établissement, nous vous demandons d’accueillir <?php if($donne[0]['code_sexe']=="m"){echo "M ";}else { echo "Mlle ";} ?><span style="font-weight: bold;"><?= $donne[0]['nom_fr'] ?> <?=$donne[0]['prenom_fr']?></span> , <?php if($donne[0]['code_sexe']=="m"){echo "inscrit";}else { echo "inscrite ";} ?> en 1re année du Cycle Ingénieur, Filière <span style="font-weight: bold;">Tronc Commun </span> sous le CNE n°  <span style="font-weight: bold;"><?= $donne[0]['cne'] ?></span> , afin d’effectuer un stage operateur  au sein de votre établissement d’un mois, du ... au ……  </p>
+<p> Dans le but de développer davantage l’esprit d’initiative chez l’élève ingénieur de notre établissement, nous vous demandons d’accueillir <?php if($donne[0]['code_sexe']=="m"){echo "M ";}elseif($donne[0]['code_sexe']=="f"){ echo "Mlle ";} ?><span style="font-weight: bold;"><?= $donne[0]['nom_fr'] ?> <?=$donne[0]['prenom_fr']?></span> , <?php if($donne[0]['code_sexe']=="m"){echo "inscrit";}else { echo "inscrite ";} ?> en 1re année du Cycle Ingénieur, Filière <span style="font-weight: bold;">Tronc Commun </span> sous le CNE n°  <span style="font-weight: bold;"><?= $donne[0]['cne'] ?></span> , afin d’effectuer un stage operateur  au sein de votre établissement d’un mois, du ... au ……  </p>
 
 <p>
 Ce stage sera sanctionné par un rapport à déposer à la direction au début de l’année universitaire en cours.

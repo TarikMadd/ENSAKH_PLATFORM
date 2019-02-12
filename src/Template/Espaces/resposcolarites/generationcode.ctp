@@ -20,9 +20,9 @@
                 echo $this->form->create();
           ?>
             <div class="form-group center-block">
-              <label>Choisir semestre:</label>
-              <?php $sessions = ['1'=>'Normale','2'=>'Rattrapage','3'=>'PV'];
-              echo $this->Form->select('session', $sessions, ['empty' => 'Session']); ?>
+              <label>Choisir un motif:</label>
+              <?php $sessions = ['1'=>'Session normale','2'=>'Session de rattrage','3'=>'Modification'];
+              echo $this->Form->select('session', $sessions, ['empty' => 'Motif']); ?>
             </div>
             <div class="form-group center-block">
               <label>Choisir semestre:</label>

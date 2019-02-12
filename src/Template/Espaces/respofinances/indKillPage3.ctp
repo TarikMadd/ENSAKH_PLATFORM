@@ -1,4 +1,4 @@
-<?php $this->layout = 'AdminLTE.print';?>
+<?php $this->layout = 'AdminLTE.print';include 'N2TEXT.php';?>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">

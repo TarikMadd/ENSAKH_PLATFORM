@@ -6,7 +6,7 @@ $this->layout = 'AdminLTE.print';}
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Certificats #<small><?= $donne[0]['demande_id'] ?></small>
+        Certificats <small><?= $donne[0]['demande_id'] ?></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?= $this->Url->build(['controller'=>'resposcolarites','action'=>'indexCertificats']) ?>"><i class="fa fa-dashboard"></i> Home</a></li>

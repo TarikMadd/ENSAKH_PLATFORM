@@ -8,7 +8,7 @@
     </h1>
     <ol class="breadcrumb">
         <li>
-            <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'listerActivites'], ['escape' => false])?>
+            <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'listerActivites'], ['escape' => false])?>
         </li>
     </ol>
 <br>
@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col_md-6 col-lg-12">
                         <table class="table table-striped">
-                            <tright style="margin:60px"> <?php echo $this->Html->image('14.jpg'); ?></tright>
+                            <tright style="margin:60px"> <?php echo $this->Html->image('9.jpg'); ?></tright>
                             <tbody>
 
                             <tr style="text-align: center">

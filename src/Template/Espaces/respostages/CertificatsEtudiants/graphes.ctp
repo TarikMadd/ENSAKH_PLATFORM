@@ -70,8 +70,7 @@ endforeach; ?>
 
 
 <?php $this->start('scriptBotton'); ?>
-<script src="/admin_l_t_e/plugins/chartjs/Chart.min.js"></script>
-<!-- page script -->
+<script src="/Ensaksite/admin_l_t_e/plugins/chartjs/Chart.min.js"></script><!-- page script -->
 <script>
 function graphe(p2,donnes) {
     /* ChartJS
@@ -91,7 +90,7 @@ function graphe(p2,donnes) {
     var areaChart2 = new Chart(areaChart2Canvas2);
 
     var areaChart2Data = {
-      labels: ["January", "February", "March", "April", "May", "June", "July","Août","Septembre","October","Novembre","Decembre"],
+      labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet","Août","Septembre","October","Novembre","Decembre"],
       datasets: [
         {
           label: "Digital Goods",
@@ -156,14 +155,13 @@ function graphe(p2,donnes) {
     //-------------
                // The function returns the product of p1 and p2
 }
-
+$(document).ready(function(){
 var array = JSON.parse("["+$('#filiereId').text()+"]");
  for (var i = 0; i < array.length; i++) {
-
  	var data_array = JSON.parse("["+$('#filiereData'+array[i]).text()+"]");
-     console.log(data_array);
  	graphe(array[i],data_array);
  }
+});
 </script>
 <?php  $this->end(); ?>
 

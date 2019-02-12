@@ -66,10 +66,4 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
-
-    public function notes(Type $var = null)
-    {
-        # code...
-    }
-    
 }

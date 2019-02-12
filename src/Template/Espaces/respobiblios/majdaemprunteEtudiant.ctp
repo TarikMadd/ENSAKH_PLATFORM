@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Emprunts Etudiants
+    Les Emprunts des Etudiants
   </h1>
 </section>
 
@@ -25,16 +25,18 @@
           <table class="table table-hover">
             <tr>
               <th><?= $this->Paginator->sort('code appogée') ?></th>
+              <th><?= $this->Paginator->sort('nom & prenom') ?></th>
               <th><?= $this->Paginator->sort('titre ouvrage') ?></th>
-              <th><?= $this->Paginator->sort('numéro Inventaire') ?></th>
-              <th><?= $this->Paginator->sort('date Emprunte') ?></th>
-              <th><?= $this->Paginator->sort('delai') ?></th>
+              <th><?= $this->Paginator->sort("numéro d'inventaire") ?></th>
+              <th><?= $this->Paginator->sort('date Emprunt') ?></th>
+              <th><?= $this->Paginator->sort('délai') ?></th>
               <th><?= __('Etat') ?></th>
               <th><?= __('Actions') ?></th>
             </tr>
             <?php for ($i=0;$i<count($empreinter);$i++) { ?>
               <tr>
                 <td><?= $empreinter[$i]['username'] ?></td>
+                <td><?= $nom[$i] ?></td>
                 <td><?= $empreinter[$i]['titre'] ?></td>
                 <td><?= $empreinter[$i]['numInventaire'] ?></td>
                 <td><?= $empreinter[$i]['dateEmprunte'] ?></td>

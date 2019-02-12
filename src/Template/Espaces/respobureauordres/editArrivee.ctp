@@ -34,36 +34,12 @@
             echo $this->Form->input('Désignation');
            
             echo $this->Form->input('type_courrier');
+           
+            echo $this->Form->input('Priorité');
             echo $this->Form->input('date_limite_du_traitement');
-
-           ?>
-           <label> Priorité </label>
-                  <?php echo '<select name="Priorité" style="width: 100%; height:40px;" class="form-control select2" >'; ?>
-                 <?php
-                 echo '<option selected value="'.$courrierArrivee["Priorité"].'" style="width: 100%;" >' .$courrierArrivee["Priorité"].'</option>' ; ?>
-                    <?php foreach($courrierArrivee as $var)
-                        {
-                          echo '<option value="'.$var['Priorité'].'" style="width: 100%;" >' .$var['Priorité'].'</option>';
-                        }
-                    echo '<option value="Normal">Normal</option>';
-                    echo '<option value="Urgent">Urgent</option>';
-                    echo '<option value="Trés Urgent">Trés Urgent</option>';
-
-                  echo '</select>';?> <br>
-          <?php
             echo $this->Form->input('etat_du_courrier');
+            
           ?>
-          <label> Courrier retourne </label>
-                  <?php echo '<select name="courrier_retourne" style="width: 100%; height:40px;" class="form-control select2" >'; ?>
-                 <?php   echo '<option selected value="'.$courrierArrivee["courrier_retourne"].'" style="width: 100%;" >' .$courrierArrivee["courrier_retourne"].'</option>' ; ?>
-                    <?php foreach($courrierArrivee as $var)
-                        {
-                          echo '<option value="'.$var['courrier_retourne'].'" style="width: 100%;" >' .$var['courrier_retourne'].'</option>';
-                        }
-                    echo '<option value="Oui">Oui</option>';
-                    echo '<option value="Non">Non</option>';
-
-                  echo '</select>';?> <br>
          
          <label> Expéditeur </label>
                   <?php echo '<select name="expediteur_id" style="width: 100%; height:40px;" class="form-control select2" >'; ?>

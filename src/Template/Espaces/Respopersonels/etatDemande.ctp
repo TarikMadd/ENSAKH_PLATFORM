@@ -9,7 +9,7 @@
   }
   ?>
 
-    Demande déposés par : <?= $nom ?>  <?= $prenom?>
+
 
   </h1>
 </section>
@@ -19,18 +19,25 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="box">
-        <div class="box-header">
-          <h3 class="box-title">Documents Demandés</h3>
+        <div class="panel panel-primary"><?php
+        if (!isset($nom))
+         {?>
+          <div class="panel-heading">Aucune Demande n'a été déposée </div><?php
+         }
+         else{?>
+          <div class="panel-heading">Demandes déposées par : <?= $nom ?>  <?= $prenom?><?php
+         }
 
+?>
         </div>
         <!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover">
             <tr>
-              <th><?= $this->Paginator->sort('somme') ?></th>
-              <th><?= $this->Paginator->sort('Date Demande') ?></th>
-              <th><?= $this->Paginator->sort('Document') ?></th>
-              <th><?= $this->Paginator->sort('Etat Demande') ?></th>
+              <th><?= $this->Paginator->sort('SOMME') ?></th>
+              <th><?= $this->Paginator->sort('DATE DEMANDE') ?></th>
+              <th><?= $this->Paginator->sort('NOM DOCUMENT') ?></th>
+              <th><?= $this->Paginator->sort('ETAT DOCUMENT') ?></th>
 
 
 
@@ -45,7 +52,7 @@
               <td><?= h($documentsProfesseur->profpermanent->somme)?></td>
                   <td><?= h($documentsProfesseur->dateDemande)?></td>
                  <td ><?= h($documentsProfesseur->document->nomDocument)?></td>
-                 <td class='btn btn-success btn-xs'><?= h($documentsProfesseur->etatdemande)?></td>
+                 <td class='btn btn-danger btn-xs'><?= h($documentsProfesseur->etatdemande)?></td>
 
                  <?php
 

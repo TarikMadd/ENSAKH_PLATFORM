@@ -2,7 +2,7 @@
 <section class="content-header">
   <h1>
 SUIVI DES COMMANDES
-    <div class="pull-right"><?= $this->Html->link(__('Nouvelle'), ['action' => 'add'], ['class'=>'btn btn-success btn-xs']) ?></div>
+    <div class="pull-right"><?= $this->Html->link(__('Nouvelle'), ['action' => 'addyassir'], ['class'=>'btn btn-success btn-xs']) ?></div>
   </h1>
 </section>
 

@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Cake\Event\event;
 
 /**
  * Users Controller
@@ -10,7 +12,11 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
-
+   
+   public function BeforeFilter(Event $event)
+   {
+     $this->Auth->allow('add');
+   }
 
 
     /**
@@ -114,6 +120,9 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if($user){
                 $this->Auth->setUser($user);
+                $session = $this->request->session();
+                $session->write('role', $user['role']);
+                $session->write('user_id', $user['id']);
                // $this->Flash->success('Connexion avec succes');
                 switch ($user['role'])
                 {
@@ -121,44 +130,110 @@ class UsersController extends AppController
                         return $this->redirect(array('controller' => 'Admin', 'action' => 'index'));
                         break;
                     case 'resposcolarite':
+                        $recuperer_donne = TableRegistry::get("fonctionnaires");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                            ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_fct'].' '.$donne[0]['prenom_fct']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'resposcolarites', 'action' => 'index'));
                         break;
                     case 'respopersonel':
+                        $recuperer_donne = TableRegistry::get("fonctionnaires");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                            ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_fct'].' '.$donne[0]['prenom_fct']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'Respopersonels', 'action' => 'index'));
                         break;
                     case 'respobiblio':
+                        $recuperer_donne = TableRegistry::get("fonctionnaires");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                            ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_fct'].' '.$donne[0]['prenom_fct']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'respobiblios', 'action' => 'index'));
                         break;
                     case 'respobureauordre':
+                        $recuperer_donne = TableRegistry::get("fonctionnaires");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                            ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_fct'].' '.$donne[0]['prenom_fct']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'respobureauordres', 'action' => 'index'));
                         break;
                     case 'respofinance':
+                        $recuperer_donne = TableRegistry::get("fonctionnaires");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                            ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_fct'].' '.$donne[0]['prenom_fct']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'respofinances', 'action' => 'index'));
                         break;
                     case 'respostock':
+                        $recuperer_donne = TableRegistry::get("fonctionnaires");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                            ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_fct'].' '.$donne[0]['prenom_fct']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'respostocks', 'action' => 'index'));
                         break;
                     case 'etudiant':
+                        $recuperer_donne = TableRegistry::get("etudiants");
+                        $donne = $recuperer_donne->find('all', [
+                                'conditions' => ['user_id' => $user['id']
+                                ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_fr'].' '.$donne[0]['prenom_fr']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'Etudiants', 'action' => 'index'));
                         break;
                     case 'profvacataire':
+                        $recuperer_donne = TableRegistry::get("vacataires");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                            ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_vacataire'].' '.$donne[0]['prenom_vacataire']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'profvacataires', 'action' => 'index'));
                         break;
                     case 'profpermanent':
+                        $recuperer_donne = TableRegistry::get("profpermanents");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                        ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_prof'].' '.$donne[0]['prenom_prof']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'profpermanents', 'action' => 'index'));
                         break;
                     case 'ingenieur':
+                        $recuperer_donne = TableRegistry::get("fonctionnaires");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                            ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_fct'].' '.$donne[0]['prenom_fct']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
                         return $this->redirect(array('controller' => 'ingenieurs', 'action' => 'index'));
                         break;
                     case 'respostage':
-                        return $this->redirect(array('controller' => 'respostages', 'action' => 'indexrespo'));
+                        $recuperer_donne = TableRegistry::get("fonctionnaires");
+                        $donne = $recuperer_donne->find('all', [
+                            'conditions' => ['user_id' => $user['id']
+                            ]])->toArray();
+                        $session->write('nom_user', $donne[0]['nom_fct'].' '.$donne[0]['prenom_fct']);
+                        $session->write('img_user', '../webroot/'.$donne[0]['photo']);
+                        return $this->redirect(array('controller' => 'respostages', 'action' => 'index'));
                         break;
                 }
 
             }
 
             //if nothing happend 
-            $this->Flash->error('Veuillez verifier vos entrers');
+            return $this->Flash->error('Veuillez verifier vos entrers');
         }
     }
 

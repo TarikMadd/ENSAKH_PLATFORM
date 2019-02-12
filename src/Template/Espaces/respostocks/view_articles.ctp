@@ -21,7 +21,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <dl class="dl-horizontal">
-                                                                                                        <dt><?= __('Stock Category') ?></dt>
+                                                                                                        <dt><?= __('Stock Categorie') ?></dt>
                                 <dd>
                                     <?= $article->has('stock_category') ? $article->stock_category->id : '' ?>
                                 </dd>

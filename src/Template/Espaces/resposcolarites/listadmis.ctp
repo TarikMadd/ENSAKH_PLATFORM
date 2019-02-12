@@ -10,7 +10,7 @@
                       <th style="text-align: center;">Cycle</th>
                       <th style="text-align: center;">Niveau</th>
                       <th style="text-align: center;">Filière</th>
-                      <th style="text-align: center;">Liste das admis</th>
+                      <th style="text-align: center;">Liste des admis</th>
                     </tr>
                     <tr style="text-align: center;">
                       <td>1</td>

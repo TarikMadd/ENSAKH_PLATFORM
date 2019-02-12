@@ -39,7 +39,7 @@
             <?php foreach ($articles as $article): ?>
               <tr>
                 <td><?= $this->Number->format($article->id) ?></td>
-                <td><?= $article->has('stock_category') ? $this->Html->link($article->stock_category->id, ['controller' => 'Respostocks', 'action' => 'view_stockcategories', $article->stock_category->id]) : '' ?></td>
+                <td><?= $article->has('stock_category') ? $this->Html->link($article->stock_category->label_cat, ['controller' => 'Respostocks', 'action' => 'view_stockcategories', $article->stock_category->label_cat]) : '' ?></td>
                 <td><?= h($article->label_article) ?></td>
                 <td><?= $this->Number->format($article->quantite_min) ?></td>
                 <td><?= h($article->marque) ?></td>

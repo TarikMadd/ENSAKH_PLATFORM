@@ -4,39 +4,40 @@
     <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'afficherEvent'], ['escape' => false]) ?>
     </li>
   </ol>
-  <h1 class="Activite">
-    Ajout des Activités
+  <h1 >
+
     <small><?= __('') ?></small>
   </h1>
 
 </section>
 
 <!-- Main content -->
-<section class="content">
-  <div class="row">
+<section class="content" class="panel panel-primary"style='width:600px' >
+  <div class="row" >
     <!-- left column -->
     <div class="col-md-12">
       <!-- general form elements -->
       <div  class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><?= __('Form') ?></h3>
+          <h3 class="box-title">Ajoutez vos Activités : </h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
         <?= $this->Form->create($activite, array('role' => 'form','enctype'=>'multipart/form-data')) ?>
-          <div class="box-body" >
-           <div class="Activite" style="width:500px;margin-left:8px" > <?php echo $this->Form->input('nomActivite',['label'=>'Nom Activité','style'=>'width:455px','class'=>'form-control']);?></div>
+          <div class="box-body" class="panel-heading"  >
+
+           <div  style="width:500px;margin-left:8px" > <?php echo $this->Form->input('nomActivite',['label'=>'Nom Activité','style'=>'width:300px','class'=>'form-control']);?></div>
             <div class="row" >
                                            <div class="col-md-6" >
                                                 <div class="box-body">
                                                  <!-- Date dd/mm/yyyy -->
-                                                 <div class="Activite" class="form-group">
-                                                   <label >Date Début:</label>
+                                                 <div  class="form-group">
+                                                   <label >Date Début de l'événement:</label>
                                                      <div class="input-group">
                                                      <div class="input-group-addon">
                                                        <i class="fa fa-calendar"></i>
                                                      </div>
-                                                     <input name="dateDebut" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                     <input name="dateDebut" style='width:260px' type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                                                    </div>
                                                      </div>
                                                </div>
@@ -46,13 +47,13 @@
                                                                                     <div class="col-md-6">
                                                                                          <div class="box-body">
                                                                                           <!-- Date dd/mm/yyyy -->
-                                                                                          <div class="Activite"     class="form-group">
-                                                                                            <label>Date Fin:</label>
+                                                                                          <div     class="form-group">
+                                                                                            <label>Date Fin de l'événement :</label>
                                                                                               <div class="input-group">
                                                                                               <div class="input-group-addon">
                                                                                                 <i class="fa fa-calendar"></i>
                                                                                               </div>
-                                                                                              <input name="dateFin" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                                                              <input name="dateFin" style='width:260px' type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                                                                                             </div>
                                                                                               </div>
                                                                                         </div>
@@ -65,9 +66,9 @@
           </div>
 
 
-                                 <div  style="width:500px;margin-left:20px" class="Activite"> <label>Photo Descriptive : </label><input type="file" name="photoAct" class="form-control"></div>
+                                 <div  style="width:500px;margin-left:20px" > <label>Photo Descriptive : </label><input type="file" style='width:300px'  name="photoAct" class="form-control"></div>
           <div class="box-footer" style='margin-left:450px'>
-                         <?= $this->Form->button(__('Save')) ?>
+                   <?= $this->Form->button(__('Ajouter')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>

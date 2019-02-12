@@ -140,7 +140,7 @@ class respofinancesController extends AppController
 
     }
 
-    public function suivicommandes() {
+    public function suivicommande() {
         $Devisdemande = TableRegistry::get('devisdemandes');
         $devisdemandes = $this->paginate($Devisdemande);
         $this->set(compact('devisdemandes'));
@@ -168,10 +168,10 @@ class respofinancesController extends AppController
                     $Articleevent->save($article);
                     $article=$Articleevent->newEntity();
                 }
-                $this->Flash->success(__('The {0} has been saved.', 'Articleevent'));
-                return $this->redirect(['action' => 'suivicommandes']);
+                $this->Flash->success(__('La commande est enregistrée', 'Articleevent'));
+                return $this->redirect(['action' => 'suivicommande']);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Devisdemande'));
+                $this->Flash->error(__('erreur, ressayer.', 'Devisdemande'));
             }
         }
         $this->set(compact('article', 'devis'));
@@ -205,7 +205,7 @@ class respofinancesController extends AppController
                     $this->Flash->success(__('The {0} has been saved.', 'Boncommande'));
                     return $this->redirect(['action' => 'imprimerboncommande', $id]);
                 } else {
-                    $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Boncommande'));
+                    $this->Flash->error(__('erreur, ressayer.', 'Boncommande'));
                 }
             }else {
                 $this->Flash->error(__('Compléter le remplissage des prix'));
@@ -254,7 +254,7 @@ class respofinancesController extends AppController
                 $this->Flash->success(__('The {0} has been saved.', 'Articleevent'));
                 return $this->redirect(['action' => 'boncommande', $articleevent['devisdemande_id']]);
             } else {
-                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Articleevent'));
+                $this->Flash->error(__('erreur, ressayer.', 'Articleevent'));
             }
         }
         $query = $this->Devisdemandes->find('all', [
@@ -488,9 +488,14 @@ class respofinancesController extends AppController
         $this->set('role', $usrole);
         $username = $this->Auth->user('username');
         $this->set('username', $username);
-        // $date = $con->execute('SELECT titre,day(date) as jourDebut,month(date) as mois,YEAR(date) as year,day(fin) as jourFin,month(fin) as moisFin,YEAR(fin) as yearFin FROM calendriers')->fetchAll('assoc');
-        // $this->set('date', $date);
+        $date = $con->execute('SELECT titre,day(date) as jourDebut,month(date) as mois,YEAR(date) as year,day(fin) as jourFin,month(fin) as moisFin,YEAR(fin) as yearFin FROM calendriers')->fetchAll('assoc');
+        $this->set('date', $date);
         $couleurs = array("#27ae60" => 0, "#2980b9" => 0, "#e74c3c" => 0, "#7f8c8d" => 0, "#16a085" => 0, "#8e44ad" => 0, "#1abc9c" => 0, "#34495e" => 0);
+        $Devisdemande = TableRegistry::get('devisdemandes');
+        $devisdemandes = $this->paginate($Devisdemande);
+        $this->set(compact('devisdemandes'));
+        $this->set('_serialize', ['devisdemandes']);
+        $this->render('/Espaces/respofinances/suivicommande');
         $this->set('couleurs', $couleurs);
         $this->render('/Espaces/respofinances/home');
     }
@@ -1877,9 +1882,8 @@ class respofinancesController extends AppController
     }
 
 
-    /*
-     * Mesouak
-     */
+    /**  Massouk **/
+
 
 
     public function afficherMission()
@@ -1898,15 +1902,17 @@ class respofinancesController extends AppController
     public function afficherProf()
     {
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
 
         $profpermanent = TableRegistry::get('profpermanents');
-        $profpermanents = $profpermanent->find("all", array("fields" => array("somme", "id")))->toArray();
+        $profpermanents=$profpermanent->find("all",array("fields" =>array("somme","id")))->toArray();
 
-        $id = $this->request->data['search'];
-        $resultat = $con->execute('SELECT * FROM missions WHERE missions.profpermanent_id=?', [$id])->fetchAll();
-        $this->set(compact('resultat', 'profpermanents', 'id'));
+        $id=$this->request->data['search'];
+        $resultat=$con->execute('SELECT * FROM missions WHERE missions.profpermanent_id=?',[$id])->fetchAll();
+        $resultat1=$con->execute('SELECT somme, nom_prof, prenom_prof FROM Profpermanents WHERE profpermanents.id=?',[$id])->fetchAll();
+        $r=$resultat1[0];
+        $this->set(compact('resultat','r','profpermanents','id'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/afficherProf');
 
@@ -1915,14 +1921,16 @@ class respofinancesController extends AppController
     public function afficherFonc()
     {
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $id = $this->request->data['search'];
-        $resultat = $con->execute('SELECT * FROM missions WHERE missions.fonctionnaire_id=?', [$id])->fetchAll();
+        $id=$this->request->data['search'];
+        $resultat=$con->execute('SELECT * FROM missions WHERE missions.fonctionnaire_id=?',[$id])->fetchAll();
+        $resultat1=$con->execute('SELECT somme, nom_fct, prenom_fct FROM fonctionnaires WHERE fonctionnaires.id=?',[$id])->fetchAll();
+        $r=$resultat1[0];
         $fonctionnaire = TableRegistry::get('fonctionnaires');
-        $fonctionnaires = $fonctionnaire->find("all", array("fields" => array("somme", "id")))->toArray();
+        $fonctionnaires=$fonctionnaire->find("all",array("fields" =>array("somme","id")))->toArray();
 
-        $this->set(compact('resultat', 'fonctionnaires', 'id'));
+        $this->set(compact('resultat','r','fonctionnaires','id'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/afficherFonc');
 
@@ -1931,15 +1939,16 @@ class respofinancesController extends AppController
     public function afficherMissionProf()
     {
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT * FROM missions WHERE missions.profpermanent_id <> "null"')->fetchAll();
+        /*$resultat=$con->execute('SELECT * FROM missions WHERE missions.profpermanent_id <> "null"')->fetchAll();*/
+        $resultat=$con->execute('SELECT missions.id, villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.nbr_nuit,missions.indemnite_kilometrique,missions.taux, missions.indemnite_appliquee, missions.montant_indemnite,missions.Motif, missions.total, profpermanents.somme FROM villes,missions, profpermanents WHERE missions.ville_id=villes.id and missions.profpermanent_id=profpermanents.id and missions.profpermanent_id <> "null"')->fetchAll();
 
         $profpermanent = TableRegistry::get('profpermanents');
-        $profpermanents = $profpermanent->find("all", array("fields" => array("somme", "id")))->toArray();
+        $profpermanents=$profpermanent->find("all",array("fields" =>array("somme","id")))->toArray();
 
 
-        $this->set(compact('resultat', 'profpermanents'));
+        $this->set(compact('resultat','profpermanents'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/afficherMissionProf');
 
@@ -1948,15 +1957,15 @@ class respofinancesController extends AppController
     public function afficherMissionFonc()
     {
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT * FROM missions WHERE missions.fonctionnaire_id <> "null"')->fetchAll();
+        $resultat=$con->execute('SELECT missions.id,villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.nbr_nuit,missions.indemnite_kilometrique,missions.taux, missions.indemnite_appliquee, missions.montant_indemnite,missions.Motif, missions.total, fonctionnaires.somme FROM villes,missions, fonctionnaires WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=fonctionnaires.id and missions.fonctionnaire_id <> "null"')->fetchAll();
 
 
         $fonctionnaire = TableRegistry::get('fonctionnaires');
-        $fonctionnaires = $fonctionnaire->find("all", array("fields" => array("somme", "id")))->toArray();
+        $fonctionnaires=$fonctionnaire->find("all",array("fields" =>array("somme","id")))->toArray();
 
-        $this->set(compact('resultat', 'fonctionnaires'));
+        $this->set(compact('resultat','fonctionnaires'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/afficherMissionFonc');
 
@@ -1965,7 +1974,7 @@ class respofinancesController extends AppController
     public function ajouterMissionProf()
     {
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
 
         $missions = TableRegistry::get('missions');
@@ -1975,47 +1984,49 @@ class respofinancesController extends AppController
 
         $fonctionnaires = $missions->Fonctionnaires->find('list', ['limit' => 200]);
         $profpermanent = $profpermanents->find('all');
-        $ville = $villes->find("all");
+        $ville=$villes->find("all");
 
         if ($this->request->is('post')) {
             $mission = $missions->patchEntity($mission, $this->request->data);
-
-            $mission->profpermanent_id = $this->request->data['Prof'];
-            $mission->ville_id = $this->request->data['LaVille'];
+            $mission->Motif=$this->request->data['Motif'];
+            $mission->profpermanent_id =$this->request->data['Prof'];
+            $mission->ville_id =$this->request->data['LaVille'];
 
 
 // calcule indemnite_kilometrique
 
-            $dist = $con->execute('SELECT distance FROM villes WHERE id =?', [$this->request->data['LaVille']])->fetchAll('assoc');
 
-            $mission->indemnite_kilometrique = $dist[0]['distance'] * 2 * $this->request->data['Indemnité_appliquée_à_la_puissance_fiscale_de_la_voiture'];
 
-            if ($this->request->data['mode_transport'] = 'voiture de service') {
-                $mission->indemnite_kilometrique = 0;
+            $dist=$con->execute('SELECT distance FROM villes WHERE id =?',[$this->request->data['LaVille']])->fetchAll('assoc');
+
+            $mission->indemnite_kilometrique=$dist[0]['distance']*2*$this->request->data['la_puissance_fiscale_de_la_voiture'];
+            if ($this->request->data['mode_transport']=='voiture de service') {
+                $mission->indemnite_kilometrique=0;
             }
+
 
 //calculer le taux
 
-            $mission->taux = $this->request->data['nbr_nuit'] * 3 + 2;
+            $mission->taux =$this->request->data['nbr_nuit']*3+2;
 
 // calcule de montant_indemnite appliquée
 
-            $salaire = $con->execute('SELECT salaire FROM profpermanents WHERE id =?', [$this->request->data['Prof']])->fetchAll('assoc');
-            if ($salaire[0]['salaire'] >= 5000) {
-                $mission->indemnite_appliquee = 100;
-            } elseif ($salaire[0]['salaire'] >= 3500) {
-                $mission->indemnite_appliquee = 80;
-            } elseif ($salaire[0]['salaire'] >= 2500) {
-                $mission->indemnite_appliquee = 60;
-            } elseif ($salaire[0]['salaire'] >= 2000) {
-                $mission->indemnite_appliquee = 40;
-            } else {
-                $mission->indemnite_appliquee = 30;
+            $salaire=$con->execute('SELECT salaire FROM profpermanents WHERE id =?',[$this->request->data['Prof']])->fetchAll('assoc');
+            if($salaire[0]['salaire']>=5000){
+                $mission->indemnite_appliquee=100;
+            }elseif ($salaire[0]['salaire']>=3500) {
+                $mission->indemnite_appliquee=80;
+            }elseif ($salaire[0]['salaire']>=2500) {
+                $mission->indemnite_appliquee=60;
+            }elseif ($salaire[0]['salaire']>=2000) {
+                $mission->indemnite_appliquee=40;
+            }else{
+                $mission->indemnite_appliquee=30;
             }
-            $mission->montant_indemnite = $mission->indemnite_appliquee * $mission->taux;
+            $mission->montant_indemnite=$mission->indemnite_appliquee*$mission->taux;
 
 // calcule du total
-            $mission->total = $mission->indemnite_kilometrique + $mission->montant_indemnite;
+            $mission->total=$mission->indemnite_kilometrique+$mission->montant_indemnite;
 
 // sauvgarde dans la base de données
             if ($missions->save($mission)) {
@@ -2038,11 +2049,11 @@ class respofinancesController extends AppController
     {
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
         $villes = TableRegistry::get('villes');
         $profpermanents = TableRegistry::get('profpermanents');
-        $fonctionnaires = TableRegistry::get('fonctionnaires');
+        $fonctionnaires=TableRegistry::get('fonctionnaires');
         $Missions = TableRegistry::get('missions');
 
         $mission = $Missions->get($id, [
@@ -2051,54 +2062,55 @@ class respofinancesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $mission = $Missions->patchEntity($mission, $this->request->data);
 
-            $mission->profpermanent_id = $this->request->data['Prof'];
-            $mission->ville_id = $this->request->data['LaVille'];
+            $mission->profpermanent_id =$this->request->data['Prof'];
+            $mission->ville_id =$this->request->data['LaVille'];
 
 
 // calcule indemnite_kilometrique
 
-            $dist = $con->execute('SELECT distance FROM villes WHERE id =?', [$this->request->data['LaVille']])->fetchAll('assoc');
 
-            $mission->indemnite_kilometrique = $dist[0]['distance'] * 2 * $this->request->data['Indemnité_appliquée_à_la_puissance_fiscale_de_la_voiture'];
+            $dist=$con->execute('SELECT distance FROM villes WHERE id =?',[$this->request->data['LaVille']])->fetchAll('assoc');
 
-            if ($this->request->data['mode_transport'] = 'voiture de service') {
-                $mission->indemnite_kilometrique = 0;
+            $mission->indemnite_kilometrique=$dist[0]['distance']*2*$this->request->data['la_puissance_fiscale_de_la_voiture'];
+
+            if ($this->request->data['mode_transport']=='voiture de service') {
+                $mission->indemnite_kilometrique=0;
             }
 
 //calculer le taux
 
-            $mission->taux = $this->request->data['nbr_nuit'] * 3 + 2;
+            $mission->taux =$this->request->data['nbr_nuit']*3+2;
 
 // calcule de montant_indemnite appliquée
 
-            $salaire = $con->execute('SELECT salaire FROM profpermanents WHERE id =?', [$this->request->data['Prof']])->fetchAll('assoc');
-            if ($salaire[0]['salaire'] >= 5000) {
-                $mission->indemnite_appliquee = 100;
-            } elseif ($salaire[0]['salaire'] >= 3500) {
-                $mission->indemnite_appliquee = 80;
-            } elseif ($salaire[0]['salaire'] >= 2500) {
-                $mission->indemnite_appliquee = 60;
-            } elseif ($salaire[0]['salaire'] >= 2000) {
-                $mission->indemnite_appliquee = 40;
-            } else {
-                $mission->indemnite_appliquee = 30;
+            $salaire=$con->execute('SELECT salaire FROM profpermanents WHERE id =?',[$this->request->data['Prof']])->fetchAll('assoc');
+            if($salaire[0]['salaire']>=5000){
+                $mission->indemnite_appliquee=100;
+            }elseif ($salaire[0]['salaire']>=3500) {
+                $mission->indemnite_appliquee=80;
+            }elseif ($salaire[0]['salaire']>=2500) {
+                $mission->indemnite_appliquee=60;
+            }elseif ($salaire[0]['salaire']>=2000) {
+                $mission->indemnite_appliquee=40;
+            }else{
+                $mission->indemnite_appliquee=30;
             }
-            $mission->montant_indemnite = $mission->indemnite_appliquee * $mission->taux;
+            $mission->montant_indemnite=$mission->indemnite_appliquee*$mission->taux;
 
 // calcule du total
-            $mission->total = $mission->indemnite_kilometrique + $mission->montant_indemnite;
+            $mission->total=$mission->indemnite_kilometrique+$mission->montant_indemnite;
 
 // sauvgarde dans la base de données
             if ($Missions->save($mission)) {
                 $this->Flash->success(__('The {0} has been saved.', 'Mission'));
-                return $this->redirect(['action' => 'afficherMissionFonc']);
+                return $this->redirect(['action' => 'afficherMissionProf']);
             } else {
                 $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Mission'));
             }
         }
         $fonctionnaire = $fonctionnaires->find('all');
         $profpermanent = $profpermanents->find('all');
-        $ville = $villes->find("all");
+        $ville=$villes->find("all");
         $this->set(compact('mission', 'fonctionnaire', 'profpermanent', 'ville'));
         $this->set('_serialize', ['mission']);
         $this->render('/Espaces/respofinances/modifierMissionProf');
@@ -2108,52 +2120,54 @@ class respofinancesController extends AppController
     public function ajouterMissionFonc()
     {
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
 
         $missions = TableRegistry::get('missions');
         $mission = $missions->newEntity();
         $villes = TableRegistry::get('villes');
         $profpermanents = TableRegistry::get('profpermanents');
-        $fonctionnaires = TableRegistry::get('fonctionnaires');
+        $fonctionnaires=TableRegistry::get('fonctionnaires');
 
 
         if ($this->request->is('post')) {
             $mission = $missions->patchEntity($mission, $this->request->data);
-            $mission->fonctionnaire_id = $this->request->data['Fonc'];
-            $mission->ville_id = $this->request->data['LaVille'];
+            $mission->fonctionnaire_id =$this->request->data['Fonc'];
+            $mission->ville_id =$this->request->data['LaVille'];
 
 // calcule indemnite_kilometrique
 
-            $dist = $con->execute('SELECT distance FROM villes WHERE id =?', [$this->request->data['LaVille']])->fetchAll('assoc');
 
-            $mission->indemnite_kilometrique = $dist[0]['distance'] * 2 * $this->request->data['Indemnité_appliquée_à_la_puissance_fiscale_de_la_voiture'];
+            $dist=$con->execute('SELECT distance FROM villes WHERE id =?',[$this->request->data['LaVille']])->fetchAll('assoc');
 
-            if ($this->request->data['mode_transport'] = 'voiture de service') {
-                $mission->indemnite_kilometrique = 0;
+            $mission->indemnite_kilometrique=$dist[0]['distance']*2*$this->request->data['la_puissance_fiscale_de_la_voiture'];
+
+            if ($this->request->data['mode_transport']=='voiture de service') {
+                $mission->indemnite_kilometrique=0;
             }
+
 //calculer le taux
 
-            $mission->taux = $this->request->data['nbr_nuit'] * 3 + 2;
+            $mission->taux =$this->request->data['nbr_nuit']*3+2;
 
 // calcule de montant_indemnite appliquée
 
-            $salaire = $con->execute('SELECT salaire FROM fonctionnaires WHERE id =?', [$this->request->data['Fonc']])->fetchAll('assoc');
-            if ($salaire[0]['salaire'] >= 5000) {
-                $mission->indemnite_appliquee = 100;
-            } elseif ($salaire[0]['salaire'] >= 3500) {
-                $mission->indemnite_appliquee = 80;
-            } elseif ($salaire[0]['salaire'] >= 2500) {
-                $mission->indemnite_appliquee = 60;
-            } elseif ($salaire[0]['salaire'] >= 2000) {
-                $mission->indemnite_appliquee = 40;
-            } else {
-                $mission->indemnite_appliquee = 30;
+            $salaire=$con->execute('SELECT salaire FROM fonctionnaires WHERE id =?',[$this->request->data['Fonc']])->fetchAll('assoc');
+            if($salaire[0]['salaire']>=5000){
+                $mission->indemnite_appliquee=100;
+            }elseif ($salaire[0]['salaire']>=3500) {
+                $mission->indemnite_appliquee=80;
+            }elseif ($salaire[0]['salaire']>=2500) {
+                $mission->indemnite_appliquee=60;
+            }elseif ($salaire[0]['salaire']>=2000) {
+                $mission->indemnite_appliquee=40;
+            }else{
+                $mission->indemnite_appliquee=30;
             }
-            $mission->montant_indemnite = $mission->indemnite_appliquee * $mission->taux;
+            $mission->montant_indemnite=$mission->indemnite_appliquee*$mission->taux;
 
 // calcule du total
-            $mission->total = $mission->indemnite_kilometrique + $mission->montant_indemnite;
+            $mission->total=$mission->indemnite_kilometrique+$mission->montant_indemnite;
 
 // sauvgarde dans la base de données
             if ($missions->save($mission)) {
@@ -2167,7 +2181,7 @@ class respofinancesController extends AppController
         //$profpermanents = $missions->Profpermanents->find('list', ['limit' => 200]);
         $fonctionnaire = $fonctionnaires->find('all');
         $profpermanent = $profpermanents->find('all');
-        $ville = $villes->find("all");
+        $ville=$villes->find("all");
         $this->set(compact('mission', 'fonctionnaire', 'profpermanent', 'ville'));
         $this->set('_serialize', ['mission']);
         $this->render('/Espaces/respofinances/ajouterMissionFonc');
@@ -2178,11 +2192,11 @@ class respofinancesController extends AppController
     {
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
         $villes = TableRegistry::get('villes');
         $profpermanents = TableRegistry::get('profpermanents');
-        $fonctionnaires = TableRegistry::get('fonctionnaires');
+        $fonctionnaires=TableRegistry::get('fonctionnaires');
         $Missions = TableRegistry::get('missions');
 
         $mission = $Missions->get($id, [
@@ -2190,40 +2204,41 @@ class respofinancesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $mission = $Missions->patchEntity($mission, $this->request->data);
-            $mission->fonctionnaire_id = $this->request->data['Fonc'];
-            $mission->ville_id = $this->request->data['LaVille'];
+            $mission->fonctionnaire_id =$this->request->data['Fonc'];
+            $mission->ville_id =$this->request->data['LaVille'];
 
 // calcule indemnite_kilometrique
 
-            $dist = $con->execute('SELECT distance FROM villes WHERE id =?', [$this->request->data['LaVille']])->fetchAll('assoc');
+            $dist=$con->execute('SELECT distance FROM villes WHERE id =?',[$this->request->data['LaVille']])->fetchAll('assoc');
 
-            $mission->indemnite_kilometrique = $dist[0]['distance'] * 2 * $this->request->data['Indemnité_appliquée_à_la_puissance_fiscale_de_la_voiture'];
+            $mission->indemnite_kilometrique=$dist[0]['distance']*2*$this->request->data['la_puissance_fiscale_de_la_voiture'];
 
-            if ($this->request->data['mode_transport'] = 'voiture de service') {
-                $mission->indemnite_kilometrique = 0;
+            if ($this->request->data['mode_transport']=='voiture de service') {
+                $mission->indemnite_kilometrique=0;
             }
+
 //calculer le taux
 
-            $mission->taux = $this->request->data['nbr_nuit'] * 3 + 2;
+            $mission->taux =$this->request->data['nbr_nuit']*3+2;
 
 // calcule de montant_indemnite appliquée
 
-            $salaire = $con->execute('SELECT salaire FROM fonctionnaires WHERE id =?', [$this->request->data['Fonc']])->fetchAll('assoc');
-            if ($salaire[0]['salaire'] >= 5000) {
-                $mission->indemnite_appliquee = 100;
-            } elseif ($salaire[0]['salaire'] >= 3500) {
-                $mission->indemnite_appliquee = 80;
-            } elseif ($salaire[0]['salaire'] >= 2500) {
-                $mission->indemnite_appliquee = 60;
-            } elseif ($salaire[0]['salaire'] >= 2000) {
-                $mission->indemnite_appliquee = 40;
-            } else {
-                $mission->indemnite_appliquee = 30;
+            $salaire=$con->execute('SELECT salaire FROM fonctionnaires WHERE id =?',[$this->request->data['Fonc']])->fetchAll('assoc');
+            if($salaire[0]['salaire']>=5000){
+                $mission->indemnite_appliquee=100;
+            }elseif ($salaire[0]['salaire']>=3500) {
+                $mission->indemnite_appliquee=80;
+            }elseif ($salaire[0]['salaire']>=2500) {
+                $mission->indemnite_appliquee=60;
+            }elseif ($salaire[0]['salaire']>=2000) {
+                $mission->indemnite_appliquee=40;
+            }else{
+                $mission->indemnite_appliquee=30;
             }
-            $mission->montant_indemnite = $mission->indemnite_appliquee * $mission->taux;
+            $mission->montant_indemnite=$mission->indemnite_appliquee*$mission->taux;
 
 // calcule du total
-            $mission->total = $mission->indemnite_kilometrique + $mission->montant_indemnite;
+            $mission->total=$mission->indemnite_kilometrique+$mission->montant_indemnite;
 
 // sauvgarde dans la base de données
             if ($Missions->save($mission)) {
@@ -2235,7 +2250,7 @@ class respofinancesController extends AppController
         }
         $fonctionnaire = $fonctionnaires->find('all');
         $profpermanent = $profpermanents->find('all');
-        $ville = $villes->find("all");
+        $ville=$villes->find("all");
         $this->set(compact('mission', 'fonctionnaire', 'profpermanent', 'ville'));
         $this->set('_serialize', ['mission']);
         $this->render('/Espaces/respofinances/modifierMissionFonc');
@@ -2254,7 +2269,6 @@ class respofinancesController extends AppController
         }
         return $this->redirect(['action' => 'afficherMissionProf']);
     }
-
     public function deleteFonc($id = null)
     {
         $Missions = TableRegistry::get('missions');
@@ -2268,318 +2282,289 @@ class respofinancesController extends AppController
         return $this->redirect(['action' => 'afficherMissionFonc']);
     }
 
-    public function imprimerFiche1($id)
-    {
+    public function imprimerFiche1($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.profpermanent_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.profpermanent_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $profpermanent = TableRegistry::get('profpermanents');
-        $profpermanents = $profpermanent->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $prof = $profpermanents[0];
+        $profpermanents=$profpermanent->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $prof=$profpermanents[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'prof'));
+        $this->set(compact('resultat','t','prof'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indAppPage');
 
     }
-
-    public function imprimerFiche2($id)
-    {
+    public function imprimerFiche2($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.profpermanent_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.profpermanent_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $profpermanent = TableRegistry::get('profpermanents');
-        $profpermanents = $profpermanent->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $prof = $profpermanents[0];
+        $profpermanents=$profpermanent->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $prof=$profpermanents[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'prof'));
+        $this->set(compact('resultat','t','prof'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indAppPage1');
 
     }
-
-    public function imprimerFiche3($id)
-    {
+    public function imprimerFiche3($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.profpermanent_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport,missions.Motif, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.profpermanent_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $profpermanent = TableRegistry::get('profpermanents');
-        $profpermanents = $profpermanent->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $prof = $profpermanents[0];
+        $profpermanents=$profpermanent->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $prof=$profpermanents[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'prof'));
+        $this->set(compact('resultat','t','prof'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indAppPage2');
 
     }
-
-    public function imprimerFiche4($id)
-    {
+    public function imprimerFiche4($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.profpermanent_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.profpermanent_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $profpermanent = TableRegistry::get('profpermanents');
-        $profpermanents = $profpermanent->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $prof = $profpermanents[0];
+        $profpermanents=$profpermanent->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $prof=$profpermanents[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'prof'));
+        $this->set(compact('resultat','t','prof'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indkillPage');
 
     }
-
-    public function imprimerFiche5($id)
-    {
+    public function imprimerFiche5($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT  missions.date_depart , missions.date_arrivee, villes.nom,villes.distance, missions.indemnite_kilometrique FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and missions.profpermanent_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(indemnite_kilometrique) FROM missions WHERE profpermanent_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT  missions.date_depart , missions.date_arrivee, villes.nom,villes.distance, missions.indemnite_kilometrique FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and missions.profpermanent_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(indemnite_kilometrique) FROM missions WHERE profpermanent_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $profpermanent = TableRegistry::get('profpermanents');
-        $profpermanents = $profpermanent->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $prof = $profpermanents[0];
+        $profpermanents=$profpermanent->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $prof=$profpermanents[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'prof'));
+        $this->set(compact('resultat','t','prof'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indkillPage1');
 
     }
-
-    public function imprimerFiche6($id)
-    {
+    public function imprimerFiche6($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and  missions.profpermanent_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.Motif,missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and  missions.profpermanent_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $profpermanent = TableRegistry::get('profpermanents');
-        $profpermanents = $profpermanent->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $prof = $profpermanents[0];
+        $profpermanents=$profpermanent->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $prof=$profpermanents[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'prof'));
+        $this->set(compact('resultat','t','prof'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indkillPage2');
 
     }
-
-    public function imprimerFiche7($id)
-    {
+    public function imprimerFiche7($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and missions.profpermanent_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and missions.profpermanent_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE profpermanent_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $profpermanent = TableRegistry::get('profpermanents');
-        $profpermanents = $profpermanent->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $prof = $profpermanents[0];
+        $profpermanents=$profpermanent->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $prof=$profpermanents[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'prof'));
+        $this->set(compact('resultat','t','prof'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indkillPage3');
 
     }
 
-    public function imprimerFiche1Fonc($id)
-    {
+    public function imprimerFiche1Fonc($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $fonctionnaire = TableRegistry::get('fonctionnaires');
-        $fonctionnaires = $fonctionnaire->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $fonc = $fonctionnaires[0];
+        $fonctionnaires=$fonctionnaire->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $fonc=$fonctionnaires[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'fonc'));
+        $this->set(compact('resultat','t','fonc'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indAppPageFonc');
 
     }
-
-    public function imprimerFiche2Fonc($id)
-    {
+    public function imprimerFiche2Fonc($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $fonctionnaire = TableRegistry::get('fonctionnaires');
-        $fonctionnaires = $fonctionnaire->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $fonc = $fonctionnaires[0];
+        $fonctionnaires=$fonctionnaire->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $fonc=$fonctionnaires[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'fonc'));
+        $this->set(compact('resultat','t','fonc'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indAppPage1Fonc');
 
     }
-
-    public function imprimerFiche3Fonc($id)
-    {
+    public function imprimerFiche3Fonc($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport,missions.Motif, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $fonctionnaire = TableRegistry::get('fonctionnaires');
-        $fonctionnaires = $fonctionnaire->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $fonc = $fonctionnaires[0];
+        $fonctionnaires=$fonctionnaire->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $fonc=$fonctionnaires[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'fonc'));
+        $this->set(compact('resultat','t','fonc'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indAppPage2Fonc');
 
     }
-
-    public function imprimerFiche4Fonc($id)
-    {
+    public function imprimerFiche4Fonc($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $fonctionnaire = TableRegistry::get('fonctionnaires');
-        $fonctionnaires = $fonctionnaire->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $fonc = $fonctionnaires[0];
+        $fonctionnaires=$fonctionnaire->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $fonc=$fonctionnaires[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'fonc'));
+        $this->set(compact('resultat','t','fonc'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indkillPageFonc');
 
     }
-
-    public function imprimerFiche5Fonc($id)
-    {
+    public function imprimerFiche5Fonc($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT missions.date_depart , missions.date_arrivee, villes.nom,villes.distance, missions.indemnite_kilometrique FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and missions.fonctionnaire_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT missions.date_depart , missions.date_arrivee, villes.nom,villes.distance, missions.indemnite_kilometrique FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and missions.fonctionnaire_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $fonctionnaire = TableRegistry::get('fonctionnaires');
-        $fonctionnaires = $fonctionnaire->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $fonc = $fonctionnaires[0];
+        $fonctionnaires=$fonctionnaire->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $fonc=$fonctionnaires[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'fonc'));
+        $this->set(compact('resultat','t','fonc'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indkillPage1Fonc');
 
     }
-
-    public function imprimerFiche6Fonc($id)
-    {
+    public function imprimerFiche6Fonc($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and missions.fonctionnaire_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.Motif,missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.mode_transport like "voiture personnelle" and missions.fonctionnaire_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $fonctionnaire = TableRegistry::get('fonctionnaires');
-        $fonctionnaires = $fonctionnaire->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $fonc = $fonctionnaires[0];
+        $fonctionnaires=$fonctionnaire->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $fonc=$fonctionnaires[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'fonc'));
+        $this->set(compact('resultat','t','fonc'));
         $this->set('_serialize', ['resultat']);
         $this->render('/Espaces/respofinances/indkillPage2Fonc');
 
     }
-
-    public function imprimerFiche7Fonc($id)
-    {
+    public function imprimerFiche7Fonc($id){
 
         $dsn = 'mysql://root@localhost/ensaksite';
-        $con = ConnectionManager::get('default', ['url' => $dsn]);
+        $con=ConnectionManager::get('default', ['url' => $dsn]);
 
-        $resultat = $con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?', [$id])->fetchAll();
-        $total = $con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?', [$id])->fetch();
-        $t = $total[0];
+        $resultat=$con->execute('SELECT villes.nom, missions.date_depart , missions.date_arrivee, missions.mode_transport, missions.taux, missions.indemnite_appliquee, missions.montant_indemnite FROM villes,missions WHERE missions.ville_id=villes.id and missions.fonctionnaire_id=?',[$id])->fetchAll();
+        $total=$con->execute('SELECT SUM(montant_indemnite) FROM missions WHERE fonctionnaire_id=?',[$id])->fetch();
+        $t=$total[0];
 
         $fonctionnaire = TableRegistry::get('fonctionnaires');
-        $fonctionnaires = $fonctionnaire->find("all", array("conditions" => array('id' => $id)))->toArray();
-        $fonc = $fonctionnaires[0];
+        $fonctionnaires=$fonctionnaire->find("all",array("conditions" => array('id' => $id)))->toArray();
+        $fonc=$fonctionnaires[0];
 
         // $prof=$con->execute('SELECT * from profpermanents WHERE id=?',[$id])->fetch();
 
-        $this->set(compact('resultat', 't', 'fonc'));
+        $this->set(compact('resultat','t','fonc'));
         $this->set('_serialize', ['resultat']);
-        $this->render('/Espaces/respofinances/indkillPage3');
-
-
-        /******** Fin Ayoub *********/
-
+        $this->render('/Espaces/respofinances/indkillPage3Fonc');
 
     }
 
+    /** Fin Massouak */
 
 
     /****** Bouhsise *******/
@@ -2644,7 +2629,7 @@ class respofinancesController extends AppController
         $idUser=$this->Auth->user('id');
         $profpermanents=TableRegistry::get('Fonctionnaires');
         $query=$profpermanents->find('all')->select('id')->where(['user_id'=>$idUser]);
-        $usrid = 0;
+
         foreach($query as $ligne)
         {
             $usrid=$ligne->id;
@@ -2759,7 +2744,6 @@ class respofinancesController extends AppController
         $idUser = $this->Auth->user('id');
         $Foncts = TableRegistry::get('Fonctionnaires');
         $query = $Foncts->find('all')->select('id')->where(['user_id' => $idUser]);
-        $ide = 0;
         foreach ($query as $ligne) {
             $ide = $ligne->id;
             break;

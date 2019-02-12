@@ -5,7 +5,7 @@
             <div class="small-box" style="background-color: #336E7B; color: #fff">
               <div class="inner">
                 <h3><?= $premierCadre[0]['sum']; ?></h3>
-                <p>Totales ouvrages</p>
+                <p>Total des ouvrages</p>
               </div>
               <div class="icon">
                 <i class="fa fa-book"></i>
@@ -18,7 +18,7 @@
         <div class="small-box" style="background-color: #66CC99; color: #fff">
           <div class="inner">
             <h3><?= $deuxiemeCadre[0]['sum']; ?></h3>
-            <p>Ouvrages résérvées</p>
+            <p>Total des ouvrages réservés</p>
           </div>
           <div class="icon">
             <i class="fa fa-calendar"></i>
@@ -31,7 +31,7 @@
         <div class="small-box" style="background-color: #F9BF3B; color: #fff">
           <div class="inner">
             <h3><?= $troisiemeCadre[0]['sum']; ?></h3>
-            <p>Ouvrages empreintées</p>
+            <p>Total des ouvrages empruntés</p>
           </div>
           <div class="icon">
             <i class="fa fa-tags"></i>
@@ -45,7 +45,7 @@
         <div class="small-box" style="background-color: #F64747; color: #fff">
           <div class="inner">
             <h3><?= $quatriemeCadre[0]['sum']; ?></h3>
-            <p>Ouvrages non retournées</p>
+            <p>Listes des ouvrages non retournés</p>
           </div>
           <div class="icon">
             <i class="fa fa-exclamation-triangle"></i>
@@ -56,7 +56,7 @@
       <div class="small-box" style="background-color: #F64747; color: #fff">
           <div class="inner">
             <h3><?= $quatriemeCadre[0]['sum']; ?></h3>
-            <p>Ouvrages non retournées</p>
+            <p>Listes des ouvrages non retournés</p>
           </div>
           <div class="icon">
             <i class="fa fa-exclamation-triangle"></i>
@@ -69,9 +69,9 @@
       <div class="col-sm-4">
         <section class="panel" >
           <div class="profile-db-head" style="background-color: #336E7B; color: #fff"><br/>
-            <p style="text-align:center;"><img src="/admin_l_t_e/img/respobiblio.png" class="img-circle" alt=""  width="75px" ></p>
-            <h3><p style="text-align:center;">Mr. Alexander Pierce</p></h3>
-            <p style="text-align:center;"><?= $role ?></p>
+            <p style="text-align:center;"><img src="/Ensaksite/img/respobiblio/815e6212def15fe76ed27cec7a393d59.png" class="img-circle" alt=""  width="75px" ></p>
+            <h3><p style="text-align:center;"><?= $genre ?>. <?= $nom ?></p></h3>
+            <p style="text-align:center;"><?= $name[0]['specialite'] ?></p>
           </div>
           <table class="table table-hover">
             <tbody>
@@ -79,28 +79,28 @@
                 <td>
                   <i class="glyphicon glyphicon-user text-maroon-light"></i>
                 </td>
-                <td>Utilisateurs</td>
-                <td><?= $username ?></td>
+                <td>CIN</td>
+                <td><?= $name[0]['CIN'] ?></td>
               </tr>
               <tr>
                 <td>
                   <i class="fa fa-envelope text-maroon-light"></i>
                 </td>
                 <td>Email</td>
-                <td><?= $role ?>@gmail.com</td>
+                <td><?= $name[0]['email'] ?></td>
               </tr>
               <tr>
                 <td>
                   <i class="fa fa-phone text-maroon-light"></i>
                 </td>
                 <td>Tel</td>
-                <td>0602122546</td>
+                <td><?= $name[0]['phone'] ?></td>
               </tr>
               <tr>
                 <td>
                   <i class=" fa fa-globe text-maroon-light"></i>
                 </td>
-                <td>Addresse</td>
+                <td>Adresse</td>
                 <td>Bd Béni Amir, BP 77, Khouribga - Maroc</td>
               </tr>
             </tbody>

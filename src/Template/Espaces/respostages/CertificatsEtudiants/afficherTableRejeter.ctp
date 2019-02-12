@@ -4,10 +4,10 @@
               <th><?= $this->Paginator->sort('certificat') ?></th>
               
               <th><?= $this->Paginator->sort('Nom') ?></th>
-              <th><?= $this->Paginator->sort('Filiere') ?></th>
+              <th><?= $this->Paginator->sort('Filière') ?></th>
               <th><?= $this->Paginator->sort('Envoyé') ?></th>
               <th><?= $this->Paginator->sort('Entreprise') ?></th>
-              <th><?= $this->Paginator->sort('etat') ?></th>
+              <th><?= $this->Paginator->sort('état') ?></th>
            
               <th><?= __('Plus') ?></th>
             </tr>

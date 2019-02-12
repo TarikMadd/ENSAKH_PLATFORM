@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Certificats
  * @property \Cake\ORM\Association\BelongsTo $Etudiants
+ * @property \Cake\ORM\Association\BelongsTo $Profpermanents
  *
  * @method \App\Model\Entity\CertificatsEtudiant get($primaryKey, $options = [])
  * @method \App\Model\Entity\CertificatsEtudiant newEntity($data = null, array $options = [])
@@ -35,9 +36,9 @@ class CertificatsEtudiantsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('certificats_etudiants');
-        $this->displayField('certificat_id');
-        $this->primaryKey(['id']);
+        $this->setTable('certificats_etudiants');
+        $this->setDisplayField('certificat_id');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
@@ -47,6 +48,10 @@ class CertificatsEtudiantsTable extends Table
         ]);
         $this->belongsTo('Etudiants', [
             'foreignKey' => 'etudiant_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Profpermanents', [
+            'foreignKey' => 'profpermanent_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -67,6 +72,33 @@ class CertificatsEtudiantsTable extends Table
             ->requirePresence('etat', 'create')
             ->notEmpty('etat');
 
+        $validator
+            ->allowEmpty('commentaire');
+
+        $validator
+            ->allowEmpty('entreprise');
+
+        $validator
+            ->allowEmpty('raison_retrait');
+
+        $validator
+            ->integer('duree_stage')
+            ->requirePresence('duree_stage', 'create')
+            ->notEmpty('duree_stage');
+
+        $validator
+            ->allowEmpty('theme_stage');
+
+        $validator
+            ->date('debut_stage')
+            ->requirePresence('debut_stage', 'create')
+            ->notEmpty('debut_stage');
+
+        $validator
+            ->date('fin_stage')
+            ->requirePresence('fin_stage', 'create')
+            ->notEmpty('fin_stage');
+
         return $validator;
     }
 
@@ -81,6 +113,7 @@ class CertificatsEtudiantsTable extends Table
     {
         $rules->add($rules->existsIn(['certificat_id'], 'Certificats'));
         $rules->add($rules->existsIn(['etudiant_id'], 'Etudiants'));
+        $rules->add($rules->existsIn(['profpermanent_id'], 'Profpermanents'));
 
         return $rules;
     }

@@ -16,7 +16,7 @@ $this->layout = 'AdminLTE.print';}
     <div class="pad margin no-print">
       <div class="callout callout-info" style="margin-bottom: 0!important;">
         <h4><i class="fa fa-info"></i> Note:</h4>
-        Cet
+        Cette page c'est pour l'impression et le téléchargement
       </div>
     </div>
 
@@ -89,7 +89,7 @@ echo $x."/".date('Y'); ?></p></td>
 <tr>
 <td><p>Khouribga le: </p></td>
 
-<td><p style="text-align:right"><?php  echo date('y/m/d'); ?></p></td>
+<td><p style="text-align:right"><?php  echo date('d/m/y'); ?></p></td>
 </tr>
 
 <tr>
@@ -123,9 +123,7 @@ echo $x."/".date('Y'); ?></p></td>
 			<form action="<?=$this->Url->build(['controller'=>'Resposcolarites','action'=>'comCertificatsEtudiants',$donne[0]['demande_id']])?>" method="POST">
            <i class="fa fa-print btn btn-default"><input value="Imprimer" name="button" style="border: none; background-color: Transparent;" type="submit"> </i>
 			</form>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Générer PDF
-          </button>
+         
         </div>
       </div>
     </section>

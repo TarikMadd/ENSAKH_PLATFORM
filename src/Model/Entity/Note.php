@@ -9,12 +9,10 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $element_id
  * @property int $etudier_id
- * @property float $note
- * @property float $note_ratt
+ * @property int $note
+ * @property int $note_ratt
  * @property int $confirmed
- * @property bool $ratt_confirmed
  * @property int $saved
- * @property bool $ratt_saved
  * @property \Cake\I18n\Time $created_at
  * @property \Cake\I18n\Time $updated_at
  *

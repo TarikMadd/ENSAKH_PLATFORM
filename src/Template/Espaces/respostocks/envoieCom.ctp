@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Mailbox
+        Boite d email
       </h1>
       <ol class="breadcrumb">
         <li><a href="indexCommandes"><i class="fa fa-dashboard"></i> back</a></li>
@@ -24,11 +24,11 @@
 <form method="post" action="envoieCom" enctype="multipart/form-data">
 <div class="box-body">
               <div class="form-group">
-                <input name="email" class="form-control" placeholder="To:">
+                <input name="email" class="form-control" placeholder="A:">
 
               </div>
               <div class="form-group">
-                <input name="subject" class="form-control" placeholder="Subject:">
+                <input name="subject" class="form-control" placeholder="Objet:">
               </div>
               <div class="form-group">
               <label>Message:</label>
@@ -47,7 +47,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
               <div class="pull-right">
-                <button name="submit" type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+                <button name="submit" type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Envoyer</button>
               </div>
             </div>
 

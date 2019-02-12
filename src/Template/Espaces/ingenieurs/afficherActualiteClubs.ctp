@@ -30,9 +30,7 @@
               <th><?= $this->Paginator->sort('fichier',array('label'=>"Fichier")) ?></th>
               <th><?= __('Actions') ?></th>
             </tr>
-            <?php
-             if (is_array($actualiteclubs)) 
-            foreach ($actualiteclubs as $actualiteclub): ?>
+            <?php foreach ($actualiteclubs as $actualiteclub): ?>
               <tr>
                 
                 <td><?= h($actualiteclub->titre) ?></td>

@@ -32,7 +32,7 @@ echo $this->Form->select('classe', $classe, ['empty' => 'Classe','onchange' =>"t
               <div class="form-group">
               <label>Choisir module:</label>
               <select name="module"  class="form-control">
-              <option value="0" selected="true">Module</option>
+              <option value="0" selected="true">Tous les modules</option>
               <?php 
                 foreach ($modules as $module) 
                 {

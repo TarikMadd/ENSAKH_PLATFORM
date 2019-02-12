@@ -5,7 +5,7 @@
   </h1>
   <ol class="breadcrumb">
     <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'index_magasins'], ['escape' => false])?>
     </li>
   </ol>
 </section>

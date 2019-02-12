@@ -4,7 +4,7 @@
   </h1>
   <ol class="breadcrumb">
     <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'index_articles'], ['escape' => false])?>
     </li>
   </ol>
 </section>
@@ -21,7 +21,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <dl class="dl-horizontal">
-                                                                                                        <dt><?= __('Stock Category') ?></dt>
+                                                                                                        <dt><?= __('Stock Categorie') ?></dt>
                                 <dd>
                                     <?= $article->has('stock_category') ? $article->stock_category->id : '' ?>
                                 </dd>

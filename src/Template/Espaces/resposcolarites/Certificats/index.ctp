@@ -17,7 +17,7 @@
           <div class="box-tools">
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <div class="input-group input-group-sm"  style="width: 180px;">
-                <input type="text" name="search" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
+                <input type="text" name="search" class="form-control" placeholder="<?= __('chercher') ?>">
                 <span class="input-group-btn">
                 <button class="btn btn-info btn-flat" type="submit"> Rechercher </button>
                    </span>
@@ -39,10 +39,11 @@
                 <td><?= $this->Number->format($certificat->id) ?></td>
                 <td><?= h($certificat->type) ?></td>
                 <td> <?= h($certificat->nombre_max) ?> </td>
+                
                 <td class="actions" style="white-space:nowrap">
-                  <?= $this->Html->link(__('View'), ['action' => 'viewCertificats', $certificat->id], ['class'=>'btn btn-info btn-xs']) ?>
-                  <?= $this->Html->link(__('Edit'), ['action' => 'editCertificats', $certificat->id], ['class'=>'btn btn-warning btn-xs']) ?>
-                  <?= $this->Form->postLink(__('Delete'), ['action' => 'deleteCertificats', $certificat->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                  <?= $this->Html->link(__('View'), ['action' => 'view', $certificat->id], ['class'=>'btn btn-info btn-xs']) ?>
+                  <?= $this->Html->link(__('Edit'), ['action' => 'edit', $certificat->id], ['class'=>'btn btn-warning btn-xs']) ?>
+                  <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $certificat->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
               </tr>
             <?php endforeach; ?>

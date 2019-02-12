@@ -1,12 +1,8 @@
 <section class="content-header">
   <h1>
-    <?php echo __('Etudiant'); ?>
+    <?php echo __('Informations de l\'Etudiant'); ?>
   </h1>
-  <ol class="breadcrumb">
-    <li>
-    <?= $this->Html->link('<i class="fa fa-return"></i> ' . __('Back'), ['action' => 'index'], ['escape' => false])?>
-    </li>
-  </ol>
+
 </section>
 
 <!-- Main content -->
@@ -16,7 +12,7 @@
         <div class="box box-solid">
             <div class="box-header with-border">
                 <i class="fa fa-info"></i>
-                <h3 class="box-title"><?php echo __('Information'); ?></h3>
+                <h3 class="box-title"><?php echo __('Informations'); ?></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -48,7 +44,7 @@
                                             
                                                                                                                                                             <dt><?= __('Cne') ?></dt>
                                 <dd>
-                                    <?= $this->Number->format($etudiant->cne) ?>
+                                    <?= $etudiant->cne ?>
                                 </dd>
                                                                                                                                                             <dt><?= __('Nom en Francais') ?></dt>
                                         <dd>

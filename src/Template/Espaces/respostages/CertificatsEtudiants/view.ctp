@@ -72,7 +72,7 @@
 <td style="white-space:nowrap">
                   <form action="<?= $this->Url->build(['controller'=>'respostages','action'=>'editCertificatsEtudiants',$certificatsEtudiant->id ]); ?>" method="post">
                   
-                  <input class="btn btn-warning btn-xs" name="editer" value="Approuver" type="submit">
+                  <input class="btn btn-primary btn-xs" name="editer" value="Approuver" type="submit">
                   
                     </form>
                 </td></tr>
@@ -81,14 +81,14 @@
 
 <td  style="white-space:nowrap">
                   <form action="<?= $this->Url->build(['controller'=>'respostages','action'=>'editCertificatsEtudiants', $certificatsEtudiant->id]); ?>" method="post">
-                  <input class="btn btn-primary btn-xs" name="editer" value="Valider" type="submit">
+                  <input class="btn btn-success btn-xs" name="editer" value="Valider" type="submit">
                 </form>
                 </td></tr>
 <?php endif; ?>
 <?php if($certificatsEtudiant->etat == 'Prête'): ?>                
 <td  style="white-space:nowrap">
                   <form action="<?= $this->Url->build(['controller'=>'respostages','action'=>'editCertificatsEtudiants', $certificatsEtudiant->id ]); ?>" method="post">
-               <input class="btn btn-block btn-success btn-xs" name="editer" value="Délivrer" type="submit">
+               <input class="btn btn-success btn-xs" name="editer" value="Délivrer" type="submit">
                </form>
                 </td></tr>
 <?php endif; ?>

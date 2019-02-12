@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Elements
  * @property \Cake\ORM\Association\BelongsTo $Etudiers
- * @property \Cake\ORM\Association\HasMany $Pvupdate
  *
  * @method \App\Model\Entity\Note get($primaryKey, $options = [])
  * @method \App\Model\Entity\Note newEntity($data = null, array $options = [])
@@ -34,9 +33,9 @@ class NotesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('notes');
-        $this->setDisplayField('id');
-        $this->setPrimaryKey('id');
+        $this->table('notes');
+        $this->displayField('id');
+        $this->primaryKey('id');
 
         $this->belongsTo('Elements', [
             'foreignKey' => 'element_id',
@@ -45,9 +44,6 @@ class NotesTable extends Table
         $this->belongsTo('Etudiers', [
             'foreignKey' => 'etudier_id',
             'joinType' => 'INNER'
-        ]);
-        $this->hasMany('Pvupdate', [
-            'foreignKey' => 'note_id'
         ]);
     }
 
@@ -64,11 +60,11 @@ class NotesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->numeric('note')
+            ->integer('note')
             ->allowEmpty('note');
 
         $validator
-            ->numeric('note_ratt')
+            ->integer('note_ratt')
             ->allowEmpty('note_ratt');
 
         $validator
@@ -76,28 +72,16 @@ class NotesTable extends Table
             ->allowEmpty('confirmed');
 
         $validator
-            ->boolean('ratt_confirmed')
-            ->requirePresence('ratt_confirmed', 'create')
-            ->notEmpty('ratt_confirmed');
-
-        $validator
             ->integer('saved')
             ->allowEmpty('saved');
 
         $validator
-            ->boolean('ratt_saved')
-            ->requirePresence('ratt_saved', 'create')
-            ->notEmpty('ratt_saved');
-
-        $validator
             ->dateTime('created_at')
-            ->requirePresence('created_at', 'create')
-            ->notEmpty('created_at');
+            ->allowEmpty('created_at');
 
         $validator
             ->dateTime('updated_at')
-            ->requirePresence('updated_at', 'create')
-            ->notEmpty('updated_at');
+            ->allowEmpty('updated_at');
 
         return $validator;
     }

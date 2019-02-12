@@ -2,7 +2,7 @@
 <section class="content-header">
   <h1>
     Missions
-    <div class="pull-right"><?= $this->Html->link(__('New'), ['action' => 'ajouterMissionFonc'], ['class'=>'btn btn-success btn-xs']) ?>
+    <div class="pull-right"><?= $this->Html->link(__('Ajouter nouvelle mission'), ['action' => 'ajouterMissionFonc'], ['class'=>'btn btn-success btn-xs']) ?>
     </div>
   </h1>
 </section>
@@ -13,7 +13,7 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title"><?= __('List of') ?> Missions</h3>
+          <h3 class="box-title"><?= __('Liste des') ?> Missions</h3>
           <div class="box-tools">
             <form name="Recherche" action="afficherFonc" method="POST">
               <div class="input-group input-group-sm"  style="width: 180px;">
@@ -33,7 +33,7 @@
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover">
             <tr>
-              <th><?= $this->Paginator->sort('id') ?></th>
+              <th><?= $this->Paginator->sort('Destination') ?></th>
               <th><?= $this->Paginator->sort('date_depart') ?></th>
               <th><?= $this->Paginator->sort('date_arrivee') ?></th>
               <th><?= $this->Paginator->sort('mode_transport') ?></th>
@@ -42,14 +42,13 @@
               <th><?= $this->Paginator->sort('taux') ?></th>
               <th><?= $this->Paginator->sort('indemnite_appliquee') ?></th>
                <th><?= $this->Paginator->sort('Montant indemnite') ?></th>
-              <th><?= $this->Paginator->sort('etat') ?></th>
+              <th><?= $this->Paginator->sort('Motif') ?></th>
               <th><?= $this->Paginator->sort('total') ?></th>
-              <th><?= $this->Paginator->sort('ID fonctionnaire') ?></th>
+              <th><?= $this->Paginator->sort('somme fonctionnaire') ?></th>
               <th><?= __('Actions') ?></th>
             </tr>
                 <?php foreach ($resultat as $resultats): ?>
               <tr>
-                <td><?=$resultats[0]?></td>
                 <td><?=$resultats[1]?></td>
                 <td><?=$resultats[2]?></td>
                 <td><?=$resultats[3]?></td>
@@ -60,11 +59,12 @@
                 <td><?=$resultats[8]?></td>
                 <td><?=$resultats[9]?></td>
                 <td><?=$resultats[10]?></td> 
-                <td><?=$resultats[11]?></td>    
+                <td><?=$resultats[11]?></td>
+                <td><?=$resultats[12]?></td>    
   
                 <td class="actions" style="white-space:nowrap">
                   <?= $this->Html->link(__('modifier'), ['action' => 'modifierMissionFonc', $resultats[0]], ['class'=>'btn btn-warning btn-xs']) ?>
-                  <?= $this->Form->postLink(__('Delete'), ['action' => 'deleteFonc', $resultats[0]], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                  <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deleteFonc', $resultats[0]], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
               </tr> 
             <?php endforeach; ?>

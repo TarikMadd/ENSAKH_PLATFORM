@@ -13,13 +13,14 @@
  </td>
 <td width=10% ></td>
  <td>
-<div class="pull-right"><?= $this->Html->link(__('Réinitialiser'), ['action' => 'reinitiliserCertificatsEtudiants'],
- ['confirm' => __('Vous allez réinitialiser touts les demandes'),'class'=>'btn btn-danger btn-xs']) ?></div>
+<div class="pull-right"><div class="pull-right"><?= $this->Html->link(__('graphes'), ['action' => 'graphesCertificatsEtudiants'],
+ ['class'=>'btn btn-block btn-warning btn-xs']) ?></div>
  </td>
  <td width=10% ></td>
  <td>
-<div class="pull-right"><div class="pull-right"><?= $this->Html->link(__('graphes'), ['action' => 'graphesCertificatsEtudiants'],
- ['class'=>'btn btn-info btn-xs']) ?></div>
+ <div class="pull-right"><?= $this->Html->link(__('Réinitialiser'), ['action' => 'reinitiliserCertificatsEtudiants'],
+ ['class'=>'btn btn-danger btn-xs']) ?></div>
+
  </td>
  </tr>
  </table>

@@ -1,6 +1,6 @@
 <section class="content-header">
   <h1>
-    <?php echo __('Paiment Vacation'); ?>
+    <?php echo __('Paiement Heures supplémentaires'); ?>
   </h1>
 
 </section>
@@ -93,7 +93,7 @@
             <div class="box">
                 <div class="box-header">
                     <i class="fa fa-share-alt"></i>
-                    <h3 class="box-title"><?= __("Vacations") ?></h3>
+                    <h3 class="box-title"><?= __("Heures supplémentaires") ?></h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">

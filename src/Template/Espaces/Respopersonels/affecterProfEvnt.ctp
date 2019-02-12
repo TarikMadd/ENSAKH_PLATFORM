@@ -8,9 +8,22 @@
     <?= $this->Form->create($profpermanentsActivite) ?>
     <fieldset>
         <legend><?= __('Affectation Professeurs Permanents Activites') ?></legend>
-        <?php
-
-            echo $this->Form->input('somme', ['options' => $sommetab]);
+        <label >Nom Professeur</label><br />
+                      <select style='color:black;height:35px;width:460px' name="nomProf">
+                      <?php
+                       for($i=1;$i<=count($tabNomProf);$i++)
+                      {
+                         ?><option style='color:black' value=<?= $tabNomProf[$i]?> ><?=$tabNomProf[$i]?> </option><?php
+                      }?>
+                      </select>
+                      <label >Prénom Professeur</label><br />
+                                    <select style='color:black;height:35px;width:460px' name="prenomProf">
+                                    <?php
+                                     for($i=1;$i<=count($tabPrenomProf);$i++)
+                                    {
+                                       ?><option style='color:black' value=<?= $tabPrenomProf[$i]?> ><?=$tabPrenomProf[$i]?> </option><?php
+                                    }?>
+                                    </select><?php
             echo $this->Form->input('nomActivite', ['options' => $nomtab]);
             echo $this->Form->input('poste_comite');
         ?>

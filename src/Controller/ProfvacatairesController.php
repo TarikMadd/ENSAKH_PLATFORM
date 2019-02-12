@@ -9,7 +9,7 @@ use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 
 
-class profvacatairesController extends AppController{
+class ProfvacatairesController extends AppController{
 
     public function beforeFilter(Event $event)
     {
@@ -66,7 +66,7 @@ class profvacatairesController extends AppController{
 
     private function generateSchoolYear() {
         $year = (int)date("Y");
-        $month = (int)date("M");
+        $month = (int)date("m");
 
         if ($month <= 6) {
             $y1 = $year-1;
@@ -79,7 +79,7 @@ class profvacatairesController extends AppController{
     }
 
     public function generateSemester() {
-        $month = (int)date("Y");
+        $month = (int)date("m");
         if ($month >= 9 || $month < 2) {
             return array('S1', 'S3', 'S5');
         }
@@ -161,29 +161,44 @@ class profvacatairesController extends AppController{
         }
     }
 
+    // modifier_3/21/2017
     public function getStudentsMarksOrderBy($element_id, $order_key) {
         $conn = ConnectionManager::get('default');
+        $classe_id =  $this->request->session()->read('class_id');
+        $annee_scolaire_id = $this->getSchoolId();
         return $conn->execute(
             "SELECT n.* ,et.cne , et.nom_fr, et.prenom_fr, el.id as element_id, el.libile  "
             . "FROM notes n, elements el, etudiants et , etudiers e "
             . "WHERE el.id = $element_id AND "
             . "n.element_id = el.id AND "
             . "et.id = e.etudiant_id AND "
-            . "e.id = n.etudier_id "
+            . "e.id = n.etudier_id AND "
+            . "e.groupe_id = $classe_id AND "
+            . "e.annee_scolaire_id = $annee_scolaire_id"
             . " ORDER BY $order_key desc"
         );
     }
 
+
+    // modifier_3/21/2017
     public function showStudents($message = null, $order_key = null) {
         $element_id  = $this->request->data('element_id');
         $classe_id =  $this->request->session()->read('class_id');
-
+        $annee_scolaire_id = $this->getSchoolId();
         $conn = ConnectionManager::get('default');
         $stmt = null;
         $first_time = $this->isAdded($element_id);
         switch ($first_time){
             case true :
                 $stmt = $this->getStudentsMarks($element_id, $order_key);
+                $note_data = $this->getAvgMaxMinNoteByElementId($element_id);
+                $noteStatisitique = $note_data->fetchAll('assoc');
+                $rest = $this->getRestASaisir($element_id);
+                $restASaisir = $rest->fetchAll('assoc');
+                $this->set('statisticNotes', $noteStatisitique);
+                $this->set('restASaisir', $restASaisir);
+                //echo '<pre>';
+                //print_r($noteStatisitique);die();
                 break;
             case false:
                 $stmt = $conn->execute(
@@ -192,7 +207,8 @@ class profvacatairesController extends AppController{
                     . "WHERE el.id = $element_id AND "
                     . "e.element_id = el.id AND "
                     . "et.id = e.etudiant_id AND "
-                    . "e.groupe_id = $classe_id"
+                    . "e.groupe_id = $classe_id AND "
+                    . "e.annee_scolaire_id = $annee_scolaire_id"
                 );
                 break;
         }
@@ -200,6 +216,7 @@ class profvacatairesController extends AppController{
         $this->set('first_time', !$first_time);
         $this->set("etudiants", $rows);
         $this->set('message', $message);
+
         try {
             $for_pv = $this->request->session()->read('for_pv');
             $for_ratt = $this->request->session()->read('for_ratt');
@@ -207,14 +224,51 @@ class profvacatairesController extends AppController{
             $for_pv = 0;
             $for_ratt = 0;
         }
-        //echo $for_pv.'<br/>'.$for_ratt;die();
+
         $this->set('for_pv', $for_pv);
         $this->set('for_ratt', $for_ratt);
         $this->set('anneeScolaire', $this->getAnneeScolaire($rows[0]['etudier_id']));
         $this->set('semestre', $this->getSemestre($rows[0]['etudier_id']));
         $this->set('access_type', $this->request->session()->read('access_type'));
         //echo $order_key;die();
-        $this->render('/Espaces/profvacataires/liste-etudiants');
+        $this->render('/Espaces/profpermanents/liste-etudiants');
+    }
+
+
+    //modifier3/21/2017
+    private function getRestASaisir($element_id){
+        $conn = ConnectionManager::get('default');
+        $classe_id =  $this->request->session()->read('class_id');
+        $annee_scolaire_id = $this->getSchoolId();
+        return $conn->execute(
+            "SELECT COUNT(n.id) non_saisie "
+            . "FROM notes n, elements el, etudiants et , etudiers e "
+            . "WHERE el.id = $element_id AND "
+            . "n.element_id = el.id AND "
+            . "et.id = e.etudiant_id AND "
+            . "e.id = n.etudier_id AND "
+            . "e.groupe_id = $classe_id AND "
+            . "e.annee_scolaire_id = $annee_scolaire_id AND "
+            . "n.note IS NULL"
+        );
+    }
+
+
+    //modifier_3/21/2017
+    private function getAvgMaxMinNoteByElementId($element_id){
+        $conn = ConnectionManager::get('default');
+        $classe_id =  $this->request->session()->read('class_id');
+        $annee_scolaire_id = $this->getSchoolId();
+        return $conn->execute(
+            "SELECT AVG(CASE WHEN n.ratt_confirmed = 1 AND n.note_ratt IS NOT NULL THEN n.note_ratt ELSE n.note END) AS avg_note, MIN(n.note) AS min_note, MAX(n.note) AS max_note "
+            . "FROM notes n, elements el, etudiants et , etudiers e "
+            . "WHERE el.id = $element_id AND "
+            . "n.element_id = el.id AND "
+            . "et.id = e.etudiant_id AND "
+            . "e.id = n.etudier_id AND "
+            . "e.groupe_id = $classe_id AND "
+            . "e.annee_scolaire_id = $annee_scolaire_id"
+        );
     }
 
     public function addNote() {
@@ -494,9 +548,11 @@ class profvacatairesController extends AppController{
         }
     }
 
+    // modifier_3/21/2017
     private function getStudentsMarks($element_id, $order_key) {
         $conn = ConnectionManager::get('default');
-
+        $classe_id =  $this->request->session()->read('class_id');
+        $annee_scolaire_id = $this->getSchoolId();
         if ($order_key == null || $order_key == "DEFAULT") {
             return $conn->execute(
                 "SELECT n.* ,et.cne , et.nom_fr, et.prenom_fr, el.id as element_id, el.libile  "
@@ -504,7 +560,9 @@ class profvacatairesController extends AppController{
                 . "WHERE el.id = $element_id AND "
                 . "n.element_id = el.id AND "
                 . "et.id = e.etudiant_id AND "
-                . "e.id = n.etudier_id "
+                . "e.id = n.etudier_id AND "
+                . "e.groupe_id = $classe_id AND "
+                . "e.annee_scolaire_id = $annee_scolaire_id"
             );
         }
         else{
@@ -523,6 +581,7 @@ class profvacatairesController extends AppController{
 
         }
     }
+
     private function insert_marks_from_csv() {
         $file = $this->request->data('csv_notes');
         $element_id = $this->request->data('element_id');
@@ -1173,6 +1232,7 @@ class profvacatairesController extends AppController{
 
     /******* FADILI  ********/
 
+ //******fadili****
     public function getDestinataire($typeD) {
 
         $usrole=$this->Auth->user('role');
@@ -1185,33 +1245,35 @@ class profvacatairesController extends AppController{
         if (strcmp($typeD, 'etudiantSpecifie') == 0) {
             $year = $this->genererAnneeScol();
             $semestre = $this->genererSemester();
-            $typeDest = $cnx->execute("SELECT grp.id, f.libile as filiere, n.libile as niveau, s.libile as semestre
+            $typeDest = $cnx->execute("SELECT DISTINCT grp.id, f.libile as filiere, n.libile as niveau, s.libile as semestre
           FROM elements elt, modules m, semestres s, groupes grp,
           filieres f, niveaus n, vacataires p, enseigners ens, annee_scolaires a
           WHERE 
                 p.id = $monIdDsMaTable  AND p.id = ens.vacataire_id AND elt.id = ens.element_id  AND m.id = elt.module_id
-          AND   grp.id = m.groupe_id AND n.id = grp.niveaus_id and ens.semestre_id = s.id and (s.libile like '$semestre[0]' OR s.libile like '$semestre[1]'
-          OR   s.libile like '$semestre[2]') and f.id = grp.filiere_id and ens.annee_scolaire_id = a.id and a.libile like '$year'
+          AND   grp.id = m.groupe_id AND n.id = grp.niveaus_id and ens.semestre_id = s.id and (s.id like $semestre[0] OR s.id like $semestre[1]
+          OR   s.id like $semestre[2]) and f.id = grp.filiere_id and ens.annee_scolaire_id = a.id and a.libile like '$year'
            
            ")->fetchAll('assoc');
             $session->write('typeDest', $typeDest);
             $this->set('filierID',-1);
-        }
+        } //$typeDest = $cnx->execute("SELECT id, username FROM users WHERE role like 'respofinance' ")->fetchAll('assoc');
         if (strcmp($typeD, 'scolarite') == 0)
             $typeDest = $cnx->execute("SELECT id, username FROM users WHERE role like 'resposcolarite' ")->fetchAll('assoc');
 
         if (strcmp($typeD, 'etudiants') == 0) {
             $year = $this->genererAnneeScol();
             $semestre = $this->genererSemester();
-            $typeDest = $cnx->execute("SELECT grp.id, f.libile as filiere, n.libile as niveau, s.libile as semestre
+            $typeDest = $cnx->execute("
+                SELECT DISTINCT grp.id, f.libile as filiere, n.libile as niveau, s.libile as semestre
           FROM elements elt, modules m, semestres s, groupes grp,
           filieres f, niveaus n, vacataires p, enseigners ens, annee_scolaires a
           WHERE 
                 p.id = $monIdDsMaTable  AND p.id = ens.vacataire_id AND elt.id = ens.element_id  AND m.id = elt.module_id
-          AND   grp.id = m.groupe_id AND n.id = grp.niveaus_id and ens.semestre_id = s.id and (s.libile like '$semestre[0]' OR s.libile like '$semestre[1]'
-          OR   s.libile like '$semestre[2]') and f.id = grp.filiere_id and ens.annee_scolaire_id = a.id and a.libile like '$year'
+          AND   grp.id = m.groupe_id AND n.id = grp.niveaus_id and ens.semestre_id = s.id and (s.id like $semestre[0] OR s.id like $semestre[1]
+          OR   s.id like $semestre[2]) and f.id = grp.filiere_id and ens.annee_scolaire_id = a.id 
+          and a.libile like '$year'
                ")->fetchAll('assoc');
-        }
+            }
 
 
         $this->set('typeDest',$typeDest);
@@ -1222,8 +1284,8 @@ class profvacatairesController extends AppController{
     {
         $session = $this->request->session();
         $cnx=ConnectionManager::get('default');
-        $typeD = 'etudiantSpecifie';
-        $listEtudiants = $cnx->execute("SELECT DISTINCT u.id, e.nom_fr as nom, e.prenom_fr as prenom
+            $typeD = 'etudiantSpecifie';
+            $listEtudiants = $cnx->execute("SELECT DISTINCT u.id, e.nom_fr as nom, e.prenom_fr as prenom
                   FROM etudiants e, etudiers etu, groupes grp, filieres f, niveaus n, users u
                   WHERE
                         u.id = e.user_id AND e.id = etu.etudiant_id AND etu.groupe_id =(SELECT id FROM groupes WHERE id = $grpID) ORDER BY nom
@@ -1237,7 +1299,7 @@ class profvacatairesController extends AppController{
         $this->set('filierID',$grpID);
         $usrole=$this->Auth->user('role');
         $this->set('role',$usrole);
-        $this->render('/Espaces/profvacataires/envoyerNvVac');
+        $this->render('/Espaces/profvacataires/envoyerNvPer');
     }
 
     public function boiteRecVac() {
@@ -1245,10 +1307,11 @@ class profvacatairesController extends AppController{
         $usrole=$this->Auth->user('role');
         $this->set('role',$usrole);
         $monid = $this->Auth->user('id');
-        $monIdDsMaTablee = $cnx->execute("SELECT id FROM vacataires WHERE user_id = $monid ")->fetchAll('assoc');
-        $monIdDsMaTable = $monIdDsMaTablee['0']['id'];
+        $monIdDsMaTable = $cnx->execute("SELECT id FROM vacataires WHERE user_id = $monid ")->fetchAll('assoc');
+        $monIdDsMaTable = $monIdDsMaTable['0']['id'];
         Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
-
+        $semestre = $this->genererSemester();
+        $year = $this->genererAnneeScol();
 
         $mesMessages=$cnx->execute("
         SELECT u.username, role, m.sujet, m.contenu, TIME_TO_SEC(TIMEDIFF(now(), date)) as inttervale,m.id, date
@@ -1265,9 +1328,10 @@ class profvacatairesController extends AppController{
         FROM diffusions_messages dmg, messages m, users u
         where dmg.user_id = u.id and dmg.message_id  = m.id AND role like 'resposcolarite' and m.id NOT IN (SELECT DISTINCT message_id FROM asupprimer WHERE user_id = $monid) 
         and ((dmg.typerecepteur like 'profsParFiliere' AND 
-        dmg.group_id IN (SELECT DISTINCT grp.id FROM vacataires p, enseigners ens, elements elt, modules m, groupes grp 
-              WHERE  p.id = ens.vacataire_id and elt.id = ens.element_id and m.id = elt.module_id
-              and grp.id = dmg.group_id)) 
+        dmg.group_id IN (SELECT DISTINCT m.groupe_id FROM vacataires p, enseigners ens, elements as elt, modules m, annee_scolaires a
+        WHERE  p.id = ens.vacataire_id and elt.id = ens.element_id and m.id = elt.module_id and p.id = $monIdDsMaTable 
+        and a.id = ens.annee_scolaire_id and a.libile like '$year' 
+        and ens.semestre_id in ($semestre[0], $semestre[1], $semestre[2])))
         OR (dmg.typerecepteur like 'profsParDept' AND 
                dmg.departement_id IN (SELECT DISTINCT dept.departement_id FROM vacataires_departements dept 
                WHERE  dept.vacataire_id = $monIdDsMaTable )) OR dmg.typerecepteur like 'profs' )
@@ -1302,15 +1366,15 @@ class profvacatairesController extends AppController{
                 WHERE m.id = um.message_id and u.id= user_idrecepteur and um.user_id = $monID and m.id = $id AND e.user_id = u.id and role like 'etudiant'
             ")->fetchAll('assoc');
             }
-            else
-            {
-                $msg = $cnx->execute("
+         else
+             {
+             $msg = $cnx->execute("
             SELECT m.id, m.sujet, m.contenu, m.piecejointe, dm.date,CONCAT_WS(' ', n.libile, f.libile) AS username, role 
             FROM messages m, diffusions_messages dm, groupes grp, filieres f, niveaus n, users u
             WHERE u.id = $monID and m.id = dm.message_id and dm.user_id = $monID and typerecepteur like 'etudiantsParFiliere' and grp.id = dm.group_id and grp.filiere_id = f.id 
             and grp.niveaus_id = n.id and m.id = $id
             ")->fetchAll('assoc');
-            }
+             }
             $this->set('me','me');
         }
         else {
@@ -1357,7 +1421,7 @@ class profvacatairesController extends AppController{
         $nomFichier = $this->suppAccent($nomFichier);
         if(strcmp($this->request->getData('attachment')["name"],'') != 0)
         {
-            $attachementPath = "/Ensaksite/webroot/messageriesFiles/" . $msg['0']['id'] . $nomFichier;
+            $attachementPath = "/ensaksite/webroot/messageriesFiles/" . $msg['0']['id'] . $nomFichier;
             move_uploaded_file($this->request->getData('attachment')["tmp_name"], 'messageriesFiles/'.$msg['0']['id'].$nomFichier );
         }
         else
@@ -1399,15 +1463,15 @@ class profvacatairesController extends AppController{
         else{
             $session = $this->request->session();
             $session->delete('typeDest');
-            // recepteur => respo scolarité
-            $cnx->insert('users_messages',
-                [
-                    'message_id' => $msg['0']['id'],
-                    'user_id' => $detinateur,
-                    'user_idrecepteur' => $this->request->getData('destinataire'),
-                    'date' => Time::now()
-                ]
-            );
+                // recepteur => respo scolarité
+                $cnx->insert('users_messages',
+                    [
+                        'message_id' => $msg['0']['id'],
+                        'user_id' => $detinateur,
+                        'user_idrecepteur' => $this->request->getData('destinataire'),
+                        'date' => Time::now()
+                    ]
+                );
 
         }
         $this->Flash->success('Votre message est envoyé');
@@ -1442,7 +1506,7 @@ class profvacatairesController extends AppController{
 
     public function supprimerMsg()
     {
-        // debug($this->request->getData('msgChecked'));
+       // debug($this->request->getData('msgChecked'));
         $deletTab = $this->request->getData('msgChecked');
         if (count($deletTab) > 0) {
             $cnx = ConnectionManager::get('default');
@@ -1460,9 +1524,9 @@ class profvacatairesController extends AppController{
             $this->Flash->error('Veuillez séléctionner au moins un message!');
         $this->boiteRecVac();
     }
-
-
-    function suppAccent($chaine)
+    
+    
+     function suppAccent($chaine)
     {
         $a = array("ä", "â", "à");
         $chaine = str_replace($a, "a", $chaine);
@@ -1479,8 +1543,8 @@ class profvacatairesController extends AppController{
     }
     public function genererAnneeScol() {
         $year = (int)date("Y");
-        $month = (int)date("M");
-
+        $month = (int)date("m");
+ 
         if ($month <= 6) {
             $y1 = $year-1;
             return $y1.'/'.$year;
@@ -1491,15 +1555,17 @@ class profvacatairesController extends AppController{
         }
     }
 
-    public function genererSemester() {
-        $month = (int)date("M");
+     public function genererSemester() {
+        $month = (int)date("m");
         if ($month >= 9 || $month < 2) {
-            return array('S1', 'S3', 'S5');
+            return array(1, 3, 5);
         }
         else{
-            return array('S2', 'S4', 'S6');
+            return array(2, 4, 6);
         }
     }
+
+//******fadili****
     /******* FIN FADILI  ********/
 
 
@@ -1539,7 +1605,7 @@ class profvacatairesController extends AppController{
         $books = $con->execute("SELECT * FROM books WHERE id IN ( SELECT min(id) FROM books GROUP BY ISBN )")->fetchAll('assoc');;// where id in (select sous_categorie_id from books)")
         $this->set('books', $books);
         $this->set('choix', $choix);
-        $this->render('/Espaces/Profvacataires/listbook');
+        $this->render('/Espaces/profvacataires/listbook');
 
     }
 
@@ -1564,7 +1630,7 @@ class profvacatairesController extends AppController{
         $this->set('books5', $books5);
         $books6 = $con->execute("SELECT * FROM books where sous_categorie_id in (select id from sous_categories where categorie_id =600) and id IN ( SELECT min(id) FROM books GROUP BY ISBN )")->fetchAll('assoc');
         $this->set('books6', $books6);
-        $this->render('/Espaces/Profvacataires/listcategorie');
+        $this->render('/Espaces/profvacataires/listcategorie');
 
 
     }
@@ -1580,7 +1646,7 @@ class profvacatairesController extends AppController{
         $books = $con->execute("SELECT * FROM books where titre  like '%" . $search . "%'   and id IN ( SELECT min(id) FROM books GROUP BY ISBN )")->fetchAll('assoc');
         $this->set('books', $books);
         $this->Flash->success(__('Votre recherche a bien été effectué : '.count($books).' de éléments trouvés'));
-        $this->render('/Espaces/Profvacataires/recherchebook');
+        $this->render('/Espaces/profvacataires/recherchebook');
 
 }
 
@@ -1596,7 +1662,7 @@ class profvacatairesController extends AppController{
         $this->set('books', $books);
         $this->set('search', $search);
         $this->Flash->success(__('Votre recherche a bien été effectué : '.count($books).' de éléments trouvés'));
-        $this->render('/Espaces/Profvacataires/recherchebook');
+        $this->render('/Espaces/profvacataires/recherchebook');
 
     }
 
@@ -1621,7 +1687,7 @@ class profvacatairesController extends AppController{
                 users.id=vacataires.user_id and users.id =" . $usrole . "")->fetchAll('assoc');
             $this->set('coord', $coord);
 
-            $this->render('/Espaces/Profvacataires/proposerbook');
+            $this->render('/Espaces/profvacataires/proposerbook');
 
     }
 
@@ -1652,7 +1718,7 @@ class profvacatairesController extends AppController{
             case 'etudiant':
                 $condition = $con->execute('SELECT maxEtud AS max FROM parametres')->fetchAll('assoc');
                 break;
-            case 'profvacataire':
+            case 'vacataire':
                 $condition = $con->execute('SELECT maxProfVac AS max FROM parametres')->fetchAll('assoc');
                 break;
             case 'profpermanent':
@@ -1708,7 +1774,7 @@ class profvacatairesController extends AppController{
             case 'etudiant':
                 $condition = $con->execute('SELECT maxEtud AS max FROM parametres')->fetchAll('assoc');
                 break;
-            case 'profvacataire':
+            case 'vacataire':
                 $condition = $con->execute('SELECT maxProfVac AS max FROM parametres')->fetchAll('assoc');
                 break;
             case 'profpermanent':

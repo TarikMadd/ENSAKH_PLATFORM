@@ -24,7 +24,7 @@
               <th><?= $this->Paginator->sort('Auteur') ?></th>
               <th><?= $this->Paginator->sort('ISBN') ?></th>
               <th><?= $this->Paginator->sort('Num Inventaire') ?></th>
-              <th><?= $this->Paginator->sort('Date Empreintes') ?></th>
+              <th><?= $this->Paginator->sort('Date Emprunt') ?></th>
               <th><?= $this->Paginator->sort('Delai') ?></th>
               <th><?= $this->Paginator->sort('Etat') ?></th>
 

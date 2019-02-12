@@ -41,8 +41,8 @@
                 <td><?= $this->Number->format($mouvement->quantite_entree) ?></td>
                 <td><?= $this->Number->format($mouvement->quantite_sortie) ?></td>
                 <td><?= h($mouvement->service) ?></td>
-                <td><?= $mouvement->has('magasin') ? $this->Html->link($mouvement->magasin->id, ['controller' => 'Respostocks', 'action' => 'view_magasins', $mouvement->magasin->id]) : '' ?></td>
-				<td><?= $mouvement->has('article') ? $this->Html->link($mouvement->article->id, ['controller' => 'Respostocks', 'action' => 'view_articles', $mouvement->article->id]) : '' ?></td>
+                <td><?= $mouvement->has('magasin') ? $this->Html->link($mouvement->magasin->nom_magasin, ['controller' => 'Respostocks', 'action' => 'view_magasins', $mouvement->magasin->nom_magasin]) : '' ?></td>
+				<td><?= $mouvement->has('article') ? $this->Html->link($mouvement->article->label_article, ['controller' => 'Respostocks', 'action' => 'view_articles', $mouvement->article_id]) : '' ?></td>
                 <td class="actions" style="white-space:nowrap">
                   <?= $this->Html->link(__('Afficher'), ['action' => 'view_mouvements', $mouvement->id], ['class'=>'btn btn-info btn-xs']) ?>
 				  <?php if($mouvement->quantite_entree<$mouvement->quantite_sortie){ ?>

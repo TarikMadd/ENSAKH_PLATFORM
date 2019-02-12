@@ -12,7 +12,8 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Semestres
  * @property \Cake\ORM\Association\BelongsTo $AnneeScolaires
  * @property \Cake\ORM\Association\BelongsTo $Elements
- * @property \Cake\ORM\Association\BelongsTo $Professeurs
+ * @property \Cake\ORM\Association\BelongsTo $Profpermanents
+ * @property \Cake\ORM\Association\BelongsTo $Vacataires
  *
  * @method \App\Model\Entity\Enseigner get($primaryKey, $options = [])
  * @method \App\Model\Entity\Enseigner newEntity($data = null, array $options = [])
@@ -35,9 +36,9 @@ class EnseignersTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('enseigners');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('enseigners');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Semestres', [
             'foreignKey' => 'semestre_id',
@@ -51,9 +52,12 @@ class EnseignersTable extends Table
             'foreignKey' => 'element_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Professeurs', [
-            'foreignKey' => 'professeur_id',
+        $this->belongsTo('Profpermanents', [
+            'foreignKey' => 'profpermanent_id',
             'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Vacataires', [
+            'foreignKey' => 'vacataire_id'
         ]);
     }
 
@@ -68,14 +72,6 @@ class EnseignersTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
-
-        $validator
-            ->dateTime('created_at')
-            ->allowEmpty('created_at');
-
-        $validator
-            ->dateTime('updated_at')
-            ->allowEmpty('updated_at');
 
         return $validator;
     }
@@ -92,7 +88,8 @@ class EnseignersTable extends Table
         $rules->add($rules->existsIn(['semestre_id'], 'Semestres'));
         $rules->add($rules->existsIn(['annee_scolaire_id'], 'AnneeScolaires'));
         $rules->add($rules->existsIn(['element_id'], 'Elements'));
-        $rules->add($rules->existsIn(['professeur_id'], 'Professeurs'));
+        $rules->add($rules->existsIn(['profpermanent_id'], 'Profpermanents'));
+        $rules->add($rules->existsIn(['vacataire_id'], 'Vacataires'));
 
         return $rules;
     }

@@ -21,7 +21,6 @@
                         <option value="prenom_fct"> Prenom fonctionnaire </option>
                         <option value="somme">Numero de somme </option>
                         <option value="specialite"> Specialite </option>
-                        <option value="echelle"> Echelle</option>
                         <option value="echelle"> Age</option>
                         <option value="echelle"> Genre</option>
                         <option value="echelle"> Date Recrutement</option>

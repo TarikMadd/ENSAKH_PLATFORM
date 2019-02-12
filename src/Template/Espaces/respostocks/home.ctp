@@ -33,10 +33,10 @@
 <section class="content">
       <div class="row">
         <div class="col-lg-3 col-xs-6">
-            <a href="index_articles" class="small-box-footer">
+            <a href="respostocks/index_articles" class="small-box-footer">
             <div class="small-box" style="background-color: #336E7B; color: #fff">
               <div class="inner">
-                <h3><?= $j ;?></h3>
+                <h3><?= $pr[0]['sum'] ;?></h3>
                 <p>Totales Articles</p>
               </div>
               <div class="icon">
@@ -46,10 +46,10 @@
             </a>
         </div>
       <div class="col-lg-3 col-xs-6">
-        <a href="indexCommandes" class="small-box-footer">
+        <a href="respostocks/indexCommandes" class="small-box-footer">
         <div class="small-box" style="background-color: #66CC99; color: #fff">
           <div class="inner">
-            <h3><?= $her; ?></h3>
+            <h3><?= $br[0]['sum'] ; ?></h3>
             <p>Commandes Effectuées</p>
           </div>
           <div class="icon">
@@ -59,10 +59,10 @@
         </a>
       </div>
       <div class="col-lg-3 col-xs-6">
-        <a href="index_stockcategories" class="small-box-footer">
+        <a href="respostocks/index_stockcategories" class="small-box-footer">
         <div class="small-box" style="background-color: #F9BF3B; color: #fff">
           <div class="inner">
-            <h3><?= $mer; ?></h3>
+            <h3><?= $vr[0]['sum']; ?></h3>
             <p>Categories</p>
           </div>
           <div class="icon">
@@ -87,7 +87,7 @@
       <?php } else {?>
       <div class="small-box" style="background-color: #F64747; color: #fff">
           <div class="inner">
-            <h3><?= $i; ?></h3>
+            <h3><?= $mr; ?></h3>
             <p>Articles en états critique</p>
           </div>
           <div class="icon">
@@ -96,47 +96,49 @@
         </div>
       <?php }?>
       </div>
+
+
     </div>
     <div class="row">
       <div class="col-sm-4">
         <section class="panel" >
-          <div class="profile-db-head" style="background-color: #336E7B; color: #fff"><br/>
-            <p style="text-align:center;"><img src="/admin_l_t_e/img/respobiblio.png" class="img-circle" alt=""  width="75px" ></p>
-            <h3><p style="text-align:center;">Mr. Alexander Pierce</p></h3>
-            <p style="text-align:center;"><?= $role ?></p>
-          </div>
-          <table class="table table-hover">
-            <tbody>
-              <tr>
-                <td>
-                  <i class="glyphicon glyphicon-user text-maroon-light"></i>
-                </td>
-                <td>Utilisateurs</td>
-                <td><?= $role ?></td>
-              </tr>
-              <tr>
-                <td>
-                  <i class="fa fa-envelope text-maroon-light"></i>
-                </td>
-                <td>Email</td>
-                <td><?= $role ?>@gmail.com</td>
-              </tr>
-              <tr>
-                <td>
-                  <i class="fa fa-phone text-maroon-light"></i>
-                </td>
-                <td>Tel</td>
-                <td>0602122546</td>
-              </tr>
-              <tr>
-                <td>
-                  <i class=" fa fa-globe text-maroon-light"></i>
-                </td>
-                <td>Addresse</td>
-                <td>Bd Béni Amir, BP 77, Khouribga - Maroc</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="profile-db-head" style="background-color: #336E7B; color: #fff"><br/>
+                    <p style="text-align:center;"><img src="/Ensaksite/img/respostock/7bfc85c0d74ff05806e0b5a0fa0c1df1.png" class="img-circle" alt=""  width="75px" ></p>
+                    <h3><p style="text-align:center;"><?= $genre ?>. <?= $nom ?></p></h3>
+                    <p style="text-align:center;"><?= $name[0]['specialite'] ?></p>
+                  </div>
+        <table class="table table-hover">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <i class="glyphicon glyphicon-user text-maroon-light"></i>
+                        </td>
+                        <td>CIN</td>
+                        <td><?= $name[0]['CIN'] ?></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <i class="fa fa-envelope text-maroon-light"></i>
+                        </td>
+                        <td>Email</td>
+                        <td><?= $name[0]['email'] ?></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <i class="fa fa-phone text-maroon-light"></i>
+                        </td>
+                        <td>Tel</td>
+                        <td><?= $name[0]['phone'] ?></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <i class=" fa fa-globe text-maroon-light"></i>
+                        </td>
+                        <td>Addresse</td>
+                        <td>Bd Béni Amir, BP 77, Khouribga - Maroc</td>
+                      </tr>
+                    </tbody>
+                  </table>
         </section>
       </div>
       <div class="col-sm-8">

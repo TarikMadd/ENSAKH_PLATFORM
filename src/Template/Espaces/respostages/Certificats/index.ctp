@@ -45,9 +45,9 @@
                 <td> <?= h($certificats[$i]['nombre_max']) ?> </td>
                 <?php endif; ?>
                 <td class="actions" style="white-space:nowrap">
-                  <?= $this->Html->link(__('View'), ['action' => 'viewCertificats', $certificats[$i]['id']], ['class'=>'btn btn-info btn-xs'] )?>
-                  <?= $this->Html->link(__('Edit'), ['action' => 'editCertificats', $certificats[$i]['id']], ['class'=>'btn btn-warning btn-xs']) ?>
-                  <?= $this->Form->postLink(__('Delete'), ['action' => 'deleteCertificats', $certificats[$i]['id']], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                  <?= $this->Html->link(__('Afficher'), ['action' => 'viewCertificats', $certificats[$i]['id']], ['class'=>'btn btn-info btn-xs'] )?>
+                  <?= $this->Html->link(__('Editer'), ['action' => 'editCertificats', $certificats[$i]['id']], ['class'=>'btn btn-warning btn-xs']) ?>
+                  <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deleteCertificats', $certificats[$i]['id']], ['confirm' => __('Voulez vous supprimer ce certificat?'), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
               </tr>
             <?php endfor; ?>
@@ -81,7 +81,32 @@ $this->Html->script([
 <?php $this->start('scriptBotton'); ?>
 <script>
   $(function () {
-    $("#example1").DataTable();
+   $("#example1").DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "order": [[ 2, "desc" ]],
+        "info": false,
+        "autoWidth": true,  
+        "language": {
+            "paginate": {
+            "next": "Suivant",
+            "previous": "Précédent",
+            },
+            "search": "Rechercher: ",
+            "zeroRecords": "Aucun critère ne correspond à ce que vous avez tapé.",
+            "emptyTable": "Rien à afficher.",
+            "lengthMenu": "Afficher _MENU_ lignes"
+        },
+        buttons: [ 'copy', {
+                  extend: 'exel',
+                  exportOptions: {
+                    columns: [0,1,2]
+                  }
+                  },'pdf','colvis']
+    });
+    $("#example1").append(table.table().buttons);
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,

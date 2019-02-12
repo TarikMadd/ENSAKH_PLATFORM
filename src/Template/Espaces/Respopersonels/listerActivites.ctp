@@ -35,9 +35,9 @@
                                 <td><?= $fonctionnairesActivite->has('activite') ? $this->Html->link($fonctionnairesActivite->activite->id, ['controller' => 'Activites', 'action' => 'view', $fonctionnairesActivite->activite->id]) : '' ?></td>
 
                                 <td class="actions" style="white-space:nowrap">
-                                    <?= $this->Html->link(__('View'), ['action' => 'viewActivite', $fonctionnairesActivite->fonctionnaire->id,$fonctionnairesActivite->activite->id,$fonctionnairesActivite->id], ['class'=>'label label-primary']) ?>
-                                    <?= $this->Html->link(__('Edit'), ['action' => 'editFonctActivite', $fonctionnairesActivite->id], ['class'=>'btn btn-warning btn-xs']) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'deleteFonctActivite', $fonctionnairesActivite->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                                    <?= $this->Html->link(__('Consulter'), ['action' => 'viewActivite', $fonctionnairesActivite->fonctionnaire->id,$fonctionnairesActivite->activite->id,$fonctionnairesActivite->id], ['class'=>'label label-primary']) ?>
+                                    <?= $this->Html->link(__('Modifier'), ['action' => 'editFonctActivite', $fonctionnairesActivite->id], ['class'=>'btn btn-warning btn-xs']) ?>
+                                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deleteFonctActivite', $fonctionnairesActivite->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

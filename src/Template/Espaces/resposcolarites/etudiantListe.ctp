@@ -43,8 +43,8 @@
                                    
                        $options[] = [$cncr->id => $cncr->niveau->libile." ".$cncr->filiere->libile];          }
          
-          echo $this->Form->label('groupes', null, ['style' => ' display: inline; width: 20%; float: left; padding-top:3px; ']);                                         
-          echo $this->Form->select('groupes', $options, ['escape' => false, 'id'=>'grps','empty' => 'Choisir groupes']);
+          echo $this->Form->label('Classes', null, ['style' => ' display: inline; width: 20%; float: left; padding-top:3px; ']);                                         
+          echo $this->Form->select('groupes', $options, ['escape' => false, 'id'=>'grps','empty' => 'Choisir Classe']);
            echo $this->Form->end();
           ?>
           </div>
@@ -57,11 +57,11 @@
             <tr >
               <th class="active">  </th>
               <th class="active"><?= $this->Paginator->sort('nom_fr', array('label'=>'Nom')) ?></th>
-              <th class="active"><?= $this->Paginator->sort('prenom_fr', array('label'=>'Prenom')) ?></th>
+              <th class="active"><?= $this->Paginator->sort('prenom_fr', array('label'=>'Prénom')) ?></th>
               <th class="active"><?= $this->Paginator->sort('apogee', array('label'=>'Code Apogée')) ?></th>
               <th class="active"><?= $this->Paginator->sort('cne', array('label'=>'CNE')) ?></th>
               <th class="active"><?= $this->Paginator->sort('cin', array('label'=>'CIN')) ?></th>
-              <th class="active">Etat de l'edition</th>
+              <th class="active">Validation de l'étudiant</th>
               <th class="active">Classe</th>
 
               <td align="center" class="active"><B>Actions</B></td>
@@ -104,10 +104,10 @@
                 
                 <td align="center" class="active"><?= h($fil ) ?></td>
                 <td class="actions" style="white-space:nowrap" align="center">
-                  <?= $this->Html->link(__('View'), ['action' => 'viewEtudiant', $etudiant->id], ['class'=>'btn btn-info btn-xs']) ?>
-                  <?= $this->Html->link(__('Print'), ['action' => 'printEtudiant', $etudiant->id], ['class'=>'btn btn-success btn-xs']) ?>
-                  <?= $this->Html->link(__('Edit'), ['action' => 'editEtudiant', $etudiant->id], ['class'=>'btn btn-warning btn-xs']) ?>
-                  <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deleteEtudiant', $etudiant->id], ['confirm' => __('Voulez vous vraiment supprimer ce champ?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                  <?= $this->Html->link(__('Informations'), ['action' => 'viewEtudiant', $etudiant->id], ['class'=>'btn btn-info btn-xs']) ?>
+                  <?= $this->Html->link(__('Imprimer'), ['action' => 'printEtudiant', $etudiant->id], ['class'=>'btn btn-success btn-xs']) ?>
+                  <?= $this->Html->link(__('Editer'), ['action' => 'editEtudiant', $etudiant->id], ['class'=>'btn btn-warning btn-xs']) ?>
+                 
                   
                 </td>
                 <td align="center">

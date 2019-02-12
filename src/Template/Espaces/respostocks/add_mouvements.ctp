@@ -18,24 +18,25 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><?= __('Form') ?></h3>
+          <h3 class="box-title"><?= __('Formulaire') ?></h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
         <?= $this->Form->create($mouvement, array('role' => 'form')) ?>
           <div class="box-body">
           <?php
-		    echo $this->Form->input('article_id', ['options' => $articles]);
-			echo $this->Form->input('magasin_id', ['options' => $magasins]);
+		    //echo $this->Form->input('article_id', ['options' => $articles]);
+                      echo $this->Form->input('article', ['options' => $donne]);    
+			echo $this->Form->input('magasin', ['options' => $donnee]);
             echo $this->Form->input('date_mouvement',['value' => 'now']);
             echo $this->Form->input('reference_sortie',['required' => true]);
-            echo $this->Form->input('quantite_sortie',['required' => true]);
+            echo $this->Form->input('quantite_sortie',['required' => true],array('type'=>'number', 'min'=>0));
             echo $this->Form->input('service');
           ?>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <?= $this->Form->button(__('Save')) ?>
+            <?= $this->Form->button(__('Sauvegarder')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>

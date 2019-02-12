@@ -12,7 +12,7 @@
         .panel, .flip {
             padding: 5px;
             text-align: center;
-            background-color: #6B8E23;
+            background-color: #51A5CA;
             border: solid 1px #c3c3c3;
         }
 
@@ -27,7 +27,7 @@
 <!-- Content Header (Page header) -->
 <ol class="breadcrumb">
     <li>
-        <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Back'), ['action' => 'afficherFonctEvent'], ['escape' => false])?>
+        <?= $this->Html->link('<i class="fa fa-dashboard"></i> ' . __('Retour'), ['action' => 'afficherFonctEvent'], ['escape' => false])?>
     </li>
 </ol>
 <section class="content-header">

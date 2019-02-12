@@ -38,7 +38,7 @@
             <?php foreach ($fournisseurs as $fournisseur): ?>
               <tr>
                 <td><?= $this->Number->format($fournisseur->id) ?></td>
-                <td><?= $fournisseur->has('stock_category') ? $this->Html->link($fournisseur->stock_category->id, ['controller' => 'Respostocks', 'action' => 'view_stockcategories', $fournisseur->stock_category->id]) : '' ?></td>
+                <td><?= $fournisseur->has('stock_category') ? $this->Html->link($fournisseur->stock_category->label_cat, ['controller' => 'Respostocks', 'action' => 'view_stockcategories', $fournisseur->stock_category->label_cat]) : '' ?></td>
                 <td><?= h($fournisseur->nom_fournisseur) ?></td>
                 <td><?= h($fournisseur->prenom_fournisseur) ?></td>
                 <td><?= h($fournisseur->label_fournisseur) ?></td>

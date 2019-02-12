@@ -4,11 +4,7 @@
     Certificats Etudiant
     <small><?= __('Supprimer') ?></small>
   </h1>
-  <ol class="breadcrumb">
-    <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'indexCertificatsEtudiants'], ['escape' => false]) ?>
-    </li>
-  </ol>
+  
 </section>
 
 <!-- Main content -->

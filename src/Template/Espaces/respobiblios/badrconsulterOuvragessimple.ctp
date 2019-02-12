@@ -11,11 +11,11 @@
     <div class="col-xs-12">
       <div class="box">
       <div class="box-header">
-          <h3 class="box-title">Les Ouvrages Disponible</h3>
+          <h3 class="box-title">Les Ouvrages Disponibles</h3>
           <div class="box-tools">
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <select name="categorie" onchange="this.form.submit();">
-              <option value="inf">tout les catégories</option>
+              <option value="inf">toutes les catégories</option>
                 <?php 
                 for ($i=0; $i <count($categorie) ; $i++) { 
                   if(isset($selection)){ ?>
@@ -25,7 +25,7 @@
                 <?php }} ?>
                 </select>
                 <select name="souscategorie" onchange="this.form.submit();" <?php if(!isset($selection)) echo "disabled";?>>
-                  <option value="inf1">tout les sous catégories</option>
+                  <option value="inf1">toutes les sous catégories</option>
                   <?php 
                   for ($i=0; $i <count($souscategorie) ; $i++) { 
                       if(isset($selection1)){ ?>
@@ -45,9 +45,9 @@
               <th><?= $this->Paginator->sort('titre') ?></th>
               <th><?= $this->Paginator->sort('auteur') ?></th>
               <th><?= $this->Paginator->sort('édition') ?></th>
-              <th><?= $this->Paginator->sort('resumer') ?></th>
+              <th><?= $this->Paginator->sort('resumé') ?></th>
               <th><?= $this->Paginator->sort('ISBN') ?></th>
-              <th><?= $this->Paginator->sort('nombre exemplaire') ?></th>
+              <th><?= $this->Paginator->sort("nombre d'exemplaires") ?></th>
             </tr>
             <?php for ($i=0;$i<count($book);$i++) { ?>
               <tr>

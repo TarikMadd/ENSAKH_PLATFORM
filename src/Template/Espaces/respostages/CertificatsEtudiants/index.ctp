@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Respo Stage
+    Responsable du Stage
   </h1>
   
 </section>
@@ -15,10 +15,10 @@
     <div class="col-xs-12">
      <div class="box">
      <div class="box-header">
-          <h3 class="box-title"><?= __('List des') ?> Certificats des etudiants</h3>
+          <h3 class="box-title"><?= __('Liste des') ?> Certificats des etudiants</h3>
           <div class="box-tools">
              <?= $this->Html->link(__('Réinitialiser'), ['action' => 'reinitialiserCertificatsEtudiants'], ['class'=>'btn btn-danger btn-xs']) ?>
-             <?= $this->Form->postLink(__('Vider la table'), ['action' => 'miseAzeroCertificatsEtudiants'], ['confirm' => __('Confirmer la mise à zero de la table ?'), 'class'=>'btn btn-danger btn-xs']) ?>
+            
           </div>
         </div>
       <div class="nav-tabs-custom">

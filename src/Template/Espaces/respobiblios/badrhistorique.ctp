@@ -32,7 +32,7 @@
               <th><?= $this->Paginator->sort('utilisateur') ?></th>
               <th><?= $this->Paginator->sort('fonction') ?></th>
               <th><?= $this->Paginator->sort('identifiant') ?></th>
-              <th><?= $this->Paginator->sort('dateEmprunte') ?></th>
+              <th><?= $this->Paginator->sort('date Emprunt') ?></th>
               <th><?= $this->Paginator->sort('date Retour') ?></th>
             </tr>
             <?php if (isset($emprunt)) {

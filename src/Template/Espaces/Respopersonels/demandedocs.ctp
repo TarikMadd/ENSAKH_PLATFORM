@@ -5,7 +5,6 @@
 <form   method="post" action=" <?php echo $this->Url->build('/respopersonels/demandedocs', true) ?>">
     <select name="choix" required ></br>
         <option value="attestationTravail">attestationTravail</option>
-        <option value="2">2</option>
         
 </select></br>
 <input type="date" name="date" required></br>
@@ -31,14 +30,13 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="row">
-<?= $this->Form->create($vacatairesDocument, array('role' => 'form')) ?>
+
                     <div class="col-md-12">
                         <div class="form-group" >
                             <label>Demande</label>
                             <?php
                             echo  "<select name=\"choix\" required  class=\"form-control\" >
                             <option value='attestationTravail'>attestationTravail</option>
-                            
                                                 
                          <select>"; ?>
                         </div>
@@ -53,7 +51,7 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Numero Somme</label>
+                            <label for="exampleInputEmail1">Numer Somme</label>
                             <input type="text" value="<?php echo $id;?>" name="id" disabled class="form-control">
                         </div>
 
@@ -65,7 +63,7 @@
             </div>
 
             <div class="box-footer">
-                <button type="submit" class="btn btn-info btn-block">cliquez ici pour envoyer la demande </button>
+                <button type="submit" class="btn btn-info btn-block">cliquez ici pour envoyer </button>
             </div>
 
         <?= $this->Form->end() ?>

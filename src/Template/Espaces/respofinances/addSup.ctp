@@ -44,7 +44,7 @@
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nbr Heures</label>
+                        <label for="exampleInputEmail1">Nombre d'heures</label>
                         <input type="number" name="nbHeure" class="form-control" id="nbHeure" placeholder="Enter nombre d'heures" min="1" max="20" required>
                     </div>
 

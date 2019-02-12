@@ -33,7 +33,7 @@
                  <th><?= $this->Paginator->sort('Numéro Enregitrement') ?></th>
               <th><?= $this->Paginator->sort('date_arrivee') ?></th>
               <th><?= $this->Paginator->sort('Désignation') ?></th>
-              <th><?= $this->Paginator->sort('expediteur') ?></th>
+              <th><?= $this->Paginator->sort('expediteur_id') ?></th>
               <th><?= $this->Paginator->sort('nom_service') ?></th>
 
               <th><?= $this->Paginator->sort('type_courrier') ?></th>
@@ -44,25 +44,27 @@
                <th><?= $this->Paginator->sort('etat_du_courrier') ?></th>
               <th><?= $this->Paginator->sort('Courrier') ?></th>
               <th><?= $this->Paginator->sort('Accusé de reception') ?></th>
-              <th><?= $this->Paginator->sort('Courrier_retourne') ?></th>
+              
               <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-              
-             <?php  for ($i=0;$i<count($courrierArrivees);$i++ ): ?>
+    
+             <?php for ($i=0;$i<count($courrierArrivees);$i++ ): ?>
               <tr>
                 <td><?= h($courrierArrivees[$i]['id']) ?></td>
                 <td><?= h($courrierArrivees[$i]['date_arrivee']) ?></td>
                 <td><?= h($courrierArrivees[$i]['Désignation']) ?></td>
                 <td> <?= h($courrierArrivees[$i]['nomComplet_expediteur']) ?> </td>
-                 
+
+
                 <td> <?php if($courrierArrivees[$i]['service_id']!= NULL): ?>
                 <?= h($services[$courrierArrivees[$i]['service_id']]) ?>
               <?php endif; ?>
                  </td>
                  
-                <td><?= h($courrierArrivees[$i]['type_courrier']) ?></td>
+       
+          <td><?= h($courrierArrivees[$i]['type_courrier']) ?></td>
                 <td><?= h($courrierArrivees[$i]['necessité_du_traitement']) ?></td>
 
             
@@ -88,11 +90,11 @@
                 ?>
              <td><?= h($courrierArrivees[$i]['date_limite_du_traitement']) ?></td>
 <?php if( h($courrierArrivees[$i]['etat_du_courrier'])!="-")
-                { 
-                  echo'<td> 
-                  <span class="badge bg-yellow" >';echo $courrierArrivees[$i]['etat_du_courrier'];?>  
+                { echo'<td> 
+                <span class="badge bg-yellow" >';?> <?= h($courrierArrivee[$i]['etat_du_courrier']) ?> 
                   <?php echo '</span></td>'; }
-                  else {echo'<td>'. h($courrierArrivee[$i]['etat_du_courrier']) .'</td>';}
+                  else echo'<td>'. h($courrierArrivee[$i]['etat_du_courrier']) .'</td>';
+
                   ?>
                 <td class="actions" style="white-space:nowrap">
                 <?php if($courrierArrivee[$i]['courrier']!=""): ?> 
@@ -108,15 +110,6 @@
                   <a href="<?php echo $this->Url->build('/courrier/'.$courrierArrivee[$i]['accuse'].''); ?>" target="_blank" class="btn bg-navy margin">afficher</a>
                    <?php endif;?>
                 </td>
-                <?php if($courrierArrivees[$i]['courrier_retourne']  =="Oui")
-                {
-                  echo'<td> 
-                <span class="badge bg-red" >';echo $courrierArrivee[$i]['courrier_retourne']?> 
-                <?php echo '</span></td>'; }
-                else
-                  echo'<td>'. $courrierArrivees[$i]['courrier_retourne'] .'</td>';
-
-                 ?>
          
 
 <td class="actions" style="white-space:nowrap">

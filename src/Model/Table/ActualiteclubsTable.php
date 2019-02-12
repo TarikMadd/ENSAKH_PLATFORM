@@ -33,6 +33,10 @@ class ActualiteclubsTable extends Table
         $this->table('actualiteclubs');
         $this->displayField('id');
         $this->primaryKey('id');
+        $this->belongsTo('Clubs', [
+            'foreignKey' => 'id_club',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -72,8 +76,8 @@ class ActualiteclubsTable extends Table
             ->allowEmpty('video');
 
         $validator
-            ->requirePresence('fichier', 'create')
-            ->notEmpty('fichier');
+           
+            ->allowEmpty('fichier');
 
         return $validator;
     }

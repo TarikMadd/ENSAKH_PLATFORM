@@ -13,18 +13,34 @@
                     </tr>
                     <?php $i=1;
   foreach($mesprofs as $value): ?>
-   
-	<tr>
-	<td> <?php echo $i;?></td>
-	<td> <?php echo $value['nom_prof'] ?></td>
-	<td> <?php echo $value['prenom_prof'] ?></td>
-	<td> <?php echo $value['email_prof'] ?></td>
-	
-		
-	</tr>
-	 <?php $i++;  ?>
-		
-<?php  endforeach;?>
+
+                                                            	<tr>
+                                                            	<td> <?php echo $i;?></td>
+                                                            	<td> <?php echo $value['nom_prof'] ?></td>
+                                                            	<td> <?php echo $value['prenom_prof'] ?></td>
+                                                            	<td> <?php echo $value['email_prof'] ?></td>
+
+
+                                                            	</tr>
+                                                            	 <?php $i++;  ?>
+
+                                                            <?php  endforeach;
+
+
+
+       foreach($mesprofsvacataires as $value): ?>
+
+                                                                   	<tr>
+                                                                   	<td> <?php echo $i;?></td>
+                                                                   	<td> <?php echo $value['nom_vacataire'] ?></td>
+                                                                   	<td> <?php echo $value['prenom_vacataire'] ?></td>
+                                                                   	<td> <?php echo $value['email'] ?></td>
+
+
+                                                                   	</tr>
+                                                                   	 <?php $i++;  ?>
+
+                                                                   <?php  endforeach;?>
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

@@ -1,4 +1,4 @@
-<?php $this->layout = 'AdminLTE.print';?>
+<?php $this->layout = 'AdminLTE.print';include 'N2TEXT.php';?>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,7 +45,18 @@ ENSA-KHOURIBGA</strong></address>
         Domiciliation&nbsp;&nbsp; :<br><br>
         <b>Pièces justificatives:</b>
         <ul><li>copie de l’état des sommes dues</li><li>copie de l’Ordre de mission</li></ul>
-        Arrêté le présent ordre de paiement à la somme de :<b><?=$t?> Dh</b><br><br>
+        <?php
+
+                $number = number_format((float)($t), 2, '.', '');
+        
+                $num=(string)$number;
+        
+                $pieces = explode(".", $num);
+                $som = new ConvertNumberToText();$d =$som->Convert($pieces[0]);
+                $p=explode("(", $d);
+
+                ?>
+        Arrêté le présent ordre de paiement à la somme de :<b><?php  echo strtoupper($p[0])." DIRHAMS ".$pieces[1]." CTS"; echo " ( ".$t."DH )";?></b><br><br>
       <div class="col-xs-6" style="border: solid 2px;height: 270px;">
         <b>TRANSMIS AU TRESORIER PAYEUR</b><br>
         le: <br>

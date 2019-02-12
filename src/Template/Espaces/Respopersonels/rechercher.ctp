@@ -1,9 +1,6 @@
 
 <section class="content-header">
-  <h1>
-    Profpermanents
 
-  </h1>
 </section>
 <!-- Main content -->
 <section class="content">
@@ -11,13 +8,14 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title" ><?= __('List of') ?> Profpermanents</h3>
+        <div class="panel panel-primary">
+          <div class="panel-heading">Liste des professeurs permanents à l'ENSA KHOURIBGA :
           <div class="box-tools">
             <form action="<?php echo $this->Url->build(); ?>" method="POST">
               <div class="input-group input-group-sm"  style="width: 180px;">
-                <input type="text" name="chercherProf" class="form-control"  placeholder="<?= __('Fill in to start search') ?>">
+                <input type="text" name="chercherProf" class="form-control"  ?>
                 <span class="input-group-btn">
-                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
+                <button class="btn btn-info btn-flat"style="margin-left:906px type="submit"><?= __('Filtrer') ?></button>
                 </span>
               </div>
             </form>
@@ -52,7 +50,7 @@
                     </div>
                     <div class="box-footer no-padding">
                       <ul class="nav nav-stacked">
-                        <li><a href="../../Ensaksite/Respopersonels/viewProfBis/<?=$professeursGrade->profpermanent->id?>" >Somme<span class="pull-right badge bg-blue"><?=$professeursGrade->profpermanent->somme?>
+                        <li><a href="/Respopersonels/viewProfBis/<?=$professeursGrade->profpermanent->id?>" >Somme<span class="pull-right badge bg-blue"><?=$professeursGrade->profpermanent->somme?>
                         <li><a href="#">Specialité <span class="pull-right badge bg-aqua"><?=$professeursGrade->profpermanent->specialite?></span></a></li>
                         <li><a href="#">Lieu Naissance <span class="pull-right badge bg-green"><?=$professeursGrade->profpermanent->Lieu_Naissance?></span></a></li>
                         <li><a href="#">Date de naissance <span class="pull-right badge bg-red"><?=$professeursGrade->profpermanent->dateNaissance?></span></a></li>

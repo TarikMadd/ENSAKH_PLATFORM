@@ -4,7 +4,7 @@
     </h1>
     <ol class="breadcrumb">
         <li>
-            <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'afficherFonctEvent'], ['escape' => false]) ?>
+            <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Retour'), ['action' => 'afficherFonctEvent'], ['escape' => false]) ?>
         </li>
     </ol>
 </section>
@@ -27,12 +27,12 @@
                 <!-- form start -->
                 <?= $this->Form->create($activite, array('role' => 'form','enctype'=>'multipart/form-data')) ?>
                 <div class="box-body" >
-                    <div  style="text-align: left" > <?php echo $this->Form->input('nomActivite',['label'=>'Nom Evénement','style'=>'width:500px','class'=>'form-control']);?></div>
+                    <div style="width:500px;margin-left:8px;text-align: left" > <?php echo $this->Form->input('nomActivite',['label'=>'Nom Evénement','style'=>'width:500px','class'=>'form-control']);?></div>
                     <div class="row" >
                         <div class="col-md-12" >
                             <div class="box-body">
                                 <!-- Date dd/mm/yyyy -->
-                                <div  class="form-group" style="text-align: left">
+                                <div class="form-group" style="text-align: left">
                                     <label >Date Début:</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">

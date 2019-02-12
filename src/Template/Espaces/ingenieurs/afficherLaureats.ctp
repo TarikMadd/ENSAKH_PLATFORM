@@ -1,7 +1,8 @@
 <!-- Content Header (Page header) -->
+
 <section class="content-header">
   <h1>
-    Laureats
+    Statistics Laureate
     <div class="pull-right"><?= $this->Html->link(__('New'), ['action' => 'ajouterLaureats'], ['class'=>'btn btn-success btn-xs']) ?></div>
   </h1>
 </section>
@@ -12,7 +13,7 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title"><?= __('Liste des') ?> Laureats</h3>
+          <h3 class="box-title"><?= __('List of') ?> Statistics Laureate</h3>
           <div class="box-tools">
 
           </div>
@@ -21,11 +22,11 @@
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover">
             <tr>
-              <th><?= $this->Paginator->sort('id') ?></th>
-              <th><?= $this->Paginator->sort('annee') ?></th>
-              <th><?= $this->Paginator->sort('nombresTravailles') ?></th>
-              <th><?= $this->Paginator->sort('nombresNonTravailles') ?></th>
-              <th><?= $this->Paginator->sort('filieres') ?></th>
+              <th><?= $this->Paginator->sort('id',array('label'=>"ID")) ?></th>
+              <th><?= $this->Paginator->sort('annee',array('label'=>"Promotion")) ?></th>
+              <th><?= $this->Paginator->sort('nombresTravailles',array('label'=>"Number of successful candidates who landed a job")) ?></th>
+              <th><?= $this->Paginator->sort('nombresNonTravailles',array('label'=>"Number of unemployed laureates")) ?></th>
+              <th><?= $this->Paginator->sort('filieres',array('label'=>"Industry")) ?></th>
               <th><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($laureats as $laureat): ?>
@@ -36,9 +37,9 @@
                 <td><?= $this->Number->format($laureat->nombresNonTravailles) ?></td>
                 <td><?= h($laureat->filieres) ?></td>
                 <td class="actions" style="white-space:nowrap">
-                  <?= $this->Html->link(__('Afficher'), ['action' => 'viewLaureats', $laureat->id], ['class'=>'btn btn-info btn-xs']) ?>
-                  <?= $this->Html->link(__('Modifier'), ['action' => 'modifierLaureats', $laureat->id], ['class'=>'btn btn-warning btn-xs']) ?>
-                  <?= $this->Form->postLink(__('Supprimer'), ['action' => 'supprimerLaureats', $laureat->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                  <?= $this->Html->link(__('View'), ['action' => 'viewLaureats', $laureat->id], ['class'=>'btn btn-info btn-xs']) ?>
+                  <?= $this->Html->link(__('Edit'), ['action' => 'modifierLaureats', $laureat->id], ['class'=>'btn btn-warning btn-xs']) ?>
+                  <?= $this->Form->postLink(__('Delete'), ['action' => 'supprimerLaureats', $laureat->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -69,12 +70,33 @@
     margin: 10px;
 }
 </style>
-<?php echo '<h3>  Tapper une annee et vous auriez les informations sur les laureats de cette annee :  </h3>
-<form action="liste2" method="post">
-<input type="text" name="annee" >
-<button type="submit" class="button" name="button">valider</button>
-</form>
+<?php echo '<h3>  Type a year and you will have informations about the laureats of this year: </h3>';?>
 
 
-';?>
 <!-- /.content -->
+
+    <script type="text/javascript">
+      function showHint()
+      {
+
+        var str=document.getElementsByName('text')[0].value;
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange=function(){
+          if(this.readyState == 4 && this.status == 200)
+          {
+            document.getElementById("resultat").innerHTML = this.responseText;
+          }
+
+        }
+        xmlhttp.open("GET","liste2?q="+str,true);
+        xmlhttp.send();
+
+      }
+
+    </script>
+
+
+    <input type="text" name="text" onkeyup="showHint(this.value)">
+  
+    <div id="resultat"></div>

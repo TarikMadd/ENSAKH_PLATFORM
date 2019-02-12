@@ -1,43 +1,38 @@
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <h1>
-    404 Error Page
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="#">Examples</a></li>
-    <li class="active">404 error</li>
-  </ol>
-</section>
+<?php
+use Cake\Core\Configure;
+use Cake\Error\Debugger;
 
-<!-- Main content -->
-<section class="content">
-  <div class="error-page">
-    <h2 class="headline text-yellow"> 404</h2>
+$this->layout = 'error';
 
-    <div class="error-content">
-      <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+if (Configure::read('debug')):
+    $this->layout = 'dev_error';
 
-      <p>
-        We could not find the page you were looking for.
-        Meanwhile, you may <a href="<?php echo $this->Url->build(array('controller' => 'pages', 'action' => 'display', 'home')); ?>">return to dashboard</a> or try using the search form.
-      </p>
+    $this->assign('title', $message);
+    $this->assign('templateName', 'error400.ctp');
 
-      <form class="search-form">
-        <div class="input-group">
-          <input type="text" name="search" class="form-control" placeholder="Search">
+    $this->start('file');
+?>
+<?php if (!empty($error->queryString)) : ?>
+    <p class="notice">
+        <strong>SQL Query: </strong>
+        <?= h($error->queryString) ?>
+    </p>
+<?php endif; ?>
+<?php if (!empty($error->params)) : ?>
+        <strong>SQL Query Params: </strong>
+        <?php Debugger::dump($error->params) ?>
+<?php endif; ?>
+<?= $this->element('auto_table_warning') ?>
+<?php
+    if (extension_loaded('xdebug')):
+        xdebug_print_function_stack();
+    endif;
 
-          <div class="input-group-btn">
-            <button type="submit" name="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-        <!-- /.input-group -->
-      </form>
-    </div>
-    <!-- /.error-content -->
-  </div>
-  <!-- /.error-page -->
-</section>
-<!-- /.content -->
-
+    $this->end();
+endif;
+?>
+<h2><?= h($message) ?></h2>
+<p class="error">
+    <strong><?= __d('cake', 'Error') ?>: </strong>
+    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
+</p>

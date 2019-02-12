@@ -12,7 +12,7 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title"><?= __('List of') ?> Missions</h3>
+          <h3 class="box-title"><?= __('liste des missions du fonctionnaire: ').$r[0].' '.$r[1].' '.$r[2];?></h3>
           <div class="box-tools">
             <form name="Recherche" action="afficherFonc" method="POST">
               <div class="input-group input-group-sm"  style="width: 180px;">
@@ -32,7 +32,6 @@
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover">
             <tr>
-              <th><?= $this->Paginator->sort('id') ?></th>
               <th><?= $this->Paginator->sort('date_depart') ?></th>
               <th><?= $this->Paginator->sort('date_arrivee') ?></th>
               <th><?= $this->Paginator->sort('mode_transport') ?></th>
@@ -41,12 +40,12 @@
               <th><?= $this->Paginator->sort('taux') ?></th>
               <th><?= $this->Paginator->sort('indemnite_appliquee') ?></th>
               <th><?= $this->Paginator->sort('Montant indemnite') ?></th>
-              <th><?= $this->Paginator->sort('etat') ?></th>
+              <th><?= $this->Paginator->sort('Motif') ?></th>
               <th><?= $this->Paginator->sort('total') ?></th>
+              <th><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($resultat as $resultats): ?>
               <tr>
-                <td><?=$resultats[0]?></td>
                 <td><?=$resultats[1]?></td>
                 <td><?=$resultats[2]?></td>
                 <td><?=$resultats[3]?></td>
@@ -57,6 +56,10 @@
                 <td><?=$resultats[8]?></td>
                 <td><?=$resultats[9]?></td>
                 <td><?=$resultats[10]?></td>
+                <td class="actions" style="white-space:nowrap">
+                  <?= $this->Html->link(__('modifier'), ['action' => 'modifierMissionFonc', $resultats[0]], ['class'=>'btn btn-warning btn-xs']) ?>
+                  <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deleteFonc', $resultats[0]], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                </td>
               </tr>  
             <?php endforeach; ?>
           </table>
@@ -69,34 +72,42 @@
     </div>
     <div class="col-xs-6">
     <h4>imprimer les fiches de l'indemnité appliquée</h4>
-  <ul>
-    <li>
-      <?= $this->Html->link(__('Imprimer Fiche1'), ['action' => 'imprimerFiche1Fonc',$id], ['target'=> '_blank']) ?>
-    </li>
-    <li>
-    <?= $this->Html->link(__('Imprimer Fiche2'), ['action' => 'imprimerFiche2Fonc',$id], ['target'=> '_blank']) ?>
-    </li>
-    <li>
-    <?= $this->Html->link(__('Imprimer Fiche3'), ['action' => 'imprimerFiche3Fonc',$id], ['target'=> '_blank']) ?>
-    </li>
-  </ul>
+<table>
+  <tr>
+    <td width="40%">Fiche1 :  </td>
+    <td><?= $this->Html->link(__(' Ordre de paiement '), ['action' => 'imprimerFiche1Fonc',$id], ['target'=> '_blank','class'=>'btn btn-success btn-xs']) ?></td>
+  </tr>
+  <tr>
+   <td>Fiche2 :  </td>
+    <td><?= $this->Html->link(__('Etat des sommes dues'), ['action' => 'imprimerFiche2Fonc',$id], ['target'=> '_blank' ,'class'=>'btn btn-info btn-xs']) ?></td>
+  </tr>
+  <tr>
+    <td>Fiche1 :  </td>
+    <td><?= $this->Html->link(__(' ORDRE DE MISSION '), ['action' => 'imprimerFiche3Fonc',$id], ['target'=> '_blank', 'class'=>'btn btn-warning btn-xs']) ?></td>
+  </tr>
+</table>
     </div>
   <div class="col-xs-6">
     <h4>imprimer les fiches de l'indemnité kilométrique</h4>
-        <ul>
-              <li>
-              <?= $this->Html->link(__('Imprimer Fiche1'), ['action' => 'imprimerFiche4Fonc',$id], ['target'=> '_blank']) ?>
-              </li>
-              <li>
-              <?= $this->Html->link(__('Imprimer Fiche2'), ['action' => 'imprimerFiche5Fonc',$id], ['target'=> '_blank']) ?>
-              </li>
-              <li>
-              <?= $this->Html->link(__('Imprimer Fiche3'), ['action' => 'imprimerFiche6Fonc',$id], ['target'=> '_blank']) ?>
-              </li>
-              <li>
-              <?= $this->Html->link(__('Imprimer Fiche4'), ['action' => 'imprimerFiche7Fonc',$id], ['target'=> '_blank']) ?>
-              </li>
-        </ul>
+  
+        <table>
+          <tr>
+            <td width="40%">Fiche1 :  </td>
+            <td><?= $this->Html->link(__('Ordre de paiement'), ['action' => 'imprimerFiche4Fonc',$id], ['target'=> '_blank','class'=>'btn btn-success btn-xs']) ?></td>
+          </tr>
+          <tr>
+           <td>Fiche2 :  </td>
+            <td><?= $this->Html->link(__('Etat des sommes dues'), ['action' => 'imprimerFiche5Fonc',$id], ['target'=> '_blank','class'=>'btn btn-info btn-xs']) ?></td>
+          </tr>
+          <tr>
+            <td>Fiche3 :  </td>
+            <td><?= $this->Html->link(__('ORDRE DE MISSIONS'), ['action' => 'imprimerFiche6Fonc',$id], ['target'=> '_blank', 'class'=>'btn btn-warning btn-xs']) ?></td>
+          </tr>
+          <tr>
+            <td>Fiche4 :  </td>
+            <td><?= $this->Html->link(__('  DECISION  '), ['action' => 'imprimerFiche7Fonc',$id], ['target'=> '_blank', 'class'=>'btn btn-danger btn-xs']) ?></td>
+          </tr>
+        </table>
     </div>
   </div>
 </section>

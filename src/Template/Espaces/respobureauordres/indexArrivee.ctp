@@ -45,7 +45,6 @@
                <th><?= $this->Paginator->sort('etat') ?></th>
               <th><?= $this->Paginator->sort('Courrier') ?></th>
               <th><?= $this->Paginator->sort('Accusé de réception') ?></th>
-              <th><?= $this->Paginator->sort('Courrier_retourne') ?></th>
               <th>Actions</th>
               
                 </tr>
@@ -101,6 +100,7 @@
                 else echo'<td>'. h($courrierArrivee[$i]['etat_du_courrier']) .'</td>';
 
                  ?>
+                 
                 <td class="actions" style="white-space:nowrap">
                 <?php if($courrierArrivee[$i]['courrier']!=""): ?> 
                   <?= $this->Html->link(__('Télécharger'), ['action' => 'download', $courrierArrivee[$i]['id']], ['class'=>'fa fa-download']) ?>
@@ -115,13 +115,7 @@
                   <a href="<?php echo $this->Url->build('/courrier/'.$courrierArrivee[$i]['accuse'].''); ?>" target="_blank" class="btn bg-navy margin">afficher</a>
                    <?php endif;?>
                 </td>
-                <?php if( h($courrierArrivee[$i]['courrier_retourne']) =="Oui")
-                { echo'<td> 
-                <span class="badge bg-red" >';?> <?= h($courrierArrivee[$i]['courrier_retourne']) ?> 
-                <?php echo '</span></td>'; }
-                else echo'<td>'. h($courrierArrivee[$i]['courrier_retourne']) .'</td>';
-
-                 ?>
+             
                 <td class="actions" style="white-space:nowrap">
                 <p>
                 <span style="inline;">

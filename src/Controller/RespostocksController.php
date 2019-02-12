@@ -36,8 +36,8 @@ class respostocksController extends AppController {
         $this->set('username',$username);
         $id=$this->Auth->user('id');
         $name = $con->execute('SELECT nom_fct , prenom_fct ,genre ,somme, specialite, CIN, email,phone FROM fonctionnaires WHERE user_id=?',[$id])->fetchAll('assoc');
-        if($name[0]['genre']=='F') {
         $this->set('name',$name);
+        if($name[0]['genre']=='F') {
             $genre='Mme';
         }
         else {
@@ -128,11 +128,8 @@ class respostocksController extends AppController {
         $connection = ConnectionManager::get('default');
         $article = TableRegistry::get('Articles')->newEntity();
         if ($this->request->is('post')) {
-      //     die(print_r($this->request->data()));
-            //$prete =  $connection->execute('SELECT id FROM stock_categories where label_cat="'.$this->request->data("label_article").'"')->fetchAll('assoc');
-            //echo $prete;
-//            die(print_r($prete));
-            $article->stock_categorie_id=$this->request->data("stock_categories_id");
+            $prete =  $connection->execute('SELECT id FROM stock_categories where label_cat="'.$this->request->data['stock_categorie'].'"')->fetchAll('assoc');
+            $article->stock_categorie_id=$prete[0]["id"];
             $article = TableRegistry::get('Articles')->patchEntity($article, $this->request->data);
             if (TableRegistry::get('Articles')->save($article)) {
                 $this->Flash->success(__('Enregitré avec succès.', 'Article'));
@@ -177,8 +174,8 @@ class respostocksController extends AppController {
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            //$prete =  $connection->execute('SELECT id FROM stock_categories where label_cat="'.$this->request->data['stock_categorie'].'"')->fetchAll('assoc');
-            //$article->stock_categorie_id=$prete[0]["id"];
+            $prete =  $connection->execute('SELECT id FROM stock_categories where label_cat="'.$this->request->data['stock_categorie'].'"')->fetchAll('assoc');
+            $article->stock_categorie_id=$prete[0]["id"];
             $article = TableRegistry::get('Articles')->patchEntity($article, $this->request->data);
             if (TableRegistry::get('Articles')->save($article)) {
                 $connection->execute('delete  FROM commande_articles where article_id="'.$id.'"');
@@ -670,8 +667,8 @@ class respostocksController extends AppController {
         $connection = ConnectionManager::get('default');
         $fournisseur = TableRegistry::get('Fournisseurs')->newEntity();
         if ($this->request->is('post')) {
-         //   $prete =  $connection->execute('SELECT id FROM stock_categories where label_cat="'.$this->request->data['stock_categorie'].'"')->fetchAll('assoc');
-           // $fournisseur->stock_categorie_id=$prete[0]["id"];
+            $prete =  $connection->execute('SELECT id FROM stock_categories where label_cat="'.$this->request->data['stock_categorie'].'"')->fetchAll('assoc');
+            $fournisseur->stock_categorie_id=$prete[0]["id"];
             $fournisseur = TableRegistry::get('Fournisseurs')->patchEntity($fournisseur, $this->request->data);
             if (TableRegistry::get('Fournisseurs')->save($fournisseur)) {
                 $this->Flash->success(__('Enregitré avec succès.', 'Fournisseur'));
@@ -714,8 +711,8 @@ class respostocksController extends AppController {
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-           // $prete =  $connection->execute('SELECT id FROM stock_categories where label_cat="'.$this->request->data['stock_categorie'].'"')->fetchAll('assoc');
-            //$fournisseur->stock_categorie_id=$prete[0]["id"];
+            $prete =  $connection->execute('SELECT id FROM stock_categories where label_cat="'.$this->request->data['stock_categorie'].'"')->fetchAll('assoc');
+            $fournisseur->stock_categorie_id=$prete[0]["id"];
             $fournisseur = TableRegistry::get('Fournisseurs')->patchEntity($fournisseur, $this->request->data);
             if (TableRegistry::get('Fournisseurs')->save($fournisseur)) {
 
@@ -946,10 +943,10 @@ class respostocksController extends AppController {
         $articlesTable = TableRegistry::get('Articles');
         $mouvement = TableRegistry::get('Mouvements')->newEntity();
         if ($this->request->is('post')) {
-        //    $prete =  $connection->execute('SELECT id FROM articles where label_article="'.$this->request->data['article'].'"')->fetchAll('assoc');
-            //$mouvement->article_id=$prete[0]["id"];
-            //$pretee =  $connection->execute('SELECT id FROM magasins where nom_magasin="'.$this->request->data['magasin'].'"')->fetchAll('assoc');
-            //$mouvement->magasin_id=$pretee[0]["id"];
+            $prete =  $connection->execute('SELECT id FROM articles where label_article="'.$this->request->data['article'].'"')->fetchAll('assoc');
+            $mouvement->article_id=$prete[0]["id"];
+            $pretee =  $connection->execute('SELECT id FROM magasins where nom_magasin="'.$this->request->data['magasin'].'"')->fetchAll('assoc');
+            $mouvement->magasin_id=$pretee[0]["id"];
             if($_POST['quantite_sortie']>0){
                 $mouvement = TableRegistry::get('Mouvements')->patchEntity($mouvement, $this->request->data);
                 if (TableRegistry::get('Mouvements')->save($mouvement) ) {
@@ -1184,16 +1181,7 @@ class respostocksController extends AppController {
         }
         return $this->redirect(['action' => 'index']);
     }
-        public function articlechaqueannee()
-            {
-                 $con=ConnectionManager::get('default');
 
-                $date=$con->execute("SELECT  year(date_article) as date, count(*) as nombre FROM articles GROUP BY date ORDER BY date ASC");
-                $this->set('date',$date);
-
-
-                $this->render('/Espaces/respostocks/articlechaqueannee');
-            }
 
 
 

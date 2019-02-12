@@ -4,17 +4,18 @@
 <!-- Main content -->
 <section class="invoice">
     <!-- title row -->
+
     <div class="row">
         <div class="col-xs-12">
             <h2 class="page-header">
-                <i></i> <center><strong><br><br>ATTESTATION DE TRAVAIL</strong></center>
+                <i></i><center> ATTESTATION DE TRAVAIL</center>
                 <?php
-                foreach($fonctionnairesDocuments as $ligne)
+                foreach($profpermanentsDocuments as $ligne)
                 {
                     ?>
-                    <small class="pull-right"><?= $ligne->date_demande ?></small>
-                    <?php
 
+                    <?php
+                    $id=$ligne->fonctionnaire->id;
                     $nom=$ligne->fonctionnaire->nom_fct;
                     $prenom=$ligne->fonctionnaire->prenom_fct;
                     $daterec=$ligne->fonctionnaire->date_Recrut;
@@ -23,6 +24,19 @@
 
 
 
+                }
+                $k=1;
+                foreach($tabGrade as $Grade)
+                {
+                    if($k==$nbGrade)
+                    {
+                        $nomGrade=$Grade['nomGrade'];
+                        break;
+                    }
+                    else
+                    {
+                        $k++;
+                    }
                 }
                 ?>
             </h2>
@@ -33,18 +47,26 @@
     <div >
         <div  >
             <br><br><br><br> Le Directeur de l’Ecole Nationale des Sciences Appliquées de Khouribga  atteste que Mr :<br><br><br>
-            <strong>- NOM ET PRENOM :</strong><?= $nom.' '. $prenom ?><br><br><br>
-            <strong>- N° de C.I.N :</strong> <?= $cin ?><br><br><br>
-            <strong>- N° de  P.P.R :</strong> <?= $somme ?><br><br><br>
-            <strong>- DATE DE RECRUTEMENT:</strong><?= $daterec ?><br><br><br>
-            <strong>- LIEU DE TRAVAIL :</strong> Ecole nationale des sciences appliquées de Khouribga<br><br><br>
+            - NOM ET PRENOM :<?= $nom.' '. $prenom ?><br><br><br>
+            - N° de C.I.N : <?= $cin ?><br><br><br>
+            - N° de  P.P.R : <?= $somme ?><br><br><br>
+            - GRADE : <?= $nomGrade ?> <br><br><br>
+            - DATE DE RECRUTEMENT:<?= $daterec ?><br><br><br>
+            - LIEU DE TRAVAIL : Ecole nationale des sciences appliquées de Khouribga<br><br><br>
             La présente attestation est délivrée à l’intéressé pour servir et valoir ce que de droit.<br><br><br>
 
-            <center> Khouribga le : ………………………………</center><br><br>
+            <center> Khouribga le : ………………………………</center><br><br><br>
 
-        </div>
+        </div><br><br><br><br>
         <!-- /.row -->
 
 
 
+
 </section>
+
+<ol class="breadcrumb">
+    <li>
+        <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Retour'), ['action' => 'consultationDemandeFct',$id], ['escape' => false]) ?>
+    </li>
+</ol>

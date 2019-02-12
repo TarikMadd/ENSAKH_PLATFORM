@@ -32,7 +32,7 @@
           </div>
                <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Les ouvrages</h3>
+          <h3 class="box-title">Liste de tous les ouvrages</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -50,7 +50,7 @@
                 <th><?= $this->Paginator->sort('titre') ?></th>
                 <th><?= $this->Paginator->sort('auteur') ?></th>
                 <th><?= $this->Paginator->sort('edition') ?></th>
-                <th><?= $this->Paginator->sort('nombre Exemplaires') ?></th>
+                <th><?= $this->Paginator->sort('nombre Exemplaires' ,["label"=>"nombre d'exemplaire"]) ?></th>
               </tr>
               </thead>
               <tbody>
@@ -87,7 +87,7 @@
 
               <i class="fa  fa-thumbs-o-up"></i>
               <p class="text-center">
-                <strong>Ouvrages les Plus demandés</strong>
+                <strong>Les ouvrages les Plus demandés</strong>
               </p>
               <?php for ($i=0; $i < 5; $i++) { 
                 if($i<count($demande)){?>
@@ -104,7 +104,7 @@
           </div>
                 <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Ouvrages Empruntées</h3>
+          <h3 class="box-title">Les ouvrages Empruntés</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -117,7 +117,7 @@
           <table class="table no-margin">
               <thead>
               <tr>
-                <th><?= $this->Paginator->sort('numInventaire') ?></th>
+                <th><?= $this->Paginator->sort('numInventaire',['label'=>"Numéro d'inventaire"]) ?></th>
                 <th><?= $this->Paginator->sort('titre') ?></th>
               </tr>
               </thead>
@@ -136,7 +136,7 @@
       </div>
             <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Ouvrages Résérvées</h3>
+          <h3 class="box-title">Les ouvrages Réservés</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -149,7 +149,7 @@
           <table class="table no-margin">
               <thead>
               <tr>
-                <th><?= $this->Paginator->sort('numInventaire') ?></th>
+                <th><?= $this->Paginator->sort('numInventaire' ,['label'=>"Numéro d'inventaire"]) ?></th>
                 <th><?= $this->Paginator->sort('titre') ?></th>
               </tr>
               </thead>
@@ -168,7 +168,7 @@
             <?php if (count($deppassement)>0) {?>
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title"><span class="glyphicon glyphicon-alert" aria-hidden="true"></span>Alerte</h3>
+          <h3 class="box-title"><span class="glyphicon glyphicon-alert" aria-hidden="true"></span>Alerte : Délai emprunt</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -182,9 +182,8 @@
             <table class="table no-margin">
               <thead>
               <tr>
-                <th><?= $this->Paginator->sort('numéro inventaire') ?></th>
-                <th><?= $this->Paginator->sort('utilisateurs') ?></th>
-                <th><?= $this->Paginator->sort('role') ?></th>
+                <th><?= $this->Paginator->sort('numéro inventaire',['label'=>"Numéro d'inventaire"]) ?></th>
+                <th><?= $this->Paginator->sort('Titre') ?></th>
               </tr>
               </thead>
               <tbody>
@@ -192,8 +191,7 @@
                 <?php for ($i=0;$i<count($deppassement)/3;$i++) {?>
               <tr>
                 <td><?= h($deppassement[$i]['numInventaire']) ?></td>
-                <td><?= h($deppassement[$i]['username']) ?></td>
-                <td><?= h($deppassement[$i]['role']) ?></td>
+                <td><?= h($deppassement[$i]['titre']) ?></td>
               </tr>
             <?php } ?>
               </tbody>

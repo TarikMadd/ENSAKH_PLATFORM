@@ -37,7 +37,7 @@
                                   <td><?= h(' Du '.$prelevement->dateDebut->format('d/m/Y').' Au '.$prelevement->dateFin->format('d/m/Y')) ?></td>
                                 <td><?= h($prelevement->totalImpot) ?></td>
                                 <td class="actions" style="white-space:nowrap">
-                                  <?= $this->Html->link(__('Aficher'), ['action' => 'viewPrelevement', $prelevement->id], ['class'=>'btn btn-info btn-xs']) ?>
+                                  <?= $this->Html->link(__('Afficher'), ['action' => 'viewPrelevement', $prelevement->id], ['class'=>'btn btn-info btn-xs']) ?>
                                   <?= $this->Html->link(__('modifier'), ['action' => 'editPrelevement', $prelevement->id], ['class'=>'btn btn-warning btn-xs']) ?>
                                   <?= $this->Form->postLink(__('supprimer'), ['action' => 'deletePrelevement', $prelevement->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
                                 </td>

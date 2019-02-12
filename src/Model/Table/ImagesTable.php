@@ -48,8 +48,8 @@ class ImagesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('lien', 'create')
-            ->notEmpty('lien');
+            
+            ->allowEmpty('lien');
 
         $validator
             ->requirePresence('commentaire', 'create')

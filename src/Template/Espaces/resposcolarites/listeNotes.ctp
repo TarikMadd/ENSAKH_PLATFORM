@@ -22,7 +22,7 @@ if($_SESSION['is_note'] == 'yes')
                 <!-- Tabs within a box -->
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#notes" data-toggle="tab">Notes</a></li>
-                  <li><a href="#resultats" data-toggle="tab">Résultats</a></li>
+                  <li><a href="#resultats" data-toggle="tab">Décision</a></li>
                   
                 </ul>
 
@@ -73,48 +73,32 @@ if($_SESSION['is_note'] == 'yes')
                     </thead>
                     <tbody>
                       <?php
-                      $j=0; $kj=0;
-
+                      $j=0; 
                       foreach ($_SESSION['etudiants'] as $etudiant) 
-                      { if($kj < 2)
-                      { ?>
-                          <tr>
-                              <td><?php echo $j+1?></td>
-                              <td><?php echo $etudiant['cne']?></td>
-                              <td><?php echo $etudiant['nom_fr']?></td>
-                              <td><?php echo $etudiant['prenom_fr']?></td>
-                              <?php $somme=0; for ($i=0; $i < $_SESSION['nbr_ele'][0]['n']; $i++)
-                              { ?>
-                                  <td><?php if($_SESSION['sess']==1) {
-                                          $somme += $_SESSION['notes'][$i][$j];
-                                          echo $_SESSION['notes'][$i][$j];}
-                                      else {
-                                          $somme += $_SESSION['notes'][$i][$j];
-                                          echo $_SESSION['notes'][$i][$j];}?></td>
-                              <?php }?>
-                              <?php
-                              if($_SESSION['nbr_ele'][0]['n']>1)
-                              {?>
-                                  <td><?php if($_SESSION['sess']==1) echo $somme/$_SESSION['nbr_ele'][0]['n']; else
-                                      {
-                                          if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
-                                          {
-                                              if($somme/$_SESSION['nbr_ele'][0]['n']>10)
-                                                  echo 10;
-                                          }
-                                          else
-                                          {
-                                              if($somme/$_SESSION['nbr_ele'][0]['n']>12)
-                                                  echo 12;
-                                          }
-                                      }?></td>
-                              <?php }
-                              ?>
-
-                          </tr>
-                     <?php }?>
-
-                      <?php $j++; $kj++;}?>
+                      {?>
+                      <tr>
+                        <td><?php echo $j+1?></td>
+                        <td><?php echo $etudiant['cne']?></td>
+                        <td><?php echo $etudiant['nom_fr']?></td>
+                        <td><?php echo $etudiant['prenom_fr']?></td> 
+                        <?php $somme=0; for ($i=0; $i < $_SESSION['nbr_ele'][0]['n']; $i++) 
+                        { ?>
+                            <td><?php if($_SESSION['sess']==1) {
+                              $somme += $_SESSION['notes'][$i][$j];
+                              echo $_SESSION['notes'][$i][$j];}
+                               else {
+                                $somme += $_SESSION['notes'][$i][$j];
+                                echo $_SESSION['notes'][$i][$j];}?></td>
+                       <?php }?>
+                       <?php 
+                          if($_SESSION['nbr_ele'][0]['n']>1)
+                          {?>
+                            <td><?php if($_SESSION['sess']==1 || $_SESSION['sess']==2) echo $somme/$_SESSION['nbr_ele'][0]['n'];?></td>
+                          <?php }
+                        ?>
+                       
+                      </tr>
+                      <?php $j++; }?>
                       
                     </tbody>
                   </table>
@@ -142,7 +126,7 @@ if($_SESSION['is_note'] == 'yes')
                   <thead>
                       <tr>
                         <th colspan="4" style="text-align: center">ETUDIANT</th>
-                        <th colspan="<?php echo $_SESSION['nbr_ele'][0]['n'];?>" style="text-align: center">RESULTAT</th>
+                        <th colspan="<?php echo $_SESSION['nbr_ele'][0]['n'];?>" style="text-align: center">DECISION</th>
                         <?php 
                           if($_SESSION['nbr_ele'][0]['n']>1)
                           {
@@ -165,113 +149,68 @@ if($_SESSION['is_note'] == 'yes')
                     </thead>
                     <tbody>
                       <?php
-                      $j=0; $u=0;
+                      $j=0; 
                       foreach ($_SESSION['etudiants'] as $etudiant) 
-                      { if($u<2)
-                      { ?>
-                          <tr>
-                              <td><?php echo $j+1?></td>
-                              <td><?php echo $etudiant['cne']?></td>
-                              <td><?php echo $etudiant['nom_fr']?></td>
-                              <td><?php echo $etudiant['prenom_fr']?></td>
-                              <?php for ($i=0; $i < $_SESSION['nbr_ele'][0]['n']; $i++)
-                              { ?>
-                                  <td>
-                                      <?php
-                                      if($_SESSION['sess']==1)
-                                      {
-                                          if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
-                                          {
-                                              if($_SESSION['notes'][$i][$j]>=10)
-                                                  echo "Validé";
-
-                                              else
-                                                  echo "Rattrapage";
-                                          }
-                                          else
-                                          {
-                                              if($_SESSION['notes'][$i][$j]>=12)
-                                                  echo "Validé";
-
-                                              else
-                                                  echo "Rattrapage";
-                                          }
-                                      }
-                                      else
-                                      {
-                                          if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
-                                          {
-                                              if($_SESSION['notes'][$i][$j]>=10)
-                                                  echo "Validé";
-
-                                              else if($_SESSION['notes'][$i][$j]<10 && $_SESSION['notes'][$i][$j]>=7 )
-                                                  echo "Non validé";
-                                              else
-                                                  echo "Ajourné";
-                                          }
-                                          else
-                                          {
-                                              if($_SESSION['notes'][$i][$j]>=12)
-                                                  echo "Validé";
-
-                                              else if($_SESSION['notes'][$i][$j]<12 && $_SESSION['notes'][$i][$j]>=8 )
-                                                  echo "Non validé";
-                                              else
-                                                  echo "Ajourné";
-                                          }
-                                      } ?>
-                                  </td>
-                              <?php }
-                              if($_SESSION['nbr_ele'][0]['n']>1){
-                                  ?>
-                                  <td><?php
-                                      if($_SESSION['sess']==1)
-                                      {
-                                          if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
-                                          {
-                                              if($somme/$_SESSION['nbr_ele'][0]['n']>=10)
-                                                  echo "Validé";
-
-                                              else
-                                                  echo "Rattrapage";
-                                          }
-                                          else
-                                          {
-                                              if($somme/$_SESSION['nbr_ele'][0]['n']>=12)
-                                                  echo "Validé";
-
-                                              else
-                                                  echo "Rattrapage";
-                                          }
-                                      }
-                                      else
-                                      {
-                                          if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
-                                          {
-                                              if($somme/$_SESSION['nbr_ele'][0]['n']>=10)
-                                                  echo "Validé";
-
-                                              else if($somme/$_SESSION['nbr_ele'][0]['n']<10 && $somme/$_SESSION['nbr_ele'][0]['n']>=7 )
-                                                  echo "Non validé";
-                                              else
-                                                  echo "Ajourné";
-                                          }
-                                          else
-                                          {
-                                              if($somme/$_SESSION['nbr_ele'][0]['n']>=12)
-                                                  echo "Validé";
-
-                                              else if($somme/$_SESSION['nbr_ele'][0]['n']<12 && $somme/$_SESSION['nbr_ele'][0]['n']>=8 )
-                                                  echo "Non validé";
-                                              else
-                                                  echo "Ajourné";
-                                          }
-                                      }
-                                      ?>
-                                  </td> <?php } ?>
-                          </tr>
-                      <?php }?>
-
+                      {?>
+                      <tr>
+                        <td><?php echo $j+1?></td>
+                        <td><?php echo $etudiant['cne']?></td>
+                        <td><?php echo $etudiant['nom_fr']?></td>
+                        <td><?php echo $etudiant['prenom_fr']?></td> 
+                       <?php $somme=0; for ($i=0; $i < $_SESSION['nbr_ele'][0]['n']; $i++) 
+                        { ?>
+                            <td><?php if($_SESSION['sess']==1) {
+                              $somme += $_SESSION['notes'][$i][$j];
+                              if($_SESSION['notes'][$i][$j]>=10) echo "Validé"; else echo "Rattrapage";}
+                               else {
+                                $somme += $_SESSION['notes'][$i][$j];
+                                if($_SESSION['notes'][$i][$j]>=10) echo "Validé"; else if($_SESSION['notes'][$i][$j]<10 && $_SESSION['notes'][$i][$j] >= 7) echo "Non validé"; else echo "Ajourné";}?></td>
+                       <?php }?>
+                       <?php 
+                          if($_SESSION['nbr_ele'][0]['n']>1)
+                          {?>
+                            <td><?php if($_SESSION['sess']==1) {
+                              if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2){
+                                if ($somme/$_SESSION['nbr_ele'][0]['n']>=10) {
+                                 echo "Validé";
+                                }
+                                else
+                                  echo "Rattrapage";
+                              }
+                              else
+                              {
+                                if ($somme/$_SESSION['nbr_ele'][0]['n']>=12) {
+                                 echo "Validé";
+                                }
+                                else
+                                  echo "Rattrapage";
+                              }
+                            }else
+                       {
+                        if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
+                        {
+                          if ($somme/$_SESSION['nbr_ele'][0]['n']>=10) {
+                                 echo "Validé";
+                                }
+                                else if($somme/$_SESSION['nbr_ele'][0]['n']>=7 && $somme/$_SESSION['nbr_ele'][0]['n']<10)
+                                  echo "Non validé";
+                                else
+                                  echo "Ajourné";
+                        }
+                        else
+                        {
+                          if ($somme/$_SESSION['nbr_ele'][0]['n']>=12) {
+                                 echo "Validé";
+                                }
+                                else if($somme/$_SESSION['nbr_ele'][0]['n']>=8 && $somme/$_SESSION['nbr_ele'][0]['n']<12)
+                                  echo "Non validé";
+                                else
+                                  echo "Ajourné";
+                        }
+                        }?></td>
+                          <?php }
+                        ?>
+                      </tr>
                       <?php $j++; }?>
                       
                     </tbody>
@@ -359,7 +298,7 @@ else if($_SESSION['is']=="no")
                 <!-- Tabs within a box -->
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#notes" data-toggle="tab">Notes</a></li>
-                  <li><a href="#resultats" data-toggle="tab">Résultats</a></li>
+                  <li><a href="#resultats" data-toggle="tab">Décision</a></li>
                   
                 </ul>
                 <div class="tab-content no-padding">
@@ -398,32 +337,29 @@ else if($_SESSION['is']=="no")
                     </thead>
                     <tbody>
                       <?php
-                      $j=0; $u=0;
+                      $j=0; 
                       foreach ($_SESSION['etudiants'] as $etudiant) 
-                      { if($u<2)
-                      { ?>
-                          <tr>
-                              <td><?php echo $j+1?></td>
-                              <td><?php echo $etudiant['cne']?></td>
-                              <td><?php echo $etudiant['nom_fr']?></td>
-                              <td><?php echo $etudiant['prenom_fr']?></td>
-                              <?php for ($i=0; $i < $_SESSION['nbr_mod']; $i++)
-                              { ?>
-                                  <td><?php if($_SESSION['sess']==1)
-                                      {
-                                          echo $_SESSION['notes'][$i][$j];
-                                      }
-                                      else if($_SESSION['sess']==2)
-                                      {
-                                          echo $_SESSION['notes'][$i][$j];
-
-                                      }
-                                      ?></td>
-                              <?php }?>
-                          </tr>
-                     <?php }?>
-
-                      <?php $j++; $u++; }?>
+                      {?>
+                      <tr>
+                        <td><?php echo $j+1?></td>
+                        <td><?php echo $etudiant['cne']?></td>
+                        <td><?php echo $etudiant['nom_fr']?></td>
+                        <td><?php echo $etudiant['prenom_fr']?></td> 
+                        <?php for ($i=0; $i < $_SESSION['nbr_mod']; $i++) 
+                        { ?>
+                            <td><?php if($_SESSION['sess']==1) 
+                            {
+                              echo $_SESSION['notes'][$i][$j];
+                            }
+                            else if($_SESSION['sess']==2)
+                            {
+                                 echo $_SESSION['notes'][$i][$j];
+                                                                  
+                            }
+                                ?></td>
+                       <?php }?>
+                      </tr>
+                      <?php $j++; }?>
                       
                     </tbody>
                   </table>
@@ -446,7 +382,7 @@ else if($_SESSION['is']=="no")
                   <thead>
                       <tr>
                         <th colspan="4" style="text-align: center">ETUDIANT</th>
-                        <th colspan="<?php echo $_SESSION['nbr_mod'];?>" style="text-align: center">RESULTAT</th>
+                        <th colspan="<?php echo $_SESSION['nbr_mod'];?>" style="text-align: center">DECISION</th>
                       </tr>
                       <tr>
                         <th style="text-align: center">N°</th>
@@ -463,63 +399,60 @@ else if($_SESSION['is']=="no")
                     </thead>
                     <tbody>
                       <?php
-                      $j=0; $u=0;
+                      $j=0; 
                       foreach ($_SESSION['etudiants'] as $etudiant) 
-                      { if($u<2)
-                      { ?>
-                          <tr>
-                              <td><?php echo $j+1?></td>
-                              <td><?php echo $etudiant['cne']?></td>
-                              <td><?php echo $etudiant['nom_fr']?></td>
-                              <td><?php echo $etudiant['prenom_fr']?></td>
-                              <?php for ($i=0; $i < $_SESSION['nbr_mod']; $i++)
-                              { ?>
-                                  <td>
-                                      <?php
-                                      if($_SESSION['sess']==1)
-                                      {
-                                          if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
-                                          {
-                                              if($_SESSION['notes'][$i][$j]>=10)
-                                                  echo "Validé";
-
-                                              else
-                                                  echo "Rattrapage";
-                                          }
-                                          else
-                                          {
-                                              if($_SESSION['notes'][$i][$j]>=12)
-                                                  echo "Validé";
-
-                                              else
-                                                  echo "Rattrapage";
-                                          }
-                                      }
-                                      else
-                                      {
-                                          if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
-                                          {
-                                              if($_SESSION['notes'][$i][$j]>=10)
-                                                  echo "Validé";
-
-                                              else
-                                                  echo "Rattrapage";
-                                          }
-                                          else
-                                          {
-                                              if($_SESSION['notes'][$i][$j]>=12)
-                                                  echo "Validé";
-
-                                              else
-                                                  echo "Rattrapage";
-                                          }
-                                      }?>
-                                  </td>
-                              <?php }?>
-                          </tr>
-                    <?php  }?>
-
-                      <?php $j++; $u++; }?>
+                      {?>
+                      <tr>
+                        <td><?php echo $j+1?></td>
+                        <td><?php echo $etudiant['cne']?></td>
+                        <td><?php echo $etudiant['nom_fr']?></td>
+                        <td><?php echo $etudiant['prenom_fr']?></td> 
+                        <?php for ($i=0; $i < $_SESSION['nbr_mod']; $i++) 
+                        { ?>
+                            <td>
+                            <?php 
+                            if($_SESSION['sess']==1)
+                              {
+                                if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
+                                {
+                                  if($_SESSION['notes'][$i][$j]>=10)
+                                      echo "Validé";
+                                                              
+                                  else
+                                      echo "Rattrapage";
+                                }
+                                else
+                                {
+                                  if($_SESSION['notes'][$i][$j]>=12)
+                                      echo "Validé";
+                                                              
+                                  else
+                                      echo "Rattrapage";
+                                }
+                              }
+                              else
+                                {
+                                  if($_SESSION['id_groupe'] ==1 || $_SESSION['id_groupe']==2)
+                                {
+                                  if($_SESSION['notes'][$i][$j]>=10)
+                                      echo "Validé";
+                                                              
+                                  else
+                                      echo "Rattrapage";
+                                }
+                                else
+                                {
+                                  if($_SESSION['notes'][$i][$j]>=12)
+                                      echo "Validé";
+                                                              
+                                  else
+                                      echo "Rattrapage";
+                                }
+                                  }?>
+                            </td>
+                       <?php }?>
+                      </tr>
+                      <?php $j++; }?>
                       
                     </tbody>
                   </table>

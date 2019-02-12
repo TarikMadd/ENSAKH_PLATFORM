@@ -34,18 +34,8 @@
                         <dd>
                             <?php echo $profpermabis[0]['CIN'] ?>
                         </dd>
-                        <dt><?= __('Poste') ?></dt>
-                        <dd>
-                            <?php  echo $profpermabis[0]['poste'] ?>
-                        </dd>
-                        <dt><?= __('Echelle') ?></dt>
-                        <dd>
-                            <?php echo $profpermabis[0]['echelle'] ?>
-                        </dd>
-                        <dt><?= __('Echelon') ?></dt>
-                        <dd>
-                            <?php echo $profpermabis[0]['echelon'] ?>
-                        </dd>
+                        
+                        
                         <dt><?= __('Etat') ?></dt>
                         <dd>
                             <?php echo $profpermabis[0]['etat'] ?>
@@ -80,14 +70,8 @@
                         <dd>
                             <?php echo $profpermabis[0]['situation_familiale'] ?>
                         </dd>
-                        <dt><?= __('Code de situation') ?></dt>
-                        <dd>
-                            <?php echo $profpermabis[0]['code_situation_admin'] ?>
-                        </dd>
-                        <dt><?= __('Date de naissance') ?></dt>
-                        <dd>
-                            <?php echo $profpermabis[0]['dateNaissance'] ?>
-                        </dd>
+                        
+                        
                         <dt><?= __('Lieu de naissance') ?></dt>
                         <dd>
                             <?php echo $profpermabis[0]['Lieu_Naissance'] ?>

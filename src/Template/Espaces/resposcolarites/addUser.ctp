@@ -1,11 +1,11 @@
 <section class="content-header">
   <h1>
     Nouveau Etudiant
-    <small><?= __('Add') ?></small>
+    <small><?= __('Creation de compte') ?></small>
   </h1>
   <ol class="breadcrumb">
     <li>
-    <?= $this->Html->link('<i class="fa fa-undo"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    <?= $this->Html->link('<i class="fa fa-undo"></i> '.__('Retour vers la liste des étudiants'), ['action' => 'index'], ['escape' => false]) ?>
     </li>
   </ol>
 </section>
@@ -18,21 +18,20 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><?= __('Form') ?></h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
         <?= $this->Form->create($user, array('role' => 'form')) ?>
           <div class="box-body">
           <?php
-            echo $this->Form->input('username');
-            echo $this->Form->input('password');
+            echo $this->Form->input('username',['label'=>'Nom de compte (CNE)']);
+            echo $this->Form->input('password',['label'=>'Mot de Passe (Date de Naissance sous forme de : jjmmaaaa)']);
             echo $this->Form->hidden('role', ['value'=>'etudiant']);
           ?>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <?= $this->Form->button(__('Save')) ?>
+            <?= $this->Form->button(__('Valider')) ?>
           </div>
         <?= $this->Form->end() ?>
       </div>
