@@ -24,9 +24,12 @@
         <!-- form start -->
         <?= $this->Form->create($mission, array('role' => 'form')) ?>
           <div class="box-body">
+              Date depart : <input type="date" name="date_depart" value="YYYY-MM-DD">
+              <br/>
+              Date arrivee : <input type="date" name="date_arrivee" value="YYYY-MM-DD">
           <?php
-            echo $this->Form->input('date_depart');
-            echo $this->Form->input('date_arrivee');
+            // echo $this->Form->input('date_depart');
+            // echo $this->Form->input('date_arrivee');
             echo $this->Form->input('mode_transport', array('id'=>'mode','options' => array('voiture personnelle'=>'voiture personnelle', 'voiture de service'=>'voiture de service'),'onchange'=>'cache()'));
             echo('<br>');
             echo $this->Form->input('nbr_nuit');
