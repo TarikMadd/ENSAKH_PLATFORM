@@ -3198,86 +3198,60 @@ class resposcolaritesController extends AppController {
     /*-----------------------------------------------------------------------------------------------------------------------*/
 	/*-----------------------------------------------Index certificats_etudiants---------------------------------------------*/
     public function indexCertificatsEtudiants($f = NULL)
-    {
-        $this->paginate = [
-            'contain' => ['Certificats', 'Etudiants']
-        ];
-      $usrole=$this->Auth->user('role');
-        $this->set('role',$usrole);
-        $connection = ConnectionManager::get('default');
-        $suite = "";
-        if($f != NULL){
-            $suite = "AND filieres.id = :f ";
-        }
-        $donne_delivrer =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as 
-		id_certif,certificats.id,etudiants.id, etudiants.nom_fr,etudiants.prenom_fr, filieres.libile,
-		certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified,semestres.libile AS semestres FROM 
-		                                                       filieres JOIN groupes ON filieres.id = groupes.filiere_id
-										                       JOIN niveaus ON groupes.niveaus_id=niveaus.id
-										                       JOIN semestres ON niveaus.id=semestres.niveaus_id
-                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
-                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
-                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
-                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id 
-															  
-                                                               WHERE certificats_etudiants.etat = "Délivré" AND 
-															   (certificats.type LIKE "%scolarité")'.$suite,[':f'=>$f])->fetchAll('assoc');
-
-
-
-        $donne_demande =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as id_certif,etudiants.id, etudiants.nom_fr,
-		etudiants.prenom_fr, filieres.libile, certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified 
-		,semestres.libile AS semestres FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
-										                       JOIN niveaus ON groupes.niveaus_id=niveaus.id
-										                       JOIN semestres ON niveaus.id=semestres.niveaus_id
-                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
-                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
-                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
-                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id 
-                                                               WHERE certificats_etudiants.etat = "Demande envoyé" AND 
-															   (certificats.type LIKE "%scolarité") '.$suite,[':f'=>$f])->fetchAll('assoc');
-
-
-
-        $donne_enCour =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as id_certif,etudiants.id, etudiants.nom_fr,
-		etudiants.prenom_fr, filieres.libile, certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified
-		,semestres.libile AS semestres FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
-										                       JOIN niveaus ON groupes.niveaus_id=niveaus.id
-										                       JOIN semestres ON niveaus.id=semestres.niveaus_id
-                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
-                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
-                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
-                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id  
-                                                               WHERE certificats_etudiants.etat = "En cours de traitement" AND 
-															   (certificats.type LIKE "%scolarité") '.$suite,[':f'=>$f])->fetchAll('assoc');
-
-
-        $donne_rejeter =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as id_certif,etudiants.id, 
-		etudiants.nom_fr,etudiants.prenom_fr, filieres.libile, certificats_etudiants.etat, certificats_etudiants.created, 
-		certificats_etudiants.modified ,semestres.libile AS semestres FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
-										                       JOIN niveaus ON groupes.niveaus_id=niveaus.id
-										                       JOIN semestres ON niveaus.id=semestres.niveaus_id
-                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
-                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
-                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
-                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id 
-                                                               WHERE certificats_etudiants.etat = "Rejeter" 
-															   AND (certificats.type LIKE "%scolarité")'.$suite,[':f'=>$f])->fetchAll('assoc');
-
-
-        $donne_prete =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as id_certif,etudiants.id, etudiants.nom_fr,
-		etudiants.prenom_fr, filieres.libile,certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified 
-		,semestres.libile AS semestres FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
-										                       JOIN niveaus ON groupes.niveaus_id=niveaus.id
-										                       JOIN semestres ON niveaus.id=semestres.niveaus_id
-                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
-                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
-                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
-                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id  
-                                                               WHERE certificats_etudiants.etat = "Prête"
-															   AND (certificats.type LIKE "%scolarité") '.$suite,[':f'=>$f])->fetchAll('assoc');
-
+   {
         
+        
+        $connection = ConnectionManager::get('default');
+
+
+        $donne_delivrer =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as id_certif,certificats.id,etudiants.id, etudiants.nom_fr,etudiants.prenom_fr, filieres.libile, certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
+                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
+                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
+                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
+                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id 
+                                                               WHERE certificats_etudiants.etat = "Délivré" AND (certificats.type= 
+                      "Retrait définitive bac" OR certificats.type="Retrait provisoire bac" OR certificats.type="Certificat scolarité")')->fetchAll('assoc');
+
+
+
+        $donne_demande =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as id_certif,etudiants.id, etudiants.nom_fr,etudiants.prenom_fr, filieres.libile, certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
+                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
+                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
+                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
+                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id 
+                                                               WHERE certificats_etudiants.etat = "Demande envoyé" AND (certificats.type= 
+                                 "Retrait définitive bac" OR certificats.type="Retrait provisoire bac" OR certificats.type="Certificat scolarité") ')->fetchAll('assoc');
+
+
+
+        $donne_enCour =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as id_certif,etudiants.id, etudiants.nom_fr,etudiants.prenom_fr, filieres.libile, certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified FROM filieres 
+                                JOIN groupes ON filieres.id = groupes.filiere_id
+                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
+                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
+                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
+                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id 
+                                                               WHERE certificats_etudiants.etat = "En cours de traitement" AND (certificats.type= 
+                                 "Retrait définitive bac" OR certificats.type="Retrait provisoire bac" OR certificats.type="Certificat scolarité") ')->fetchAll('assoc');
+
+
+        $donne_rejeter =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as id_certif,etudiants.id, etudiants.nom_fr,etudiants.prenom_fr, filieres.libile, certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
+                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
+                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
+                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
+                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id 
+                                                               WHERE certificats_etudiants.etat = "Rejeter" AND (certificats.type= 
+                                 "Retrait définitive bac" OR certificats.type="Retrait provisoire bac" OR certificats.type="Certificat scolarité")')->fetchAll('assoc');
+
+
+        $donne_prete =  $connection->execute('SELECT certificats.type,certificats_etudiants.id as id_certif,etudiants.id, etudiants.nom_fr,etudiants.prenom_fr, filieres.libile, certificats_etudiants.etat, certificats_etudiants.created, certificats_etudiants.modified FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
+                                                               JOIN etudiers ON groupes.id = etudiers.groupe_id
+                                                               JOIN etudiants ON etudiers.etudiant_id = etudiants.id
+                                                               JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
+                                                               JOIN certificats ON certificats_etudiants.certificat_id = certificats.id 
+                                                               WHERE certificats_etudiants.etat = "Prête" AND (certificats.type= 
+                                 "Retrait définitive bac" OR certificats.type="Retrait provisoire bac" OR certificats.type="Certificat scolarité") ')->fetchAll('assoc');
+
+       
         $this->set('donne_delivrer',$donne_delivrer);
         $this->set('donne_demande',$donne_demande);
         $this->set('donne_enCour',$donne_enCour);
@@ -3285,101 +3259,111 @@ class resposcolaritesController extends AppController {
         $this->set('donne_prete',$donne_prete);
         $this->render('/Espaces/resposcolarites/CertificatsEtudiants/index');
     }
-	
-	
-	
-	
-	
-	/*-----------------------------------------------------------------------------------------------------------------------*/
-	/*--------------------------------------------------Views certificats_etudiants-----------------------------------------*/
+
+
+
+
+
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------Views certificats_etudiants-----------------------------------------*/
 
     public function viewCertificatsEtudiants($id = null)
     {
-		$CertificatsEtudiants = TableRegistry::get("certificats_etudiants");
+        $CertificatsEtudiants = TableRegistry::get("certificats_etudiants");
         $certificatsEtudiant = $CertificatsEtudiants->get($id, [
             'contain' => ['Certificats', 'Etudiants']
         ]);
- 
-        $certificatsEtudiant->notif_respo = FALSE;
-        $certificatsEtudiant->modified = $certificatsEtudiant->modified;
+        
         if($CertificatsEtudiants->save($certificatsEtudiant)){
+
+            $Notifications_users = TableRegistry::get("notifications_users");
+            $Notifications_users->deleteAll(['lien LIKE "viewCertificats%/'.$id.'"']);
+            
+            $Notifications_grp = TableRegistry::get("notifications_groupe");
+            $Notifications_grp->deleteAll(['lien  LIKE "viewCertificats%/'.$id.'"']);
+
             $this->set('certificatsEtudiant', $certificatsEtudiant);
             $this->set('_serialize', ['certificatsEtudiant']);
-     
+
             return $this->render('/Espaces/resposcolarites/CertificatsEtudiants/view');
         }else{
             return $this->Flash->error(_('Erreur innatendue !!'));
         }
     }
-	
-	
-	
-	
-	
-	/*-----------------------------------------------------------------------------------------------------------------------*/
-	/*-----------------------------------------------Générer les certificats_etudiants--------------------------------------*/
-	
+
+
+
+
+
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+    /*-----------------------------------------------Générer les certificats_etudiants--------------------------------------*/
+
     public function comCertificatsEtudiants($id = null)
-    {
-        $this->dossier();
+     {
         $connection = ConnectionManager::get('default');
-        $donne =  $connection->execute('SELECT certificats.type,etudiants.nom_fr,etudiants.prenom_fr, 
-		etudiants.date_naissance,etudiants.ville_naissance_fr,etudiants.cne,etudiants.cin,etudiants.apogee, etudiants.sexe_fr AS sexe,certificats_etudiants.id AS demande_id, 
-		filieres.libile,semestres.libile AS semestres  
+        $donne =  $connection->execute('SELECT etudiants.nom_fr,etudiants.prenom_fr, etudiants.date_naissance,etudiants.cne, certificats_etudiants.entreprise, filieres.libile  
                                         FROM filieres JOIN groupes ON filieres.id = groupes.filiere_id
-										                       JOIN niveaus ON groupes.niveaus_id=niveaus.id
-										                       JOIN semestres ON niveaus.id=semestres.niveaus_id
                                                                JOIN etudiers ON groupes.id = etudiers.groupe_id
                                                                JOIN etudiants ON etudiers.etudiant_id = etudiants.id
                                                                JOIN certificats_etudiants ON etudiants.id = certificats_etudiants.etudiant_id 
                                                                JOIN certificats ON certificats_etudiants.certificat_id = certificats.id 
                                                                WHERE certificats_etudiants.id = :id',[':id'=>$id])->fetchAll('assoc');
 
- 
         $this->set('donne', $donne);
-		
-		if($donne[0]['type']=='Certificat - scolarité')
-		{
-                $this->render('/Espaces/resposcolarites/CertificatsEtudiants/com1_certificat_scolaire');
-		}
-		else if($donne[0]['type']=='Retrait provisoire bac - scolarité')
-		{
-			    $this->render('/Espaces/resposcolarites/CertificatsEtudiants/com2-retrait_privisoire');
-		}
-		    else if($donne[0]['type']=='Retrait définitive bac - scolarité')
-			{
-				 $this->render('/Espaces/resposcolarites/CertificatsEtudiants/com3_retrait_definitif');
-			}
-			    else {
-					 $this->render('/Espaces/resposcolarites/CertificatsEtudiants/com4_attestation_reussite');
-				}
+                $this->render('/Espaces/resposcolarites/CertificatsEtudiants/com');
     }
 
-	
-	
-	
-	/*-----------------------------------------------------------------------------------------------------------------------*/
-	/*--------------------------------------------------------Commenter-----------------------------------------------------*/
-	
-	public function cmntCertificatsEtudiants($id = null)
+
+
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------Commenter-----------------------------------------------------*/
+
+    public function cmntCertificatsEtudiants($id = null)
     {
-		$CertificatsEtudiants = TableRegistry::get("certificats_etudiants");
+        $CertificatsEtudiants = TableRegistry::get("certificats_etudiants");
         $certificatsEtudiant = $CertificatsEtudiants->get($id, [
-            'contain' => []
+            'contain' => ['Certificats','Etudiants']
         ]);
-		  
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            if (isset($this->request->data['Rejeter'])) {  
-            $this->set('test',$this->request->data);
-            return $this->render('/Espaces/resposcolarites/CertificatsEtudiants/cmnt');
+                            
+            if (isset($this->request->data['Rejeter'])) {
+                $this->set('test',$this->request->data);
+                return $this->render('/Espaces/resposcolarites/CertificatsEtudiants/cmnt');
             }
             $certificatsEtudiant->commantaire = $this->request->data['commentaire'];
             $certificatsEtudiant->notif_etudiant = TRUE;
-            if (isset($this->request->data['rejeterprince'])) {
-              $certificatsEtudiant->etat = "Rejeter";
+            if (isset($this->request->data['rejeterprince']) && $this->request->data['rejeterprince']) {
+                $certificatsEtudiant->etat = "Rejeter";
             }
-            $certificatsEtudiant->commentaire = $this->request->data['commentaire'];
-			if ($CertificatsEtudiants->save($certificatsEtudiant)) {
+            if ($CertificatsEtudiants->save($certificatsEtudiant)) {
+                
+                $donne_notif['user_id']  = $certificatsEtudiant->etudiant->user_id;
+                $donne_notif['principale'] = 'Un responsable a commenter votre demande: '.$certificatsEtudiant->certificat->type;
+                $donne_notif['commentaire'] = $this->request->data['commentaire'];
+                $donne_notif['lien'] = 'viewCertificats/'.$id;
+                $donne_notif['titre'] = $certificatsEtudiant->etat;
+                
+                switch ($certificatsEtudiant->etat){
+                    case 'Rejeter' : 
+                        $donne_notif['style'] = "badge bg-red";
+                    break;
+                    case 'En cours de traitement' : 
+                        $donne_notif['style'] = "badge bg-yellow" ;
+                    break;
+                    case 'Demande envoyé' : 
+                        $donne_notif['style'] = "badge bg-light-blue";
+                    break;
+                    case 'Prête' : 
+                        $donne_notif['style'] ="badge bg-green";
+                    break;
+                    case 'Délivré' : 
+                        $donne_notif['style'] = "badge bg-navy";
+                    break;
+                }
+                
+                $this->preparerNotification($donne_notif,"indiv");
+
                 $this->Flash->success(__('L\'opération est effectué avec succes.'));
                 return $this->redirect(['action' => 'indexCertificatsEtudiants']);
             }
@@ -3389,85 +3373,107 @@ class resposcolaritesController extends AppController {
 
     }
 
-	
-	
-	
-	
-	/*-----------------------------------------------------------------------------------------------------------------------*/
-	/*-----------------------------------------------editer les certificats_etudiants---------------------------------------*/
-	
+
+
+
+
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+    /*-----------------------------------------------editer les certificats_etudiants---------------------------------------*/
+
     public function editCertificatsEtudiants($id = null)
     {
-		$CertificatsEtudiants = TableRegistry::get('certificats_etudiants');
+        $CertificatsEtudiants = TableRegistry::get('certificats_etudiants');
         $this->request->allowMethod(['post', 'Prête','Approuver','Rejeter','Délivré','Cmnt']);
         $certificatsEtudiant = $CertificatsEtudiants->get($id, [
-            'contain' => []
+            'contain' => ["Etudiants","Certificats"]
         ]);
-       
-              
- 
+
+        
         switch ($this->request->data['editer']) {
             case 'Approuver':
                 $certificatsEtudiant->etat = "En cours de traitement";
-                $certificatsEtudiant->notif_etudiant=1;
                 break;
             case 'Valider':
                 $certificatsEtudiant->etat = "Prête";
-                $certificatsEtudiant->notif_etudiant=1;
                 break;
             case 'Délivrer':
                 $certificatsEtudiant->etat = "Délivré";
-                $certificatsEtudiant->notif_etudiant=1;
-                break;  
-                 case 'Rejeter':
+                break;
+            case 'Rejeter':
                 $certificatsEtudiant->etat = "Rejeter";
-                $certificatsEtudiant->notif_etudiant=1;
-                break;   
-                        
+                break;
+
         }
-            if ($CertificatsEtudiants->save($certificatsEtudiant)) {
-                $this->Flash->success(__('Succes!!'));
-                return $this->redirect(['action' => 'indexCertificatsEtudiants']);
+        switch ($certificatsEtudiant->etat){
+                case 'Rejeter' : 
+                    $donne_notif['style'] = "badge bg-red";
+                break;
+                case 'En cours de traitement' : 
+                    $donne_notif['style'] = "badge bg-yellow" ;
+                break;
+                case 'Demande envoyé' : 
+                    $donne_notif['style'] = "badge bg-light-blue";
+                break;
+                case 'Prête' : 
+                    $donne_notif['style'] ="badge bg-green";
+                break;
+                case 'Délivré' : 
+                    $donne_notif['style'] = "badge bg-navy";
+                break;
             }
+
+        $query = $certificatsEtudiant->toArray();
+        $donne_notif['user_id']  = $query['etudiant']['user_id'];
+        $donne_notif['principale'] = 'Votre '.$query['certificat']['type'].' est declaré comme: '.$certificatsEtudiant->etat;
+        $donne_notif['commentaire'] = $query['commentaire'];
+        $donne_notif['lien'] = 'viewCertificats/'.$id;        
+        $donne_notif['titre'] = $certificatsEtudiant->etat;
+
+        if ($CertificatsEtudiants->save($certificatsEtudiant)) {
+            
+            $this->preparerNotification($donne_notif,"indiv");
+            $this->Flash->success(__('Succes!!'));
+            return $this->redirect(['action' => 'indexCertificatsEtudiants']);
+        }
         $this->Flash->error(__('Erreur.'));
-        
+
         return $this->redirect(['action' => 'indexCertificatsEtudiants']);
     }
 
-	
-	
-	
-	/*-----------------------------------------------------------------------------------------------------------------------*/
-	/*-----------------------------------------------Reinitilisation des certificats_etudiants------------------------------*/
-	
-	
-	public function reinitiliserCertificatsEtudiants(){
-		
-        
+
+
+
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+    /*-----------------------------------------------Reinitilisation des certificats_etudiants------------------------------*/
+
+
+    public function reinitiliserCertificatsEtudiants(){
+
+
         $connection = ConnectionManager::get('default');
- 
+
         $CertificatsEtudiants = TableRegistry::get("certificats_etudiants");
         $certificats_type =  $connection->execute('SELECT type, id FROM certificats WHERE certificats.type LIKE "%scolarité" ')->fetchAll('assoc');
         $this->set('certificats_type', $certificats_type);
-         if ($this->request->is(['patch', 'post', 'put']) && !isset($this->request->data['Réinitialiser'])) 
-         {
-                $certif_id = array();
-                foreach($this->request->data as $key => $value){
-                    if($key != "vider")
+        if ($this->request->is(['patch', 'post', 'put']) && !isset($this->request->data['Réinitialiser']))
+        {
+            $certif_id = array();
+            foreach($this->request->data as $key => $value){
+                if($key != "vider")
                     $certif_id[] = $key;
-                }
-
-               if(count($certif_id)!=0 &&  $CertificatsEtudiants->deleteAll(["certificat_id IN(".implode(',', $certif_id).")"])){
-                   $this->Flash->success(__('Réinitilisation avec success'));
-               }else{
-                   $this->Flash->error(__('LA REINTILALISATION N EST PAS EFFECTUE'));
-               }
-               return $this->redirect(['action'=>'indexCertificatsEtudiants']);
             }
-         $this->render('/Espaces/Resposcolarites/CertificatsEtudiants/choix');
-	}
-	
-	
+
+            if(count($certif_id)!=0 &&  $CertificatsEtudiants->deleteAll(["certificat_id IN(".implode(',', $certif_id).")"])){
+                $this->Flash->success(__('Réinitilisation avec success'));
+            }else{
+                $this->Flash->error(__('LA REINTILALISATION N\'EST PAS EFFECTUE'));
+            }
+            return $this->redirect(['action'=>'indexCertificatsEtudiants']);
+        }
+        $this->render('/Espaces/Resposcolarites/CertificatsEtudiants/choix');
+    }
+
+
 	
 	
 	/*-----------------------------------------------------------------------------------------------------------------------*/
