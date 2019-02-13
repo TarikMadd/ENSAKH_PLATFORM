@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 10 fév. 2019 à 17:43
--- Version du serveur :  5.7.24
--- Version de PHP :  5.6.40
+-- Généré le :  mar. 12 fév. 2019 à 21:23
+-- Version du serveur :  5.7.23
+-- Version de PHP :  5.6.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,7 +40,15 @@ CREATE TABLE IF NOT EXISTS `absences` (
   PRIMARY KEY (`id`),
   KEY `fonctionnaire_id` (`fonctionnaire_id`),
   KEY `absences_fonctionnaires_id_foreign` (`fonctionnaire_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Déchargement des données de la table `absences`
+--
+
+INSERT INTO `absences` (`id`, `fonctionnaire_id`, `duree_ab`, `cause`, `date_ab`, `time_ab`, `isvalid`) VALUES
+(1, 1, 0.5, 'malade', '2019-02-15', '12:30:00', 0),
+(2, 1, 1, 'malade', '2019-02-15', '12:30:00', 0);
 
 -- --------------------------------------------------------
 
@@ -192,7 +200,14 @@ CREATE TABLE IF NOT EXISTS `articleevents` (
   `prix_unitaire_ht` float DEFAULT NULL,
   `devisdemande_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `articleevents`
+--
+
+INSERT INTO `articleevents` (`id`, `desigantion`, `quantite`, `prix_unitaire_ht`, `devisdemande_id`) VALUES
+(1, 'bureau', 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -260,7 +275,14 @@ CREATE TABLE IF NOT EXISTS `boncommandes` (
   `date` datetime DEFAULT CURRENT_TIMESTAMP,
   `devisdemande_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `boncommandes`
+--
+
+INSERT INTO `boncommandes` (`id`, `exercice`, `prix_total`, `date`, `devisdemande_id`) VALUES
+(1, 2019, 2.4, '2019-02-12 19:39:20', 1);
 
 -- --------------------------------------------------------
 
@@ -591,7 +613,14 @@ CREATE TABLE IF NOT EXISTS `devisdemandes` (
   `intitule` text,
   `etat` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `devisdemandes`
+--
+
+INSERT INTO `devisdemandes` (`id`, `nom_devis`, `nom_fournisseur`, `adresse_fournisseur`, `intitule`, `etat`) VALUES
+(1, 'devis1', 'fournisseur1', '96 quartier industriel , Casablanca', 'commande1', 'En cours de traitement');
 
 -- --------------------------------------------------------
 
@@ -647,7 +676,14 @@ CREATE TABLE IF NOT EXISTS `documents` (
   `nbDocument` int(11) NOT NULL,
   `nomDocument` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `documents`
+--
+
+INSERT INTO `documents` (`id`, `idDocument`, `nbDocument`, `nomDocument`) VALUES
+(1, 10, 1, 'CNSS');
 
 -- --------------------------------------------------------
 
@@ -937,7 +973,14 @@ CREATE TABLE IF NOT EXISTS `fonctionnaires` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `user_id_2` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `fonctionnaires`
+--
+
+INSERT INTO `fonctionnaires` (`id`, `somme`, `date_Recrut`, `salaire`, `etat`, `user_id`, `nom_fct`, `prenom_fct`, `dateNaissance`, `lieuNaissance`, `specialite`, `situation_Familiale`, `email`, `etat_attestation`, `etat_fiche`, `phone`, `CIN`, `age`, `genre`, `nbr_enfants`, `isPassExam`, `photo`) VALUES
+(1, '20', '2014-02-08', 10000, 20, 11, 'hamza', 'ghandi', '1997-02-07', 'CASA', 'Informatique', 'marie', 'anass2@gmail.com', 0, 0, 12345678, 'EE633450', 28, 'male', 2, 0, '');
 
 -- --------------------------------------------------------
 
@@ -1274,7 +1317,15 @@ CREATE TABLE IF NOT EXISTS `missions` (
   KEY `ville_id` (`ville_id`),
   KEY `profpermanent_id` (`profpermanent_id`),
   KEY `fonctionnaires_id` (`fonctionnaire_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `missions`
+--
+
+INSERT INTO `missions` (`id`, `date_depart`, `date_arrivee`, `mode_transport`, `nbr_nuit`, `taux`, `indemnite_kilometrique`, `indemnite_appliquee`, `montant_indemnite`, `Motif`, `total`, `fonctionnaire_id`, `profpermanent_id`, `ville_id`) VALUES
+(2, '2019-02-12', '2019-02-14', 'voiture de service', 2, 8, 0, 100, 800, ' ', 800, NULL, 3, 1),
+(3, '2019-02-12', '2019-02-16', 'voiture de service', 1, 5, 0, 100, 500, ' ', 500, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1513,7 +1564,14 @@ CREATE TABLE IF NOT EXISTS `paimentsups` (
   `prelevementsup_id` int(11) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `prelevementsup_id` (`prelevementsup_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `paimentsups`
+--
+
+INSERT INTO `paimentsups` (`id`, `dateDebut`, `dateFin`, `Numero`, `cheque`, `montantBrut`, `Impot`, `MontantNet`, `prelevementsup_id`) VALUES
+(1, '2019-01-01', '2019-12-31', 2, '1234', 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1535,7 +1593,14 @@ CREATE TABLE IF NOT EXISTS `paimentvacs` (
   PRIMARY KEY (`id`),
   KEY `ordrevairment_id` (`prelevement_id`),
   KEY `ordrevirment_id` (`prelevement_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `paimentvacs`
+--
+
+INSERT INTO `paimentvacs` (`id`, `dateDebut`, `dateFin`, `Numero`, `cheque`, `montantBrut`, `Impot`, `MontantNet`, `prelevement_id`) VALUES
+(1, '2019-01-01', '2019-12-31', 1, '010203', 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1697,7 +1762,14 @@ CREATE TABLE IF NOT EXISTS `prelevements` (
   `dateDebut` date NOT NULL,
   `dateFin` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `prelevements`
+--
+
+INSERT INTO `prelevements` (`id`, `dateDebut`, `dateFin`) VALUES
+(1, '2019-01-01', '2019-12-31');
 
 -- --------------------------------------------------------
 
@@ -1711,7 +1783,14 @@ CREATE TABLE IF NOT EXISTS `prelevementsups` (
   `dateDebut` date NOT NULL,
   `dateFin` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `prelevementsups`
+--
+
+INSERT INTO `prelevementsups` (`id`, `dateDebut`, `dateFin`) VALUES
+(1, '2019-01-01', '2019-12-31');
 
 -- --------------------------------------------------------
 
@@ -2104,7 +2183,14 @@ CREATE TABLE IF NOT EXISTS `sup_heures` (
   PRIMARY KEY (`id`),
   KEY `paiementsupo_sdsd_fk` (`paimentsup_id`),
   KEY `prof_fk_suph` (`profpermanent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `sup_heures`
+--
+
+INSERT INTO `sup_heures` (`id`, `mois`, `annee`, `nbHeure`, `dateInsertion`, `etat`, `profpermanent_id`, `paimentsup_id`) VALUES
+(1, 1, 2019, 4, '2019-02-12 20:27:38', 'payé', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -2121,7 +2207,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
@@ -2136,7 +2222,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `created`, `modified`
 (7, 'bennay', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'profpermanent', NULL, NULL),
 (8, 'jerradi', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'profpermanent', NULL, NULL),
 (9, 'mandar', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'profvacataire', NULL, NULL),
-(10, 'ingenieur', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'ingenieur', NULL, NULL);
+(10, 'ingenieur', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'ingenieur', NULL, NULL),
+(11, 'respofinance', '$2y$10$adq5VBfhM/VelDXJF08WseJdCgJjxXDuwIVVPSSNqk2FAPYOj7FdC', 'respofinance', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2221,14 +2308,15 @@ CREATE TABLE IF NOT EXISTS `vacataires` (
   `age` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `vacataires_ibfk_1` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `vacataires`
 --
 
 INSERT INTO `vacataires` (`id`, `user_id`, `somme`, `nom_vacataire`, `prenom_vacataire`, `nb_heures`, `echelle`, `echelon`, `dateRecrut`, `dateNaissance`, `LieuNaissance`, `diplome`, `universite`, `specialite`, `CIN`, `situationFamiliale`, `codeSituation`, `dateAffectation`, `email`, `nbr_enfants`, `genre`, `age`) VALUES
-(1, 9, '5R5T', '44RR4', 'RRR', 4, 4, 4, '2019-01-23 00:00:00', '2019-01-01', 'CSA', 'diplome', 'UH1', 'GI', '55', 'MARIE', '1', '2019-01-24', 'mandar@gmail.cim', 1, 'FFF', 12);
+(1, 9, '5R5T', '44RR4', 'RRR', 4, 4, 4, '2019-01-23 00:00:00', '2019-01-01', 'CSA', 'diplome', 'UH1', 'GI', '55', 'MARIE', '1', '2019-01-24', 'mandar@gmail.cim', 1, 'FFF', 12),
+(2, 4, '30', 'GI', 'khalid', 20, 3, 2, '2019-02-01 00:00:00', '1997-02-07', 'khouribga', 'master', 'uh1', 'Informatique', 'ee112233', 'celebataire', '11223344', '2019-02-02', 'anass2@gmail.com', 2, 'male', 40);
 
 -- --------------------------------------------------------
 
@@ -2361,7 +2449,14 @@ CREATE TABLE IF NOT EXISTS `vacations` (
   UNIQUE KEY `mois` (`mois`,`annee`,`vacataire_id`),
   KEY `vacataire_id` (`vacataire_id`),
   KEY `paimentvac_id` (`paimentvac_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `vacations`
+--
+
+INSERT INTO `vacations` (`id`, `mois`, `annee`, `nbHeure`, `dateInsertion`, `etat`, `vacataire_id`, `paimentvac_id`) VALUES
+(1, 7, 2019, 10, '2019-02-12 20:05:21', 'payé', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -2389,7 +2484,14 @@ CREATE TABLE IF NOT EXISTS `villes` (
   `nom` varchar(255) NOT NULL,
   `distance` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `villes`
+--
+
+INSERT INTO `villes` (`id`, `nom`, `distance`) VALUES
+(1, 'Marrakech', 250);
 
 -- --------------------------------------------------------
 
