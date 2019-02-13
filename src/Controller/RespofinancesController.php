@@ -1982,9 +1982,11 @@ class respofinancesController extends AppController
 
             $mission->profpermanent_id = $this->request->data['Prof'];
             $mission->ville_id = $this->request->data['LaVille'];
+            $mission->date_depart = $this->request->data['date_depart'];
+            $mission->date_arrivee = $this->request->data['date_arrivee'];
+            $mission->Motif = " ";
 
-
-// calcule indemnite_kilometrique
+// calcule indemnite_kilometriquem
 
             $dist = $con->execute('SELECT distance FROM villes WHERE id =?', [$this->request->data['LaVille']])->fetchAll('assoc');
 
@@ -2053,7 +2055,8 @@ class respofinancesController extends AppController
 
             $mission->profpermanent_id = $this->request->data['Prof'];
             $mission->ville_id = $this->request->data['LaVille'];
-
+            $mission->date_depart = $this->request->data['date_depart'];
+            $mission->date_arrivee = $this->request->data['date_arrivee'];
 
 // calcule indemnite_kilometrique
 
@@ -2091,7 +2094,7 @@ class respofinancesController extends AppController
 // sauvgarde dans la base de données
             if ($Missions->save($mission)) {
                 $this->Flash->success(__('The {0} has been saved.', 'Mission'));
-                return $this->redirect(['action' => 'afficherMissionFonc']);
+                return $this->redirect(['action' => 'afficherMissionProf']);
             } else {
                 $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Mission'));
             }
@@ -2122,6 +2125,9 @@ class respofinancesController extends AppController
             $mission = $missions->patchEntity($mission, $this->request->data);
             $mission->fonctionnaire_id = $this->request->data['Fonc'];
             $mission->ville_id = $this->request->data['LaVille'];
+            $mission->date_depart = $this->request->data['date_depart'];
+            $mission->date_arrivee = $this->request->data['date_arrivee'];
+            $mission->Motif = " ";
 
 // calcule indemnite_kilometrique
 
@@ -2192,6 +2198,8 @@ class respofinancesController extends AppController
             $mission = $Missions->patchEntity($mission, $this->request->data);
             $mission->fonctionnaire_id = $this->request->data['Fonc'];
             $mission->ville_id = $this->request->data['LaVille'];
+            $mission->date_depart = $this->request->data['date_depart'];
+            $mission->date_arrivee = $this->request->data['date_arrivee'];
 
 // calcule indemnite_kilometrique
 
